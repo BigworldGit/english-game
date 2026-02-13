@@ -538,6 +538,9 @@ html, body {
 
 .word-image-container {
     margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #wordCanvas {

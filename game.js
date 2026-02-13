@@ -382,52 +382,64 @@ function updateProgressUI() {
 // Minecraft风格图片绘制
 // ============================================
 function drawWordImage(wordData) {
-    const canvas = elements.wordCanvas;
-    if (!canvas) {
-        console.error('Canvas not found!');
-        return;
+    try {
+        const canvas = elements.wordCanvas;
+        if (!canvas) {
+            console.error('Canvas not found!');
+            alert('Canvas not found!');
+            return;
+        }
+        const ctx = canvas.getContext('2d');
+        if (!ctx) {
+            console.error('Context not found!');
+            return;
+        }
+        const width = canvas.width;
+        const height = canvas.height;
+
+        console.log('Drawing word:', wordData.word, 'canvas size:', width, height);
+
+        // 清空画布 - 天空蓝背景
+        ctx.fillStyle = '#87CEEB';
+        ctx.fillRect(0, 0, width, height);
+
+        // 绘制草地底部
+        ctx.fillStyle = '#5CAB5C';
+        ctx.fillRect(0, height * 0.75, width, height * 0.25);
+
+        // 调用绘制函数
+        drawMinecraftStyle(ctx, wordData, width, height);
+
+        console.log('Draw complete for:', wordData.word);
+    } catch (e) {
+        console.error('Error drawing:', e);
+        alert('Error: ' + e.message);
     }
-    const ctx = canvas.getContext('2d');
-    if (!ctx) {
-        console.error('Context not found!');
-        return;
-    }
-    const width = canvas.width;
-    const height = canvas.height;
-
-    console.log('Drawing word:', wordData.word, 'canvas size:', width, height);
-
-    // 清空画布 - 天空蓝背景
-    ctx.fillStyle = '#87CEEB';
-    ctx.fillRect(0, 0, width, height);
-
-    // 绘制草地底部
-    ctx.fillStyle = '#5CAB5C';
-    ctx.fillRect(0, height * 0.75, width, height * 0.25);
-
-    // 调用绘制函数
-    drawMinecraftStyle(ctx, wordData, width, height);
-
-    console.log('Draw complete');
 }
 
 // Minecraft 风格像素画绘制系统
 function drawMinecraftStyle(ctx, wordData, width, height) {
-    const word = wordData.word.toLowerCase();
+    try {
+        const word = wordData.word.toLowerCase();
+        console.log('drawMinecraftStyle:', word);
 
-    // 绘制草地底层
-    drawMinecraftBlock(ctx, 0, height * 0.75, width, height * 0.25, 'grass');
+        // 绘制草地底层
+        drawMinecraftBlock(ctx, 0, height * 0.75, width, height * 0.25, 'grass');
 
-    // 根据单词绘制主体
-    const success = drawWordImage(ctx, word, width, height);
+        // 根据单词绘制主体
+        const success = drawWordImage2(ctx, word, width, height);
+        console.log('drawWordImage2 result:', success);
 
-    // 如果没有特定图片，绘制默认的 Minecraft 方块
-    if (!success) {
-        // 显示单词文字作为后备
-        ctx.fillStyle = '#FFFFFF';
-        ctx.font = 'bold 20px Arial';
-        ctx.textAlign = 'center';
-        ctx.fillText(word, width/2, height/2);
+        // 如果没有特定图片，绘制默认的 Minecraft 方块
+        if (!success) {
+            // 显示单词文字作为后备
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = 'bold 20px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText(word, width/2, height/2);
+        }
+    } catch (e) {
+        console.error('Error in drawMinecraftStyle:', e);
     }
 }
 
@@ -478,7 +490,7 @@ function drawMinecraftBlock(ctx, x, y, w, h, type) {
 }
 
 // 绘制单词对应的图片
-function drawWordImage(ctx, word, width, height) {
+function drawWordImage2(ctx, word, width, height) {
     const centerX = width / 2;
     const centerY = height / 2 - 20;
 
