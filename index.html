@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Minecraft英语单词小助手</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 背景动画 -->
+    <div class="background">
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        <div class="cloud cloud3"></div>
+        <div class="sun"></div>
+        <div class="mountain mountain1"></div>
+        <div class="mountain mountain2"></div>
+        <div class="ground"></div>
+        <div class="grass"></div>
+        <div class="trees">
+            <div class="tree"></div>
+            <div class="tree"></div>
+            <div class="tree"></div>
+            <div class="tree"></div>
+        </div>
+    </div>
+
+    <!-- 音乐控制 -->
+    <div class="music-control" id="musicControl">
+        <span class="music-icon">🔇</span>
+    </div>
+
+    <!-- 主容器 -->
+    <div class="game-container">
+
+        <!-- 欢迎页面 -->
+        <div class="page page-welcome active" id="welcomePage">
+            <div class="welcome-content">
+                <div class="logo-container">
+                    <div class="block block-green"></div>
+                    <div class="block block-brown"></div>
+                    <div class="block block-dirt"></div>
+                </div>
+                <h1 class="title">Minecraft<br>英语小助手</h1>
+                <p class="subtitle">深圳小学生英语单词学习</p>
+
+                <!-- 登录表单 -->
+                <div class="login-form" id="loginForm">
+                    <div class="form-group">
+                        <input type="text" id="username" placeholder="请输入你的名字" maxlength="10" autocomplete="off">
+                    </div>
+                    <div class="grade-select">
+                        <label>选择你的年级：</label>
+                        <div class="grade-buttons">
+                            <button class="grade-btn" data-grade="1">1</button>
+                            <button class="grade-btn" data-grade="2">2</button>
+                            <button class="grade-btn" data-grade="3">3</button>
+                            <button class="grade-btn" data-grade="4">4</button>
+                            <button class="grade-btn" data-grade="5">5</button>
+                            <button class="grade-btn" data-grade="6">6</button>
+                        </div>
+                    </div>
+                    <button class="start-btn" id="startBtn">开始学习</button>
+                </div>
+
+                <!-- 已登录用户显示 -->
+                <div class="user-info" id="userInfo" style="display: none;">
+                    <p class="welcome-text">欢迎回来，<span id="userNameDisplay"></span>！</p>
+                    <p class="progress-text">你正在学习 <span id="currentGrade">1</span> 年级的单词</p>
+                    <p class="progress-text">当前第 <span id="currentLevel">1</span> 关，第 <span id="currentQuestion">1</span> 题</p>
+                    <button class="start-btn" id="continueBtn">继续学习</button>
+                    <button class="reset-btn" id="resetBtn">重新开始</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 游戏页面 -->
+        <div class="page page-game" id="gamePage">
+            <div class="game-header">
+                <div class="user-badge">
+                    <span class="badge-icon">👤</span>
+                    <span id="gameUserName"></span>
+                </div>
+                <div class="level-info">
+                    <span class="level-badge">第 <span id="levelNum">1</span> 关</span>
+                    <span class="question-badge">第 <span id="questionNum">1</span>/10 题</span>
+                </div>
+            </div>
+
+            <div class="game-content">
+                <!-- 单词图片区域 -->
+                <div class="word-image-container">
+                    <canvas id="wordCanvas" width="240" height="240"></canvas>
+                    <div class="word-hint">这是什么？</div>
+                </div>
+
+                <!-- 选项区域 -->
+                <div class="options-container" id="optionsContainer">
+                    <!-- 选项将通过JS生成 -->
+                </div>
+
+                <!-- 进度条 -->
+                <div class="progress-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+            </div>
+
+            <!-- 反馈动画 -->
+            <div class="feedback" id="feedback">
+                <div class="feedback-text"></div>
+            </div>
+        </div>
+
+        <!-- 关卡结束页面 -->
+        <div class="page page-result" id="resultPage">
+            <div class="result-content">
+                <div class="result-title">关卡完成！</div>
+
+                <div class="result-stats">
+                    <div class="stat-item">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-value" id="correctCount">0</div>
+                        <div class="stat-label">正确</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">❌</div>
+                        <div class="stat-value" id="wrongCount">0</div>
+                        <div class="stat-label">错误</div>
+                    </div>
+                </div>
+
+                <div class="accuracy-display">
+                    <div class="accuracy-circle" id="accuracyCircle">
+                        <span class="accuracy-value" id="accuracyValue">0%</span>
+                    </div>
+                    <div class="accuracy-label">正确率</div>
+                </div>
+
+                <div class="result-message" id="resultMessage"></div>
+
+                <div class="result-buttons">
+                    <button class="result-btn continue-btn" id="nextLevelBtn">下一关</button>
+                    <button class="result-btn home-btn" id="homeBtn">返回主页</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 加载提示 -->
+    <div class="loading" id="loading">
+        <div class="loading-block"></div>
+        <div class="loading-text">加载中...</div>
+    </div>
+
+    <script src="words.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
