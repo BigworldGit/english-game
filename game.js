@@ -52,7 +52,8 @@ const elements = {
     resultMessage: document.getElementById('resultMessage'),
     nextLevelBtn: document.getElementById('nextLevelBtn'),
     homeBtn: document.getElementById('homeBtn'),
-    musicControl: document.getElementById('musicControl')
+    musicControl: document.getElementById('musicControl'),
+    wordHint: document.getElementById('wordHint')
 };
 
 // ============================================
@@ -220,6 +221,9 @@ function loadQuestion() {
         return;
     }
 
+    // 更新题目序号显示
+    updateProgressUI();
+
     // 获取单词
     const wordIndex = (currentLevel - 1) * QUESTIONS_PER_LEVEL + (currentQuestion - 1);
     if (wordIndex >= allWords.length) {
@@ -228,6 +232,11 @@ function loadQuestion() {
     }
 
     currentWord = allWords[wordIndex % allWords.length];
+
+    // 显示单词含义提示
+    if (elements.wordHint) {
+        elements.wordHint.textContent = `提示: ${currentWord.meaning}`;
+    }
 
     // 生成选项
     generateOptions();
@@ -246,18 +255,39 @@ function generateOptions() {
     const correctAnswer = currentWord.word;
     const wrongAnswers = [];
 
-    // 从同学、同年级单词中获取干扰项
+    // 1. 优先选择同类别、长度相近的单词作为干扰项（混淆效果）
     const sameCategory = allWords.filter(w =>
         w.category === currentWord.category && w.word !== correctAnswer
     );
-    const otherWords = allWords.filter(w => w.word !== correctAnswer);
+
+    // 2. 找长度相近的单词
+    const lengthDiff = 2; // 允许的长度差异
+    const similarLength = allWords.filter(w =>
+        w.word !== correctAnswer &&
+        Math.abs(w.word.length - correctAnswer.length) <= lengthDiff
+    );
+
+    // 3. 找首字母相同的单词
+    const sameInitial = allWords.filter(w =>
+        w.word !== correctAnswer &&
+        w.word.charAt(0) === correctAnswer.charAt(0)
+    );
+
+    // 合并候选词：同类别 > 长度相近 > 首字母相同 > 其他
+    let candidates = [
+        ...shuffleArray(sameCategory).slice(0, 8),
+        ...shuffleArray(similarLength).slice(0, 6),
+        ...shuffleArray(sameInitial).slice(0, 4),
+        ...shuffleArray(allWords.filter(w => w.word !== correctAnswer)).slice(0, 10)
+    ];
+
+    // 去重
+    candidates = [...new Set(candidates.map(w => w.word))];
 
     // 获取3个干扰项
-    const candidates = shuffleArray([...sameCategory, ...otherWords]).slice(0, 20);
-
     while (wrongAnswers.length < 3 && candidates.length > 0) {
-        const candidate = candidates.pop().word;
-        if (!wrongAnswers.includes(candidate) && candidate !== correctAnswer) {
+        const candidate = candidates.pop();
+        if (candidate !== correctAnswer) {
             wrongAnswers.push(candidate);
         }
     }
@@ -661,6 +691,13 @@ function drawColor(ctx, word, width, height) {
     // 高光效果
     ctx.fillStyle = 'rgba(255,255,255,0.3)';
     ctx.fillRect((width - size) / 2, (height - size) / 2, size / 3, size / 3);
+
+    // 显示颜色名称
+    ctx.fillStyle = word === 'white' || word === 'yellow' ? '#000' : '#FFF';
+    ctx.font = 'bold 20px VT323';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(word, width / 2, height / 2);
 }
 
 // 绘制数字
@@ -730,49 +767,173 @@ function drawObject(ctx, word, width, height) {
         ctx.fillRect(centerX - size / 2, centerY - size / 2, size, size * 1.5);
         ctx.fillStyle = '#81D4FA';
         ctx.fillRect(centerX - size / 4, centerY - size / 3, size / 2, size);
-    } else if (['face', 'eye', 'nose', 'mouth'].includes(word)) {
-        // 脸部
+    } else if (['face', 'eye', 'nose', 'mouth', 'hand', 'head', 'leg', 'foot'].includes(word)) {
+        // 脸部或身体部位
         ctx.fillStyle = '#FFCC80';
         drawCircle(ctx, centerX, centerY, size);
         ctx.fillStyle = '#000';
-        // 眼睛
-        drawCircle(ctx, centerX - size / 3, centerY - size / 5, size / 6);
-        drawCircle(ctx, centerX + size / 3, centerY - size / 5, size / 6);
-        if (word === 'nose') {
+        if (word === 'eye') {
+            // 眼睛
+            drawCircle(ctx, centerX - size / 3, centerY - size / 5, size / 6);
+            drawCircle(ctx, centerX + size / 3, centerY - size / 5, size / 6);
+        } else if (word === 'nose') {
             // 鼻子
             ctx.fillStyle = '#FFAB91';
             ctx.fillRect(centerX - 3, centerY, 6, 10);
-        }
-        if (word === 'mouth') {
+        } else if (word === 'mouth') {
             // 嘴巴
             ctx.fillRect(centerX - size / 4, centerY + size / 4, size / 2, size / 6);
+        } else if (word === 'hand' || word === 'head') {
+            // 手或头
+            ctx.fillStyle = '#E0E0E0';
+            drawCircle(ctx, centerX, centerY, size / 2);
         }
-    } else if (['sun', 'moon', 'star', 'cloud'].includes(word)) {
+    } else if (['sun', 'moon', 'star', 'cloud', 'rain', 'snow', 'wind'].includes(word)) {
         // 天气相关
         if (word === 'sun') {
             ctx.fillStyle = '#FFD700';
             drawCircle(ctx, centerX, centerY, size);
+            // 光芒
+            for (let i = 0; i < 8; i++) {
+                const angle = (i / 8) * Math.PI * 2;
+                ctx.fillStyle = '#FFD700';
+                ctx.fillRect(
+                    centerX + Math.cos(angle) * (size + 10) - 3,
+                    centerY + Math.sin(angle) * (size + 10) - 3,
+                    6, 6
+                );
+            }
         } else if (word === 'moon') {
             ctx.fillStyle = '#FFF9C4';
             drawCircle(ctx, centerX, centerY, size);
+            ctx.fillStyle = '#FFE082';
+            drawCircle(ctx, centerX - size / 4, centerY - size / 4, size / 3);
         } else if (word === 'cloud') {
             ctx.fillStyle = '#FFFFFF';
             drawCircle(ctx, centerX - size / 3, centerY, size / 1.5);
             drawCircle(ctx, centerX, centerY - size / 4, size / 1.2);
             drawCircle(ctx, centerX + size / 3, centerY, size / 1.5);
-        } else {
-            // 星星
-            ctx.fillStyle = '#FFD700';
-            drawStar(ctx, centerX, centerY, 5, size, size / 2);
+        } else if (word === 'rain') {
+            ctx.fillStyle = '#81D4FA';
+            drawCircle(ctx, centerX, centerY, size);
+            ctx.fillStyle = '#0288D1';
+            for (let i = -2; i <= 2; i++) {
+                ctx.fillRect(centerX + i * 15 - 2, centerY + size / 2, 4, 20);
+            }
+        } else if (word === 'snow') {
+            ctx.fillStyle = '#E3F2FD';
+            drawCircle(ctx, centerX, centerY, size);
+            ctx.fillStyle = '#FFFFFF';
+            for (let i = 0; i < 6; i++) {
+                const angle = (i / 6) * Math.PI * 2;
+                drawCircle(ctx, centerX + Math.cos(angle) * 20, centerY + Math.sin(angle) * 20, 6);
+            }
+        } else if (word === 'wind') {
+            ctx.fillStyle = '#B0BEC5';
+            drawCircle(ctx, centerX, centerY, size);
+            ctx.fillStyle = '#ECEFF1';
+            ctx.font = 'bold 24px VT323';
+            ctx.textAlign = 'center';
+            ctx.fillText('~ ~', centerX, centerY + 5);
+        }
+    } else if (['water', 'milk', 'juice'].includes(word)) {
+        // 饮料
+        ctx.fillStyle = word === 'water' ? '#29B6F6' : word === 'milk' ? '#FAFAFA' : '#FF7043';
+        drawCircle(ctx, centerX, centerY, size);
+        ctx.fillStyle = 'rgba(255,255,255,0.3)';
+        ctx.fillRect(centerX - size / 3, centerY - size / 2, size / 3, size / 2);
+    } else if (['flower', 'tree', 'grass', 'leaf'].includes(word)) {
+        // 植物
+        if (word === 'flower') {
+            ctx.fillStyle = '#5CAB5C';
+            ctx.fillRect(centerX - 5, centerY, 10, size / 2);
+            const colors = ['#E91E63', '#FFEB3B', '#9C27B0', '#FF5722'];
+            ctx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
+            drawCircle(ctx, centerX, centerY - 10, 15);
+        } else if (word === 'tree') {
+            ctx.fillStyle = '#6D4C41';
+            ctx.fillRect(centerX - 10, centerY, 20, size / 2);
+            ctx.fillStyle = '#2E7D32';
+            drawCircle(ctx, centerX, centerY - 20, 30);
+        } else if (word === 'grass' || word === 'leaf') {
+            ctx.fillStyle = '#4CAF50';
+            ctx.fillRect(0, centerY, width, height / 2);
+            ctx.fillStyle = '#81C784';
+            for (let i = 0; i < width; i += 20) {
+                ctx.fillRect(i + 5, centerY - 10, 10, 15);
+            }
+        }
+    } else if (['happy', 'sad', 'angry', 'tired', 'hungry', 'thirsty'].includes(word)) {
+        // 表情
+        ctx.fillStyle = '#FFCC80';
+        drawCircle(ctx, centerX, centerY, size);
+        ctx.fillStyle = '#000';
+        // 眼睛
+        drawCircle(ctx, centerX - size / 3, centerY - size / 5, size / 7);
+        drawCircle(ctx, centerX + size / 3, centerY - size / 5, size / 7);
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = '#000';
+        if (word === 'happy') {
+            ctx.beginPath();
+            ctx.arc(centerX, centerY + 5, size / 2.5, 0, Math.PI);
+            ctx.stroke();
+        } else if (word === 'sad') {
+            ctx.beginPath();
+            ctx.arc(centerX, centerY + size, size / 2.5, Math.PI, 0);
+            ctx.stroke();
+        } else if (word === 'angry') {
+            // 眉毛
+            ctx.beginPath();
+            ctx.moveTo(centerX - size / 2, centerY - size / 2);
+            ctx.lineTo(centerX - size / 6, centerY - size / 3);
+            ctx.moveTo(centerX + size / 2, centerY - size / 2);
+            ctx.lineTo(centerX + size / 6, centerY - size / 3);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(centerX, centerY + size / 3, size / 3, 0, Math.PI);
+            ctx.stroke();
+        } else if (word === 'tired') {
+            ctx.beginPath();
+            ctx.moveTo(centerX - size / 3, centerY - size / 5);
+            ctx.lineTo(centerX - size / 6, centerY - size / 5 + 3);
+            ctx.moveTo(centerX + size / 3, centerY - size / 5);
+            ctx.lineTo(centerX + size / 6, centerY - size / 5 + 3);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(centerX, centerY + size / 4, size / 5, 0, Math.PI);
+            ctx.stroke();
+        } else if (word === 'hungry' || word === 'thirsty') {
+            ctx.beginPath();
+            ctx.arc(centerX, centerY + size / 4, size / 3, 0, Math.PI);
+            ctx.stroke();
         }
     } else {
-        // 默认 - 问号方块
-        ctx.fillStyle = '#78909C';
+        // 默认 - 显示单词的Minecraft风格方块
+        ctx.fillStyle = '#5CAB5C'; // 草地绿底色
         ctx.fillRect(centerX - size / 2, centerY - size / 2, size, size);
+
+        // 边框效果
+        ctx.strokeStyle = 'rgba(0,0,0,0.3)';
+        ctx.lineWidth = 3;
+        ctx.strokeRect(centerX - size / 2, centerY - size / 2, size, size);
+
+        // 高光
+        ctx.fillStyle = 'rgba(255,255,255,0.3)';
+        ctx.fillRect(centerX - size / 2, centerY - size / 2, size / 3, size / 3);
+
+        // 显示单词
         ctx.fillStyle = '#FFFFFF';
-        ctx.font = 'bold 40px VT323';
+        ctx.font = 'bold 16px VT323';
         ctx.textAlign = 'center';
-        ctx.fillText('?', centerX, centerY + 5);
+        ctx.textBaseline = 'middle';
+
+        // 如果单词太长，分两行显示
+        if (word.length > 6) {
+            ctx.fillText(word.substring(0, 5), centerX, centerY - 8);
+            ctx.fillText(word.substring(5), centerX, centerY + 10);
+        } else {
+            ctx.fillText(word, centerX, centerY + 2);
+        }
     }
 }
 
