@@ -2,9 +2,8 @@ preamble: |
   Deploy Minecraft English Learning Game for Shenzhen Primary Students
 
 services:
-  - type: web
+  - type: static
     name: english-game
     env: static
-    buildCommand: ""
+    buildCommand: echo "No build needed"
     staticPublishPath: .
-    repo: https://github.com/BigworldGit/english-game
