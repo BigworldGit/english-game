@@ -424,79 +424,428 @@ function drawMinecraftStyle(ctx, wordData, width, height) {
 // 绘制 Minecraft 风格方块
 function drawMinecraftBlock(ctx, x, y, w, h, type) {
     const colors = {
-        grass: ['#5CAB5C', '#4A8F4A', '#6BBF6B', '#3D7A3D'],
-        dirt: ['#8B5A2B', '#6B4423', '#9C6A3C', '#5A3A1A'],
-        stone: ['#9E9E9E', '#757575', '#BDBDBD', '#616161'],
-        wood: ['#795548', '#5D4037', '#8D6E63', '#4E342E'],
-        leaves: ['#4CAF50', '#388E3C', '#66BB6A', '#2E7D32'],
-        water: ['#29B6F6', '#03A9F4', '#4FC3F7', '#0288D1'],
-        sand: ['#FFE082', '#FFD54F', '#FFECB3', '#FFCA28'],
-        snow: ['#FAFAFA', '#F5F5F5', '#FFFFFF', '#E0E0E0'],
-        coal: ['#424242', '#212121', '#616161', '#000000'],
-        iron: ['#B0BEC5', '#90A4AE', '#CFD8DC', '#607D8B'],
-        gold: ['#FFD700', '#FFC107', '#FFEB3B', '#FFA000'],
-        diamond: ['#4DD0E1', '#26C6DA', '#80DEEA', '#00ACC1'],
-        redstone: ['#F44336', '#E53935', '#EF5350', '#D32F2F'],
-        emerald: ['#4CAF50', '#43A047', '#66BB6A', '#388E3C']
+        grass: { base: '#5CAB5C', dark: '#4A8F4A', light: '#6BBF6B', edge: '#3D7A3D' },
+        dirt: { base: '#8B5A2B', dark: '#6B4423', light: '#9C6A3C', edge: '#5A3A1A' },
+        stone: { base: '#9E9E9E', dark: '#757575', light: '#BDBDBD', edge: '#616161' },
+        wood: { base: '#795548', dark: '#5D4037', light: '#8D6E63', edge: '#4E342E' },
+        leaves: { base: '#4CAF50', dark: '#388E3C', light: '#66BB6A', edge: '#2E7D32' },
+        water: { base: '#29B6F6', dark: '#03A9F4', light: '#4FC3F7', edge: '#0288D1' },
+        sand: { base: '#FFE082', dark: '#FFD54F', light: '#FFECB3', edge: '#FFCA28' },
+        snow: { base: '#FAFAFA', dark: '#F5F5F5', light: '#FFFFFF', edge: '#E0E0E0' },
     };
 
     const palette = colors[type] || colors.dirt;
     const pixelSize = Math.max(4, Math.min(w, h) / 16);
 
-    // 绘制主色
-    ctx.fillStyle = palette[0];
+    // 绘制主色底
+    ctx.fillStyle = palette.base;
     ctx.fillRect(x, y, w, h);
 
-    // 添加像素纹理
-    for (let i = 0; i < (w * h) / (pixelSize * pixelSize * 2); i++) {
+    // 添加深色像素纹理
+    ctx.fillStyle = palette.dark;
+    for (let i = 0; i < (w * h) / (pixelSize * pixelSize * 3); i++) {
         const px = x + Math.floor(Math.random() * (w / pixelSize)) * pixelSize;
         const py = y + Math.floor(Math.random() * (h / pixelSize)) * pixelSize;
-        if (px < x + w && py < y + h) {
-            ctx.fillStyle = palette[Math.floor(Math.random() * 4)];
+        if (px < x + w - pixelSize && py < y + h - pixelSize) {
             ctx.fillRect(px, py, pixelSize, pixelSize);
         }
     }
 
-    // 添加边框效果
-    ctx.strokeStyle = 'rgba(0,0,0,0.3)';
+    // 边框效果
+    ctx.strokeStyle = palette.edge;
     ctx.lineWidth = 2;
-    ctx.strokeRect(x, y, w, h);
+    ctx.strokeRect(x + 1, y + 1, w - 2, h - 2);
 
-    // 高光效果
-    ctx.fillStyle = 'rgba(255,255,255,0.2)';
-    ctx.fillRect(x, y, w * 0.3, h * 0.3);
+    // 左上角高光
+    ctx.fillStyle = palette.light;
+    ctx.globalAlpha = 0.4;
+    ctx.fillRect(x + 2, y + 2, w * 0.25, h * 0.25);
+    ctx.globalAlpha = 1.0;
 }
 
-// 绘制单词对应的图片
+// 绘制单词对应的图片 - Minecraft 像素画风格
 function drawWordImage2(ctx, word, width, height) {
-    const centerX = width / 2;
-    const centerY = height / 2 - 20;
+    const cx = width / 2;
+    const cy = height / 2 - 20;
 
-    // 动物绘制
-    if (drawAnimalImage(ctx, word, centerX, centerY)) return true;
+    // 使用像素点绘制更精美的图片
+    return drawMinecraftPixelArt(ctx, word, cx, cy);
+}
 
-    // 食物绘制
-    if (drawFoodImage(ctx, word, centerX, centerY)) return true;
+// 统一的 Minecraft 像素画绘制函数
+function drawMinecraftPixelArt(ctx, word, cx, cy) {
+    // 动物
+    const animals = {
+        cat: () => {
+            // 橙色猫 - 身体
+            drawPixelRect(ctx, cx - 30, cy - 15, 60, 40, '#FF9800');
+            // 头
+            drawPixelRect(ctx, cx - 25, cy - 35, 35, 30, '#FF9800');
+            // 耳朵
+            drawPixelRect(ctx, cx - 25, cy - 45, 10, 12, '#FF9800');
+            drawPixelRect(ctx, cx + 5, cy - 45, 10, 12, '#FF9800');
+            // 眼睛
+            drawPixelRect(ctx, cx - 18, cy - 28, 6, 6, '#000000');
+            drawPixelRect(ctx, cx + 5, cy - 28, 6, 6, '#000000');
+            // 鼻子
+            drawPixelRect(ctx, cx - 6, cy - 20, 8, 5, '#F48FB1');
+            return true;
+        },
+        dog: () => {
+            // 棕色狗
+            drawPixelRect(ctx, cx - 35, cy - 20, 70, 50, '#8D6E63');
+            drawPixelRect(ctx, cx - 25, cy - 35, 35, 30, '#8D6E63');
+            drawPixelRect(ctx, cx - 30, cy - 40, 12, 15, '#8D6E63');
+            drawPixelRect(ctx, cx + 8, cy - 40, 12, 15, '#8D6E63');
+            drawPixelRect(ctx, cx - 18, cy - 28, 6, 6, '#000000');
+            drawPixelRect(ctx, cx + 5, cy - 28, 6, 6, '#000000');
+            drawPixelRect(ctx, cx - 8, cy - 18, 12, 8, '#000000');
+            return true;
+        },
+        bird: () => {
+            drawPixelRect(ctx, cx - 30, cy - 15, 60, 35, '#F44336');
+            drawPixelRect(ctx, cx + 15, cy - 30, 30, 30, '#F44336');
+            drawPixelRect(ctx, cx + 40, cy - 20, 15, 10, '#FFA500');
+            drawPixelRect(ctx, cx + 25, cy - 25, 6, 6, '#000000');
+            drawPixelRect(ctx, cx - 40, cy - 5, 20, 20, '#D32F2F');
+            return true;
+        },
+        duck: () => {
+            drawPixelRect(ctx, cx - 30, cy - 15, 60, 35, '#FFA500');
+            drawPixelRect(ctx, cx + 15, cy - 30, 30, 30, '#FFA500');
+            drawPixelRect(ctx, cx + 40, cy - 20, 15, 10, '#E69500');
+            drawPixelRect(ctx, cx + 25, cy - 25, 6, 6, '#000000');
+            return true;
+        },
+        fish: () => {
+            drawPixelRect(ctx, cx - 35, cy - 15, 70, 35, '#2196F3');
+            drawPixelRect(ctx, cx + 20, cy - 20, 25, 30, '#2196F3');
+            drawPixelRect(ctx, cx - 50, cy - 25, 20, 25, '#1976D2');
+            drawPixelRect(ctx, cx + 30, cy - 12, 6, 6, '#000000');
+            return true;
+        },
+        rabbit: () => {
+            drawPixelRect(ctx, cx - 25, cy - 10, 50, 35, '#EEEEEE');
+            drawPixelRect(ctx, cx - 15, cy - 30, 30, 25, '#EEEEEE');
+            drawPixelRect(ctx, cx - 20, cy - 55, 10, 30, '#EEEEEE');
+            drawPixelRect(ctx, cx - 2, cy - 55, 10, 30, '#EEEEEE');
+            drawPixelRect(ctx, cx - 12, cy - 24, 5, 5, '#F48FB1');
+            drawPixelRect(ctx, cx + 2, cy - 24, 5, 5, '#F48FB1');
+            return true;
+        },
+        pig: () => {
+            drawPixelRect(ctx, cx - 35, cy - 20, 70, 50, '#F8BBD9');
+            drawPixelRect(ctx, cx - 20, cy - 35, 40, 30, '#F8BBD9');
+            drawPixelRect(ctx, cx - 15, cy - 20, 30, 15, '#F48FB1');
+            drawPixelRect(ctx, cx - 15, cy - 30, 6, 6, '#000000');
+            drawPixelRect(ctx, cx + 5, cy - 30, 6, 6, '#000000');
+            return true;
+        },
+        bear: () => {
+            drawPixelRect(ctx, cx - 40, cy - 25, 80, 55, '#795548');
+            drawPixelRect(ctx, cx - 25, cy - 45, 50, 35, '#795548');
+            drawPixelRect(ctx, cx - 30, cy - 55, 15, 15, '#795548');
+            drawPixelRect(ctx, cx + 5, cy - 55, 15, 15, '#795548');
+            drawPixelRect(ctx, cx - 20, cy - 35, 6, 6, '#000000');
+            drawPixelRect(ctx, cx + 8, cy - 35, 6, 6, '#000000');
+            return true;
+        },
+        elephant: () => {
+            drawPixelRect(ctx, cx - 40, cy - 20, 80, 50, '#9E9E9E');
+            drawPixelRect(ctx, cx - 30, cy - 40, 45, 35, '#9E9E9E');
+            drawPixelRect(ctx, cx - 50, cy - 35, 25, 30, '#BDBDBD');
+            drawPixelRect(ctx, cx + 18, cy - 35, 25, 30, '#BDBDBD');
+            drawPixelRect(ctx, cx - 10, cy - 10, 20, 40, '#9E9E9E');
+            drawPixelRect(ctx, cx - 20, cy + 20, 8, 15, '#FFFFFF');
+            drawPixelRect(ctx, cx + 5, cy + 20, 8, 15, '#FFFFFF');
+            return true;
+        },
+    };
 
-    // 颜色绘制
-    if (drawColorImage(ctx, word, centerX, centerY)) return true;
+    // 食物
+    const foods = {
+        apple: () => {
+            drawPixelRect(ctx, cx - 30, cy - 25, 60, 55, '#E53935');
+            drawPixelRect(ctx, cx - 25, cy - 20, 15, 15, 'rgba(255,255,255,0.3)');
+            drawPixelRect(ctx, cx - 5, cy - 35, 10, 12, '#4CAF50');
+            drawPixelRect(ctx, cx - 3, cy - 40, 6, 8, '#795548');
+            return true;
+        },
+        banana: () => {
+            drawPixelRect(ctx, cx - 35, cy - 15, 70, 25, '#FFEB3B');
+            drawPixelRect(ctx, cx + 20, cy - 25, 20, 20, '#FDD835');
+            drawPixelRect(ctx, cx - 40, cy - 10, 15, 15, '#FBC02D');
+            return true;
+        },
+        orange: () => {
+            drawPixelRect(ctx, cx - 30, cy - 25, 60, 55, '#FF9800');
+            drawPixelRect(ctx, cx - 20, cy - 18, 12, 12, 'rgba(255,255,255,0.2)');
+            return true;
+        },
+        grape: () => {
+            for (let r = 0; r < 3; r++) {
+                for (let c = 0; c < 3; c++) {
+                    drawPixelRect(ctx, cx - 30 + c * 22, cy - 30 + r * 22, 18, 18, '#9C27B0');
+                }
+            }
+            drawPixelRect(ctx, cx - 5, cy - 45, 10, 18, '#4CAF50');
+            return true;
+        },
+        watermelon: () => {
+            drawPixelRect(ctx, cx - 35, cy - 30, 70, 60, '#4CAF50');
+            drawPixelRect(ctx, cx - 28, cy - 23, 56, 46, '#E53935');
+            for (let i = 0; i < 6; i++) {
+                drawPixelRect(ctx, cx - 20 + i * 8, cy - 10, 4, 8, '#212121');
+            }
+            return true;
+        },
+        bread: () => {
+            drawPixelRect(ctx, cx - 35, cy - 20, 70, 45, '#FFB74D');
+            drawPixelRect(ctx, cx - 30, cy - 15, 60, 35, '#FFA726');
+            return true;
+        },
+        cake: () => {
+            drawPixelRect(ctx, cx - 35, cy - 10, 70, 35, '#F48FB1');
+            drawPixelRect(ctx, cx - 35, cy - 25, 70, 18, '#E91E63');
+            drawPixelRect(ctx, cx - 3, cy - 45, 6, 22, '#FFFFFF');
+            drawPixelRect(ctx, cx - 5, cy - 50, 10, 8, '#FFEB3B');
+            return true;
+        },
+        egg: () => {
+            ctx.fillStyle = '#FFF9C4';
+            ctx.beginPath();
+            ctx.ellipse(cx, cy, 25, 35, 0, 0, Math.PI * 2);
+            ctx.fill();
+            return true;
+        },
+        milk: () => {
+            drawPixelRect(ctx, cx - 25, cy - 35, 50, 70, '#FAFAFA');
+            drawPixelRect(ctx, cx - 20, cy - 25, 40, 25, '#42A5F5');
+            return true;
+        },
+        juice: () => {
+            drawPixelRect(ctx, cx - 25, cy - 30, 50, 60, '#FF7043');
+            drawPixelRect(ctx, cx - 18, cy - 20, 36, 25, '#FFAB91');
+            drawPixelRect(ctx, cx - 5, cy - 45, 8, 25, '#FFFFFF');
+            return true;
+        },
+        water: () => {
+            drawPixelRect(ctx, cx - 30, cy - 30, 60, 60, '#29B6F6');
+            drawPixelRect(ctx, cx - 25, cy - 25, 20, 20, 'rgba(255,255,255,0.3)');
+            return true;
+        },
+    };
 
-    // 数字绘制
-    if (drawNumberImage(ctx, word, centerX, centerY)) return true;
+    // 颜色
+    const colors = {
+        red: () => drawColorBlock(ctx, cx, cy, '#E53935'),
+        blue: () => drawColorBlock(ctx, cx, cy, '#1E88E5'),
+        yellow: () => drawColorBlock(ctx, cx, cy, '#FDD835'),
+        green: () => drawColorBlock(ctx, cx, cy, '#43A047'),
+        pink: () => drawColorBlock(ctx, cx, cy, '#EC407A'),
+        purple: () => drawColorBlock(ctx, cx, cy, '#8E24AA'),
+        black: () => drawColorBlock(ctx, cx, cy, '#212121'),
+        white: () => drawColorBlock(ctx, cx, cy, '#FAFAFA'),
+    };
 
-    // 天气/自然
-    if (drawNatureImage(ctx, word, centerX, centerY)) return true;
+    // 自然/天气
+    const nature = {
+        sun: () => {
+            drawPixelRect(ctx, cx - 40, cy - 40, 80, 80, '#FFD700');
+            for (let i = 0; i < 8; i++) {
+                const angle = (i / 8) * Math.PI * 2;
+                const px = cx + Math.cos(angle) * 55;
+                const py = cy + Math.sin(angle) * 55;
+                drawPixelRect(ctx, px - 8, py - 8, 16, 16, '#FFC107');
+            }
+            return true;
+        },
+        moon: () => {
+            drawPixelRect(ctx, cx - 35, cy - 35, 70, 70, '#FFF9C4');
+            drawPixelRect(ctx, cx - 20, cy - 25, 30, 25, '#FFE082');
+            return true;
+        },
+        cloud: () => {
+            drawPixelRect(ctx, cx - 50, cy - 20, 40, 30, '#FFFFFF');
+            drawPixelRect(ctx, cx - 35, cy - 35, 70, 35, '#FFFFFF');
+            drawPixelRect(ctx, cx - 10, cy - 20, 40, 30, '#FFFFFF');
+            return true;
+        },
+        tree: () => {
+            drawPixelRect(ctx, cx - 15, cy + 10, 30, 50, '#795548');
+            drawPixelRect(ctx, cx - 45, cy - 50, 90, 65, '#4CAF50');
+            drawPixelRect(ctx, cx - 35, cy - 40, 70, 50, '#388E3C');
+            return true;
+        },
+        flower: () => {
+            drawPixelRect(ctx, cx - 5, cy + 20, 10, 40, '#4CAF50');
+            const fc = ['#E91E63', '#FFEB3B', '#9C27B0', '#FF5722'][Math.floor(Math.random() * 4)];
+            drawPixelRect(ctx, cx - 20, cy - 15, 40, 40, fc);
+            drawPixelRect(ctx, cx - 8, cy - 8, 16, 16, '#FFC107');
+            return true;
+        },
+        rain: () => {
+            drawPixelRect(ctx, cx - 40, cy - 50, 35, 25, '#B0BEC5');
+            drawPixelRect(ctx, cx - 25, cy - 60, 55, 30, '#B0BEC5');
+            for (let i = 0; i < 8; i++) {
+                drawPixelRect(ctx, cx - 35 + i * 10, cy, 4, 25, '#29B6F6');
+            }
+            return true;
+        },
+        snow: () => {
+            for (let i = 0; i < 15; i++) {
+                drawPixelRect(ctx, Math.random() * 200 + 20, Math.random() * 200 + 20, 8, 8, '#FFFFFF');
+            }
+            return true;
+        },
+    };
 
-    // 人物/家庭
-    if (drawPersonImage(ctx, word, centerX, centerY)) return true;
+    // 人物
+    const people = {
+        mother: () => {
+            drawPixelRect(ctx, cx - 20, cy - 40, 40, 40, '#FFCC80');
+            drawPixelRect(ctx, cx - 30, cy + 5, 60, 50, '#E91E63');
+            drawPixelRect(ctx, cx - 25, cy - 45, 50, 30, '#5D4037');
+            drawPixelRect(ctx, cx - 30, cy - 25, 15, 40, '#5D4037');
+            drawPixelRect(ctx, cx + 15, cy - 25, 15, 40, '#5D4037');
+            drawPixelRect(ctx, cx - 12, cy - 30, 5, 5, '#000000');
+            drawPixelRect(ctx, cx + 7, cy - 30, 5, 5, '#000000');
+            return true;
+        },
+        father: () => {
+            drawPixelRect(ctx, cx - 20, cy - 40, 40, 40, '#FFCC80');
+            drawPixelRect(ctx, cx - 30, cy + 5, 60, 50, '#1976D2');
+            drawPixelRect(ctx, cx - 22, cy - 45, 44, 18, '#3E2723');
+            drawPixelRect(ctx, cx - 12, cy - 30, 5, 5, '#000000');
+            drawPixelRect(ctx, cx + 7, cy - 30, 5, 5, '#000000');
+            return true;
+        },
+    };
 
     // 物品
-    if (drawItemImage(ctx, word, centerX, centerY)) return true;
+    const items = {
+        book: () => {
+            drawPixelRect(ctx, cx - 35, cy - 45, 70, 60, '#5CAB5C');
+            drawPixelRect(ctx, cx - 28, cy - 35, 56, 40, '#FFFFFF');
+            for (let i = 0; i < 4; i++) {
+                drawPixelRect(ctx, cx - 22, cy - 28 + i * 12, 44, 4, '#333333');
+            }
+            return true;
+        },
+        pen: () => {
+            drawPixelRect(ctx, cx - 40, cy - 8, 80, 16, '#1E88E5');
+            drawPixelRect(ctx, cx + 35, cy - 8, 10, 16, '#FFD700');
+            return true;
+        },
+        bag: () => {
+            drawPixelRect(ctx, cx - 40, cy - 35, 80, 60, '#F44336');
+            drawPixelRect(ctx, cx - 35, cy - 30, 70, 25, '#D32F2F');
+            drawPixelRect(ctx, cx - 20, cy - 45, 8, 25, '#212121');
+            drawPixelRect(ctx, cx + 12, cy - 45, 8, 25, '#212121');
+            return true;
+        },
+        chair: () => {
+            drawPixelRect(ctx, cx - 30, cy - 30, 60, 10, '#8D6E63');
+            drawPixelRect(ctx, cx - 30, cy - 45, 10, 45, '#8D6E63');
+            drawPixelRect(ctx, cx + 20, cy - 45, 10, 45, '#8D6E63');
+            drawPixelRect(ctx, cx - 30, cy - 55, 60, 25, '#8D6E63');
+            return true;
+        },
+        table: () => {
+            drawPixelRect(ctx, cx - 45, cy - 15, 90, 15, '#8D6E63');
+            drawPixelRect(ctx, cx - 40, cy, 12, 35, '#8D6E63');
+            drawPixelRect(ctx, cx + 28, cy, 12, 35, '#8D6E63');
+            return true;
+        },
+        bed: () => {
+            drawPixelRect(ctx, cx - 50, cy - 20, 100, 50, '#F44336');
+            drawPixelRect(ctx, cx - 45, cy - 15, 90, 40, '#FFFFFF');
+            drawPixelRect(ctx, cx - 55, cy - 10, 12, 40, '#795548');
+            return true;
+        },
+        door: () => {
+            drawPixelRect(ctx, cx - 30, cy - 50, 60, 80, '#795548');
+            drawPixelRect(ctx, cx - 25, cy - 45, 50, 70, '#5D4037');
+            drawPixelRect(ctx, cx + 15, cy - 10, 8, 15, '#FFD700');
+            return true;
+        },
+        window: () => {
+            drawPixelRect(ctx, cx - 35, cy - 45, 70, 70, '#8D6E63');
+            drawPixelRect(ctx, cx - 28, cy - 38, 56, 56, '#81D4FA');
+            drawPixelRect(ctx, cx - 3, cy - 38, 6, 56, '#8D6E63');
+            drawPixelRect(ctx, cx - 28, cy - 15, 56, 6, '#8D6E63');
+            return true;
+        },
+    };
 
-    // 动词/形容词
-    if (drawActionImage(ctx, word, centerX, centerY)) return true;
+    // 表情
+    const faces = {
+        happy: () => {
+            drawPixelRect(ctx, cx - 35, cy - 35, 70, 70, '#FFCC80');
+            drawPixelRect(ctx, cx - 25, cy - 20, 8, 8, '#000000');
+            drawPixelRect(ctx, cx + 10, cy - 20, 8, 8, '#000000');
+            drawPixelRect(ctx, cx - 20, cy + 10, 40, 8, '#000000');
+            return true;
+        },
+        sad: () => {
+            drawPixelRect(ctx, cx - 35, cy - 35, 70, 70, '#FFCC80');
+            drawPixelRect(ctx, cx - 25, cy - 20, 8, 8, '#000000');
+            drawPixelRect(ctx, cx + 10, cy - 20, 8, 8, '#000000');
+            drawPixelRect(ctx, cx - 15, cy + 20, 30, 8, '#000000');
+            return true;
+        },
+        angry: () => {
+            drawPixelRect(ctx, cx - 35, cy - 35, 70, 70, '#FFCC80');
+            drawPixelRect(ctx, cx - 25, cy - 25, 8, 8, '#000000');
+            drawPixelRect(ctx, cx + 10, cy - 25, 8, 8, '#000000');
+            drawPixelRect(ctx, cx - 30, cy - 35, 25, 5, '#F44336');
+            drawPixelRect(ctx, cx + 5, cy - 35, 25, 5, '#F44336');
+            drawPixelRect(ctx, cx - 20, cy + 10, 40, 8, '#000000');
+            return true;
+        },
+    };
+
+    // 检查所有类别
+    if (animals[word]) return animals[word]();
+    if (foods[word]) return foods[word]();
+    if (colors[word]) return colors[word]();
+    if (nature[word]) return nature[word]();
+    if (people[word]) return people[word]();
+    if (items[word]) return items[word]();
+    if (faces[word]) return faces[word]();
 
     return false;
+}
+
+// 辅助函数：绘制像素矩形
+function drawPixelRect(ctx, x, y, w, h, color) {
+    ctx.fillStyle = color;
+    ctx.fillRect(Math.floor(x), Math.floor(y), Math.floor(w), Math.floor(h));
+}
+
+// 辅助函数：绘制颜色方块
+function drawColorBlock(ctx, cx, cy, color) {
+    const size = 70;
+    drawPixelRect(ctx, cx - size/2, cy - size/2, size, size, color);
+    // 添加像素纹理
+    ctx.fillStyle = 'rgba(0,0,0,0.1)';
+    for (let i = 0; i < 20; i++) {
+        drawPixelRect(
+            ctx,
+            cx - size/2 + Math.random() * size,
+            cy - size/2 + Math.random() * size,
+            5, 5,
+            'rgba(0,0,0,0.1)'
+        );
+    }
+    // 边框
+    ctx.strokeStyle = 'rgba(0,0,0,0.3)';
+    ctx.lineWidth = 3;
+    ctx.strokeRect(cx - size/2, cy - size/2, size, size);
+    // 高光
+    ctx.fillStyle = 'rgba(255,255,255,0.3)';
+    ctx.fillRect(cx - size/2, cy - size/2, size/3, size/3);
+    return true;
 }
 
 // 动物图片绘制
