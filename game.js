@@ -383,30 +383,37 @@ function updateProgressUI() {
 // ============================================
 function drawWordImage(wordData) {
     const canvas = elements.wordCanvas;
+    if (!canvas) {
+        console.error('Canvas not found!');
+        return;
+    }
     const ctx = canvas.getContext('2d');
+    if (!ctx) {
+        console.error('Context not found!');
+        return;
+    }
     const width = canvas.width;
     const height = canvas.height;
 
-    // 清空画布
+    console.log('Drawing word:', wordData.word, 'canvas size:', width, height);
+
+    // 清空画布 - 天空蓝背景
     ctx.fillStyle = '#87CEEB';
     ctx.fillRect(0, 0, width, height);
 
-    // 绘制Minecraft风格像素图
+    // 绘制草地底部
+    ctx.fillStyle = '#5CAB5C';
+    ctx.fillRect(0, height * 0.75, width, height * 0.25);
+
+    // 调用绘制函数
     drawMinecraftStyle(ctx, wordData, width, height);
+
+    console.log('Draw complete');
 }
 
 // Minecraft 风格像素画绘制系统
-// 使用像素块绘制真正的 Minecraft 风格图片
-
 function drawMinecraftStyle(ctx, wordData, width, height) {
     const word = wordData.word.toLowerCase();
-
-    // 设置画布
-    ctx.imageSmoothingEnabled = false;
-
-    // 绘制天空背景
-    ctx.fillStyle = '#87CEEB';
-    ctx.fillRect(0, 0, width, height);
 
     // 绘制草地底层
     drawMinecraftBlock(ctx, 0, height * 0.75, width, height * 0.25, 'grass');
@@ -416,7 +423,11 @@ function drawMinecraftStyle(ctx, wordData, width, height) {
 
     // 如果没有特定图片，绘制默认的 Minecraft 方块
     if (!success) {
-        drawMinecraftBlock(ctx, width/2 - 40, height/2 - 40, 80, 80, 'dirt');
+        // 显示单词文字作为后备
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = 'bold 20px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText(word, width/2, height/2);
     }
 }
 
