@@ -384,20 +384,11 @@ function updateProgressUI() {
 function drawWordImage(wordData) {
     try {
         const canvas = elements.wordCanvas;
-        if (!canvas) {
-            console.error('Canvas not found!');
-            alert('Canvas not found!');
-            return;
-        }
+        if (!canvas) return;
         const ctx = canvas.getContext('2d');
-        if (!ctx) {
-            console.error('Context not found!');
-            return;
-        }
+        if (!ctx) return;
         const width = canvas.width;
         const height = canvas.height;
-
-        console.log('Drawing word:', wordData.word, 'canvas size:', width, height);
 
         // 清空画布 - 天空蓝背景
         ctx.fillStyle = '#87CEEB';
@@ -409,37 +400,24 @@ function drawWordImage(wordData) {
 
         // 调用绘制函数
         drawMinecraftStyle(ctx, wordData, width, height);
-
-        console.log('Draw complete for:', wordData.word);
     } catch (e) {
         console.error('Error drawing:', e);
-        alert('Error: ' + e.message);
     }
 }
 
 // Minecraft 风格像素画绘制系统
 function drawMinecraftStyle(ctx, wordData, width, height) {
-    try {
-        const word = wordData.word.toLowerCase();
-        console.log('drawMinecraftStyle:', word);
+    const word = wordData.word.toLowerCase();
 
-        // 绘制草地底层
-        drawMinecraftBlock(ctx, 0, height * 0.75, width, height * 0.25, 'grass');
+    // 绘制草地底层
+    drawMinecraftBlock(ctx, 0, height * 0.75, width, height * 0.25, 'grass');
 
-        // 根据单词绘制主体
-        const success = drawWordImage2(ctx, word, width, height);
-        console.log('drawWordImage2 result:', success);
+    // 根据单词绘制主体
+    const success = drawWordImage2(ctx, word, width, height);
 
-        // 如果没有特定图片，绘制默认的 Minecraft 方块
-        if (!success) {
-            // 显示单词文字作为后备
-            ctx.fillStyle = '#FFFFFF';
-            ctx.font = 'bold 20px Arial';
-            ctx.textAlign = 'center';
-            ctx.fillText(word, width/2, height/2);
-        }
-    } catch (e) {
-        console.error('Error in drawMinecraftStyle:', e);
+    // 如果没有特定图片，绘制一个泥土方块
+    if (!success) {
+        drawMinecraftBlock(ctx, width/2 - 30, height/2 - 30, 60, 60, 'dirt');
     }
 }
 
