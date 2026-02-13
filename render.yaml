@@ -1,0 +1,8 @@
+services:
+  - type: static
+    name: english-game
+    env: static
+    buildCommand: ""
+    publishDir: "."
+    repo: https://github.com/BigworldGit/english-game
+    autoDeploy: true
