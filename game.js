@@ -235,7 +235,7 @@ function loadQuestion() {
 
     // 显示单词含义提示
     if (elements.wordHint) {
-        elements.wordHint.textContent = `提示: ${currentWord.meaning}`;
+        // 不显示中文提示，让用户看图猜词
     }
 
     // 生成选项
@@ -395,34 +395,950 @@ function drawWordImage(wordData) {
     drawMinecraftStyle(ctx, wordData, width, height);
 }
 
+// Minecraft 风格像素画绘制系统
+// 使用像素块绘制真正的 Minecraft 风格图片
+
 function drawMinecraftStyle(ctx, wordData, width, height) {
     const word = wordData.word.toLowerCase();
-    const meaning = wordData.meaning;
 
-    // 根据单词类别绘制不同的图案
+    // 设置画布
     ctx.imageSmoothingEnabled = false;
 
-    switch(wordData.category) {
-        case 'animal':
-            drawAnimal(ctx, word, width, height);
-            break;
-        case 'food':
-            drawFood(ctx, word, width, height);
-            break;
-        case 'color':
-            drawColor(ctx, word, width, height);
-            break;
-        case 'number':
-            drawNumber(ctx, word, width, height);
-            break;
-        case 'family':
-            drawFamily(ctx, word, width, height);
-            break;
-        case 'noun':
-        default:
-            drawObject(ctx, word, width, height);
-            break;
+    // 绘制天空背景
+    ctx.fillStyle = '#87CEEB';
+    ctx.fillRect(0, 0, width, height);
+
+    // 绘制草地底层
+    drawMinecraftBlock(ctx, 0, height * 0.75, width, height * 0.25, 'grass');
+
+    // 根据单词绘制主体
+    const success = drawWordImage(ctx, word, width, height);
+
+    // 如果没有特定图片，绘制默认的 Minecraft 方块
+    if (!success) {
+        drawMinecraftBlock(ctx, width/2 - 40, height/2 - 40, 80, 80, 'dirt');
     }
+}
+
+// 绘制 Minecraft 风格方块
+function drawMinecraftBlock(ctx, x, y, w, h, type) {
+    const colors = {
+        grass: ['#5CAB5C', '#4A8F4A', '#6BBF6B', '#3D7A3D'],
+        dirt: ['#8B5A2B', '#6B4423', '#9C6A3C', '#5A3A1A'],
+        stone: ['#9E9E9E', '#757575', '#BDBDBD', '#616161'],
+        wood: ['#795548', '#5D4037', '#8D6E63', '#4E342E'],
+        leaves: ['#4CAF50', '#388E3C', '#66BB6A', '#2E7D32'],
+        water: ['#29B6F6', '#03A9F4', '#4FC3F7', '#0288D1'],
+        sand: ['#FFE082', '#FFD54F', '#FFECB3', '#FFCA28'],
+        snow: ['#FAFAFA', '#F5F5F5', '#FFFFFF', '#E0E0E0'],
+        coal: ['#424242', '#212121', '#616161', '#000000'],
+        iron: ['#B0BEC5', '#90A4AE', '#CFD8DC', '#607D8B'],
+        gold: ['#FFD700', '#FFC107', '#FFEB3B', '#FFA000'],
+        diamond: ['#4DD0E1', '#26C6DA', '#80DEEA', '#00ACC1'],
+        redstone: ['#F44336', '#E53935', '#EF5350', '#D32F2F'],
+        emerald: ['#4CAF50', '#43A047', '#66BB6A', '#388E3C']
+    };
+
+    const palette = colors[type] || colors.dirt;
+    const pixelSize = Math.max(4, Math.min(w, h) / 16);
+
+    // 绘制主色
+    ctx.fillStyle = palette[0];
+    ctx.fillRect(x, y, w, h);
+
+    // 添加像素纹理
+    for (let i = 0; i < (w * h) / (pixelSize * pixelSize * 2); i++) {
+        const px = x + Math.floor(Math.random() * (w / pixelSize)) * pixelSize;
+        const py = y + Math.floor(Math.random() * (h / pixelSize)) * pixelSize;
+        if (px < x + w && py < y + h) {
+            ctx.fillStyle = palette[Math.floor(Math.random() * 4)];
+            ctx.fillRect(px, py, pixelSize, pixelSize);
+        }
+    }
+
+    // 添加边框效果
+    ctx.strokeStyle = 'rgba(0,0,0,0.3)';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(x, y, w, h);
+
+    // 高光效果
+    ctx.fillStyle = 'rgba(255,255,255,0.2)';
+    ctx.fillRect(x, y, w * 0.3, h * 0.3);
+}
+
+// 绘制单词对应的图片
+function drawWordImage(ctx, word, width, height) {
+    const centerX = width / 2;
+    const centerY = height / 2 - 20;
+
+    // 动物绘制
+    if (drawAnimalImage(ctx, word, centerX, centerY)) return true;
+
+    // 食物绘制
+    if (drawFoodImage(ctx, word, centerX, centerY)) return true;
+
+    // 颜色绘制
+    if (drawColorImage(ctx, word, centerX, centerY)) return true;
+
+    // 数字绘制
+    if (drawNumberImage(ctx, word, centerX, centerY)) return true;
+
+    // 天气/自然
+    if (drawNatureImage(ctx, word, centerX, centerY)) return true;
+
+    // 人物/家庭
+    if (drawPersonImage(ctx, word, centerX, centerY)) return true;
+
+    // 物品
+    if (drawItemImage(ctx, word, centerX, centerY)) return true;
+
+    // 动词/形容词
+    if (drawActionImage(ctx, word, centerX, centerY)) return true;
+
+    return false;
+}
+
+// 动物图片绘制
+function drawAnimalImage(ctx, word, cx, cy) {
+    const size = 80;
+
+    switch(word) {
+        case 'cat':
+            // 橙色猫
+            drawMinecraftBlock(ctx, cx - 35, cy - 20, 70, 50, 'grass');
+            // 头
+            drawMinecraftBlock(ctx, cx - 25, cy - 35, 35, 30, 'grass');
+            // 耳朵
+            drawMinecraftBlock(ctx, cx - 25, cy - 45, 10, 12, 'grass');
+            drawMinecraftBlock(ctx, cx + 5, cy - 45, 10, 12, 'grass');
+            // 眼睛
+            ctx.fillStyle = '#000';
+            ctx.fillRect(cx - 18, cy - 28, 6, 6);
+            ctx.fillRect(cx + 5, cy - 28, 6, 6);
+            // 鼻子
+            ctx.fillStyle = '#F48FB1';
+            ctx.fillRect(cx - 6, cy - 20, 8, 5);
+            return true;
+
+        case 'dog':
+            // 棕色狗
+            drawMinecraftBlock(ctx, cx - 35, cy - 20, 70, 50, 'wood');
+            drawMinecraftBlock(ctx, cx - 25, cy - 35, 35, 30, 'wood');
+            // 耳朵
+            drawMinecraftBlock(ctx, cx - 30, cy - 40, 12, 15, 'wood');
+            drawMinecraftBlock(ctx, cx + 8, cy - 40, 12, 15, 'wood');
+            // 眼睛
+            ctx.fillStyle = '#000';
+            ctx.fillRect(cx - 18, cy - 28, 6, 6);
+            ctx.fillRect(cx + 5, cy - 28, 6, 6);
+            // 鼻子
+            ctx.fillStyle = '#000';
+            ctx.fillRect(cx - 8, cy - 18, 12, 8);
+            return true;
+
+        case 'bird':
+        case 'duck':
+            const birdColor = word === 'duck' ? '#FFA500' : '#F44336';
+            ctx.fillStyle = birdColor;
+            // 身体
+            ctx.fillRect(cx - 30, cy - 15, 60, 35);
+            // 头
+            ctx.fillRect(cx + 15, cy - 30, 30, 30);
+            // 嘴
+            ctx.fillStyle = '#FFA500';
+            ctx.fillRect(cx + 40, cy - 20, 15, 10);
+            // 眼睛
+            ctx.fillStyle = '#000';
+            ctx.fillRect(cx + 25, cy - 25, 6, 6);
+            // 翅膀
+            ctx.fillStyle = birdColor;
+            ctx.fillRect(cx - 40, cy - 5, 20, 20);
+            return true;
+
+        case 'fish':
+            // 鱼
+            ctx.fillStyle = '#4DD0E1';
+            // 身体
+            ctx.fillRect(cx - 35, cy - 15, 70, 35);
+            // 头
+            ctx.fillRect(cx + 20, cy - 20, 25, 30);
+            // 尾巴
+            ctx.fillRect(cx - 50, cy - 25, 20, 25);
+            // 眼睛
+            ctx.fillStyle = '#000';
+            ctx.fillRect(cx + 30, cy - 12, 6, 6);
+            return true;
+
+        case 'rabbit':
+            // 兔子
+            ctx.fillStyle = '#E0E0E0';
+            // 身体
+            ctx.fillRect(cx - 25, cy - 10, 50, 35);
+            // 头
+            ctx.fillRect(cx - 15, cy - 30, 30, 25);
+            // 耳朵
+            ctx.fillRect(cx - 20, cy - 55, 10, 30);
+            ctx.fillRect(cx - 2, cy - 55, 10, 30);
+            // 眼睛
+            ctx.fillStyle = '#F48FB1';
+            ctx.fillRect(cx - 12, cy - 24, 5, 5);
+            ctx.fillRect(cx + 2, cy - 24, 5, 5);
+            return true;
+
+        case 'pig':
+            // 粉色猪
+            ctx.fillStyle = '#F8BBD9';
+            ctx.fillRect(cx - 35, cy - 20, 70, 50);
+            ctx.fillRect(cx - 20, cy - 35, 40, 30);
+            // 鼻子
+            ctx.fillStyle = '#F48FB1';
+            ctx.fillRect(cx - 15, cy - 20, 30, 15);
+            // 眼睛
+            ctx.fillStyle = '#000';
+            ctx.fillRect(cx - 15, cy - 30, 6, 6);
+            ctx.fillRect(cx + 5, cy - 30, 6, 6);
+            return true;
+
+        case 'bear':
+            // 熊
+            ctx.fillStyle = '#795548';
+            ctx.fillRect(cx - 40, cy - 25, 80, 55);
+            ctx.fillRect(cx - 25, cy - 45, 50, 35);
+            // 耳朵
+            ctx.fillRect(cx - 30, cy - 55, 15, 15);
+            ctx.fillRect(cx + 5, cy - 55, 15, 15);
+            // 眼睛
+            ctx.fillStyle = '#000';
+            ctx.fillRect(cx - 20, cy - 35, 6, 6);
+            ctx.fillRect(cx + 8, cy - 35, 6, 6);
+            return true;
+
+        case 'lion':
+            // 狮子
+            ctx.fillStyle = '#FFB300';
+            ctx.fillRect(cx - 35, cy - 20, 70, 50);
+            ctx.fillRect(cx - 25, cy - 35, 50, 35);
+            // 鬃毛
+            ctx.fillStyle = '#FF8F00';
+            for (let i = 0; i < 8; i++) {
+                const angle = (i / 8) * Math.PI * 2;
+                ctx.fillRect(
+                    cx + Math.cos(angle) * 35 - 5,
+                    cy - 30 + Math.sin(angle) * 35 - 5,
+                    10, 10
+                );
+            }
+            // 眼睛
+            ctx.fillStyle = '#000';
+            ctx.fillRect(cx - 18, cy - 28, 6, 6);
+            ctx.fillRect(cx + 5, cy - 28, 6, 6);
+            return true;
+
+        case 'tiger':
+            // 老虎
+            ctx.fillStyle = '#FF7043';
+            ctx.fillRect(cx - 35, cy - 20, 70, 50);
+            ctx.fillRect(cx - 25, cy - 35, 50, 35);
+            // 条纹
+            ctx.fillStyle = '#000';
+            ctx.fillRect(cx - 30, cy - 15, 8, 25);
+            ctx.fillRect(cx - 5, cy - 18, 8, 30);
+            ctx.fillRect(cx + 20, cy - 15, 8, 25);
+            return true;
+
+        case 'monkey':
+            // 猴子
+            ctx.fillStyle = '#8D6E63';
+            ctx.fillRect(cx - 30, cy - 15, 60, 45);
+            ctx.fillRect(cx - 20, cy - 35, 40, 30);
+            // 耳朵
+            ctx.fillRect(cx - 30, cy - 35, 12, 12);
+            ctx.fillRect(cx + 10, cy - 35, 12, 12);
+            // 眼睛
+            ctx.fillStyle = '#000';
+            ctx.fillRect(cx - 15, cy - 28, 6, 6);
+            ctx.fillRect(cx + 3, cy - 28, 6, 6);
+            return true;
+
+        case 'elephant':
+            // 大象
+            ctx.fillStyle = '#9E9E9E';
+            ctx.fillRect(cx - 40, cy - 20, 80, 50);
+            ctx.fillRect(cx - 30, cy - 40, 45, 35);
+            // 耳朵
+            ctx.fillStyle = '#BDBDBD';
+            ctx.fillRect(cx - 50, cy - 35, 25, 30);
+            ctx.fillRect(cx + 18, cy - 35, 25, 30);
+            // 鼻子
+            ctx.fillStyle = '#9E9E9E';
+            ctx.fillRect(cx - 10, cy - 10, 20, 40);
+            // 象牙
+            ctx.fillStyle = '#FFF';
+            ctx.fillRect(cx - 20, cy + 20, 8, 15);
+            ctx.fillRect(cx + 5, cy + 20, 8, 15);
+            return true;
+    }
+    return false;
+}
+
+// 食物图片绘制
+function drawFoodImage(ctx, word, cx, cy) {
+    switch(word) {
+        case 'apple':
+            // 苹果 - 红色方块
+            ctx.fillStyle = '#E53935';
+            ctx.fillRect(cx - 30, cy - 25, 60, 55);
+            // 高光
+            ctx.fillStyle = 'rgba(255,255,255,0.3)';
+            ctx.fillRect(cx - 25, cy - 20, 15, 15);
+            // 叶子
+            ctx.fillStyle = '#4CAF50';
+            ctx.fillRect(cx - 5, cy - 35, 10, 12);
+            // 柄
+            ctx.fillStyle = '#795548';
+            ctx.fillRect(cx - 3, cy - 40, 6, 8);
+            return true;
+
+        case 'banana':
+            // 香蕉 - 黄色弧形
+            ctx.fillStyle = '#FFD700';
+            ctx.fillRect(cx - 35, cy - 15, 70, 25);
+            ctx.fillRect(cx + 20, cy - 25, 20, 20);
+            ctx.fillRect(cx - 40, cy - 10, 15, 15);
+            return true;
+
+        case 'orange':
+            // 橙子
+            ctx.fillStyle = '#FF9800';
+            ctx.fillRect(cx - 30, cy - 25, 60, 55);
+            ctx.fillStyle = 'rgba(255,255,255,0.2)';
+            ctx.fillRect(cx - 20, cy - 18, 12, 12);
+            return true;
+
+        case 'grape':
+            // 葡萄 - 紫色方块
+            ctx.fillStyle = '#9C27B0';
+            for (let row = 0; row < 3; row++) {
+                for (let col = 0; col < 3; col++) {
+                    ctx.fillRect(cx - 30 + col * 22, cy - 30 + row * 22, 18, 18);
+                }
+            }
+            // 茎
+            ctx.fillStyle = '#4CAF50';
+            ctx.fillRect(cx - 5, cy - 45, 10, 18);
+            return true;
+
+        case 'watermelon':
+        case 'watermoon':
+            // 西瓜
+            ctx.fillStyle = '#4CAF50';
+            ctx.fillRect(cx - 35, cy - 30, 70, 60);
+            ctx.fillStyle = '#E53935';
+            ctx.fillRect(cx - 28, cy - 23, 56, 46);
+            // 瓜子
+            ctx.fillStyle = '#000';
+            for (let i = 0; i < 6; i++) {
+                ctx.fillRect(cx - 20 + i * 8, cy - 10, 4, 8);
+            }
+            return true;
+
+        case 'strawberry':
+            // 草莓
+            ctx.fillStyle = '#E53935';
+            ctx.fillRect(cx - 25, cy - 20, 50, 45);
+            // 种子
+            ctx.fillStyle = '#FFEB3B';
+            for (let i = 0; i < 3; i++) {
+                for (let j = 0; j < 3; j++) {
+                    ctx.fillRect(cx - 18 + i * 15, cy - 12 + j * 12, 5, 5);
+                }
+            }
+            // 叶子
+            ctx.fillStyle = '#4CAF50';
+            ctx.fillRect(cx - 20, cy - 30, 40, 12);
+            return true;
+
+        case 'bread':
+            // 面包
+            ctx.fillStyle = '#FFB74D';
+            ctx.fillRect(cx - 35, cy - 20, 70, 45);
+            ctx.fillStyle = '#FFA726';
+            ctx.fillRect(cx - 30, cy - 15, 60, 35);
+            return true;
+
+        case 'cake':
+            // 蛋糕
+            ctx.fillStyle = '#F48FB1';
+            ctx.fillRect(cx - 35, cy - 10, 70, 35);
+            ctx.fillStyle = '#E91E63';
+            ctx.fillRect(cx - 35, cy - 25, 70, 18);
+            // 蜡烛
+            ctx.fillStyle = '#FFF';
+            ctx.fillRect(cx - 3, cy - 45, 6, 22);
+            ctx.fillStyle = '#FFEB3B';
+            ctx.fillRect(cx - 5, cy - 50, 10, 8);
+            return true;
+
+        case 'egg':
+            // 鸡蛋
+            ctx.fillStyle = '#FFF9C4';
+            ctx.beginPath();
+            ctx.ellipse(cx, cy, 25, 35, 0, 0, Math.PI * 2);
+            ctx.fill();
+            return true;
+
+        case 'chicken':
+            // 鸡肉
+            ctx.fillStyle = '#FFEB3B';
+            ctx.fillRect(cx - 30, cy - 20, 60, 45);
+            ctx.fillStyle = '#F57F17';
+            ctx.fillRect(cx - 20, cy - 30, 40, 15);
+            return true;
+
+        case 'beef':
+            // 牛肉
+            ctx.fillStyle = '#8D6E63';
+            ctx.fillRect(cx - 35, cy - 20, 70, 45);
+            ctx.fillStyle = '#6D4C41';
+            for (let i = 0; i < 3; i++) {
+                ctx.fillRect(cx - 30 + i * 20, cy - 10, 15, 25);
+            }
+            return true;
+
+        case 'rice':
+            // 米饭
+            ctx.fillStyle = '#FAFAFA';
+            for (let i = 0; i < 20; i++) {
+                ctx.fillRect(
+                    cx - 30 + Math.random() * 60,
+                    cy - 25 + Math.random() * 50,
+                    6, 4
+                );
+            }
+            return true;
+
+        case 'milk':
+            // 牛奶盒
+            ctx.fillStyle = '#FAFAFA';
+            ctx.fillRect(cx - 25, cy - 35, 50, 70);
+            ctx.fillStyle = '#42A5F5';
+            ctx.fillRect(cx - 20, cy - 25, 40, 25);
+            return true;
+
+        case 'juice':
+            // 果汁
+            ctx.fillStyle = '#FF7043';
+            ctx.fillRect(cx - 25, cy - 30, 50, 60);
+            ctx.fillStyle = '#FFAB91';
+            ctx.fillRect(cx - 18, cy - 20, 36, 25);
+            // 吸管
+            ctx.fillStyle = '#FFF';
+            ctx.fillRect(cx - 5, cy - 45, 8, 25);
+            return true;
+
+        case 'water':
+            // 水
+            ctx.fillStyle = '#29B6F6';
+            ctx.fillRect(cx - 30, cy - 30, 60, 60);
+            ctx.fillStyle = 'rgba(255,255,255,0.3)';
+            ctx.fillRect(cx - 25, cy - 25, 20, 20);
+            return true;
+    }
+    return false;
+}
+
+// 颜色图片绘制
+function drawColorImage(ctx, word, cx, cy) {
+    const colors = {
+        red: '#E53935', blue: '#1E88E5', yellow: '#FDD835',
+        green: '#43A047', pink: '#EC407A', purple: '#8E24AA',
+        black: '#212121', white: '#FAFAFA'
+    };
+
+    if (colors[word]) {
+        // 绘制 Minecraft 方块风格的颜色
+        const size = 70;
+        ctx.fillStyle = colors[word];
+        ctx.fillRect(cx - size/2, cy - size/2, size, size);
+
+        // 像素纹理
+        ctx.fillStyle = 'rgba(0,0,0,0.1)';
+        for (let i = 0; i < 20; i++) {
+            ctx.fillRect(
+                cx - size/2 + Math.random() * size,
+                cy - size/2 + Math.random() * size,
+                5, 5
+            );
+        }
+
+        // 边框
+        ctx.strokeStyle = 'rgba(0,0,0,0.3)';
+        ctx.lineWidth = 3;
+        ctx.strokeRect(cx - size/2, cy - size/2, size, size);
+
+        // 高光
+        ctx.fillStyle = 'rgba(255,255,255,0.3)';
+        ctx.fillRect(cx - size/2, cy - size/2, size/3, size/3);
+
+        return true;
+    }
+    return false;
+}
+
+// 数字图片绘制
+function drawNumberImage(ctx, word, cx, cy) {
+    const numMap = {
+        one: '1', two: '2', three: '3', four: '4', five: '5',
+        six: '6', seven: '7', eight: '8', nine: '9', ten: '10'
+    };
+
+    if (numMap[word]) {
+        // Minecraft 背景
+        ctx.fillStyle = '#5CAB5C';
+        ctx.fillRect(0, 0, 240, 240);
+
+        // 像素风格数字
+        ctx.fillStyle = '#FFF';
+        ctx.font = 'bold 100px VT323';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(numMap[word], cx, cy);
+
+        return true;
+    }
+    return false;
+}
+
+// 自然/天气图片绘制
+function drawNatureImage(ctx, word, cx, cy) {
+    switch(word) {
+        case 'sun':
+            // 太阳
+            ctx.fillStyle = '#FFD700';
+            ctx.fillRect(cx - 40, cy - 40, 80, 80);
+            // 光芒
+            ctx.fillStyle = '#FFC107';
+            for (let i = 0; i < 8; i++) {
+                const angle = (i / 8) * Math.PI * 2;
+                const x = cx + Math.cos(angle) * 55;
+                const y = cy + Math.sin(angle) * 55;
+                ctx.fillRect(x - 8, y - 8, 16, 16);
+            }
+            return true;
+
+        case 'moon':
+            // 月亮
+            ctx.fillStyle = '#FFF9C4';
+            ctx.fillRect(cx - 35, cy - 35, 70, 70);
+            ctx.fillStyle = '#FFE082';
+            ctx.fillRect(cx - 20, cy - 25, 30, 25);
+            return true;
+
+        case 'star':
+            // 星星
+            ctx.fillStyle = '#212121';
+            ctx.fillRect(0, 0, 240, 240);
+            ctx.fillStyle = '#FFD700';
+            drawStar(ctx, cx, cy, 5, 35, 15);
+            // 小星星
+            for (let i = 0; i < 10; i++) {
+                const sx = Math.random() * 240;
+                const sy = Math.random() * 240;
+                drawStar(ctx, sx, sy, 4, 8, 3);
+            }
+            return true;
+
+        case 'cloud':
+            // 云
+            ctx.fillStyle = '#FFF';
+            ctx.fillRect(cx - 50, cy - 20, 40, 30);
+            ctx.fillRect(cx - 35, cy - 35, 70, 35);
+            ctx.fillRect(cx - 10, cy - 20, 40, 30);
+            return true;
+
+        case 'rain':
+            // 下雨天
+            ctx.fillStyle = '#78909C';
+            ctx.fillRect(0, 0, 240, 240);
+            // 云
+            ctx.fillStyle = '#B0BEC5';
+            ctx.fillRect(cx - 40, cy - 50, 35, 25);
+            ctx.fillRect(cx - 25, cy - 60, 55, 30);
+            // 雨滴
+            ctx.fillStyle = '#29B6F6';
+            for (let i = 0; i < 8; i++) {
+                ctx.fillRect(cx - 35 + i * 10, cy, 4, 25);
+            }
+            return true;
+
+        case 'snow':
+            // 下雪天
+            ctx.fillStyle = '#E3F2FD';
+            ctx.fillRect(0, 0, 240, 240);
+            // 雪花
+            ctx.fillStyle = '#FFF';
+            for (let i = 0; i < 15; i++) {
+                ctx.fillRect(
+                    Math.random() * 240,
+                    Math.random() * 240,
+                    8, 8
+                );
+            }
+            return true;
+
+        case 'wind':
+            // 风
+            ctx.fillStyle = '#E0F7FA';
+            ctx.fillRect(0, 0, 240, 240);
+            ctx.fillStyle = '#80DEEA';
+            ctx.font = 'bold 60px VT323';
+            ctx.textAlign = 'center';
+            ctx.fillText('~ ~ ~', cx, cy);
+            return true;
+
+        case 'tree':
+            // 树
+            // 树干
+            ctx.fillStyle = '#795548';
+            ctx.fillRect(cx - 15, cy + 10, 30, 50);
+            // 树叶
+            ctx.fillStyle = '#4CAF50';
+            ctx.fillRect(cx - 45, cy - 50, 90, 65);
+            ctx.fillStyle = '#388E3C';
+            ctx.fillRect(cx - 35, cy - 40, 70, 50);
+            return true;
+
+        case 'flower':
+            // 花
+            ctx.fillStyle = '#4CAF50';
+            ctx.fillRect(cx - 5, cy + 20, 10, 40);
+            const flowerColors = ['#E91E63', '#FFEB3B', '#9C27B0', '#FF5722'];
+            ctx.fillStyle = flowerColors[Math.floor(Math.random() * 4)];
+            ctx.fillRect(cx - 20, cy - 15, 40, 40);
+            ctx.fillStyle = '#FFC107';
+            ctx.fillRect(cx - 8, cy - 8, 16, 16);
+            return true;
+
+        case 'grass':
+            // 草地
+            ctx.fillStyle = '#8B5A2B';
+            ctx.fillRect(0, cy, 240, 60);
+            ctx.fillStyle = '#5CAB5C';
+            ctx.fillRect(0, cy - 20, 240, 30);
+            for (let i = 0; i < 30; i++) {
+                ctx.fillStyle = '#6BBF6B';
+                ctx.fillRect(i * 8 + 2, cy - 30, 4, 15);
+            }
+            return true;
+
+        case 'leaf':
+            // 叶子
+            ctx.fillStyle = '#4CAF50';
+            ctx.fillRect(cx - 30, cy - 25, 60, 55);
+            ctx.fillStyle = '#81C784';
+            ctx.fillRect(cx - 20, cy - 15, 40, 35);
+            return true;
+    }
+    return false;
+}
+
+// 人物/家庭图片绘制
+function drawPersonImage(ctx, word, cx, cy) {
+    switch(word) {
+        case 'mother':
+            // 妈妈 - 长发女性
+            ctx.fillStyle = '#FFCC80';
+            ctx.fillRect(cx - 20, cy - 40, 40, 40); // 头
+            ctx.fillRect(cx - 30, cy + 5, 60, 50); // 身体
+            // 头发
+            ctx.fillStyle = '#5D4037';
+            ctx.fillRect(cx - 25, cy - 45, 50, 30);
+            ctx.fillRect(cx - 30, cy - 25, 15, 40);
+            ctx.fillRect(cx + 15, cy - 25, 15, 40);
+            // 眼睛
+            ctx.fillStyle = '#000';
+            ctx.fillRect(cx - 12, cy - 30, 5, 5);
+            ctx.fillRect(cx + 7, cy - 30, 5, 5);
+            return true;
+
+        case 'father':
+            // 爸爸 - 短发男性
+            ctx.fillStyle = '#FFCC80';
+            ctx.fillRect(cx - 20, cy - 40, 40, 40);
+            ctx.fillRect(cx - 30, cy + 5, 60, 50);
+            // 头发
+            ctx.fillStyle = '#3E2723';
+            ctx.fillRect(cx - 22, cy - 45, 44, 18);
+            // 眼睛
+            ctx.fillStyle = '#000';
+            ctx.fillRect(cx - 12, cy - 30, 5, 5);
+            ctx.fillRect(cx + 7, cy - 30, 5, 5);
+            return true;
+
+        case 'sister':
+            // 姐妹
+            ctx.fillStyle = '#FFCC80';
+            ctx.fillRect(cx - 18, cy - 35, 36, 36);
+            ctx.fillRect(cx - 25, cy + 5, 50, 45);
+            // 头发
+            ctx.fillStyle = '#8D6E63';
+            ctx.fillRect(cx - 22, cy - 40, 44, 25);
+            // 眼睛
+            ctx.fillStyle = '#000';
+            ctx.fillRect(cx - 10, cy - 28, 4, 4);
+            ctx.fillRect(cx + 6, cy - 28, 4, 4);
+            return true;
+
+        case 'brother':
+            // 兄弟
+            ctx.fillStyle = '#FFCC80';
+            ctx.fillRect(cx - 18, cy - 35, 36, 36);
+            ctx.fillRect(cx - 25, cy + 5, 50, 45);
+            // 头发
+            ctx.fillStyle = '#212121';
+            ctx.fillRect(cx - 20, cy - 40, 40, 15);
+            // 眼睛
+            ctx.fillStyle = '#000';
+            ctx.fillRect(cx - 10, cy - 28, 4, 4);
+            ctx.fillRect(cx + 6, cy - 28, 4, 4);
+            return true;
+    }
+    return false;
+}
+
+// 物品图片绘制
+function drawItemImage(ctx, word, cx, cy) {
+    switch(word) {
+        case 'book':
+            // 书
+            ctx.fillStyle = '#5CAB5C';
+            ctx.fillRect(cx - 35, cy - 45, 70, 60);
+            ctx.fillStyle = '#FFF';
+            ctx.fillRect(cx - 28, cy - 35, 56, 40);
+            // 文字行
+            ctx.fillStyle = '#333';
+            for (let i = 0; i < 4; i++) {
+                ctx.fillRect(cx - 22, cy - 28 + i * 12, 44, 4);
+            }
+            return true;
+
+        case 'pen':
+            // 笔
+            ctx.fillStyle = '#1E88E5';
+            ctx.fillRect(cx - 40, cy - 8, 80, 16);
+            ctx.fillStyle = '#FFD700';
+            ctx.fillRect(cx + 35, cy - 8, 10, 16);
+            return true;
+
+        case 'bag':
+            // 书包
+            ctx.fillStyle = '#F44336';
+            ctx.fillRect(cx - 40, cy - 35, 80, 60);
+            ctx.fillStyle = '#D32F2F';
+            ctx.fillRect(cx - 35, cy - 30, 70, 25);
+            // 带子
+            ctx.fillStyle = '#212121';
+            ctx.fillRect(cx - 20, cy - 45, 8, 25);
+            ctx.fillRect(cx + 12, cy - 45, 8, 25);
+            return true;
+
+        case 'chair':
+            // 椅子
+            ctx.fillStyle = '#8D6E63';
+            ctx.fillRect(cx - 30, cy - 30, 60, 10); // 座
+            ctx.fillRect(cx - 30, cy - 45, 10, 45); // 腿
+            ctx.fillRect(cx + 20, cy - 45, 10, 45);
+            ctx.fillRect(cx - 30, cy - 55, 60, 25); // 背
+            return true;
+
+        case 'table':
+            // 桌子
+            ctx.fillStyle = '#8D6E63';
+            ctx.fillRect(cx - 45, cy - 15, 90, 15); // 面
+            ctx.fillRect(cx - 40, cy, 12, 35); // 腿
+            ctx.fillRect(cx + 28, cy, 12, 35);
+            return true;
+
+        case 'bed':
+            // 床
+            ctx.fillStyle = '#F44336';
+            ctx.fillRect(cx - 50, cy - 20, 100, 50); // 床单
+            ctx.fillStyle = '#FFF';
+            ctx.fillRect(cx - 45, cy - 15, 90, 40); // 枕头
+            ctx.fillStyle = '#795548';
+            ctx.fillRect(cx - 55, cy - 10, 12, 40); // 床头
+            return true;
+
+        case 'door':
+            // 门
+            ctx.fillStyle = '#795548';
+            ctx.fillRect(cx - 30, cy - 50, 60, 80);
+            ctx.fillStyle = '#5D4037';
+            ctx.fillRect(cx - 25, cy - 45, 50, 70);
+            // 把手
+            ctx.fillStyle = '#FFD700';
+            ctx.fillRect(cx + 15, cy - 10, 8, 15);
+            return true;
+
+        case 'window':
+            // 窗户
+            ctx.fillStyle = '#8D6E63';
+            ctx.fillRect(cx - 35, cy - 45, 70, 70);
+            ctx.fillStyle = '#81D4FA';
+            ctx.fillRect(cx - 28, cy - 38, 56, 56);
+            // 窗框
+            ctx.fillStyle = '#8D6E63';
+            ctx.fillRect(cx - 3, cy - 38, 6, 56);
+            ctx.fillRect(cx - 28, cy - 15, 56, 6);
+            return true;
+
+        case 'clock':
+            // 时钟
+            ctx.fillStyle = '#FAFAFA';
+            ctx.fillRect(cx - 30, cy - 35, 60, 70);
+            ctx.fillStyle = '#212121';
+            ctx.fillRect(cx - 2, cy - 30, 4, 20);
+            ctx.fillRect(cx - 8, cy - 25, 16, 4);
+            return true;
+
+        case 'phone':
+            // 电话
+            ctx.fillStyle = '#212121';
+            ctx.fillRect(cx - 20, cy - 40, 40, 70);
+            ctx.fillStyle = '#FFF';
+            ctx.fillRect(cx - 15, cy - 35, 30, 50);
+            return true;
+
+        case 'computer':
+            // 电脑
+            ctx.fillStyle = '#424242';
+            ctx.fillRect(cx - 45, cy - 40, 90, 60); // 屏幕
+            ctx.fillStyle = '#212121';
+            ctx.fillRect(cx - 40, cy - 35, 80, 50);
+            ctx.fillStyle = '#757575';
+            ctx.fillRect(cx - 20, cy + 20, 40, 15); // 底座
+            ctx.fillRect(cx - 30, cy + 32, 60, 8);
+            return true;
+
+        case 'tv':
+        case 'television':
+            // 电视
+            ctx.fillStyle = '#212121';
+            ctx.fillRect(cx - 50, cy - 40, 100, 70);
+            ctx.fillStyle = '#1E88E5';
+            ctx.fillRect(cx - 45, cy - 35, 90, 60);
+            return true;
+    }
+    return false;
+}
+
+// 动作/形容词图片绘制
+function drawActionImage(ctx, word, cx, cy) {
+    // 表情
+    if (['happy', 'sad', 'angry', 'tired', 'hungry', 'thirsty'].includes(word)) {
+        ctx.fillStyle = '#FFCC80';
+        ctx.fillRect(cx - 35, cy - 35, 70, 70);
+        ctx.fillStyle = '#000';
+
+        switch(word) {
+            case 'happy':
+                // 笑脸
+                ctx.fillRect(cx - 25, cy - 20, 8, 8);
+                ctx.fillRect(cx + 10, cy - 20, 8, 8);
+                ctx.fillRect(cx - 20, cy + 10, 40, 8);
+                break;
+            case 'sad':
+                ctx.fillRect(cx - 25, cy - 20, 8, 8);
+                ctx.fillRect(cx + 10, cy - 20, 8, 8);
+                ctx.fillRect(cx - 15, cy + 20, 30, 8);
+                break;
+            case 'angry':
+                ctx.fillRect(cx - 25, cy - 25, 8, 8);
+                ctx.fillRect(cx + 10, cy - 25, 8, 8);
+                ctx.fillStyle = '#F44336';
+                ctx.fillRect(cx - 30, cy - 35, 25, 5);
+                ctx.fillRect(cx + 5, cy - 35, 25, 5);
+                ctx.fillStyle = '#000';
+                ctx.fillRect(cx - 20, cy + 10, 40, 8);
+                break;
+            case 'tired':
+                ctx.fillRect(cx - 25, cy - 20, 10, 4);
+                ctx.fillRect(cx + 8, cy - 20, 10, 4);
+                ctx.fillRect(cx - 20, cy + 10, 40, 8);
+                break;
+            case 'hungry':
+            case 'thirsty':
+                ctx.fillRect(cx - 25, cy - 20, 8, 8);
+                ctx.fillRect(cx + 10, cy - 20, 8, 8);
+                ctx.fillRect(cx - 15, cy + 5, 30, 15);
+                break;
+        }
+        return true;
+    }
+
+    // 其他常见词
+    switch(word) {
+        case 'hot':
+            // 热
+            ctx.fillStyle = '#F44336';
+            ctx.fillRect(cx - 30, cy - 30, 60, 60);
+            ctx.fillStyle = '#FFF';
+            ctx.font = 'bold 50px VT323';
+            ctx.textAlign = 'center';
+            ctx.fillText('HOT', cx, cy + 5);
+            return true;
+
+        case 'cold':
+            // 冷
+            ctx.fillStyle = '#03A9F4';
+            ctx.fillRect(cx - 30, cy - 30, 60, 60);
+            ctx.fillStyle = '#FFF';
+            ctx.font = 'bold 50px VT323';
+            ctx.textAlign = 'center';
+            ctx.fillText('COLD', cx, cy + 5);
+            return true;
+
+        case 'big':
+            // 大
+            ctx.fillStyle = '#FF9800';
+            ctx.fillRect(cx - 35, cy - 35, 70, 70);
+            ctx.fillStyle = '#FFF';
+            ctx.font = 'bold 45px VT323';
+            ctx.textAlign = 'center';
+            ctx.fillText('BIG', cx, cy + 5);
+            return true;
+
+        case 'small':
+            // 小
+            ctx.fillStyle = '#4CAF50';
+            ctx.fillRect(cx - 20, cy - 20, 40, 40);
+            ctx.fillStyle = '#FFF';
+            ctx.font = 'bold 30px VT323';
+            ctx.textAlign = 'center';
+            ctx.fillText('S', cx, cy + 5);
+            return true;
+
+        case 'new':
+            // 新
+            ctx.fillStyle = '#4CAF50';
+            ctx.fillRect(cx - 30, cy - 30, 60, 60);
+            ctx.fillStyle = '#FFF';
+            ctx.font = 'bold 45px VT323';
+            ctx.textAlign = 'center';
+            ctx.fillText('NEW', cx, cy + 5);
+            return true;
+
+        case 'old':
+            // 旧
+            ctx.fillStyle = '#9E9E9E';
+            ctx.fillRect(cx - 30, cy - 30, 60, 60);
+            ctx.fillStyle = '#FFF';
+            ctx.font = 'bold 45px VT323';
+            ctx.textAlign = 'center';
+            ctx.fillText('OLD', cx, cy + 5);
+            return true;
+    }
+    return false;
 }
 
 // 绘制动物
