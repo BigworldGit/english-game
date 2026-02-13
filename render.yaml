@@ -2,7 +2,11 @@ services:
   - type: static
     name: english-game
     env: static
-    buildCommand: ""
-    publishDir: "."
+    buildCommand: echo "No build needed"
+    publishDir: .
     repo: https://github.com/BigworldGit/english-game
     autoDeploy: true
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: no-cache
