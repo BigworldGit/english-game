@@ -185,10 +185,11 @@ function showUserInfo() {
 
 function continueGame() {
     console.log('continueGame called, currentUser:', currentUser);
+    console.log('gamePage element before:', elements.gamePage);
     currentGrade = currentUser.grade;
     prepareWords();
     showPage('game');
-    console.log('gamePage element:', elements.gamePage);
+    console.log('gamePage element after:', elements.gamePage);
     console.log('gamePage classList:', elements.gamePage ? elements.gamePage.classList.toString() : 'null');
     initGameRound();
 }
