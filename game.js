@@ -72,10 +72,9 @@ function initGame() {
         showUserInfo();
     }
 
-    // 隐藏加载动画
-    setTimeout(() => {
-        elements.loading.classList.add('hidden');
-    }, 500);
+    // 隐藏加载动画 - 立即隐藏（不再等待）
+    elements.loading.classList.add('hidden');
+    console.log('Loading hidden');
 }
 
 function setupEventListeners() {
