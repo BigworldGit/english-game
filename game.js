@@ -92,7 +92,12 @@ function setupEventListeners() {
     elements.startBtn.addEventListener('click', startGame);
 
     // 继续学习
-    elements.continueBtn.addEventListener('click', continueGame);
+    console.log('continueBtn element:', elements.continueBtn);
+    if (elements.continueBtn) {
+        elements.continueBtn.addEventListener('click', continueGame);
+    } else {
+        console.error('continueBtn is null!');
+    }
 
     // 重新开始
     elements.resetBtn.addEventListener('click', resetGame);
