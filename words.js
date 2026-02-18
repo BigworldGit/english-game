@@ -591,11 +591,6 @@ function getAllWords() {
     }
     return allWords;
 }
-    for (let grade in WORD_DATA) {
-        allWords = allWords.concat(WORD_DATA[grade]);
-    }
-    return allWords;
-}
 
 // 获取年级单词
 function getWordsByGrade(grade) {
