@@ -95,11 +95,8 @@ function setupEventListeners() {
     elements.startBtn.addEventListener('click', startGame);
 
     // 继续学习
-    // continueBtn check removed
-    // Debug: if (elements.continueBtn) {
-        // continueBtn listener
-    } else {
-        console.error('continueBtn is null!');
+    if (elements.continueBtn) {
+        elements.continueBtn.addEventListener('click', continueGame);
     }
 
     // 重新开始
