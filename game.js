@@ -392,6 +392,12 @@ function drawWordImage(wordData) {
     try {
         const canvas = elements.wordCanvas;
         if (!canvas) return;
+        
+        // 先尝试加载外部图片
+        if (tryLoadWordImage(wordData.word, canvas)) {
+            return; // 图片加载中，让 onload 处理绘制
+        }
+        
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
         const width = canvas.width;
@@ -2482,4 +2488,27 @@ if (typeof window !== 'undefined') {
             location.reload();
         }
     };
+}
+
+// ============================================
+// 图片加载辅助函数
+// ============================================
+function tryLoadWordImage(word, canvas) {
+    if (!canvas) return false;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return false;
+    
+    const img = new Image();
+    img.onload = function() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const scale = Math.min(canvas.width / img.width, canvas.height / img.height);
+        const x = (canvas.width - img.width * scale) / 2;
+        const y = (canvas.height - img.height * scale) / 2;
+        ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+    };
+    img.onerror = function() {
+        // 图片不存在，不做处理
+    };
+    img.src = 'images/grade1/' + word.toLowerCase() + '.png';
+    return true;
 }
