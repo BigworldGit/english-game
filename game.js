@@ -2302,6 +2302,14 @@ function goHome() {
 // 页面管理
 // ============================================
 function showPage(pageName) {
+    console.log('showPage called with:', pageName);
+    console.log('welcomePage:', elements.welcomePage);
+    console.log('gamePage:', elements.gamePage);
+    console.log('resultPage:', elements.resultPage);
+    if (!elements.welcomePage || !elements.gamePage || !elements.resultPage) {
+        console.error('One or more page elements are missing!');
+        return;
+    }
     elements.welcomePage.classList.remove('active');
     elements.gamePage.classList.remove('active');
     elements.resultPage.classList.remove('active');
