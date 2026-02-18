@@ -186,9 +186,15 @@ function showUserInfo() {
 function continueGame() {
     console.log('continueGame called, currentUser:', currentUser);
     console.log('gamePage element before:', elements.gamePage);
-    currentGrade = currentUser.grade;
-    prepareWords();
-    showPage('game');
+    try {
+        currentGrade = currentUser.grade;
+        prepareWords();
+        console.log('Calling showPage...');
+        showPage('game');
+        console.log('showPage completed');
+    } catch (e) {
+        console.error('Error in continueGame:', e);
+    }
     console.log('gamePage element after:', elements.gamePage);
     console.log('gamePage classList:', elements.gamePage ? elements.gamePage.classList.toString() : 'null');
     initGameRound();
