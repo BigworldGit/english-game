@@ -597,6 +597,25 @@ function getWordsByGrade(grade) {
     return WORD_DATA[grade] || [];
 }
 
+// 获取指定年级及以下的所有单词
+function getWordsUpToGrade(grade) {
+    let allWords = [];
+    for (let i = 1; i <= grade; i++) {
+        const gradeKey = i.toString();
+        if (WORD_DATA[gradeKey]) {
+            allWords = allWords.concat(WORD_DATA[gradeKey]);
+        }
+        // 也检查 i-1 格式（如 "1-1", "1-2"）
+        for (let semester = 1; semester <= 2; semester++) {
+            const semesterKey = gradeKey + "-" + semester;
+            if (WORD_DATA[semesterKey]) {
+                allWords = allWords.concat(WORD_DATA[semesterKey]);
+            }
+        }
+    }
+    return allWords;
+}
+
 // 获取所有年级列表
 function getAllGrades() {
     return Object.keys(WORD_DATA);
