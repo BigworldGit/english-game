@@ -59,7 +59,9 @@ const elements = {
 // ============================================
 // 初始化
 // ============================================
+console.log('Script loaded, setting up listeners...');
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOMContentLoaded fired');
     initGame();
     setupEventListeners();
 });
