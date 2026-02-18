@@ -602,5 +602,5 @@ function getAllGrades() {
     return Object.keys(WORD_DATA);
 }
 
-// 兼容旧版本
-module.exports = { WORD_DATA, getAllWords, getWordsByGrade, getAllGrades };
+// 浏览器版本不需要 module.exports
+// module.exports = { WORD_DATA, getAllWords, getWordsByGrade, getAllGrades };
