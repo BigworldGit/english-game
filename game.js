@@ -59,9 +59,9 @@ const elements = {
 // ============================================
 // 初始化
 // ============================================
-console.log('Script loaded, setting up listeners...');
+
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOMContentLoaded fired');
+    
     initGame();
     setupEventListeners();
 });
@@ -76,7 +76,7 @@ function initGame() {
 
     // 隐藏加载动画 - 立即隐藏（不再等待）
     elements.loading.classList.add('hidden');
-    console.log('Loading hidden');
+    
 }
 
 function setupEventListeners() {
@@ -94,9 +94,9 @@ function setupEventListeners() {
     elements.startBtn.addEventListener('click', startGame);
 
     // 继续学习
-    console.log('continueBtn element:', elements.continueBtn);
-    if (elements.continueBtn) {
-        elements.continueBtn.addEventListener('click', continueGame);
+    // continueBtn check removed
+    // Debug: if (elements.continueBtn) {
+        // continueBtn listener
     } else {
         console.error('continueBtn is null!');
     }
@@ -184,19 +184,12 @@ function showUserInfo() {
 }
 
 function continueGame() {
-    console.log('continueGame called, currentUser:', currentUser);
-    console.log('gamePage element before:', elements.gamePage);
     try {
         currentGrade = currentUser.grade;
         prepareWords();
-        console.log('Calling showPage...');
         showPage('game');
-        console.log('showPage completed');
     } catch (e) {
-        console.error('Error in continueGame:', e);
     }
-    console.log('gamePage element after:', elements.gamePage);
-    console.log('gamePage classList:', elements.gamePage ? elements.gamePage.classList.toString() : 'null');
     initGameRound();
 }
 
@@ -2302,12 +2295,7 @@ function goHome() {
 // 页面管理
 // ============================================
 function showPage(pageName) {
-    console.log('showPage called with:', pageName);
-    console.log('welcomePage:', elements.welcomePage);
-    console.log('gamePage:', elements.gamePage);
-    console.log('resultPage:', elements.resultPage);
     if (!elements.welcomePage || !elements.gamePage || !elements.resultPage) {
-        console.error('One or more page elements are missing!');
         return;
     }
     elements.welcomePage.classList.remove('active');
