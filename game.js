@@ -177,9 +177,12 @@ function showUserInfo() {
 }
 
 function continueGame() {
+    console.log('continueGame called, currentUser:', currentUser);
     currentGrade = currentUser.grade;
     prepareWords();
     showPage('game');
+    console.log('gamePage element:', elements.gamePage);
+    console.log('gamePage classList:', elements.gamePage ? elements.gamePage.classList.toString() : 'null');
     initGameRound();
 }
 
