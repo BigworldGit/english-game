@@ -2500,6 +2500,7 @@ function tryLoadWordImage(word, canvas) {
     
     const img = new Image();
     img.onload = function() {
+        // 图片加载成功，绘制到 canvas
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         const scale = Math.min(canvas.width / img.width, canvas.height / img.height);
         const x = (canvas.width - img.width * scale) / 2;
@@ -2507,8 +2508,12 @@ function tryLoadWordImage(word, canvas) {
         ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
     };
     img.onerror = function() {
-        // 图片不存在，不做处理
+        // 图片不存在，返回 false 触发程序绘制
+        img.onerror = null;
+        img.onload = null;
     };
     img.src = 'images/grade1/' + word.toLowerCase() + '.png';
-    return true;
+    
+    // 返回 false 让程序绘制继续执行，图片加载成功会覆盖
+    return false;
 }
