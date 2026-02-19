@@ -250,6 +250,7 @@ function loadQuestion() {
 
     // 绘制图片
     drawWordImage(currentWord);
+    applyWordAnimation(currentWord.word);
 
     // 渲染选项
     renderOptions();
@@ -2516,4 +2517,39 @@ function tryLoadWordImage(word, canvas) {
     
     // 返回 false 让程序绘制继续执行，图片加载成功会覆盖
     return false;
+}
+
+// ============================================
+// 词汇动画效果
+// ============================================
+const wordAnimations = {
+    // 动词 - 上下浮动
+    'run': 'bounce',
+    'jump': 'jump', 
+    'walk': 'walk',
+    'sit': 'sit',
+    'stand': 'stand',
+    // 天气 - 闪烁
+    'sunny': 'sunny',
+    'rainy': 'rain',
+    'cloudy': 'cloudy',
+    'windy': 'windy'
+};
+
+function applyWordAnimation(word) {
+    const canvas = elements.wordCanvas;
+    if (!canvas) return;
+    
+    const animClass = wordAnimations[word.toLowerCase()];
+    if (animClass) {
+        canvas.classList.add('anim-' + animClass);
+    } else {
+        canvas.className = ''; // 清除动画
+    }
+}
+
+// 清除动画
+function clearWordAnimation() {
+    const canvas = elements.wordCanvas;
+    if (canvas) canvas.className = '';
 }
