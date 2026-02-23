@@ -262,31 +262,117 @@ function loadQuestion() {
 function generateOptions() {
     const correctAnswer = currentWord.word;
     const wrongAnswers = [];
+    
+    // 定义避免同时出现的词组（语义关联，避免歧义）
+    const avoidPairs = [
+        // 颜色 + 物品
+        ['red', 'apple'], ['red', 'flower'], ['red', 'ball'],
+        ['blue', 'sky'], ['blue', 'water'], ['blue', 'sea'],
+        ['yellow', 'sun'], ['yellow', 'banana'], ['yellow', 'flower'],
+        ['green', 'grass'], ['green', 'tree'], ['green', 'leaf'],
+        ['pink', 'flower'], ['pink', 'pig'],
+        ['purple', 'grape'], ['purple', 'flower'],
+        ['white', 'snow'], ['white', 'milk'], ['white', 'paper'],
+        ['black', 'cat'], ['black', 'dog'], ['black', 'night'],
+        // 形容词 + 名词
+        ['big', 'elephant'], ['big', 'dog'], ['big', 'bear'],
+        ['small', 'mouse'], ['small', 'cat'], ['small', 'bird'],
+        ['happy', 'face'], ['sad', 'face'], ['angry', 'face'],
+        ['long', 'hair'], ['short', 'hair'], ['long', 'snake'],
+        ['fast', 'car'], ['fast', 'train'], ['slow', 'turtle'],
+        ['hot', 'sun'], ['hot', 'summer'], ['cold', 'winter'], ['cold', 'snow'],
+        ['good', 'morning'], ['good', 'afternoon'], ['good', 'evening'], ['good', 'night'],
+        // 物品组合
+        ['birthday', 'cake'], ['birthday', 'party'],
+        ['ice', 'cream'], ['hot', 'dog'],
+        ['Chinese', 'China'], ['American', 'America'], ['British', 'UK'],
+        ['English', 'book'], ['Chinese', 'book'],
+        ['bed', 'room'], ['bath', 'room'], ['living', 'room'],
+        ['basketball', 'ball'], ['football', 'ball'], ['volleyball', 'ball'],
+        // 反义词对（避免同时出现）
+        ['big', 'small'], ['long', 'short'], ['tall', 'short'],
+        ['old', 'new'], ['young', 'old'], ['good', 'bad'],
+        ['fast', 'slow'], ['hot', 'cold'], ['happy', 'sad'],
+        ['light', 'heavy'], ['full', 'empty'], ['strong', 'weak'],
+        ['high', 'low'], ['fast', 'slow'], ['easy', 'difficult'],
+        ['early', 'late'], ['near', 'far'], ['inside', 'outside'],
+        ['open', 'close'], ['start', 'finish'], ['buy', 'sell'],
+        ['come', 'go'], ['sit', 'stand'], ['sleep', 'wake'],
+        ['white', 'black'], ['day', 'night'], ['sun', 'moon'],
+        ['best', 'worst'], ['better', 'worse'], ['most', 'least'],
+        ['wake', 'sleep'], ['remember', 'forget'], ['give', 'take'],
+    ];
+    
+    // 检查词是否应该避免
+    function shouldAvoid(word) {
+        const lowerWord = word.toLowerCase();
+        const lowerCorrect = correctAnswer.toLowerCase();
+        
+        // 检查是否在避免列表中
+        for (const [a, b] of avoidPairs) {
+            if ((lowerWord === a && lowerCorrect === b) || 
+                (lowerWord === b && lowerCorrect === a)) {
+                return true;
+            }
+        }
+        
+        // 如果正确答案是复合词，检查干扰项是否是其中一部分
+        if (lowerCorrect.includes(' ')) {
+            const correctParts = lowerCorrect.split(' ');
+            for (const part of correctParts) {
+                if (lowerWord === part || lowerWord.includes(part)) {
+                    return true;
+                }
+            }
+        }
+        
+        // 如果干扰项是复合词的一部分
+        if (lowerWord.includes(' ')) {
+            const wordParts = lowerWord.split(' ');
+            for (const part of wordParts) {
+                if (part === lowerCorrect || lowerCorrect.includes(part)) {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
 
     // 1. 优先选择同类别、长度相近的单词作为干扰项（混淆效果）
     const sameCategory = allWords.filter(w =>
-        w.category === currentWord.category && w.word !== correctAnswer
+        w.category === currentWord.category && w.word !== correctAnswer && !shouldAvoid(w.word)
     );
 
     // 2. 找长度相近的单词
-    const lengthDiff = 2; // 允许的长度差异
+    const lengthDiff = 2;
     const similarLength = allWords.filter(w =>
         w.word !== correctAnswer &&
-        Math.abs(w.word.length - correctAnswer.length) <= lengthDiff
+        Math.abs(w.word.length - correctAnswer.length) <= lengthDiff &&
+        !shouldAvoid(w.word)
     );
 
     // 3. 找首字母相同的单词
     const sameInitial = allWords.filter(w =>
         w.word !== correctAnswer &&
-        w.word.charAt(0) === correctAnswer.charAt(0)
+        w.word.charAt(0) === correctAnswer.charAt(0) &&
+        !shouldAvoid(w.word)
     );
 
-    // 合并候选词：同类别 > 长度相近 > 首字母相同 > 其他
+    // 4. 找不同类别的单词
+    const differentCategory = allWords.filter(w =>
+        w.word !== correctAnswer &&
+        w.category !== currentWord.category &&
+        !shouldAvoid(w.word)
+    );
+
+    // 合并候选词：同类别 > 长度相近 > 首字母相同 > 不同类别 > 其他
     let candidates = [
         ...shuffleArray(sameCategory).slice(0, 8),
         ...shuffleArray(similarLength).slice(0, 6),
         ...shuffleArray(sameInitial).slice(0, 4),
-        ...shuffleArray(allWords.filter(w => w.word !== correctAnswer)).slice(0, 10)
+        ...shuffleArray(differentCategory).slice(0, 10),
+        ...shuffleArray(allWords.filter(w => w.word !== correctAnswer && !shouldAvoid(w.word))).slice(0, 10)
     ];
 
     // 去重
@@ -295,15 +381,17 @@ function generateOptions() {
     // 获取3个干扰项
     while (wrongAnswers.length < 3 && candidates.length > 0) {
         const candidate = candidates.pop();
-        if (candidate !== correctAnswer) {
+        if (candidate !== correctAnswer && !shouldAvoid(candidate)) {
             wrongAnswers.push(candidate);
         }
     }
 
-    // 如果干扰项不够，随机生成
+    // 如果干扰项不够，随机生成（避开相关词）
     while (wrongAnswers.length < 3) {
         const randomWord = allWords[Math.floor(Math.random() * allWords.length)];
-        if (randomWord.word !== correctAnswer && !wrongAnswers.includes(randomWord.word)) {
+        if (randomWord.word !== correctAnswer && 
+            !wrongAnswers.includes(randomWord.word) && 
+            !shouldAvoid(randomWord.word)) {
             wrongAnswers.push(randomWord.word);
         }
     }
