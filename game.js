@@ -16,6 +16,9 @@ let answers = [];
 let selectedGrade = null;
 let audioContext = null;
 let isPlaying = false;
+let bgMusic = null;
+let bgMusicFiles = ['audio/bg1.mp3', 'audio/bg2.mp3', 'audio/bg3.mp3'];
+let currentMusicIndex = 0;
 
 // 游戏配置
 const QUESTIONS_PER_LEVEL = 10;
@@ -407,7 +410,10 @@ function renderOptions() {
         const btn = document.createElement('button');
         btn.className = 'option-btn';
         btn.textContent = option;
-        btn.addEventListener('click', () => handleAnswer(option, btn));
+        btn.addEventListener('click', () => {
+            playSound('click'); // 播放点击音效
+            handleAnswer(option, btn);
+        });
         elements.optionsContainer.appendChild(btn);
     });
 }
@@ -430,14 +436,17 @@ function handleAnswer(selected, btn) {
     // 显示反馈
     if (isCorrect) {
         btn.classList.add('correct');
+        btn.classList.add('correct-answer');
         showFeedback('correct');
         playSound('correct');
     } else {
         btn.classList.add('wrong');
+        btn.classList.add('wrong-answer');
         // 显示正确答案
         buttons.forEach(b => {
             if (b.textContent === currentWord.word) {
                 b.classList.add('correct');
+                b.classList.add('correct-answer');
             }
         });
         showFeedback('wrong');
@@ -465,8 +474,30 @@ function hideFeedback() {
 }
 
 function updateProgressBar() {
-    const progress = ((currentQuestion - 1) / QUESTIONS_PER_LEVEL) * 100;
-    elements.progressBar.style.width = progress + '%';
+    // 统计当前关卡的正确数
+    const correctCount = answers.filter(a => a.correct).length;
+    
+    // Minecraft 风格进度显示
+    let progressHTML = '';
+    for (let i = 0; i < QUESTIONS_PER_LEVEL; i++) {
+        if (i < correctCount) {
+            // 已正确 - 绿宝石 💎
+            progressHTML += '<span class="progress-emerald">💎</span>';
+        } else if (i < currentQuestion - 1) {
+            // 已答题但错误 - 红石 🟥
+            progressHTML += '<span class="progress-redstone">🟥</span>';
+        } else {
+            // 未答题 - 空方块 ⬜
+            progressHTML += '<span class="progress-empty">⬜</span>';
+        }
+    }
+    
+    // 10题完成显示钻石
+    if (correctCount === QUESTIONS_PER_LEVEL) {
+        progressHTML = '<span class="progress-diamond">💎💎💎💎💎💎💎💎💎💎</span>';
+    }
+    
+    elements.progressBar.innerHTML = progressHTML;
 }
 
 function updateProgressUI() {
@@ -2352,8 +2383,10 @@ function showResult() {
     let message = '';
     if (accuracy >= 90) {
         message = '太棒了！你是英语小高手！🎉';
+        playSound('success'); // 播放胜利音效
     } else if (accuracy >= 70) {
         message = '做得不错！继续加油！💪';
+        playSound('success'); // 播放胜利音效
     } else if (accuracy >= 50) {
         message = '还不错哦！多练习会更棒！🌟';
     } else {
@@ -2438,51 +2471,91 @@ function initAudio() {
 function playSound(type) {
     try {
         const ctx = initAudio();
-        const oscillator = ctx.createOscillator();
-        const gainNode = ctx.createGain();
-
-        oscillator.connect(gainNode);
-        gainNode.connect(ctx.destination);
-
+        
         switch(type) {
             case 'correct':
-                oscillator.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
-                oscillator.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1); // E5
-                gainNode.gain.setValueAtTime(0.3, ctx.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
-                oscillator.start(ctx.currentTime);
-                oscillator.stop(ctx.currentTime + 0.3);
+                // 上升音阶 (C5-E5-G5) - 正确答题
+                playNote(ctx, 523.25, 0, 0.1);    // C5
+                playNote(ctx, 659.25, 0.1, 0.1);  // E5
+                playNote(ctx, 783.99, 0.2, 0.15); // G5
                 break;
             case 'wrong':
-                oscillator.frequency.setValueAtTime(200, ctx.currentTime);
-                oscillator.frequency.setValueAtTime(150, ctx.currentTime + 0.15);
-                gainNode.gain.setValueAtTime(0.3, ctx.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
-                oscillator.start(ctx.currentTime);
-                oscillator.stop(ctx.currentTime + 0.3);
+                // 下降音阶 (G4-E4-C4) - 错误答题
+                playNote(ctx, 392.00, 0, 0.12);   // G4
+                playNote(ctx, 329.63, 0.12, 0.12); // E4
+                playNote(ctx, 261.63, 0.24, 0.15); // C4
+                break;
+            case 'click':
+                // 短促的方块点击声
+                playBlockClick(ctx);
                 break;
             case 'success':
-                oscillator.frequency.setValueAtTime(523.25, ctx.currentTime);
-                oscillator.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1);
-                oscillator.frequency.setValueAtTime(783.99, ctx.currentTime + 0.2);
-                gainNode.gain.setValueAtTime(0.3, ctx.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
-                oscillator.start(ctx.currentTime);
-                oscillator.stop(ctx.currentTime + 0.4);
+                // 胜利旋律 - 升级/通关
+                playVictoryMelody(ctx);
                 break;
             case 'encourage':
-                oscillator.frequency.setValueAtTime(392, ctx.currentTime);
-                oscillator.frequency.setValueAtTime(440, ctx.currentTime + 0.15);
-                oscillator.frequency.setValueAtTime(392, ctx.currentTime + 0.3);
-                gainNode.gain.setValueAtTime(0.3, ctx.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.45);
-                oscillator.start(ctx.currentTime);
-                oscillator.stop(ctx.currentTime + 0.45);
+                // 鼓励音效
+                playNote(ctx, 392, 0, 0.15);     // G4
+                playNote(ctx, 440, 0.15, 0.15);  // A4
+                playNote(ctx, 392, 0.3, 0.15);   // G4
                 break;
         }
     } catch (e) {
         console.log('Audio not supported');
     }
+}
+
+// 播放单个音符
+function playNote(ctx, frequency, startTime, duration) {
+    const oscillator = ctx.createOscillator();
+    const gainNode = ctx.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(ctx.destination);
+    
+    oscillator.frequency.setValueAtTime(frequency, ctx.currentTime + startTime);
+    oscillator.type = 'sine';
+    gainNode.gain.setValueAtTime(0.25, ctx.currentTime + startTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + startTime + duration);
+    
+    oscillator.start(ctx.currentTime + startTime);
+    oscillator.stop(ctx.currentTime + startTime + duration);
+}
+
+// 播放方块点击音效
+function playBlockClick(ctx) {
+    const oscillator = ctx.createOscillator();
+    const gainNode = ctx.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(ctx.destination);
+    
+    // 短促的方波模拟方块点击
+    oscillator.type = 'square';
+    oscillator.frequency.setValueAtTime(800, ctx.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.05);
+    
+    gainNode.gain.setValueAtTime(0.15, ctx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
+    
+    oscillator.start(ctx.currentTime);
+    oscillator.stop(ctx.currentTime + 0.08);
+}
+
+// 播放胜利旋律
+function playVictoryMelody(ctx) {
+    const melody = [
+        { freq: 523.25, time: 0 },    // C5
+        { freq: 659.25, time: 0.1 },  // E5
+        { freq: 783.99, time: 0.2 },  // G5
+        { freq: 1046.50, time: 0.3 }, // C6 (高八度)
+        { freq: 783.99, time: 0.45 }, // G5
+        { freq: 1046.50, time: 0.55 }, // C6
+    ];
+    
+    melody.forEach(note => {
+        playNote(ctx, note.freq, note.time, 0.15);
+    });
 }
 
 function toggleMusic() {
@@ -2492,6 +2565,11 @@ function toggleMusic() {
         isPlaying = false;
         icon.textContent = '🔇';
         elements.musicControl.classList.remove('playing');
+        // 停止背景音乐
+        if (bgMusic) {
+            bgMusic.pause();
+            bgMusic = null;
+        }
         if (audioContext && audioContext.state === 'running') {
             audioContext.suspend();
         }
@@ -2507,34 +2585,35 @@ function toggleMusic() {
 }
 
 function playBackgroundMusic() {
-    if (!isPlaying || !audioContext) return;
+    if (!isPlaying) return;
 
-    // 播放简单的背景旋律
-    const notes = [261.63, 293.66, 329.63, 349.23, 392.00, 329.63, 293.66, 261.63];
-    let noteIndex = 0;
-
-    function playNote() {
-        if (!isPlaying) return;
-
-        const ctx = initAudio();
-        const oscillator = ctx.createOscillator();
-        const gainNode = ctx.createGain();
-
-        oscillator.connect(gainNode);
-        gainNode.connect(ctx.destination);
-
-        oscillator.frequency.setValueAtTime(notes[noteIndex], ctx.currentTime);
-        gainNode.gain.setValueAtTime(0.1, ctx.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
-
-        oscillator.start(ctx.currentTime);
-        oscillator.stop(ctx.currentTime + 0.4);
-
-        noteIndex = (noteIndex + 1) % notes.length;
-        setTimeout(playNote, 500);
+    // 如果已有音乐在播放，先停止
+    if (bgMusic) {
+        bgMusic.pause();
+        bgMusic = null;
     }
 
-    playNote();
+    // 随机选择一首音乐
+    currentMusicIndex = Math.floor(Math.random() * bgMusicFiles.length);
+    
+    bgMusic = new Audio(bgMusicFiles[currentMusicIndex]);
+    bgMusic.volume = 0.5;
+    bgMusic.loop = false; // 不单曲循环，播放完后随机切换
+
+    bgMusic.addEventListener('ended', function() {
+        if (isPlaying) {
+            // 随机切换到另一首
+            let nextIndex = currentMusicIndex;
+            while (nextIndex === currentMusicIndex) {
+                nextIndex = Math.floor(Math.random() * bgMusicFiles.length);
+            }
+            currentMusicIndex = nextIndex;
+            bgMusic.src = bgMusicFiles[currentMusicIndex];
+            bgMusic.play();
+        }
+    });
+
+    bgMusic.play().catch(e => console.log('播放背景音乐失败:', e));
 }
 
 // ============================================
