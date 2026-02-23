@@ -2587,23 +2587,44 @@ function tryLoadWordImage(word, canvas) {
     const ctx = canvas.getContext('2d');
     if (!ctx) return false;
     
+    // Show loading state - clear canvas with a placeholder
+    ctx.fillStyle = '#87CEEB'; // Sky blue background
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#5CAB5C'; // Grass
+    ctx.fillRect(0, canvas.height * 0.75, canvas.width, canvas.height * 0.25);
+    
     const img = new Image();
     img.onload = function() {
-        // 图片加载成功，绘制到 canvas
+        // Clear and draw the loaded image
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Cover with sky blue first
+        ctx.fillStyle = '#87CEEB';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        // Draw image centered and scaled
         const scale = Math.min(canvas.width / img.width, canvas.height / img.height);
         const x = (canvas.width - img.width * scale) / 2;
         const y = (canvas.height - img.height * scale) / 2;
         ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
     };
     img.onerror = function() {
-        // 图片不存在，返回 false 触发程序绘制
+        // Image failed to load, trigger fallback drawing
         img.onerror = null;
         img.onload = null;
     };
-    img.src = 'images/grade1/' + word.toLowerCase() + '.png';
     
-    // 返回 false 让程序绘制继续执行，图片加载成功会覆盖
+    // Try to load from all grade folders
+    const paths = [
+        'images/grade1/' + word.toLowerCase() + '.png',
+        'images/grade2/' + word.toLowerCase() + '.png', 
+        'images/grade3/' + word.toLowerCase() + '.png'
+    ];
+    
+    for (const path of paths) {
+        img.src = path;
+        if (img.complete) continue;
+        return true; // Image is loading
+    }
+    
     return false;
 }
 
