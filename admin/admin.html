@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英语游戏管理后台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        /* 登录表单 */
+        .login-box {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 400px;
+            margin: 100px auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .login-box h2 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            color: #555;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .error-msg {
+            color: #f44336;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        /* 管理面板 */
+        .admin-panel {
+            display: none;
+        }
+        
+        .admin-header {
+            background: white;
+            border-radius: 15px;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .admin-header h2 {
+            color: #333;
+        }
+        
+        .logout-btn {
+            padding: 10px 25px;
+            background: #f44336;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .stat-card h3 {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .stat-card .value {
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .users-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .users-section h3 {
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .user-list {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .user-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .user-item:hover {
+            background: #e9ecef;
+        }
+        
+        .user-info h4 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .user-info p {
+            color: #888;
+            font-size: 14px;
+        }
+        
+        .user-progress {
+            text-align: right;
+        }
+        
+        .user-progress .level {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .user-progress .accuracy {
+            color: #4caf50;
+            font-size: 14px;
+        }
+        
+        /* 用户详情模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            margin: 20px;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .modal-header h3 {
+            color: #333;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: #888;
+            cursor: pointer;
+        }
+        
+        .close-btn:hover {
+            color: #333;
+        }
+        
+        .detail-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .detail-stat {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .detail-stat .label {
+            color: #888;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+        
+        .detail-stat .value {
+            color: #333;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .detail-stat .value.correct {
+            color: #4caf50;
+        }
+        
+        .detail-stat .value.wrong {
+            color: #f44336;
+        }
+        
+        .questions-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .questions-table th,
+        .questions-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .questions-table th {
+            background: #f8f9fa;
+            color: #555;
+            font-weight: 600;
+        }
+        
+        .questions-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .status-correct {
+            color: #4caf50;
+            font-weight: 600;
+        }
+        
+        .status-wrong {
+            color: #f44336;
+            font-weight: 600;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 50px;
+            color: #888;
+        }
+        
+        .empty-state p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 英语游戏管理后台</h1>
+        
+        <!-- 登录表单 -->
+        <div class="login-box" id="loginBox">
+            <h2>管理员登录</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">用户名</label>
+                    <input type="text" id="username" placeholder="请输入用户名" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">密码</label>
+                    <input type="password" id="password" placeholder="请输入密码" required>
+                </div>
+                <button type="submit" class="login-btn">登录</button>
+                <p class="error-msg" id="errorMsg">用户名或密码错误</p>
+            </form>
+        </div>
+        
+        <!-- 管理面板 -->
+        <div class="admin-panel" id="adminPanel">
+            <div class="admin-header">
+                <h2>欢迎回来，管理员</h2>
+                <button class="logout-btn" id="logoutBtn">退出登录</button>
+            </div>
+            
+            <div class="stats-cards">
+                <div class="stat-card">
+                    <h3>总用户数</h3>
+                    <div class="value" id="totalUsers">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>总答题数</h3>
+                    <div class="value" id="totalAnswers">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>平均正确率</h3>
+                    <div class="value" id="avgAccuracy">0%</div>
+                </div>
+            </div>
+            
+            <div class="users-section">
+                <h3>用户列表</h3>
+                <div class="user-list" id="userList">
+                    <!-- 用户列表将动态生成 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 用户详情模态框 -->
+    <div class="modal" id="userModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">用户详情</h3>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <div class="detail-stats">
+                <div class="detail-stat">
+                    <div class="label">年级</div>
+                    <div class="value" id="detailGrade">-</div>
+                </div>
+                <div class="detail-stat">
+                    <div class="label">当前关卡</div>
+                    <div class="value" id="detailLevel">-</div>
+                </div>
+                <div class="detail-stat">
+                    <div class="label">总答题数</div>
+                    <div class="value" id="detailTotal">-</div>
+                </div>
+            </div>
+            <div class="detail-stats">
+                <div class="detail-stat">
+                    <div class="label">正确数</div>
+                    <div class="value correct" id="detailCorrect">-</div>
+                </div>
+                <div class="detail-stat">
+                    <div class="label">错误数</div>
+                    <div class="value wrong" id="detailWrong">-</div>
+                </div>
+                <div class="detail-stat">
+                    <div class="label">正确率</div>
+                    <div class="value" id="detailAccuracy">-</div>
+                </div>
+            </div>
+            <h4 style="margin: 20px 0 15px; color: #333;">答题历史</h4>
+            <table class="questions-table">
+                <thead>
+                    <tr>
+                        <th>题号</th>
+                        <th>单词</th>
+                        <th>用户答案</th>
+                        <th>结果</th>
+                        <th>用时(秒)</th>
+                    </tr>
+                </thead>
+                <tbody id="questionsTable">
+                    <!-- 答题记录将动态生成 -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <script src="admin.js"></script>
+</body>
+</html>

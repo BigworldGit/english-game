@@ -23,6 +23,18 @@ let currentMusicIndex = 0;
 // 游戏配置
 const QUESTIONS_PER_LEVEL = 10;
 
+// 图片预加载
+const imagePreloadCache = new Map();
+const PRELOAD_BATCH_SIZE = 3;
+
+// 音频对象池
+const audioPool = {
+    current: null,
+    next: null,
+    fadeDuration: 2000, // 淡入淡出时间(ms)
+    isTransitioning: false
+};
+
 // ============================================
 // DOM元素
 // ============================================
@@ -260,6 +272,9 @@ function loadQuestion() {
 
     // 更新进度条
     updateProgressBar();
+
+    // 预加载下一题的答题图片
+    preloadNextQuestionImages();
 }
 
 function generateOptions() {
@@ -2740,4 +2755,160 @@ function applyWordAnimation(word) {
 function clearWordAnimation() {
     const canvas = elements.wordCanvas;
     if (canvas) canvas.className = '';
+}
+
+// ============================================
+// 图片预加载机制
+// ============================================
+function preloadNextQuestionImages() {
+    // 预加载后续题目的图片
+    const startIndex = currentQuestion;
+    const endIndex = Math.min(currentQuestion + PRELOAD_BATCH_SIZE, QUESTIONS_PER_LEVEL);
+    
+    for (let i = startIndex; i < endIndex; i++) {
+        const nextWordIndex = (currentLevel - 1) * QUESTIONS_PER_LEVEL + (i - 1);
+        if (nextWordIndex < allWords.length) {
+            const nextWord = allWords[nextWordIndex % allWords.length];
+            preloadImage(nextWord.word);
+        }
+    }
+}
+
+function preloadImage(word) {
+    if (imagePreloadCache.has(word)) {
+        return; // 已缓存
+    }
+    
+    const img = new Image();
+    const paths = [
+        'images/grade1/' + word.toLowerCase() + '.png',
+        'images/grade2/' + word.toLowerCase() + '.png',
+        'images/grade3/' + word.toLowerCase() + '.png'
+    ];
+    
+    // 尝试加载第一张存在的图片
+    for (const path of paths) {
+        img.src = path;
+        if (img.complete) {
+            imagePreloadCache.set(word, img);
+            return;
+        }
+        // 如果图片加载成功，缓存它
+        img.onload = () => {
+            imagePreloadCache.set(word, img);
+        };
+    }
+}
+
+function getPreloadedImage(word) {
+    return imagePreloadCache.get(word);
+}
+
+// ============================================
+// 背景音乐预加载与淡入淡出
+// ============================================
+function initAudioPool() {
+    // 预加载下一个音频
+    const nextIndex = (currentMusicIndex + 1) % bgMusicFiles.length;
+    audioPool.next = new Audio(bgMusicFiles[nextIndex]);
+    audioPool.next.preload = 'auto';
+    audioPool.next.volume = 0;
+}
+
+function playBackgroundMusicWithFade() {
+    if (!isPlaying) return;
+
+    // 如果已有音乐在播放，先停止
+    if (audioPool.current) {
+        audioPool.current.pause();
+    }
+
+    // 随机选择一首音乐
+    currentMusicIndex = Math.floor(Math.random() * bgMusicFiles.length);
+    
+    audioPool.current = new Audio(bgMusicFiles[currentMusicIndex]);
+    audioPool.current.volume = 0;
+    audioPool.current.loop = false;
+
+    // 预加载下一首
+    const nextIndex = (currentMusicIndex + 1) % bgMusicFiles.length;
+    audioPool.next = new Audio(bgMusicFiles[nextIndex]);
+    audioPool.next.preload = 'auto';
+
+    // 淡入效果
+    audioPool.current.play().then(() => {
+        fadeIn(audioPool.current);
+    }).catch(e => console.log('播放背景音乐失败:', e));
+
+    // 监听播放结束
+    audioPool.current.addEventListener('ended', function() {
+        if (isPlaying && !audioPool.isTransitioning) {
+            switchToNextTrack();
+        }
+    });
+}
+
+function switchToNextTrack() {
+    if (audioPool.isTransitioning) return;
+    audioPool.isTransitioning = true;
+
+    // 淡出当前音乐
+    fadeOut(audioPool.current, () => {
+        // 切换到下一首
+        audioPool.current = audioPool.next;
+        audioPool.current.volume = 0;
+        
+        // 预再加载下一首
+        const nextIndex = (currentMusicIndex + 1) % bgMusicFiles.length;
+        audioPool.next = new Audio(bgMusicFiles[nextIndex]);
+        audioPool.next.preload = 'auto';
+        
+        // 播放并淡入
+        audioPool.current.play().then(() => {
+            fadeIn(audioPool.current);
+            audioPool.isTransitioning = false;
+        });
+    });
+}
+
+function fadeIn(audio) {
+    if (!audio) return;
+    const steps = 20;
+    const interval = audioPool.fadeDuration / steps;
+    let currentStep = 0;
+    const targetVolume = 0.5;
+    
+    const fadeTimer = setInterval(() => {
+        currentStep++;
+        audio.volume = Math.min((currentStep / steps) * targetVolume, targetVolume);
+        if (currentStep >= steps) {
+            clearInterval(fadeTimer);
+        }
+    }, interval);
+}
+
+function fadeOut(audio, callback) {
+    if (!audio) {
+        if (callback) callback();
+        return;
+    }
+    const steps = 20;
+    const interval = audioPool.fadeDuration / steps;
+    let currentStep = 0;
+    const startVolume = audio.volume;
+    
+    const fadeTimer = setInterval(() => {
+        currentStep++;
+        audio.volume = Math.max(startVolume * (1 - currentStep / steps), 0);
+        if (currentStep >= steps) {
+            clearInterval(fadeTimer);
+            audio.pause();
+            if (callback) callback();
+        }
+    }, interval);
+}
+
+// 覆盖原有的背景音乐函数
+function playBackgroundMusic() {
+    playBackgroundMusicWithFade();
 }
