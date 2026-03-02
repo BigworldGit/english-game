@@ -25,6 +25,7 @@
         .card{background:#f9f9f9;padding:8px;border-radius:8px;text-align:center;border:2px solid transparent;cursor:pointer}
         .card:hover{border-color:#667eea}
         .card.bad{border-color:#f44336;background:#ffe0e0}
+        .card.ok{border-color:#4caf50;background:#e0ffe0}
         .card.mis{border-color:#ff9800;background:#fff8e0}
         .card.skip{border-color:#9c27b0;background:#f0e0ff}
         .card img{width:100%;height:60px;object-fit:contain;border-radius:5px;background:#fff}
@@ -33,6 +34,7 @@
         .btns{display:flex;gap:3px;margin-top:4px}
         .btns button{flex:1;padding:4px;font-size:9px;border:1px solid #ddd;background:#fff;cursor:pointer;border-radius:3px}
         .btns button:hover{background:#eee}
+        .btns button.ok.on{background:#4caf50;color:white;border-color:#4caf50}
         .btns button.on{background:#f44336;color:white;border-color:#f44336}
         .btns button.skip.on{background:#9c27b0;color:white;border-color:#9c27b0}
         /* Lightbox */
@@ -41,6 +43,11 @@
         .lb img{max-width:90%;max-height:70%;object-fit:contain;border-radius:8px}
         .lb .wd{color:white;font-size:24px;font-weight:bold;margin:15px 0}
         .lb .cl{position:absolute;top:20px;right:30px;color:white;font-size:40px;cursor:pointer}
+        .lb .acts{display:flex;gap:15px;margin-top:20px}
+        .lb .acts button{padding:12px 30px;font-size:16px;border:none;border-radius:8px;cursor:pointer}
+        .lb .acts .pass{background:#4caf50;color:white}
+        .lb .acts .redo{background:#f44336;color:white}
+        .lb .acts .skip{background:#9c27b0;color:white}
         /* Modal */
         .modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);z-index:100;display:none;align-items:center;justify-content:center}
         .modal.on{display:flex}
@@ -67,6 +74,7 @@
     <div class="filter">
         筛选:<select id="f" onchange="render()">
             <option value="">全部</option>
+            <option value="ok">已通过</option>
             <option value="mis">缺失图片</option>
             <option value="bad">需重做</option>
             <option value="skip">已剔除</option>
@@ -80,6 +88,11 @@
     <span class="cl" onclick="closeLb()">×</span>
     <img id="lbImg" src="">
     <div class="wd" id="lbWord"></div>
+    <div class="acts" onclick="event.stopPropagation()">
+        <button class="pass" onclick="setCurrent('ok')">✓ 通过</button>
+        <button class="redo" onclick="setCurrent('bad')">↻ 重做</button>
+        <button class="skip" onclick="setCurrent('skip')">✕ 剔除</button>
+    </div>
 </div>
 
 <!-- Modal -->
@@ -101,6 +114,8 @@ const words = {
 };
 let img = {};
 let st = {};
+let currentG = null;
+let currentW = null;
 // 保存
 function save(){localStorage.setItem('rev_st',JSON.stringify(st));update()}
 
@@ -114,6 +129,7 @@ function update(){
             let s = st[key]||'';
             if(s==='skip')skip++;
             else if(s==='bad')bad++;
+            else if(s==='ok')ok++;
             else if(has)ok++;
             else mis++;
         });
@@ -136,11 +152,21 @@ function clearAll(){if(confirm('清除所有?')){st={};save();render()}}
 
 // 打开大图
 function openLb(g,w){
+    currentG = g;
+    currentW = w;
     document.getElementById('lbImg').src='/images/grade'+g+'/'+w.toLowerCase()+'.png';
     document.getElementById('lbWord').textContent=w;
     document.getElementById('lb').classList.add('on');
 }
-function closeLb(){document.getElementById('lb').classList.remove('on')}
+function closeLb(){document.getElementById('lb').classList.remove('on');currentG=null;currentW=null}
+
+// 设置当前图片状态
+function setCurrent(s){
+    if(currentG!==null && currentW!==null){
+        setSt(currentG, currentW, s);
+    }
+    closeLb();
+}
 
 // 渲染
 function render(){
@@ -155,7 +181,7 @@ function render(){
             let s = st[key]||'';
             if(s==='skip')skip++;
             else if(s==='bad')bad++;
-            else if(has)ok++;
+            else if(s==='ok' || has)ok++;
             else miss++;
         });
         
@@ -167,6 +193,7 @@ function render(){
             if(f==='mis'&&(has||s))return false;
             if(f==='bad'&&s!=='bad')return false;
             if(f==='skip'&&s!=='skip')return false;
+            if(f==='ok'&&s!=='ok')return false;
             return true;
         });
         if(!rows.length)continue;
@@ -181,8 +208,10 @@ function render(){
             let stTxt = has?'有图':'缺图';
             if(s==='skip'){cls+=' skip';stTxt='剔除';}
             else if(s==='bad'){cls+=' bad';stTxt='需重做';}
+            else if(s==='ok'){cls+=' ok';stTxt='通过';}
             else if(!has){cls+=' mis';}
             
+            let okOn = s==='ok'?' on':'';
             let badOn = s==='bad'?' on':'';
             let skipOn = s==='skip'?' on':'';
             
@@ -191,6 +220,7 @@ function render(){
                 '<div class="word">'+w+'</div>'+
                 '<div class="st">'+stTxt+'</div>'+
                 '<div class="btns" onclick="event.stopPropagation()">'+
+                '<button class="ok '+okOn+'" onclick="setSt('+g+',&#39;'+w+'&#39;,&#39;ok&#39;)">通过</button>'+
                 '<button class="'+badOn+'" onclick="setSt('+g+',&#39;'+w+'&#39;,&#39;bad&#39;)">重做</button>'+
                 '<button class="skip '+skipOn+'" onclick="setSt('+g+',&#39;'+w+'&#39;,&#39;skip&#39;)">剔除</button>'+
                 '</div></div>';
