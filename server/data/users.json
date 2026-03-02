@@ -1,0 +1,18 @@
+[
+  {
+    "id": "test_user_1",
+    "name": "测试用户",
+    "grade": 1,
+    "level": 1,
+    "question": 3,
+    "lastActive": "2026-03-01T03:26:55.422Z"
+  },
+  {
+    "id": "test_user_2",
+    "name": "小明",
+    "grade": 2,
+    "level": 3,
+    "question": 5,
+    "lastActive": "2026-03-01T03:26:55.430Z"
+  }
+]

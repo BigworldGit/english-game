@@ -42,6 +42,9 @@ const elements = {
     questionsTable: document.getElementById('questionsTable')
 };
 
+// 后端 API 地址
+const API_BASE = 'http://localhost:3001/api';
+
 // 用户数据存储
 let allUsers = [];
 let currentUserId = null;
@@ -51,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     init();
 });
 
-function init() {
+async function init() {
     // 检查是否已登录
     checkLoginStatus();
     
@@ -59,7 +62,7 @@ function init() {
     bindEvents();
     
     // 加载用户数据
-    loadUsersFromGame();
+    await loadUsersFromGame();
 }
 
 // 绑定事件
@@ -134,16 +137,45 @@ function showAdminPanel() {
     renderUserList();
 }
 
-// 从游戏中加载用户数据
-function loadUsersFromGame() {
-    // 从 localStorage 获取所有用户的进度数据
-    // 游戏会在每次进度更新时保存数据，我们需要收集所有不同的用户
-    
+// 从后端 API 加载用户数据
+async function loadUsersFromGame() {
+    try {
+        // 从后端获取用户列表（包含统计数据）
+        const response = await fetch(`${API_BASE}/users`);
+        if (response.ok) {
+            const usersData = await response.json();
+            allUsers = usersData;
+            
+            // 同时获取完整答题记录
+            const answersResponse = await fetch(`${API_BASE}/answers`);
+            if (answersResponse.ok) {
+                const allAnswers = await answersResponse.json();
+                
+                // 将答题记录附加到用户对象
+                allUsers = allUsers.map(user => {
+                    const userAnswers = allAnswers.filter(a => a.userId === user.id);
+                    return {
+                        ...user,
+                        answers: userAnswers
+                    };
+                });
+            }
+            
+            console.log('从后端加载用户数据成功:', allUsers.length, '个用户');
+        } else {
+            console.warn('从后端获取用户数据失败，尝试本地数据');
+            loadUsersFromLocalStorage();
+        }
+    } catch (err) {
+        console.error('连接后端失败:', err);
+        // 后端连接失败时使用本地数据
+        loadUsersFromLocalStorage();
+    }
+}
+
+// 从 localStorage 加载本地数据（备用方案）
+function loadUsersFromLocalStorage() {
     allUsers = [];
-    
-    // 方法1: 检查 localStorage 中的用户数据
-    // 由于游戏使用单一用户模式，我们需要通过其他方式获取历史用户
-    // 这里我们创建一个模拟的数据结构，实际使用时可以从服务器获取
     
     // 检查是否有保存的用户列表
     const savedUsers = localStorage.getItem(DATA_KEYS.users);
@@ -158,7 +190,6 @@ function loadUsersFromGame() {
             const userData = JSON.parse(currentUser);
             const progressData = JSON.parse(progress);
             
-            // 如果当前用户不在列表中，添加进去
             const existingUser = allUsers.find(u => u.id === userData.id);
             if (!existingUser) {
                 allUsers.push({
@@ -176,11 +207,9 @@ function loadUsersFromGame() {
     
     // 如果没有用户数据，显示空状态
     if (allUsers.length === 0) {
-        // 创建一些模拟数据用于演示
         createDemoData();
     }
     
-    // 保存用户列表
     localStorage.setItem(DATA_KEYS.users, JSON.stringify(allUsers));
 }
 
@@ -250,7 +279,22 @@ function generateDemoAnswers(count, correctRate) {
 }
 
 // 渲染统计信息
-function renderStats() {
+async function renderStats() {
+    // 优先从后端获取统计数据
+    try {
+        const response = await fetch(`${API_BASE}/stats`);
+        if (response.ok) {
+            const stats = await response.json();
+            elements.totalUsers.textContent = stats.totalUsers;
+            elements.totalAnswers.textContent = stats.totalAnswers;
+            elements.avgAccuracy.textContent = stats.avgAccuracy + '%';
+            return;
+        }
+    } catch (err) {
+        console.error('从后端获取统计失败，使用本地计算');
+    }
+    
+    // 后端失败时使用本地计算
     const totalUsers = allUsers.length;
     let totalAnswers = 0;
     let totalCorrect = 0;
@@ -380,9 +424,9 @@ function formatTimeAgo(timestamp) {
 // 导出函数供调试
 window.AdminPanel = {
     getUsers: () => allUsers,
-    refreshData: () => {
-        loadUsersFromGame();
-        renderStats();
+    refreshData: async () => {
+        await loadUsersFromGame();
+        await renderStats();
         renderUserList();
     }
 };

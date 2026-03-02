@@ -448,6 +448,20 @@ function handleAnswer(selected, btn) {
         correct: isCorrect
     });
 
+    // 上传答题数据到后端服务器
+    if (currentUser) {
+        submitAnswerToServer({
+            userId: currentUser.id,
+            userName: currentUser.name,
+            grade: currentGrade,
+            level: currentLevel,
+            question: currentQuestion,
+            word: currentWord.word,
+            selected: selected,
+            correct: isCorrect
+        });
+    }
+
     // 显示反馈
     if (isCorrect) {
         btn.classList.add('correct');
@@ -2471,6 +2485,28 @@ function saveProgress() {
     };
 
     localStorage.setItem('minecraft_english_progress', JSON.stringify(progress));
+}
+
+// ============================================
+// 后端数据提交
+// ============================================
+function submitAnswerToServer(answerData) {
+    const serverUrl = 'http://localhost:3001/api/answers';
+
+    fetch(serverUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(answerData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('答题数据已提交:', data);
+    })
+    .catch(err => {
+        console.error('提交答题数据失败:', err);
+    });
 }
 
 // ============================================

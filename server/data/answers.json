@@ -1,0 +1,54 @@
+[
+  {
+    "id": "1772335609363",
+    "userId": "test_user_1",
+    "userName": "测试用户",
+    "grade": 1,
+    "level": 1,
+    "question": 1,
+    "word": "apple",
+    "selected": "apple",
+    "correct": true,
+    "timeSpent": 10,
+    "timestamp": "2026-03-01T03:26:49.363Z"
+  },
+  {
+    "id": "1772335615412",
+    "userId": "test_user_1",
+    "userName": "测试用户",
+    "grade": 1,
+    "level": 1,
+    "question": 2,
+    "word": "banana",
+    "selected": "banana",
+    "correct": true,
+    "timeSpent": 8,
+    "timestamp": "2026-03-01T03:26:55.412Z"
+  },
+  {
+    "id": "1772335615422",
+    "userId": "test_user_1",
+    "userName": "测试用户",
+    "grade": 1,
+    "level": 1,
+    "question": 3,
+    "word": "cat",
+    "selected": "dog",
+    "correct": false,
+    "timeSpent": 15,
+    "timestamp": "2026-03-01T03:26:55.422Z"
+  },
+  {
+    "id": "1772335615430",
+    "userId": "test_user_2",
+    "userName": "小明",
+    "grade": 2,
+    "level": 3,
+    "question": 5,
+    "word": "water",
+    "selected": "water",
+    "correct": true,
+    "timeSpent": 12,
+    "timestamp": "2026-03-01T03:26:55.430Z"
+  }
+]

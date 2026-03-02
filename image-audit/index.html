@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English-Game 图片审核</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:linear-gradient(135deg,#667eea,#764ba2);min-height:100vh;padding:15px}
+        .container{max-width:1200px;margin:0 auto}
+        h1{color:white;text-align:center;margin-bottom:10px;font-size:1.5em}
+        .toolbar{background:white;padding:12px;border-radius:10px;margin-bottom:15px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;align-items:center}
+        .stats{display:flex;gap:8px;flex-wrap:wrap}
+        .stat{padding:6px 12px;background:#f5f5f5;border-radius:6px;text-align:center;font-size:12px}
+        .stat b{font-size:16px;display:block}
+        .stat.ok b{color:#4caf50}
+        .stat.bad b{color:#f44336}
+        .stat.mis b{color:#ff9800}
+        .stat.skip b{color:#9c27b0}
+        .btn{padding:8px 14px;border:none;border-radius:6px;cursor:pointer;font-size:13px;background:#667eea;color:white}
+        .filter{background:white;padding:10px;border-radius:10px;margin-bottom:15px}
+        .grade{margin-bottom:20px}
+        .grade h2{background:white;padding:10px 15px;margin:0;border-radius:10px 10px 0 0;font-size:14px}
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;background:white;padding:12px;border-radius:0 0 10px 10px}
+        .card{background:#f9f9f9;padding:8px;border-radius:8px;text-align:center;border:2px solid transparent;cursor:pointer}
+        .card:hover{border-color:#667eea}
+        .card.bad{border-color:#f44336;background:#ffe0e0}
+        .card.mis{border-color:#ff9800;background:#fff8e0}
+        .card.skip{border-color:#9c27b0;background:#f0e0ff}
+        .card img{width:100%;height:60px;object-fit:contain;border-radius:5px;background:#fff}
+        .card .word{font-size:10px;margin:5px 0;font-weight:bold;word-break:break-all}
+        .card .st{font-size:9px;color:#666}
+        .btns{display:flex;gap:3px;margin-top:4px}
+        .btns button{flex:1;padding:4px;font-size:9px;border:1px solid #ddd;background:#fff;cursor:pointer;border-radius:3px}
+        .btns button:hover{background:#eee}
+        .btns button.on{background:#f44336;color:white;border-color:#f44336}
+        .btns button.skip.on{background:#9c27b0;color:white;border-color:#9c27b0}
+        /* Lightbox */
+        .lb{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.9);z-index:200;display:none;align-items:center;justify-content:center;flex-direction:column}
+        .lb.on{display:flex}
+        .lb img{max-width:90%;max-height:70%;object-fit:contain;border-radius:8px}
+        .lb .wd{color:white;font-size:24px;font-weight:bold;margin:15px 0}
+        .lb .cl{position:absolute;top:20px;right:30px;color:white;font-size:40px;cursor:pointer}
+        /* Modal */
+        .modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);z-index:100;display:none;align-items:center;justify-content:center}
+        .modal.on{display:flex}
+        .modal>div{background:white;padding:20px;border-radius:12px;max-width:500px;width:90%;max-height:80vh;overflow:auto}
+        .modal h2{margin-bottom:10px}
+        .modal textarea{width:100%;height:120px;font-size:11px;margin:10px 0}
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>English-Game 图片审核</h1>
+    <div class="toolbar">
+        <div class="stats">
+            <span class="stat ok"><b id="ok">0</b>有图通过</span>
+            <span class="stat mis"><b id="mis">0</b>缺失图片</span>
+            <span class="stat bad"><b id="bad">0</b>需重做</span>
+            <span class="stat skip"><b id="skip">0</b>剔除</span>
+        </div>
+        <div>
+            <button class="btn" onclick="showReport()">查看报告</button>
+            <button class="btn" onclick="clearAll()" style="background:#757575">清除</button>
+        </div>
+    </div>
+    <div class="filter">
+        筛选:<select id="f" onchange="render()">
+            <option value="">全部</option>
+            <option value="mis">缺失图片</option>
+            <option value="bad">需重做</option>
+            <option value="skip">已剔除</option>
+        </select>
+    </div>
+    <div id="list"></div>
+</div>
+
+<!-- Lightbox -->
+<div class="lb" id="lb" onclick="closeLb()">
+    <span class="cl" onclick="closeLb()">×</span>
+    <img id="lbImg" src="">
+    <div class="wd" id="lbWord"></div>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="modal" onclick="closeModal(event)">
+    <div onclick="event.stopPropagation()">
+        <h2>审核报告</h2>
+        <p>通过:<span id="rOk">0</span> 缺图:<span id="rMis">0</span> 重做:<span id="rBad">0</span> 剔除:<span id="rSkip">0</span></p>
+        <textarea id="txt" readonly></textarea>
+        <button class="btn" onclick="copyTxt()">复制结果</button>
+        <button class="btn" onclick="closeModal({stopPropagation:()=>{}})" style="background:#757575">关闭</button>
+    </div>
+</div>
+
+<script>
+// 教材单词 - 上海小学英语 (仅显示重新生成的25张)
+const words = {
+    1: ["nice"],
+    2: ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday", "sunny", "cloudy", "rainy", "windy"],
+    3: ["cool", "draw", "drink", "close", "math", "english", "pe", "today", "tomorrow", "yesterday", "want", "old", "long"]
+};
+
+// 图片数据
+const img = {1:new Set(),2:new Set(),3:new Set()};
+let st = JSON.parse(localStorage.getItem('rev_st')||'{}');
+
+// 保存
+function save(){localStorage.setItem('rev_st',JSON.stringify(st));update()}
+
+// 更新统计
+function update(){
+    let ok=0,mis=0,bad=0,skip=0;
+    for(let g in words){
+        words[g].forEach(w=>{
+            let key = g+'-'+w;
+            let has = img[g].has(w.toLowerCase());
+            let s = st[key]||'';
+            if(s==='skip')skip++;
+            else if(s==='bad')bad++;
+            else if(has)ok++;
+            else mis++;
+        });
+    }
+    document.getElementById('ok').textContent=ok;
+    document.getElementById('mis').textContent=mis;
+    document.getElementById('bad').textContent=bad;
+    document.getElementById('skip').textContent=skip;
+}
+
+// 设置状态
+function setSt(g,w,s){
+    let key = g+'-'+w;
+    if(st[key]===s)delete st[key];else st[key]=s;
+    save();render();
+}
+
+// 清除
+function clearAll(){if(confirm('清除所有?')){st={};save();render()}}
+
+// 打开大图
+function openLb(g,w){
+    document.getElementById('lbImg').src='/images/grade'+g+'/'+w.toLowerCase()+'.png';
+    document.getElementById('lbWord').textContent=w;
+    document.getElementById('lb').classList.add('on');
+}
+function closeLb(){document.getElementById('lb').classList.remove('on')}
+
+// 渲染
+function render(){
+    let f = document.getElementById('f').value;
+    let html = '';
+    for(let g in words){
+        // 统计
+        let ok=0,bad=0,skip=0,miss=0;
+        words[g].forEach(w=>{
+            let key = g+'-'+w;
+            let has = img[g].has(w.toLowerCase());
+            let s = st[key]||'';
+            if(s==='skip')skip++;
+            else if(s==='bad')bad++;
+            else if(has)ok++;
+            else miss++;
+        });
+        
+        // 过滤
+        let rows = words[g].filter(w=>{
+            let key = g+'-'+w;
+            let has = img[g].has(w.toLowerCase());
+            let s = st[key]||'';
+            if(f==='mis'&&(has||s))return false;
+            if(f==='bad'&&s!=='bad')return false;
+            if(f==='skip'&&s!=='skip')return false;
+            return true;
+        });
+        if(!rows.length)continue;
+        
+        html += '<div class="grade"><h2>年级'+g+' (通过'+ok+' 缺'+miss+' 重做'+bad+' 剔除'+skip+')</h2><div class="grid">';
+        
+        rows.forEach(w=>{
+            let key = g+'-'+w;
+            let has = img[g].has(w.toLowerCase());
+            let s = st[key]||'';
+            let cls = 'card';
+            let stTxt = has?'有图':'缺图';
+            if(s==='skip'){cls+=' skip';stTxt='剔除';}
+            else if(s==='bad'){cls+=' bad';stTxt='需重做';}
+            else if(!has){cls+=' mis';}
+            
+            let badOn = s==='bad'?' on':'';
+            let skipOn = s==='skip'?' on':'';
+            
+            html += '<div class="'+cls+'" onclick="openLb('+g+',&#39;'+w+'&#39;)">'+
+                '<img src="/images/grade'+g+'/'+w.toLowerCase()+'.png" onerror="this.style.display=&#39;none&#39;">'+
+                '<div class="word">'+w+'</div>'+
+                '<div class="st">'+stTxt+'</div>'+
+                '<div class="btns" onclick="event.stopPropagation()">'+
+                '<button class="'+badOn+'" onclick="setSt('+g+',&#39;'+w+'&#39;,&#39;bad&#39;)">重做</button>'+
+                '<button class="skip '+skipOn+'" onclick="setSt('+g+',&#39;'+w+'&#39;,&#39;skip&#39;)">剔除</button>'+
+                '</div></div>';
+        });
+        html += '</div></div>';
+    }
+    document.getElementById('list').innerHTML = html||'<p style="color:white;text-align:center;padding:30px">无</p>';
+}
+
+// 报告
+function showReport(){
+    let ok=0,bad=0,skip=0,miss=0,ml=[],bl=[],sl=[];
+    for(let g in words){
+        words[g].forEach(w=>{
+            let key = g+'-'+w;
+            let has = img[g].has(w.toLowerCase());
+            let s = st[key]||'';
+            if(s==='skip'){skip++;sl.push(w);}
+            else if(s==='bad'){bad++;bl.push(w);}
+            else if(!has){miss++;ml.push(w);}
+            else{ok++};
+        });
+    }
+    document.getElementById('rOk').textContent=ok;
+    document.getElementById('rMis').textContent=miss;
+    document.getElementById('rBad').textContent=bad;
+    document.getElementById('rSkip').textContent=skip;
+    document.getElementById('txt').value = '【缺失图片】'+(ml.length?ml.join(', '):'无')+'\n【需重做】'+(bl.length?bl.join(', '):'无')+'\n【剔除单词】'+(sl.length?sl.join(', '):'无');
+    document.getElementById('modal').classList.add('on');
+}
+function closeModal(e){if(!e.stopPropagation)document.getElementById('modal').classList.remove('on')}
+function copyTxt(){navigator.clipboard.writeText(document.getElementById('txt').value);alert('已复制')}
+
+// 加载图片列表
+fetch('/image-audit/images.json').then(r=>r.json()).then(d=>{
+    img[1]=new Set(d['1']);img[2]=new Set(d['2']);img[3]=new Set(d['3']);
+    update();render();
+});
+</script>
+</body>
+</html>
