@@ -2783,6 +2783,7 @@ function getImageFilename(word, grade) {
     return word.toLowerCase() + ".png";
 }
 
+const wordAnimations = {
     'jump': 'jump', 
     'walk': 'walk',
     'sit': 'sit',
