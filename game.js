@@ -2744,9 +2744,9 @@ function tryLoadWordImage(word, canvas) {
     
     // Try to load from all grade folders
     const paths = [
-        'images/grade1/' + word.toLowerCase() + '.png',
-        'images/grade2/' + word.toLowerCase() + '.png', 
-        'images/grade3/' + word.toLowerCase() + '.png'
+        'images/grade1/' + getImageFilename(word, 1) + '.png',
+        'images/grade2/' + getImageFilename(word, 2) + '.png', 
+        'images/grade3/' + getImageFilename(word, 3) + '.png'
     ];
     
     for (const path of paths) {
@@ -2761,6 +2761,25 @@ function tryLoadWordImage(word, canvas) {
 // ============================================
 // 词汇动画效果
 // ============================================
+// 图片文件名映射
+function getImageFilename(word, grade) {
+    // 星期几需要特殊映射
+    const weekdayMap = {
+        "monday": "Monday.png",
+        "wednesday": "Wednesday.png",
+        "sunday": "Sunday.png"
+    };
+    
+    let fname = word.toLowerCase() + ".png";
+    
+    // 检查是否有特殊映射
+    if (weekdayMap[word.toLowerCase()]) {
+        fname = weekdayMap[word.toLowerCase()];
+    }
+    
+    return fname;
+}
+
 const wordAnimations = {
     // 动词 - 上下浮动
     'run': 'bounce',
@@ -2817,9 +2836,9 @@ function preloadImage(word) {
     
     const img = new Image();
     const paths = [
-        'images/grade1/' + word.toLowerCase() + '.png',
-        'images/grade2/' + word.toLowerCase() + '.png',
-        'images/grade3/' + word.toLowerCase() + '.png'
+        'images/grade1/' + getImageFilename(word, 1) + '.png',
+        'images/grade2/' + getImageFilename(word, 2) + '.png',
+        'images/grade3/' + getImageFilename(word, 3) + '.png'
     ];
     
     // 尝试加载第一张存在的图片
