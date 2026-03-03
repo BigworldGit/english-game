@@ -42,7 +42,7 @@ h1{color:white;text-align:center;margin-bottom:10px}
 </head>
 <body>
 <div class="container">
-<h1>English-Game 图片审核</h1>
+<h1>English-Game 图片审核 (8词)</h1>
 <div class="toolbar">
 <div class="stats">
 <div class="stat ok"><b id="ok">0</b>通过</div>
@@ -64,18 +64,13 @@ h1{color:white;text-align:center;margin-bottom:10px}
 </div>
 <script>
 const words = {
-    1: ["four", "two"],
-    2: ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"],
-    3: ["close", "old", "today", "tomorrow", "want", "yesterday"]
+    1: ["two"],
+    2: ["monday", "wednesday", "thursday", "saturday", "sunday"],
+    3: ["close", "old"]
 };
-// 文件名映射 - GitHub 上是大写开头
 const filenameMap = {
     "monday": "Monday.png",
-    "tuesday": "tuesday.png",
     "wednesday": "Wednesday.png",
-    "thursday": "thursday.png",
-    "friday": "friday.png",
-    "saturday": "saturday.png",
     "sunday": "Sunday.png"
 };
 function getImg(g,w){
