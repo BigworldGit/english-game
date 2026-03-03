@@ -2763,26 +2763,26 @@ function tryLoadWordImage(word, canvas) {
 // ============================================
 // 图片文件名映射
 function getImageFilename(word, grade) {
-    // 星期几需要特殊映射
-    const weekdayMap = {
+    // 所有大写开头的文件映射
+    const uppercaseMap = {
+        "american": "American.png",
+        "australian": "Australian.png",
+        "chinese": "Chinese.png",
+        "i": "I.png",
+        "ok": "OK.png",
         "monday": "Monday.png",
         "wednesday": "Wednesday.png",
         "sunday": "Sunday.png"
     };
     
-    let fname = word.toLowerCase() + ".png";
-    
-    // 检查是否有特殊映射
-    if (weekdayMap[word.toLowerCase()]) {
-        fname = weekdayMap[word.toLowerCase()];
+    let key = word.toLowerCase();
+    if (uppercaseMap[key]) {
+        return uppercaseMap[key];
     }
     
-    return fname;
+    return word.toLowerCase() + ".png";
 }
 
-const wordAnimations = {
-    // 动词 - 上下浮动
-    'run': 'bounce',
     'jump': 'jump', 
     'walk': 'walk',
     'sit': 'sit',
