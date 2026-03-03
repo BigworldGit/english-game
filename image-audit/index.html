@@ -41,7 +41,7 @@ h1{color:white;text-align:center;margin-bottom:10px}
 </head>
 <body>
 <div class="container">
-<h1>English-Game 图片审核 (需重做)</h1>
+<h1>English-Game 图片审核</h1>
 <div class="toolbar">
 <div class="stats">
 <div class="stat ok"><b id="ok">0</b>通过</div>
@@ -62,16 +62,8 @@ h1{color:white;text-align:center;margin-bottom:10px}
 </div>
 <script>
 const words = {
-    2: ["sunday"],
     3: ["close"]
 };
-const filenameMap = {
-    "sunday": "Sunday.png"
-};
-function getImg(g,w){
-    let fname = filenameMap[w] || w + ".png";
-    return "/images/grade"+g+"/"+fname;
-}
 let st = JSON.parse(localStorage.getItem('rev_st')||'{}');
 function save(){localStorage.setItem('rev_st',JSON.stringify(st));render()}
 function update(){
@@ -95,7 +87,7 @@ function render(){
             let s = st[key]||'';
             let cls = 'card'+(s==='ok'?' ok':s==='bad'?' bad':'');
             html += '<div class="'+cls+'" onclick="openLb('+g+',&#39;'+w+'&#39;)">'+
-                '<img src="'+getImg(g,w)+'">'+
+                '<img src="/images/grade'+g+'/'+w+'.png">'+
                 '<div class="word">'+w+'</div>'+
                 '<div class="btns"><button class="ok'+(s==='ok'?' on':'')+'" onclick="event.stopPropagation();st[\''+key+'\']=\'ok\';save()">通过</button>'+
                 '<button class="'+(s==='bad'?' on':'')+'" onclick="event.stopPropagation();st[\''+key+'\']=\'bad\';save()">重做</button></div></div>';
@@ -107,7 +99,7 @@ function render(){
 }
 function openLb(g,w){
     current = {g,w,key:g+'-'+w};
-    document.getElementById('lbImg').src = getImg(g,w);
+    document.getElementById('lbImg').src = '/images/grade'+g+'/'+w+'.png';
     document.getElementById('lbWd').textContent = w;
     document.getElementById('lb').classList.add('on');
 }
