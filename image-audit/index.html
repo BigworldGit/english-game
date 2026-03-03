@@ -14,7 +14,6 @@ h1{color:white;text-align:center;margin-bottom:10px}
 .stat b{font-size:16px;display:block}
 .stat.ok b{color:#4caf50}
 .stat.bad b{color:#f44336}
-.stat.mis b{color:#ff9800}
 .btn{padding:8px 14px;border:none;border-radius:6px;cursor:pointer;background:#667eea;color:white}
 .grade{margin-bottom:20px}
 .grade h2{background:white;padding:10px;border-radius:10px 10px 0 0}
@@ -42,11 +41,10 @@ h1{color:white;text-align:center;margin-bottom:10px}
 </head>
 <body>
 <div class="container">
-<h1>English-Game 图片审核 (8词)</h1>
+<h1>English-Game 图片审核 (需重做)</h1>
 <div class="toolbar">
 <div class="stats">
 <div class="stat ok"><b id="ok">0</b>通过</div>
-<div class="stat mis"><b id="mis">0</b>缺失</div>
 <div class="stat bad"><b id="bad">0</b>重做</div>
 </div>
 <button class="btn" onclick="showReport()">查看报告</button>
@@ -64,13 +62,10 @@ h1{color:white;text-align:center;margin-bottom:10px}
 </div>
 <script>
 const words = {
-    1: ["two"],
-    2: ["monday", "wednesday", "thursday", "saturday", "sunday"],
-    3: ["close", "old"]
+    2: ["sunday"],
+    3: ["close"]
 };
 const filenameMap = {
-    "monday": "Monday.png",
-    "wednesday": "Wednesday.png",
     "sunday": "Sunday.png"
 };
 function getImg(g,w){
@@ -80,18 +75,16 @@ function getImg(g,w){
 let st = JSON.parse(localStorage.getItem('rev_st')||'{}');
 function save(){localStorage.setItem('rev_st',JSON.stringify(st));render()}
 function update(){
-    let ok=0,bad=0,mis=0;
+    let ok=0,bad=0;
     for(let g in words){
         words[g].forEach(w=>{
             let key = g+'-'+w;
             if(st[key]==='ok')ok++;
-            else if(st[key]==='bad')bad++;
-            else mis++;
+            if(st[key]==='bad')bad++;
         });
     }
     document.getElementById('ok').textContent=ok;
     document.getElementById('bad').textContent=bad;
-    document.getElementById('mis').textContent=mis;
 }
 function render(){
     let html = '';
@@ -102,7 +95,7 @@ function render(){
             let s = st[key]||'';
             let cls = 'card'+(s==='ok'?' ok':s==='bad'?' bad':'');
             html += '<div class="'+cls+'" onclick="openLb('+g+',&#39;'+w+'&#39;)">'+
-                '<img src="'+getImg(g,w)+'" onerror="this.style.display=&#39;none&#39;">'+
+                '<img src="'+getImg(g,w)+'">'+
                 '<div class="word">'+w+'</div>'+
                 '<div class="btns"><button class="ok'+(s==='ok'?' on':'')+'" onclick="event.stopPropagation();st[\''+key+'\']=\'ok\';save()">通过</button>'+
                 '<button class="'+(s==='bad'?' on':'')+'" onclick="event.stopPropagation();st[\''+key+'\']=\'bad\';save()">重做</button></div></div>';
