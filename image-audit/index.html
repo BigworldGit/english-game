@@ -2,39 +2,36 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>English-Game 图片审核</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:linear-gradient(135deg,#667eea,#764ba2);min-height:100vh;padding:15px}
 .container{max-width:1200px;margin:0 auto}
 h1{color:white;text-align:center;margin-bottom:10px}
-.toolbar{background:white;padding:12px;border-radius:10px;margin-bottom:15px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.toolbar{background:white;padding:12px;border-radius:10px;margin-bottom:15px;display:flex;justify-content:space-between}
 .stats{display:flex;gap:8px}
-.stat{padding:6px 12px;background:#f5f5f5;border-radius:6px;text-align:center}
+.stat{padding:6px 12px;background:#f5f5f5;border-radius:6px}
 .stat b{font-size:16px;display:block}
 .stat.ok b{color:#4caf50}
 .stat.bad b{color:#f44336}
 .stat.mis b{color:#ff9800}
 .btn{padding:8px 14px;border:none;border-radius:6px;cursor:pointer;background:#667eea;color:white}
 .grade{margin-bottom:20px}
-.grade h2{background:white;padding:10px 15px;margin:0;border-radius:10px 10px 0 0;font-size:14px}
+.grade h2{background:white;padding:10px;border-radius:10px 10px 0 0}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;background:white;padding:12px;border-radius:0 0 10px 10px}
 .card{background:#f9f9f9;padding:8px;border-radius:8px;text-align:center;border:2px solid transparent;cursor:pointer}
 .card:hover{border-color:#667eea}
 .card.bad{border-color:#f44336;background:#ffe0e0}
 .card.ok{border-color:#4caf50;background:#e0ffe0}
-.card.mis{border-color:#ff9800;background:#fff8e0}
-.card img{width:100%;height:80px;object-fit:contain;border-radius:5px;background:#fff}
+.card img{width:100%;height:80px;object-fit:contain;background:#fff}
 .card .word{font-size:12px;margin:5px 0;font-weight:bold}
 .btns{display:flex;gap:3px;margin-top:4px}
-.btns button{flex:1;padding:4px;font-size:10px;border:1px solid #ddd;background:#fff;cursor:pointer;border-radius:3px}
+.btns button{flex:1;padding:4px;border:1px solid #ddd;background:#fff;cursor:pointer;border-radius:3px}
 .btns button.ok.on{background:#4caf50;color:white}
 .btns button.on{background:#f44336;color:white}
-/* Lightbox */
 .lb{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.9);z-index:200;display:none;align-items:center;justify-content:center;flex-direction:column}
 .lb.on{display:flex}
-.lb img{max-width:90%;max-height:70%;object-fit:contain;border-radius:8px}
+.lb img{max-width:90%;max-height:70%;border-radius:8px}
 .lb .wd{color:white;font-size:24px;font-weight:bold;margin:15px 0}
 .lb .cl{position:absolute;top:20px;right:30px;color:white;font-size:40px;cursor:pointer}
 .lb .acts{display:flex;gap:15px;margin-top:20px}
@@ -45,19 +42,19 @@ h1{color:white;text-align:center;margin-bottom:10px}
 </head>
 <body>
 <div class="container">
-<h1>🎮 English-Game 图片审核 (15词)</h1>
+<h1>English-Game 图片审核</h1>
 <div class="toolbar">
 <div class="stats">
 <div class="stat ok"><b id="ok">0</b>通过</div>
 <div class="stat mis"><b id="mis">0</b>缺失</div>
 <div class="stat bad"><b id="bad">0</b>重做</div>
 </div>
-<div><button class="btn" onclick="showReport()">查看报告</button></div>
+<button class="btn" onclick="showReport()">查看报告</button>
 </div>
 <div id="list"></div>
 </div>
 <div class="lb" id="lb" onclick="closeLb()">
-<div class="cl" onclick="closeLb()">×</div>
+<div class="cl">×</div>
 <img id="lbImg">
 <div class="wd" id="lbWd"></div>
 <div class="acts">
@@ -71,8 +68,21 @@ const words = {
     2: ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"],
     3: ["close", "old", "today", "tomorrow", "want", "yesterday"]
 };
+// 文件名映射 - GitHub 上是大写开头
+const filenameMap = {
+    "monday": "Monday.png",
+    "tuesday": "tuesday.png",
+    "wednesday": "Wednesday.png",
+    "thursday": "thursday.png",
+    "friday": "friday.png",
+    "saturday": "saturday.png",
+    "sunday": "Sunday.png"
+};
+function getImg(g,w){
+    let fname = filenameMap[w] || w + ".png";
+    return "/images/grade"+g+"/"+fname;
+}
 let st = JSON.parse(localStorage.getItem('rev_st')||'{}');
-let current = null;
 function save(){localStorage.setItem('rev_st',JSON.stringify(st));render()}
 function update(){
     let ok=0,bad=0,mis=0;
@@ -97,7 +107,7 @@ function render(){
             let s = st[key]||'';
             let cls = 'card'+(s==='ok'?' ok':s==='bad'?' bad':'');
             html += '<div class="'+cls+'" onclick="openLb('+g+',&#39;'+w+'&#39;)">'+
-                '<img src="/images/grade'+g+'/'+w+'.png" onerror="this.style.display=&#39;none&#39;">'+
+                '<img src="'+getImg(g,w)+'" onerror="this.style.display=&#39;none&#39;">'+
                 '<div class="word">'+w+'</div>'+
                 '<div class="btns"><button class="ok'+(s==='ok'?' on':'')+'" onclick="event.stopPropagation();st[\''+key+'\']=\'ok\';save()">通过</button>'+
                 '<button class="'+(s==='bad'?' on':'')+'" onclick="event.stopPropagation();st[\''+key+'\']=\'bad\';save()">重做</button></div></div>';
@@ -109,14 +119,12 @@ function render(){
 }
 function openLb(g,w){
     current = {g,w,key:g+'-'+w};
-    document.getElementById('lbImg').src = '/images/grade'+g+'/'+w+'.png';
+    document.getElementById('lbImg').src = getImg(g,w);
     document.getElementById('lbWd').textContent = w;
     document.getElementById('lb').classList.add('on');
 }
 function closeLb(){document.getElementById('lb').classList.remove('on')}
-function setSt(s){
-    if(current){st[current.key]=s;save();closeLb();}
-}
+function setSt(s){if(current){st[current.key]=s;save();closeLb()}}
 function showReport(){
     let ok=[],bad=[];
     for(let g in words){
