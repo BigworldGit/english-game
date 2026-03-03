@@ -97,7 +97,7 @@ function render(){
             let s = st[key]||'';
             let cls = 'card'+(s==='ok'?' ok':s==='bad'?' bad':'');
             html += '<div class="'+cls+'" onclick="openLb('+g+',&#39;'+w+'&#39;)">'+
-                '<img src="/images/grade'+g+'/'+w.toLowerCase()+'.png" onerror="this.style.display=&#39;none&#39;">'+
+                '<img src="/images/grade'+g+'/'+w+'.png" onerror="this.style.display=&#39;none&#39;">'+
                 '<div class="word">'+w+'</div>'+
                 '<div class="btns"><button class="ok'+(s==='ok'?' on':'')+'" onclick="event.stopPropagation();st[\''+key+'\']=\'ok\';save()">通过</button>'+
                 '<button class="'+(s==='bad'?' on':'')+'" onclick="event.stopPropagation();st[\''+key+'\']=\'bad\';save()">重做</button></div></div>';
@@ -109,7 +109,7 @@ function render(){
 }
 function openLb(g,w){
     current = {g,w,key:g+'-'+w};
-    document.getElementById('lbImg').src = '/images/grade'+g+'/'+w.toLowerCase()+'.png';
+    document.getElementById('lbImg').src = '/images/grade'+g+'/'+w+'.png';
     document.getElementById('lbWd').textContent = w;
     document.getElementById('lb').classList.add('on');
 }
