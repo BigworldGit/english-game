@@ -2725,9 +2725,9 @@ function tryLoadWordImage(word, canvas) {
     
     // Try to load from all grade folders
     const paths = [
-        'images/grade1/' + getImageFilename(word, 1) + '.png',
-        'images/grade2/' + getImageFilename(word, 2) + '.png', 
-        'images/grade3/' + getImageFilename(word, 3) + '.png'
+        'images/grade1/' + getImageFilename(word, 1),
+        'images/grade2/' + getImageFilename(word, 2),
+        'images/grade3/' + getImageFilename(word, 3)
     ];
     
     // Create new image for each path to properly track loading state
@@ -2846,9 +2846,9 @@ function preloadImage(word) {
     
     const img = new Image();
     const paths = [
-        'images/grade1/' + getImageFilename(word, 1) + '.png',
-        'images/grade2/' + getImageFilename(word, 2) + '.png',
-        'images/grade3/' + getImageFilename(word, 3) + '.png'
+        'images/grade1/' + getImageFilename(word, 1),
+        'images/grade2/' + getImageFilename(word, 2),
+        'images/grade3/' + getImageFilename(word, 3)
     ];
     
     // 尝试加载第一张存在的图片
