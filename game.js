@@ -277,9 +277,90 @@ function loadQuestion() {
     preloadNextQuestionImages();
 }
 
+// 颜色黑名单：特定单词的候选词需要排除的颜色词
+const COLOR_BLACKLIST = {
+    // 颜色类单词
+    'red': ['red', 'orange', 'yellow', 'pink', 'purple'],
+    'blue': ['blue', 'sky', 'cyan'],
+    'green': ['green', 'grass', 'leaf'],
+    'yellow': ['yellow', 'sun', 'orange', 'gold'],
+    'pink': ['pink', 'red', 'purple'],
+    'purple': ['purple', 'red', 'pink', 'blue'],
+    'white': ['white', 'snow', 'milk', 'paper'],
+    'black': ['black', 'dark', 'night', 'cat', 'dog'],
+    
+    // 时间/天气类单词
+    'evening': ['red', 'orange', 'yellow', 'purple', 'sunset'],
+    'morning': ['yellow', 'orange', 'sun', 'bright', 'morning'],
+    'night': ['dark', 'black', 'moon', 'star', 'night'],
+    'sunny': ['yellow', 'sun', 'bright', 'orange', 'gold'],
+    'cloudy': ['white', 'gray', 'sky', 'grey', 'cloud'],
+    'rainy': ['blue', 'cloud', 'gray', 'grey', 'wet'],
+    'snowy': ['white', 'snow', 'cold', 'ice', 'winter'],
+    'windy': ['wind', 'blow', 'cloud', 'cold'],
+    'starry': ['star', 'night', 'dark', 'moon', 'black'],
+    'moonlit': ['moon', 'night', 'light', 'silver', 'white'],
+    
+    // 自然相关
+    'sky': ['blue', 'sky', 'cyan', 'white', 'cloud', 'sun'],
+    'grass': ['green', 'grass', 'leaf'],
+    'leaf': ['green', 'leaf', 'tree', 'nature', 'spring'],
+    'nature': ['green', 'leaf', 'tree', 'nature', 'spring'],
+    'tree': ['green', 'tree', 'leaf', 'wood', 'brown'],
+    'flower': ['flower', 'red', 'pink', 'yellow', 'purple', 'colorful'],
+    'sun': ['sun', 'yellow', 'bright', 'hot', 'sunny', 'gold'],
+    'moon': ['moon', 'night', 'dark', 'star', 'silver', 'white'],
+    'star': ['star', 'night', 'dark', 'moon', 'bright', 'yellow'],
+    'cloud': ['cloud', 'white', 'sky', 'gray', 'grey', 'cloudy'],
+    'rain': ['rain', 'blue', 'cloud', 'wet', 'rainy', 'gray'],
+    'snow': ['snow', 'white', 'cold', 'ice', 'winter', 'snowy'],
+    
+    // 其他容易混淆的词
+    'water': ['water', 'blue', 'wet', 'sea', 'lake', 'river'],
+    'sea': ['sea', 'blue', 'water', 'wave', 'ocean'],
+    'fire': ['fire', 'red', 'hot', 'orange', 'flame'],
+    'ice': ['ice', 'cold', 'white', 'freeze', 'winter'],
+    'earth': ['earth', 'world', 'ground', 'soil', 'brown'],
+    'rock': ['rock', 'stone', 'gray', 'grey', 'hard'],
+    'stone': ['stone', 'rock', 'gray', 'grey', 'hard'],
+    'sand': ['sand', 'yellow', 'beach', 'desert', 'brown'],
+    'wood': ['wood', 'brown', 'tree', 'forest', 'natural'],
+    'paper': ['paper', 'white', 'read', 'write', 'book'],
+    'blood': ['blood', 'red', 'warm', 'life'],
+};
+
+// 检查单词是否为颜色词
+function isColorWord(word) {
+    const colorWords = [
+        'red', 'blue', 'green', 'yellow', 'pink', 'purple', 'orange', 'black', 'white',
+        'gray', 'grey', 'brown', 'cyan', 'gold', 'silver', 'navy', 'beige', 'violet',
+        'indigo', 'magenta', 'tan', 'olive', 'maroon', 'aqua', 'teal', 'lavender', 'peach',
+        'lilac', 'cream', 'ivory', 'chestnut', 'aquamarine', 'coral', 'crimson', 'scarlet',
+        'turquoise', 'charcoal', 'khaki', 'plum', 'sienna', 'wheat', 'salmon', 'mauve'
+    ];
+    return colorWords.includes(word.toLowerCase());
+}
+
+// 获取需要过滤的颜色黑名单
+function getColorBlacklist(word) {
+    const lowerWord = word.toLowerCase();
+    return COLOR_BLACKLIST[lowerWord] || [];
+}
+
+// 检查候选词是否在黑名单中
+function isInBlacklist(candidate, blacklist) {
+    const lowerCandidate = candidate.toLowerCase();
+    return blacklist.some(blocked => 
+        lowerCandidate === blocked || lowerCandidate.includes(blocked)
+    );
+}
+
 function generateOptions() {
     const correctAnswer = currentWord.word;
     const wrongAnswers = [];
+    
+    // 获取当前单词的颜色黑名单
+    const colorBlacklist = getColorBlacklist(correctAnswer);
     
     // 定义避免同时出现的词组（语义关联，避免歧义）
     const avoidPairs = [
@@ -326,7 +407,7 @@ function generateOptions() {
         const lowerWord = word.toLowerCase();
         const lowerCorrect = correctAnswer.toLowerCase();
         
-        // 检查是否在避免列表中
+        // 1. 检查是否在避免列表中
         for (const [a, b] of avoidPairs) {
             if ((lowerWord === a && lowerCorrect === b) || 
                 (lowerWord === b && lowerCorrect === a)) {
@@ -334,7 +415,7 @@ function generateOptions() {
             }
         }
         
-        // 如果正确答案是复合词，检查干扰项是否是其中一部分
+        // 2. 如果正确答案是复合词，检查干扰项是否是其中一部分
         if (lowerCorrect.includes(' ')) {
             const correctParts = lowerCorrect.split(' ');
             for (const part of correctParts) {
@@ -344,7 +425,7 @@ function generateOptions() {
             }
         }
         
-        // 如果干扰项是复合词的一部分
+        // 3. 如果干扰项是复合词的一部分
         if (lowerWord.includes(' ')) {
             const wordParts = lowerWord.split(' ');
             for (const part of wordParts) {
@@ -352,6 +433,18 @@ function generateOptions() {
                     return true;
                 }
             }
+        }
+        
+        // 4. 颜色黑名单过滤 - 如果当前单词有颜色黑名单，排除相关颜色词
+        if (colorBlacklist.length > 0) {
+            if (isInBlacklist(lowerWord, colorBlacklist)) {
+                return true;
+            }
+        }
+        
+        // 5. 如果当前单词是颜色词，排除其他颜色词（避免颜色混淆）
+        if (isColorWord(lowerCorrect) && isColorWord(lowerWord) && lowerWord !== lowerCorrect) {
+            return true;
         }
         
         return false;
