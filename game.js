@@ -537,16 +537,18 @@ function updateProgressUI() {
 // ============================================
 // Minecraft风格图片绘制
 // ============================================
-function drawWordImage(wordData) {
+async function drawWordImage(wordData) {
     try {
         const canvas = elements.wordCanvas;
         if (!canvas) return;
         
-        // 先尝试加载外部图片
-        if (tryLoadWordImage(wordData.word, canvas)) {
-            return; // 图片加载中，让 onload 处理绘制
+        // 先尝试加载外部图片，使用 await 确保图片加载完成后再返回
+        const imageLoaded = await tryLoadWordImage(wordData.word, canvas);
+        if (imageLoaded) {
+            return; // 图片加载成功并已绘制
         }
         
+        // 图片加载失败，使用默认绘制
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
         const width = canvas.width;
@@ -2713,9 +2715,9 @@ if (typeof window !== 'undefined') {
 // 图片加载辅助函数
 // ============================================
 function tryLoadWordImage(word, canvas) {
-    if (!canvas) return false;
+    if (!canvas) return Promise.resolve(false);
     const ctx = canvas.getContext('2d');
-    if (!ctx) return false;
+    if (!ctx) return Promise.resolve(false);
     
     // Show loading state - clear canvas with a placeholder
     ctx.fillStyle = '#87CEEB'; // Sky blue background
@@ -2731,40 +2733,39 @@ function tryLoadWordImage(word, canvas) {
     ];
     
     // Create new image for each path to properly track loading state
-    // Use recursive approach to try each path sequentially
+    // Use Promise to wait for image to actually load before returning
     return tryLoadImagePath(paths, 0, ctx, canvas.width, canvas.height);
 }
 
 function tryLoadImagePath(paths, index, ctx, width, height) {
     if (index >= paths.length) {
-        return false; // All images failed
+        return Promise.resolve(false); // All images failed
     }
     
-    const img = new Image();
-    let loaded = false;
-    
-    img.onload = function() {
-        loaded = true;
-        // Success! Draw the image
-        ctx.clearRect(0, 0, width, height);
-        ctx.fillStyle = '#87CEEB';
-        ctx.fillRect(0, 0, width, height);
-        const scale = Math.min(width / img.width, height / img.height);
-        const x = (width - img.width * scale) / 2;
-        const y = (height - img.height * scale) / 2;
-        ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
-    };
-    
-    img.onerror = function() {
-        // Try next path
-        tryLoadImagePath(paths, index + 1, ctx, width, height);
-    };
-    
-    img.src = paths[index];
-    
-    // Return true if we started loading (not yet complete or failed)
-    // The onload/onerror handlers will handle the actual drawing
-    return true;
+    return new Promise((resolve) => {
+        const img = new Image();
+        
+        img.onload = function() {
+            // Success! Draw the image
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = '#87CEEB';
+            ctx.fillRect(0, 0, width, height);
+            const scale = Math.min(width / img.width, height / img.height);
+            const x = (width - img.width * scale) / 2;
+            const y = (height - img.height * scale) / 2;
+            ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+            resolve(true); // Resolve with true when image is loaded
+        };
+        
+        img.onerror = function() {
+            // Try next path
+            tryLoadImagePath(paths, index + 1, ctx, width, height)
+                .then(resolve)
+                .catch(() => resolve(false));
+        };
+        
+        img.src = paths[index];
+    });
 }
 
 // ============================================
