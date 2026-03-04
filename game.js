@@ -380,23 +380,41 @@ function generateOptions() {
     const wrongAnswers = [];
     
     // ========== 优先使用预定义的候选词 ==========
-    // 检查当前单词是否有预定义的候选词
+    // 检查当前单词是否有预定义的候选词（尝试多种大小写形式）
     const lowerWord = correctAnswer.toLowerCase();
-    if (candidateWords[lowerWord] && candidateWords[lowerWord].options && candidateWords[lowerWord].options.length >= 4) {
+    const originalWord = currentWord.word; // 保持原始大小写
+    
+    // 尝试多种 key 形式：原始形式、小写形式、首字母大写形式
+    const keysToTry = [
+        originalWord,           // 原始形式（如 "American"）
+        lowerWord,              // 小写形式（如 "american"）
+        originalWord.charAt(0).toUpperCase() + originalWord.slice(1).toLowerCase(), // 首字母大写
+    ];
+    
+    let predefinedData = null;
+    for (const key of keysToTry) {
+        if (candidateWords[key] && candidateWords[key].options && candidateWords[key].options.length >= 4) {
+            predefinedData = candidateWords[key];
+            break;
+        }
+    }
+    
+    if (predefinedData) {
         // 使用预定义的选项（打乱顺序）
-        const predefinedOptions = [...candidateWords[lowerWord].options];
+        const predefinedOptions = [...predefinedData.options];
         currentOptions = shuffleArray(predefinedOptions);
         
         // 确保正确答案在选项中
         if (!currentOptions.includes(correctAnswer)) {
-            // 如果预定义选项中没有正确答案，回退到原有逻辑
-            console.warn('预定义选项中缺少正确答案:', correctAnswer);
-        } else {
-            return; // 使用预定义选项，函数结束
+            console.warn('预定义选项中缺少正确答案:', correctAnswer, '，选项:', predefinedOptions);
         }
+        return; // 使用预定义选项，函数结束
     }
     
-    // ========== 回退到原有逻辑 ==========
+    // ========== 没有预定义候选词，记录警告 ==========
+    console.warn('单词没有预定义候选词:', correctAnswer, '，将使用备用逻辑');
+    
+    // ========== 备用逻辑：基于词库生成干扰项 ==========
     
     // 获取当前单词的颜色黑名单
     const colorBlacklist = getColorBlacklist(correctAnswer);
