@@ -20,6 +20,9 @@ let bgMusic = null;
 let bgMusicFiles = ['audio/bg1.mp3', 'audio/bg2.mp3', 'audio/bg3.mp3'];
 let currentMusicIndex = 0;
 
+// 预定义的候选词表
+let candidateWords = {};
+
 // 游戏配置
 const QUESTIONS_PER_LEVEL = 10;
 
@@ -89,10 +92,27 @@ function initGame() {
         showUserInfo();
     }
 
+    // 加载预定义的候选词表
+    loadCandidateWords();
+
     // 隐藏加载动画
     setTimeout(() => {
         elements.loading.classList.add('hidden');
     }, 500);
+}
+
+// 加载预定义的候选词表
+function loadCandidateWords() {
+    fetch('docs/candidate-words-fixed.json')
+        .then(response => response.json())
+        .then(data => {
+            candidateWords = data;
+            console.log('候选词表已加载，共 ' + Object.keys(candidateWords).length + ' 个单词');
+        })
+        .catch(error => {
+            console.error('加载候选词表失败:', error);
+            candidateWords = {};
+        });
 }
 
 function setupEventListeners() {
@@ -358,6 +378,25 @@ function isInBlacklist(candidate, blacklist) {
 function generateOptions() {
     const correctAnswer = currentWord.word;
     const wrongAnswers = [];
+    
+    // ========== 优先使用预定义的候选词 ==========
+    // 检查当前单词是否有预定义的候选词
+    const lowerWord = correctAnswer.toLowerCase();
+    if (candidateWords[lowerWord] && candidateWords[lowerWord].options && candidateWords[lowerWord].options.length >= 4) {
+        // 使用预定义的选项（打乱顺序）
+        const predefinedOptions = [...candidateWords[lowerWord].options];
+        currentOptions = shuffleArray(predefinedOptions);
+        
+        // 确保正确答案在选项中
+        if (!currentOptions.includes(correctAnswer)) {
+            // 如果预定义选项中没有正确答案，回退到原有逻辑
+            console.warn('预定义选项中缺少正确答案:', correctAnswer);
+        } else {
+            return; // 使用预定义选项，函数结束
+        }
+    }
+    
+    // ========== 回退到原有逻辑 ==========
     
     // 获取当前单词的颜色黑名单
     const colorBlacklist = getColorBlacklist(correctAnswer);
