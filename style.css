@@ -1,26 +1,63 @@
 /* ============================================
-   Minecraft 英语单词小助手 - 样式文件
+   Minecraft 英语单词小助手 - 优化版样式
+   设计方向：现代 Minecraft 乐享版
    ============================================ */
 
-/* CSS Variables */
+/* CSS Variables - 优化配色 */
 :root {
-    --primary: #5CAB5C;
-    --primary-dark: #4A8F4A;
-    --secondary: #8B5A2B;
-    --secondary-dark: #6B4423;
+    /* 主色调 - 更活泼的绿色 */
+    --primary: #58D68D;
+    --primary-light: #82E0AA;
+    --primary-dark: #2ECC71;
+    --primary-glow: rgba(46, 204, 113, 0.4);
+    
+    /* 副色调 - Minecraft 经典 */
+    --secondary: #A0522D;
+    --secondary-light: #CD853F;
+    --secondary-dark: #8B4513;
+    
+    /* 强调色 - 更丰富 */
     --accent: #FFD700;
     --accent-light: #FFE44D;
-    --bg-sky-top: #87CEEB;
-    --bg-sky-bottom: #E0F7FA;
-    --text-dark: #2C3E50;
+    --accent-coral: #FF6B6B;
+    --accent-sky: #5DADE2;
+    --accent-purple: #AF7AC5;
+    
+    /* 背景 */
+    --bg-sky-top: #5DADE2;
+    --bg-sky-bottom: #85C1E9;
+    --bg-card: rgba(255, 255, 255, 0.95);
+    --bg-card-dark: rgba(45, 45, 55, 0.95);
+    
+    /* 文字 */
+    --text-primary: #2C3E50;
+    --text-secondary: #5D6D7E;
     --text-light: #FFFFFF;
-    --success: #4CAF50;
-    --error: #F44336;
-    --warning: #FF9800;
-    --card-bg: rgba(255, 255, 255, 0.95);
-    --shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
-    --shadow-hover: 0 6px 0 rgba(0, 0, 0, 0.25);
-    --transition: all 0.2s ease;
+    
+    /* 状态色 */
+    --success: #2ECC71;
+    --success-light: #82E0AA;
+    --error: #E74C3C;
+    --error-light: #F1948A;
+    --warning: #F39C12;
+    
+    /* 效果 */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);
+    --shadow-glow: 0 0 20px var(--primary-glow);
+    
+    /* 动画时间 */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    
+    /* 圆角 */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-full: 50%;
 }
 
 /* Reset & Base */
@@ -139,13 +176,22 @@ html, body {
 
 .sun {
     position: absolute;
-    width: 80px;
-    height: 80px;
-    background: #FFE135;
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(135deg, #FFE135 0%, #FFD700 50%, #FFC107 100%);
     border-radius: 50%;
-    top: 8%;
-    right: 10%;
-    box-shadow: 0 0 40px #FFE135, 0 0 80px rgba(255, 225, 53, 0.5);
+    top: 6%;
+    right: 12%;
+    box-shadow: 
+        0 0 40px #FFE135,
+        0 0 80px rgba(255, 225, 53, 0.5),
+        0 0 120px rgba(255, 225, 53, 0.3);
+    animation: sunPulse 4s ease-in-out infinite;
+}
+
+@keyframes sunPulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 40px #FFE135, 0 0 80px rgba(255, 225, 53, 0.5); }
+    50% { transform: scale(1.05); box-shadow: 0 0 50px #FFE135, 0 0 100px rgba(255, 225, 53, 0.6); }
 }
 
 .mountain {
@@ -320,24 +366,26 @@ html, body {
     top: 20px;
     right: 20px;
     z-index: 1000;
-    width: 50px;
-    height: 50px;
-    background: rgba(255, 255, 255, 0.9);
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: var(--shadow);
-    transition: var(--transition);
+    box-shadow: var(--shadow-md), 0 0 20px var(--primary-glow);
+    transition: var(--transition-normal);
+    border: 3px solid white;
 }
 
 .music-control:hover {
-    transform: scale(1.1);
+    transform: scale(1.1) rotate(10deg);
+    box-shadow: var(--shadow-lg), 0 0 30px var(--primary-glow);
 }
 
 .music-control.playing {
-    background: var(--primary);
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
 }
 
 .music-control.playing .music-icon {
@@ -345,7 +393,7 @@ html, body {
 }
 
 .music-icon {
-    font-size: 24px;
+    font-size: 26px;
 }
 
 @keyframes pulse {
@@ -372,14 +420,14 @@ html, body {
     max-width: 500px;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.4s ease, transform 0.4s ease;
-    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateY(30px) scale(0.95);
 }
 
 .page.active {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
 }
 
 /* Welcome Page */
@@ -430,31 +478,41 @@ html, body {
 
 /* Login Form */
 .login-form {
-    background: var(--card-bg);
-    border-radius: 16px;
-    padding: 24px;
-    box-shadow: var(--shadow);
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(10px);
+    transition: var(--transition-normal);
+}
+
+.login-form:hover {
+    box-shadow: var(--shadow-lg), 0 0 30px var(--primary-glow);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 18px;
+    font-size: 18px;
+    border: 3px solid #E0E0E0;
+    border-radius: 14px;
+    outline: none;
+    transition: var(--transition-normal);
+    text-align: center;
+    font-family: 'Noto Sans SC', sans-serif;
+    background: linear-gradient(135deg, #FAFAFA 0%, #FFFFFF 100%);
+}
+
+.form-group input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px var(--primary-glow);
+    transform: translateY(-2px);
 }
 
 .form-group {
     margin-bottom: 20px;
 }
 
-.form-group input {
-    width: 100%;
-    padding: 16px;
-    font-size: 18px;
-    border: 3px solid #ddd;
-    border-radius: 12px;
-    outline: none;
-    transition: var(--transition);
-    text-align: center;
-    font-family: 'Noto Sans SC', sans-serif;
-}
-
-.form-group input:focus {
-    border-color: var(--primary);
-}
 
 .grade-select {
     margin-bottom: 24px;
@@ -475,48 +533,84 @@ html, body {
 }
 
 .grade-btn {
-    width: 56px;
-    height: 56px;
-    font-size: 20px;
+    width: 60px;
+    height: 60px;
+    font-size: 22px;
     font-weight: 700;
     border: none;
-    border-radius: 12px;
-    background: #E0E0E0;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #F5F5F5 0%, #EEEEEE 100%);
     color: #666;
     cursor: pointer;
-    transition: var(--transition);
-    box-shadow: 0 3px 0 #BDBDBD;
+    transition: var(--transition-normal);
+    box-shadow: 0 4px 0 #BDBDBD, var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+}
+
+.grade-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 50%);
+    opacity: 0;
+    transition: var(--transition-fast);
 }
 
 .grade-btn:hover {
-    background: #F5F5F5;
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 0 #BDBDBD, var(--shadow-md);
+}
+
+.grade-btn:hover::before {
+    opacity: 1;
 }
 
 .grade-btn.selected {
-    background: var(--primary);
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
     color: white;
-    box-shadow: 0 3px 0 var(--primary-dark);
+    box-shadow: 0 4px 0 var(--primary-dark), 0 0 20px var(--primary-glow);
+    transform: translateY(-2px);
 }
 
 .start-btn {
     width: 100%;
-    padding: 18px 32px;
-    font-size: 20px;
+    padding: 20px 32px;
+    font-size: 22px;
     font-weight: 700;
     color: white;
-    background: linear-gradient(180deg, #7CB342 0%, #558B2F 100%);
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-dark) 100%);
     border: none;
-    border-radius: 12px;
+    border-radius: 14px;
     cursor: pointer;
-    transition: var(--transition);
-    box-shadow: 0 4px 0 #33691E;
+    transition: var(--transition-normal);
+    box-shadow: 0 4px 0 #1E8449, var(--shadow-md);
     font-family: 'Noto Sans SC', sans-serif;
+    position: relative;
+    overflow: hidden;
 }
 
-.start-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 0 #33691E;
+.start-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: 0.5s;
+}
+
+.start-btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 0 #1E8449, var(--shadow-glow), 0 0 30px var(--primary-glow);
+}
+
+.start-btn:hover::before {
+    left: 100%;
 }
 
 .start-btn:active {
@@ -659,43 +753,70 @@ html, body {
 }
 
 .option-btn {
-    padding: 20px 16px;
-    font-size: 18px;
+    padding: 22px 18px;
+    font-size: 19px;
     font-weight: 700;
-    color: var(--text-dark);
-    background: white;
-    border: 3px solid #ddd;
-    border-radius: 12px;
+    color: var(--text-primary);
+    background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+    border: 3px solid #E0E0E0;
+    border-radius: 14px;
     cursor: pointer;
-    transition: var(--transition);
-    box-shadow: 0 3px 0 #ccc;
+    transition: var(--transition-normal);
+    box-shadow: 0 4px 0 #BDBDBD, var(--shadow-sm);
     font-family: 'Noto Sans SC', sans-serif;
     word-break: break-word;
+    position: relative;
+    overflow: hidden;
+}
+
+.option-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 50%);
+    opacity: 0;
+    transition: var(--transition-fast);
 }
 
 .option-btn:hover:not(:disabled) {
     border-color: var(--primary);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 0 #bbb;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 0 #BDBDBD, var(--shadow-md), 0 0 15px var(--primary-glow);
+}
+
+.option-btn:hover:not(:disabled)::before {
+    opacity: 1;
 }
 
 .option-btn:active:not(:disabled) {
     transform: translateY(2px);
-    box-shadow: 0 1px 0 #bbb;
+    box-shadow: 0 2px 0 #BDBDBD;
 }
 
 .option-btn.correct {
-    background: var(--success);
+    background: linear-gradient(135deg, var(--success-light) 0%, var(--success) 100%);
     border-color: var(--success);
     color: white;
-    animation: correctPulse 0.5s ease;
+    animation: correctPop 0.5s ease;
+    box-shadow: 0 4px 0 #1E8449, 0 0 30px var(--success);
 }
 
 .option-btn.wrong {
-    background: var(--error);
+    background: linear-gradient(135deg, var(--error-light) 0%, var(--error) 100%);
     border-color: var(--error);
     color: white;
     animation: wrongShake 0.5s ease;
+    box-shadow: 0 4px 0 #B03A2E;
+}
+
+@keyframes correctPop {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.15); }
+    60% { transform: scale(0.95); }
+    100% { transform: scale(1); }
 }
 
 .option-btn:disabled {
@@ -797,10 +918,11 @@ html, body {
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
     z-index: 100;
-    padding: 32px 48px;
-    border-radius: 20px;
+    padding: 36px 52px;
+    border-radius: 24px;
     opacity: 0;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: var(--shadow-lg);
 }
 
 .feedback.show {
@@ -809,18 +931,21 @@ html, body {
 }
 
 .feedback.correct {
-    background: var(--success);
+    background: linear-gradient(135deg, var(--success-light) 0%, var(--success) 100%);
     color: white;
+    box-shadow: var(--shadow-lg), 0 0 50px var(--success);
 }
 
 .feedback.wrong {
-    background: var(--error);
+    background: linear-gradient(135deg, var(--error-light) 0%, var(--error) 100%);
     color: white;
+    box-shadow: var(--shadow-lg), 0 0 50px var(--error);
 }
 
 .feedback-text {
-    font-size: 28px;
+    font-size: 32px;
     font-weight: 700;
+    text-align: center;
 }
 
 /* Result Page */
