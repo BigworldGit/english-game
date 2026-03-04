@@ -1,1241 +1,21 @@
 {
-  "hello": {
-    "correct": "hello",
+  "American": {
+    "correct": "American",
     "options": [
-      "hello",
-      "hi",
-      "goodbye",
-      "good morning"
+      "American",
+      "Australian",
+      "Canadian",
+      "British"
     ],
     "replaced": []
   },
-  "hi": {
-    "correct": "hi",
+  "Australian": {
+    "correct": "Australian",
     "options": [
-      "hi",
-      "good afternoon",
-      "goodbye",
-      "good evening"
-    ],
-    "replaced": []
-  },
-  "goodbye": {
-    "correct": "goodbye",
-    "options": [
-      "goodbye",
-      "bye",
-      "hi",
-      "hello"
-    ],
-    "replaced": []
-  },
-  "bye": {
-    "correct": "bye",
-    "options": [
-      "bye",
-      "good night",
-      "goodbye",
-      "good evening"
-    ],
-    "replaced": []
-  },
-  "I": {
-    "correct": "I",
-    "options": [
-      "I",
-      "your",
-      "my",
-      "you"
-    ],
-    "replaced": []
-  },
-  "am": {
-    "correct": "am",
-    "options": [
-      "am",
-      "are",
-      "send",
-      "return"
-    ],
-    "replaced": []
-  },
-  "good": {
-    "correct": "good",
-    "options": [
-      "good",
-      "full",
-      "short",
-      "happy"
-    ],
-    "replaced": []
-  },
-  "morning": {
-    "correct": "morning",
-    "options": [
-      "morning",
-      "tomorrow",
-      "today",
-      "yesterday"
-    ],
-    "replaced": []
-  },
-  "afternoon": {
-    "correct": "afternoon",
-    "options": [
-      "afternoon",
-      "today",
-      "evening",
-      "birthday"
-    ],
-    "replaced": []
-  },
-  "evening": {
-    "correct": "evening",
-    "options": [
-      "evening",
-      "month",
-      "today",
-      "morning"
-    ],
-    "replaced": []
-  },
-  "night": {
-    "correct": "night",
-    "options": [
-      "night",
-      "month",
-      "yesterday",
-      "today"
-    ],
-    "replaced": []
-  },
-  "how": {
-    "correct": "how",
-    "options": [
-      "how",
-      "what",
-      "where",
-      "whose"
-    ],
-    "replaced": []
-  },
-  "are": {
-    "correct": "are",
-    "options": [
-      "are",
-      "write",
-      "enjoy",
-      "tell"
-    ],
-    "replaced": []
-  },
-  "you": {
-    "correct": "you",
-    "options": [
-      "you",
-      "your",
-      "my",
-      "I"
-    ],
-    "replaced": []
-  },
-  "thank": {
-    "correct": "thank",
-    "options": [
-      "thank",
-      "find",
-      "go",
-      "leave"
-    ],
-    "replaced": []
-  },
-  "welcome": {
-    "correct": "welcome",
-    "options": [
-      "welcome",
-      "grow up",
-      "what's your name",
-      "how are you"
-    ],
-    "replaced": []
-  },
-  "sorry": {
-    "correct": "sorry",
-    "options": [
-      "sorry",
-      "look forward to",
-      "be good at",
-      "how are you"
-    ],
-    "replaced": []
-  },
-  "OK": {
-    "correct": "OK",
-    "options": [
-      "OK",
-      "be good at",
-      "come from",
-      "grow up"
-    ],
-    "replaced": []
-  },
-  "what": {
-    "correct": "what",
-    "options": [
-      "what",
-      "who",
-      "why",
-      "whose"
-    ],
-    "replaced": []
-  },
-  "name": {
-    "correct": "name",
-    "options": [
-      "name",
-      "gift",
-      "museum",
-      "theatre"
-    ],
-    "replaced": []
-  },
-  "your": {
-    "correct": "your",
-    "options": [
-      "your",
-      "you",
-      "I",
-      "my"
-    ],
-    "replaced": []
-  },
-  "my": {
-    "correct": "my",
-    "options": [
-      "my",
-      "your",
-      "you",
-      "I"
-    ],
-    "replaced": []
-  },
-  "nice": {
-    "correct": "nice",
-    "options": [
-      "nice",
-      "empty",
-      "same",
-      "sad"
-    ],
-    "replaced": []
-  },
-  "to": {
-    "correct": "to",
-    "options": [
-      "to",
-      "in",
-      "under",
-      "behind"
-    ],
-    "replaced": []
-  },
-  "meet": {
-    "correct": "meet",
-    "options": [
-      "meet",
-      "sleep",
-      "see",
-      "ask"
-    ],
-    "replaced": []
-  },
-  "red": {
-    "correct": "red",
-    "options": [
-      "red",
-      "green",
-      "white",
-      "pink"
-    ],
-    "replaced": []
-  },
-  "blue": {
-    "correct": "blue",
-    "options": [
-      "blue",
-      "pink",
-      "orange",
-      "green"
-    ],
-    "replaced": []
-  },
-  "yellow": {
-    "correct": "yellow",
-    "options": [
-      "yellow",
-      "white",
-      "red",
-      "pink"
-    ],
-    "replaced": []
-  },
-  "green": {
-    "correct": "green",
-    "options": [
-      "green",
-      "orange",
-      "white",
-      "yellow"
-    ],
-    "replaced": []
-  },
-  "one": {
-    "correct": "one",
-    "options": [
-      "one",
-      "five",
-      "nine",
-      "eight"
-    ],
-    "replaced": []
-  },
-  "two": {
-    "correct": "two",
-    "options": [
-      "two",
-      "ten",
-      "four",
-      "five"
-    ],
-    "replaced": []
-  },
-  "three": {
-    "correct": "three",
-    "options": [
-      "three",
-      "eight",
-      "four",
-      "six"
-    ],
-    "replaced": []
-  },
-  "four": {
-    "correct": "four",
-    "options": [
-      "four",
-      "eight",
-      "six",
-      "one"
-    ],
-    "replaced": []
-  },
-  "five": {
-    "correct": "five",
-    "options": [
-      "five",
-      "one",
-      "four",
-      "eight"
-    ],
-    "replaced": []
-  },
-  "orange": {
-    "correct": "orange",
-    "options": [
-      "orange",
-      "red",
-      "green",
-      "white"
-    ],
-    "replaced": []
-  },
-  "purple": {
-    "correct": "purple",
-    "options": [
-      "purple",
-      "black",
-      "blue",
-      "green"
-    ],
-    "replaced": []
-  },
-  "pink": {
-    "correct": "pink",
-    "options": [
-      "pink",
-      "orange",
-      "green",
-      "yellow"
-    ],
-    "replaced": []
-  },
-  "brown": {
-    "correct": "brown",
-    "options": [
-      "brown",
-      "white",
-      "blue",
-      "green"
-    ],
-    "replaced": []
-  },
-  "black": {
-    "correct": "black",
-    "options": [
-      "black",
-      "yellow",
-      "white",
-      "red"
-    ],
-    "replaced": []
-  },
-  "white": {
-    "correct": "white",
-    "options": [
-      "white",
-      "purple",
-      "yellow",
-      "black"
-    ],
-    "replaced": []
-  },
-  "six": {
-    "correct": "six",
-    "options": [
-      "six",
-      "one",
-      "eight",
-      "three"
-    ],
-    "replaced": []
-  },
-  "seven": {
-    "correct": "seven",
-    "options": [
-      "seven",
-      "one",
-      "six",
-      "two"
-    ],
-    "replaced": []
-  },
-  "eight": {
-    "correct": "eight",
-    "options": [
-      "eight",
-      "seven",
-      "ten",
-      "five"
-    ],
-    "replaced": []
-  },
-  "nine": {
-    "correct": "nine",
-    "options": [
-      "nine",
-      "eight",
-      "five",
-      "one"
-    ],
-    "replaced": []
-  },
-  "ten": {
-    "correct": "ten",
-    "options": [
-      "ten",
-      "eight",
-      "one",
-      "four"
-    ],
-    "replaced": []
-  },
-  "cat": {
-    "correct": "cat",
-    "options": [
-      "cat",
-      "fish",
-      "dog",
-      "bird"
-    ],
-    "replaced": []
-  },
-  "dog": {
-    "correct": "dog",
-    "options": [
-      "dog",
-      "bird",
-      "bear",
-      "duck"
-    ],
-    "replaced": []
-  },
-  "bird": {
-    "correct": "bird",
-    "options": [
-      "bird",
-      "dog",
-      "rabbit",
-      "pig"
-    ],
-    "replaced": []
-  },
-  "fish": {
-    "correct": "fish",
-    "options": [
-      "fish",
-      "dog",
-      "cat",
-      "rabbit"
-    ],
-    "replaced": []
-  },
-  "duck": {
-    "correct": "duck",
-    "options": [
-      "duck",
-      "pig",
-      "fish",
-      "monkey"
-    ],
-    "replaced": []
-  },
-  "eye": {
-    "correct": "eye",
-    "options": [
-      "eye",
-      "foot",
-      "leg",
-      "face"
-    ],
-    "replaced": []
-  },
-  "nose": {
-    "correct": "nose",
-    "options": [
-      "nose",
-      "head",
-      "mouth",
-      "leg"
-    ],
-    "replaced": []
-  },
-  "mouth": {
-    "correct": "mouth",
-    "options": [
-      "mouth",
-      "hand",
-      "leg",
-      "eye"
-    ],
-    "replaced": []
-  },
-  "face": {
-    "correct": "face",
-    "options": [
-      "face",
-      "leg",
-      "mouth",
-      "head"
-    ],
-    "replaced": []
-  },
-  "head": {
-    "correct": "head",
-    "options": [
-      "head",
-      "nose",
-      "eye",
-      "hand"
-    ],
-    "replaced": []
-  },
-  "hand": {
-    "correct": "hand",
-    "options": [
-      "hand",
-      "leg",
-      "mouth",
-      "face"
-    ],
-    "replaced": []
-  },
-  "leg": {
-    "correct": "leg",
-    "options": [
-      "leg",
-      "hand",
-      "nose",
-      "mouth"
-    ],
-    "replaced": []
-  },
-  "foot": {
-    "correct": "foot",
-    "options": [
-      "foot",
-      "mouth",
-      "face",
-      "eye"
-    ],
-    "replaced": []
-  },
-  "mother": {
-    "correct": "mother",
-    "options": [
-      "mother",
-      "grandfather",
-      "mum",
-      "sister"
-    ],
-    "replaced": []
-  },
-  "father": {
-    "correct": "father",
-    "options": [
-      "father",
-      "grandpa",
-      "grandfather",
-      "dad"
-    ],
-    "replaced": []
-  },
-  "mum": {
-    "correct": "mum",
-    "options": [
-      "mum",
-      "grandpa",
-      "grandma",
-      "sister"
-    ],
-    "replaced": []
-  },
-  "dad": {
-    "correct": "dad",
-    "options": [
-      "dad",
-      "grandfather",
-      "grandpa",
-      "sister"
-    ],
-    "replaced": []
-  },
-  "rabbit": {
-    "correct": "rabbit",
-    "options": [
-      "rabbit",
-      "dog",
-      "bird",
-      "bear"
-    ],
-    "replaced": []
-  },
-  "bear": {
-    "correct": "bear",
-    "options": [
-      "bear",
-      "pig",
-      "dog",
-      "duck"
-    ],
-    "replaced": []
-  },
-  "pig": {
-    "correct": "pig",
-    "options": [
-      "pig",
-      "dog",
-      "bird",
-      "bear"
-    ],
-    "replaced": []
-  },
-  "monkey": {
-    "correct": "monkey",
-    "options": [
-      "monkey",
-      "bear",
-      "cat",
-      "duck"
-    ],
-    "replaced": []
-  },
-  "elephant": {
-    "correct": "elephant",
-    "options": [
-      "elephant",
-      "monkey",
-      "dog",
-      "duck"
-    ],
-    "replaced": []
-  },
-  "apple": {
-    "correct": "apple",
-    "options": [
-      "apple",
-      "beef",
-      "fruit",
-      "rice"
-    ],
-    "replaced": []
-  },
-  "banana": {
-    "correct": "banana",
-    "options": [
-      "banana",
-      "rice",
-      "beef",
-      "vegetable"
-    ],
-    "replaced": []
-  },
-  "bread": {
-    "correct": "bread",
-    "options": [
-      "bread",
-      "pork",
-      "apple",
-      "banana"
-    ],
-    "replaced": []
-  },
-  "milk": {
-    "correct": "milk",
-    "options": [
-      "milk",
-      "juice",
-      "water",
-      "grandma"
-    ],
-    "replaced": []
-  },
-  "water": {
-    "correct": "water",
-    "options": [
-      "water",
-      "milk",
-      "juice",
-      "listen"
-    ],
-    "replaced": []
-  },
-  "egg": {
-    "correct": "egg",
-    "options": [
-      "egg",
-      "pork",
-      "fruit",
-      "banana"
-    ],
-    "replaced": []
-  },
-  "rice": {
-    "correct": "rice",
-    "options": [
-      "rice",
-      "vegetable",
-      "apple",
-      "egg"
-    ],
-    "replaced": []
-  },
-  "book": {
-    "correct": "book",
-    "options": [
-      "book",
-      "eraser",
-      "pencil",
-      "desk"
-    ],
-    "replaced": []
-  },
-  "pen": {
-    "correct": "pen",
-    "options": [
-      "pen",
-      "book",
-      "ruler",
-      "bag"
-    ],
-    "replaced": []
-  },
-  "pencil": {
-    "correct": "pencil",
-    "options": [
-      "pencil",
-      "bag",
-      "eraser",
-      "pen"
-    ],
-    "replaced": []
-  },
-  "ruler": {
-    "correct": "ruler",
-    "options": [
-      "ruler",
-      "chair",
-      "book",
-      "pen"
-    ],
-    "replaced": []
-  },
-  "eraser": {
-    "correct": "eraser",
-    "options": [
-      "eraser",
-      "chair",
-      "desk",
-      "bag"
-    ],
-    "replaced": []
-  },
-  "bag": {
-    "correct": "bag",
-    "options": [
-      "bag",
-      "pen",
-      "book",
-      "pencil"
-    ],
-    "replaced": []
-  },
-  "school": {
-    "correct": "school",
-    "options": [
-      "school",
-      "park",
-      "classroom",
-      "hospital"
-    ],
-    "replaced": []
-  },
-  "classroom": {
-    "correct": "classroom",
-    "options": [
-      "classroom",
-      "village",
-      "road",
-      "park"
-    ],
-    "replaced": []
-  },
-  "desk": {
-    "correct": "desk",
-    "options": [
-      "desk",
-      "eraser",
-      "bag",
-      "ruler"
-    ],
-    "replaced": []
-  },
-  "chair": {
-    "correct": "chair",
-    "options": [
-      "chair",
-      "ruler",
-      "desk",
-      "eraser"
-    ],
-    "replaced": []
-  },
-  "teacher": {
-    "correct": "teacher",
-    "options": [
-      "teacher",
-      "woman",
-      "girl",
-      "man"
-    ],
-    "replaced": []
-  },
-  "student": {
-    "correct": "student",
-    "options": [
-      "student",
-      "baby",
-      "friend",
-      "boy"
-    ],
-    "replaced": []
-  },
-  "cake": {
-    "correct": "cake",
-    "options": [
-      "cake",
-      "apple",
-      "rice",
-      "vegetable"
-    ],
-    "replaced": []
-  },
-  "chicken": {
-    "correct": "chicken",
-    "options": [
-      "chicken",
-      "vegetable",
-      "bread",
-      "banana"
-    ],
-    "replaced": []
-  },
-  "juice": {
-    "correct": "juice",
-    "options": [
-      "juice",
-      "milk",
-      "water",
-      "English"
-    ],
-    "replaced": []
-  },
-  "home": {
-    "correct": "home",
-    "options": [
-      "home",
-      "supermarket",
-      "library",
-      "zoo"
-    ],
-    "replaced": []
-  },
-  "park": {
-    "correct": "park",
-    "options": [
-      "park",
-      "classroom",
-      "hospital",
-      "city"
-    ],
-    "replaced": []
-  },
-  "zoo": {
-    "correct": "zoo",
-    "options": [
-      "zoo",
-      "park",
-      "school",
-      "street"
-    ],
-    "replaced": []
-  },
-  "library": {
-    "correct": "library",
-    "options": [
-      "library",
-      "zoo",
-      "street",
-      "school"
-    ],
-    "replaced": []
-  },
-  "Sunday": {
-    "correct": "Sunday",
-    "options": [
-      "Sunday",
-      "Tuesday",
-      "Wednesday",
-      "Saturday"
-    ],
-    "replaced": []
-  },
-  "Monday": {
-    "correct": "Monday",
-    "options": [
-      "Monday",
-      "Thursday",
-      "Saturday",
-      "Sunday"
-    ],
-    "replaced": []
-  },
-  "Wednesday": {
-    "correct": "Wednesday",
-    "options": [
-      "Wednesday",
-      "Sunday",
-      "Tuesday",
-      "Thursday"
-    ],
-    "replaced": []
-  },
-  "sunny": {
-    "correct": "sunny",
-    "options": [
-      "sunny",
-      "rainy",
-      "windy",
-      "cloudy"
-    ],
-    "replaced": []
-  },
-  "rainy": {
-    "correct": "rainy",
-    "options": [
-      "rainy",
-      "cloudy",
-      "sunny",
-      "windy"
-    ],
-    "replaced": []
-  },
-  "cloudy": {
-    "correct": "cloudy",
-    "options": [
-      "cloudy",
-      "sunny",
-      "rainy",
-      "windy"
-    ],
-    "replaced": []
-  },
-  "windy": {
-    "correct": "windy",
-    "options": [
-      "windy",
-      "cloudy",
-      "rainy",
-      "sunny"
-    ],
-    "replaced": []
-  },
-  "run": {
-    "correct": "run",
-    "options": [
-      "run",
-      "swim",
-      "look",
-      "am"
-    ],
-    "replaced": []
-  },
-  "jump": {
-    "correct": "jump",
-    "options": [
-      "jump",
-      "drink",
-      "wish",
-      "travel"
-    ],
-    "replaced": []
-  },
-  "walk": {
-    "correct": "walk",
-    "options": [
-      "walk",
-      "leave",
-      "sell",
-      "have"
-    ],
-    "replaced": []
-  },
-  "sit": {
-    "correct": "sit",
-    "options": [
-      "sit",
-      "open",
-      "study",
-      "say"
-    ],
-    "replaced": []
-  },
-  "stand": {
-    "correct": "stand",
-    "options": [
-      "stand",
-      "return",
-      "buy",
-      "read"
-    ],
-    "replaced": []
-  },
-  "big": {
-    "correct": "big",
-    "options": [
-      "big",
-      "tired",
-      "nice",
-      "small"
-    ],
-    "replaced": []
-  },
-  "small": {
-    "correct": "small",
-    "options": [
-      "small",
-      "hungry",
-      "clean",
-      "successful"
-    ],
-    "replaced": []
-  },
-  "long": {
-    "correct": "long",
-    "options": [
-      "long",
-      "modern",
-      "tall",
-      "same"
-    ],
-    "replaced": []
-  },
-  "short": {
-    "correct": "short",
-    "options": [
-      "short",
-      "tall",
-      "low",
-      "light"
-    ],
-    "replaced": []
-  },
-  "tall": {
-    "correct": "tall",
-    "options": [
-      "tall",
-      "most",
-      "difficult",
-      "better"
-    ],
-    "replaced": []
-  },
-  "new": {
-    "correct": "new",
-    "options": [
-      "new",
-      "heavy",
-      "hot",
-      "most"
-    ],
-    "replaced": []
-  },
-  "old": {
-    "correct": "old",
-    "options": [
-      "old",
-      "small",
-      "international",
-      "boring"
-    ],
-    "replaced": []
-  },
-  "happy": {
-    "correct": "happy",
-    "options": [
-      "happy",
-      "high",
-      "slow",
-      "national"
-    ],
-    "replaced": []
-  },
-  "sad": {
-    "correct": "sad",
-    "options": [
-      "sad",
-      "kind",
-      "cool",
-      "high"
-    ],
-    "replaced": []
-  },
-  "eat": {
-    "correct": "eat",
-    "options": [
-      "eat",
-      "work",
-      "understand",
-      "spell"
-    ],
-    "replaced": []
-  },
-  "drink": {
-    "correct": "drink",
-    "options": [
-      "drink",
-      "hope",
-      "use",
-      "live"
-    ],
-    "replaced": []
-  },
-  "play": {
-    "correct": "play",
-    "options": [
-      "play",
-      "take",
-      "have",
-      "jump"
-    ],
-    "replaced": []
-  },
-  "read": {
-    "correct": "read",
-    "options": [
-      "read",
-      "sell",
-      "buy",
-      "love"
-    ],
-    "replaced": []
-  },
-  "write": {
-    "correct": "write",
-    "options": [
-      "write",
-      "buy",
-      "have",
-      "return"
-    ],
-    "replaced": []
-  },
-  "draw": {
-    "correct": "draw",
-    "options": [
-      "draw",
-      "go",
-      "tell",
-      "grow"
-    ],
-    "replaced": []
-  },
-  "sing": {
-    "correct": "sing",
-    "options": [
-      "sing",
-      "look",
-      "change",
-      "believe"
-    ],
-    "replaced": []
-  },
-  "dance": {
-    "correct": "dance",
-    "options": [
-      "dance",
-      "sit",
-      "leave",
-      "like"
-    ],
-    "replaced": []
-  },
-  "swim": {
-    "correct": "swim",
-    "options": [
-      "swim",
-      "close",
-      "jump",
-      "sell"
-    ],
-    "replaced": []
-  },
-  "sleep": {
-    "correct": "sleep",
-    "options": [
-      "sleep",
-      "open",
-      "fly",
-      "draw"
+      "Australian",
+      "Canadian",
+      "American",
+      "British"
     ],
     "replaced": []
   },
@@ -1249,23 +29,143 @@
     ],
     "replaced": []
   },
-  "math": {
-    "correct": "math",
+  "I": {
+    "correct": "I",
     "options": [
-      "math",
-      "art",
-      "Chinese",
-      "PE"
+      "I",
+      "your",
+      "my",
+      "you"
     ],
     "replaced": []
   },
-  "music": {
-    "correct": "music",
+  "Monday": {
+    "correct": "Monday",
     "options": [
-      "music",
-      "PE",
-      "Chinese",
-      "English"
+      "Monday",
+      "Thursday",
+      "Saturday",
+      "Sunday"
+    ],
+    "replaced": []
+  },
+  "OK": {
+    "correct": "OK",
+    "options": [
+      "OK",
+      "be good at",
+      "come from",
+      "grow up"
+    ],
+    "replaced": []
+  },
+  "Sunday": {
+    "correct": "Sunday",
+    "options": [
+      "Sunday",
+      "Tuesday",
+      "Wednesday",
+      "Saturday"
+    ],
+    "replaced": []
+  },
+  "Wednesday": {
+    "correct": "Wednesday",
+    "options": [
+      "Wednesday",
+      "Sunday",
+      "Tuesday",
+      "Thursday"
+    ],
+    "replaced": []
+  },
+  "afternoon": {
+    "correct": "afternoon",
+    "options": [
+      "afternoon",
+      "today",
+      "evening",
+      "birthday"
+    ],
+    "replaced": []
+  },
+  "always": {
+    "correct": "always",
+    "options": [
+      "always",
+      "usually",
+      "sometimes",
+      "often"
+    ],
+    "replaced": []
+  },
+  "am": {
+    "correct": "am",
+    "options": [
+      "am",
+      "are",
+      "send",
+      "return"
+    ],
+    "replaced": []
+  },
+  "america": {
+    "correct": "america",
+    "options": [
+      "america",
+      "close",
+      "train",
+      "will"
+    ],
+    "replaced": []
+  },
+  "angry": {
+    "correct": "angry",
+    "options": [
+      "angry",
+      "short",
+      "important",
+      "quiet"
+    ],
+    "replaced": []
+  },
+  "angry_v2": {
+    "correct": "angry_v2",
+    "options": [
+      "angry_v2",
+      "ship",
+      "egg",
+      "stop"
+    ],
+    "replaced": []
+  },
+  "answer": {
+    "correct": "answer",
+    "options": [
+      "answer",
+      "grow",
+      "close",
+      "fly"
+    ],
+    "replaced": []
+  },
+  "apple": {
+    "correct": "apple",
+    "options": [
+      "apple",
+      "beef",
+      "fruit",
+      "rice"
+    ],
+    "replaced": []
+  },
+  "are": {
+    "correct": "are",
+    "options": [
+      "are",
+      "write",
+      "enjoy",
+      "tell"
     ],
     "replaced": []
   },
@@ -1279,93 +179,273 @@
     ],
     "replaced": []
   },
-  "shirt": {
-    "correct": "shirt",
+  "ask": {
+    "correct": "ask",
     "options": [
-      "shirt",
-      "hat",
-      "sock",
-      "cap"
+      "ask",
+      "become",
+      "take",
+      "find"
     ],
     "replaced": []
   },
-  "skirt": {
-    "correct": "skirt",
+  "australia": {
+    "correct": "australia",
     "options": [
-      "skirt",
-      "shoe",
-      "shirt",
-      "coat"
+      "australia",
+      "farmer",
+      "you",
+      "angry"
     ],
     "replaced": []
   },
-  "dress": {
-    "correct": "dress",
+  "autumn": {
+    "correct": "autumn",
     "options": [
-      "dress",
-      "shoe",
-      "sock",
-      "skirt"
+      "autumn",
+      "summer",
+      "winter",
+      "spring"
     ],
     "replaced": []
   },
-  "coat": {
-    "correct": "coat",
+  "baby": {
+    "correct": "baby",
     "options": [
-      "coat",
-      "shoe",
-      "hat",
-      "cap"
+      "baby",
+      "student",
+      "teacher",
+      "friend"
     ],
     "replaced": []
   },
-  "shoe": {
-    "correct": "shoe",
+  "back": {
+    "correct": "back",
     "options": [
-      "shoe",
-      "cap",
-      "skirt",
-      "sock"
+      "back",
+      "up",
+      "left",
+      "down"
     ],
     "replaced": []
   },
-  "sock": {
-    "correct": "sock",
+  "bag": {
+    "correct": "bag",
     "options": [
-      "sock",
-      "shoe",
-      "hat",
-      "shirt"
+      "bag",
+      "pen",
+      "book",
+      "pencil"
     ],
     "replaced": []
   },
-  "cap": {
-    "correct": "cap",
+  "banana": {
+    "correct": "banana",
     "options": [
-      "cap",
-      "sock",
-      "shoe",
-      "skirt"
+      "banana",
+      "rice",
+      "beef",
+      "vegetable"
     ],
     "replaced": []
   },
-  "hat": {
-    "correct": "hat",
+  "bear": {
+    "correct": "bear",
     "options": [
-      "hat",
-      "shoe",
-      "dress",
-      "sock"
+      "bear",
+      "pig",
+      "dog",
+      "duck"
     ],
     "replaced": []
   },
-  "sister": {
-    "correct": "sister",
+  "beautiful": {
+    "correct": "beautiful",
     "options": [
-      "sister",
-      "grandpa",
-      "mum",
-      "grandfather"
+      "beautiful",
+      "warm",
+      "kind",
+      "nice"
+    ],
+    "replaced": []
+  },
+  "become": {
+    "correct": "become",
+    "options": [
+      "become",
+      "remember",
+      "finish",
+      "ask"
+    ],
+    "replaced": []
+  },
+  "bed": {
+    "correct": "bed",
+    "options": [
+      "bed",
+      "window",
+      "table",
+      "sofa"
+    ],
+    "replaced": []
+  },
+  "beef": {
+    "correct": "beef",
+    "options": [
+      "beef",
+      "apple",
+      "egg",
+      "rice"
+    ],
+    "replaced": []
+  },
+  "behind": {
+    "correct": "behind",
+    "options": [
+      "behind",
+      "to",
+      "in",
+      "under"
+    ],
+    "replaced": []
+  },
+  "believe": {
+    "correct": "believe",
+    "options": [
+      "believe",
+      "grow",
+      "bring",
+      "write"
+    ],
+    "replaced": []
+  },
+  "best": {
+    "correct": "best",
+    "options": [
+      "best",
+      "angry",
+      "full",
+      "worse"
+    ],
+    "replaced": []
+  },
+  "better": {
+    "correct": "better",
+    "options": [
+      "better",
+      "nice",
+      "impossible",
+      "weak"
+    ],
+    "replaced": []
+  },
+  "big": {
+    "correct": "big",
+    "options": [
+      "big",
+      "tired",
+      "nice",
+      "small"
+    ],
+    "replaced": []
+  },
+  "bike": {
+    "correct": "bike",
+    "options": [
+      "bike",
+      "car",
+      "ship",
+      "bus"
+    ],
+    "replaced": []
+  },
+  "bird": {
+    "correct": "bird",
+    "options": [
+      "bird",
+      "dog",
+      "rabbit",
+      "pig"
+    ],
+    "replaced": []
+  },
+  "birthday": {
+    "correct": "birthday",
+    "options": [
+      "birthday",
+      "morning",
+      "year",
+      "yesterday"
+    ],
+    "replaced": []
+  },
+  "black": {
+    "correct": "black",
+    "options": [
+      "black",
+      "yellow",
+      "white",
+      "red"
+    ],
+    "replaced": []
+  },
+  "blue": {
+    "correct": "blue",
+    "options": [
+      "blue",
+      "pink",
+      "orange",
+      "green"
+    ],
+    "replaced": []
+  },
+  "book": {
+    "correct": "book",
+    "options": [
+      "book",
+      "eraser",
+      "pencil",
+      "desk"
+    ],
+    "replaced": []
+  },
+  "boring": {
+    "correct": "boring",
+    "options": [
+      "boring",
+      "special",
+      "popular",
+      "international"
+    ],
+    "replaced": []
+  },
+  "boy": {
+    "correct": "boy",
+    "options": [
+      "boy",
+      "girl",
+      "friend",
+      "teacher"
+    ],
+    "replaced": []
+  },
+  "bread": {
+    "correct": "bread",
+    "options": [
+      "bread",
+      "pork",
+      "apple",
+      "banana"
+    ],
+    "replaced": []
+  },
+  "bring": {
+    "correct": "bring",
+    "options": [
+      "bring",
+      "visit",
+      "learn",
+      "use"
     ],
     "replaced": []
   },
@@ -1379,13 +459,933 @@
     ],
     "replaced": []
   },
-  "grandmother": {
-    "correct": "grandmother",
+  "brown": {
+    "correct": "brown",
     "options": [
-      "grandmother",
-      "mum",
+      "brown",
+      "white",
+      "blue",
+      "green"
+    ],
+    "replaced": []
+  },
+  "bus": {
+    "correct": "bus",
+    "options": [
+      "bus",
+      "train",
+      "car",
+      "plane"
+    ],
+    "replaced": []
+  },
+  "businessman": {
+    "correct": "businessman",
+    "options": [
+      "businessman",
+      "nurse",
+      "farmer",
+      "doctor"
+    ],
+    "replaced": []
+  },
+  "but": {
+    "correct": "but",
+    "options": [
+      "but",
+      "because",
+      "if",
+      "spring"
+    ],
+    "replaced": []
+  },
+  "buy": {
+    "correct": "buy",
+    "options": [
+      "buy",
+      "spell",
+      "work",
+      "watch"
+    ],
+    "replaced": []
+  },
+  "bye": {
+    "correct": "bye",
+    "options": [
+      "bye",
+      "good night",
+      "goodbye",
+      "good evening"
+    ],
+    "replaced": []
+  },
+  "cake": {
+    "correct": "cake",
+    "options": [
+      "cake",
+      "apple",
+      "rice",
+      "vegetable"
+    ],
+    "replaced": []
+  },
+  "call": {
+    "correct": "call",
+    "options": [
+      "call",
+      "remember",
+      "am",
+      "ask"
+    ],
+    "replaced": []
+  },
+  "cap": {
+    "correct": "cap",
+    "options": [
+      "cap",
+      "sock",
+      "shoe",
+      "skirt"
+    ],
+    "replaced": []
+  },
+  "car": {
+    "correct": "car",
+    "options": [
+      "car",
+      "bike",
+      "train",
+      "ship"
+    ],
+    "replaced": []
+  },
+  "careful": {
+    "correct": "careful",
+    "options": [
+      "careful",
+      "summer",
+      "yesterday",
+      "banana"
+    ],
+    "replaced": []
+  },
+  "cat": {
+    "correct": "cat",
+    "options": [
+      "cat",
+      "fish",
+      "dog",
+      "bird"
+    ],
+    "replaced": []
+  },
+  "chair": {
+    "correct": "chair",
+    "options": [
+      "chair",
+      "ruler",
+      "desk",
+      "eraser"
+    ],
+    "replaced": []
+  },
+  "change": {
+    "correct": "change",
+    "options": [
+      "change",
+      "make",
+      "jump",
+      "work"
+    ],
+    "replaced": []
+  },
+  "chicken": {
+    "correct": "chicken",
+    "options": [
+      "chicken",
+      "vegetable",
+      "bread",
+      "banana"
+    ],
+    "replaced": []
+  },
+  "china": {
+    "correct": "china",
+    "options": [
+      "china",
+      "milk",
+      "love",
+      "sit"
+    ],
+    "replaced": []
+  },
+  "chinese": {
+    "correct": "chinese",
+    "options": [
+      "chinese",
+      "beef",
+      "Tuesday",
+      "autumn"
+    ],
+    "replaced": []
+  },
+  "city": {
+    "correct": "city",
+    "options": [
+      "city",
+      "road",
+      "classroom",
+      "park"
+    ],
+    "replaced": []
+  },
+  "classroom": {
+    "correct": "classroom",
+    "options": [
+      "classroom",
+      "village",
+      "road",
+      "park"
+    ],
+    "replaced": []
+  },
+  "clean": {
+    "correct": "clean",
+    "options": [
+      "clean",
+      "necessary",
+      "low",
+      "healthy"
+    ],
+    "replaced": []
+  },
+  "clever": {
+    "correct": "clever",
+    "options": [
+      "clever",
+      "successful",
+      "easy",
+      "traditional"
+    ],
+    "replaced": []
+  },
+  "close": {
+    "correct": "close",
+    "options": [
+      "close",
+      "study",
+      "remember",
+      "believe"
+    ],
+    "replaced": []
+  },
+  "cloud": {
+    "correct": "cloud",
+    "options": [
+      "cloud",
+      "grass",
+      "star",
+      "flower"
+    ],
+    "replaced": []
+  },
+  "cloudy": {
+    "correct": "cloudy",
+    "options": [
+      "cloudy",
+      "sunny",
+      "rainy",
+      "windy"
+    ],
+    "replaced": []
+  },
+  "coat": {
+    "correct": "coat",
+    "options": [
+      "coat",
+      "shoe",
+      "hat",
+      "cap"
+    ],
+    "replaced": []
+  },
+  "cold": {
+    "correct": "cold",
+    "options": [
+      "cold",
+      "successful",
+      "tired",
+      "high"
+    ],
+    "replaced": []
+  },
+  "come": {
+    "correct": "come",
+    "options": [
+      "come",
+      "miss",
+      "forget",
+      "read"
+    ],
+    "replaced": []
+  },
+  "come_from": {
+    "correct": "come_from",
+    "options": [
+      "come_from",
+      "here",
+      "grape",
+      "cat"
+    ],
+    "replaced": []
+  },
+  "company": {
+    "correct": "company",
+    "options": [
+      "company",
+      "museum",
+      "college",
+      "song"
+    ],
+    "replaced": []
+  },
+  "cook": {
+    "correct": "cook",
+    "options": [
+      "cook",
+      "driver",
+      "doctor",
+      "police"
+    ],
+    "replaced": []
+  },
+  "cool": {
+    "correct": "cool",
+    "options": [
+      "cool",
+      "hungry",
+      "strong",
+      "small"
+    ],
+    "replaced": []
+  },
+  "country": {
+    "correct": "country",
+    "options": [
+      "country",
+      "film",
+      "UK",
+      "world"
+    ],
+    "replaced": []
+  },
+  "dad": {
+    "correct": "dad",
+    "options": [
       "dad",
-      "grandma"
+      "grandfather",
+      "grandpa",
+      "sister"
+    ],
+    "replaced": []
+  },
+  "dance": {
+    "correct": "dance",
+    "options": [
+      "dance",
+      "sit",
+      "leave",
+      "like"
+    ],
+    "replaced": []
+  },
+  "desk": {
+    "correct": "desk",
+    "options": [
+      "desk",
+      "eraser",
+      "bag",
+      "ruler"
+    ],
+    "replaced": []
+  },
+  "different": {
+    "correct": "different",
+    "options": [
+      "different",
+      "important",
+      "slow",
+      "big"
+    ],
+    "replaced": []
+  },
+  "difficult": {
+    "correct": "difficult",
+    "options": [
+      "difficult",
+      "cool",
+      "clean",
+      "international"
+    ],
+    "replaced": []
+  },
+  "dirty": {
+    "correct": "dirty",
+    "options": [
+      "dirty",
+      "warm",
+      "special",
+      "clever"
+    ],
+    "replaced": []
+  },
+  "doctor": {
+    "correct": "doctor",
+    "options": [
+      "doctor",
+      "cook",
+      "driver",
+      "businessman"
+    ],
+    "replaced": []
+  },
+  "dog": {
+    "correct": "dog",
+    "options": [
+      "dog",
+      "bird",
+      "bear",
+      "duck"
+    ],
+    "replaced": []
+  },
+  "door": {
+    "correct": "door",
+    "options": [
+      "door",
+      "sofa",
+      "table",
+      "bed"
+    ],
+    "replaced": []
+  },
+  "down": {
+    "correct": "down",
+    "options": [
+      "down",
+      "up",
+      "left",
+      "front"
+    ],
+    "replaced": []
+  },
+  "draw": {
+    "correct": "draw",
+    "options": [
+      "draw",
+      "go",
+      "tell",
+      "grow"
+    ],
+    "replaced": []
+  },
+  "dream": {
+    "correct": "dream",
+    "options": [
+      "dream",
+      "Australia",
+      "photo",
+      "language"
+    ],
+    "replaced": []
+  },
+  "dress": {
+    "correct": "dress",
+    "options": [
+      "dress",
+      "shoe",
+      "sock",
+      "skirt"
+    ],
+    "replaced": []
+  },
+  "drink": {
+    "correct": "drink",
+    "options": [
+      "drink",
+      "hope",
+      "use",
+      "live"
+    ],
+    "replaced": []
+  },
+  "driver": {
+    "correct": "driver",
+    "options": [
+      "driver",
+      "doctor",
+      "postman",
+      "farmer"
+    ],
+    "replaced": []
+  },
+  "duck": {
+    "correct": "duck",
+    "options": [
+      "duck",
+      "pig",
+      "fish",
+      "monkey"
+    ],
+    "replaced": []
+  },
+  "easy": {
+    "correct": "easy",
+    "options": [
+      "easy",
+      "small",
+      "popular",
+      "beautiful"
+    ],
+    "replaced": []
+  },
+  "eat": {
+    "correct": "eat",
+    "options": [
+      "eat",
+      "work",
+      "understand",
+      "spell"
+    ],
+    "replaced": []
+  },
+  "egg": {
+    "correct": "egg",
+    "options": [
+      "egg",
+      "pork",
+      "fruit",
+      "banana"
+    ],
+    "replaced": []
+  },
+  "eight": {
+    "correct": "eight",
+    "options": [
+      "eight",
+      "seven",
+      "ten",
+      "five"
+    ],
+    "replaced": []
+  },
+  "elephant": {
+    "correct": "elephant",
+    "options": [
+      "elephant",
+      "monkey",
+      "dog",
+      "duck"
+    ],
+    "replaced": []
+  },
+  "empty": {
+    "correct": "empty",
+    "options": [
+      "empty",
+      "traditional",
+      "most",
+      "clean"
+    ],
+    "replaced": []
+  },
+  "english": {
+    "correct": "english",
+    "options": [
+      "english",
+      "bus",
+      "close",
+      "driver"
+    ],
+    "replaced": []
+  },
+  "enjoy": {
+    "correct": "enjoy",
+    "options": [
+      "enjoy",
+      "fly",
+      "draw",
+      "stand"
+    ],
+    "replaced": []
+  },
+  "eraser": {
+    "correct": "eraser",
+    "options": [
+      "eraser",
+      "chair",
+      "desk",
+      "bag"
+    ],
+    "replaced": []
+  },
+  "evening": {
+    "correct": "evening",
+    "options": [
+      "evening",
+      "month",
+      "today",
+      "morning"
+    ],
+    "replaced": []
+  },
+  "eye": {
+    "correct": "eye",
+    "options": [
+      "eye",
+      "foot",
+      "leg",
+      "face"
+    ],
+    "replaced": []
+  },
+  "face": {
+    "correct": "face",
+    "options": [
+      "face",
+      "leg",
+      "mouth",
+      "head"
+    ],
+    "replaced": []
+  },
+  "factory": {
+    "correct": "factory",
+    "options": [
+      "factory",
+      "Japanese",
+      "dream",
+      "language"
+    ],
+    "replaced": []
+  },
+  "farmer": {
+    "correct": "farmer",
+    "options": [
+      "farmer",
+      "driver",
+      "businessman",
+      "postman"
+    ],
+    "replaced": []
+  },
+  "fast": {
+    "correct": "fast",
+    "options": [
+      "fast",
+      "low",
+      "traditional",
+      "worst"
+    ],
+    "replaced": []
+  },
+  "father": {
+    "correct": "father",
+    "options": [
+      "father",
+      "grandpa",
+      "grandfather",
+      "dad"
+    ],
+    "replaced": []
+  },
+  "film": {
+    "correct": "film",
+    "options": [
+      "film",
+      "world",
+      "future",
+      "song"
+    ],
+    "replaced": []
+  },
+  "find": {
+    "correct": "find",
+    "options": [
+      "find",
+      "remember",
+      "walk",
+      "stand"
+    ],
+    "replaced": []
+  },
+  "finish": {
+    "correct": "finish",
+    "options": [
+      "finish",
+      "tell",
+      "remember",
+      "close"
+    ],
+    "replaced": []
+  },
+  "fish": {
+    "correct": "fish",
+    "options": [
+      "fish",
+      "dog",
+      "cat",
+      "rabbit"
+    ],
+    "replaced": []
+  },
+  "fish_ref": {
+    "correct": "fish_ref",
+    "options": [
+      "fish_ref",
+      "new",
+      "clean",
+      "train"
+    ],
+    "replaced": []
+  },
+  "five": {
+    "correct": "five",
+    "options": [
+      "five",
+      "one",
+      "four",
+      "eight"
+    ],
+    "replaced": []
+  },
+  "flower": {
+    "correct": "flower",
+    "options": [
+      "flower",
+      "moon",
+      "sun",
+      "grass"
+    ],
+    "replaced": []
+  },
+  "fly": {
+    "correct": "fly",
+    "options": [
+      "fly",
+      "think",
+      "see",
+      "visit"
+    ],
+    "replaced": []
+  },
+  "foot": {
+    "correct": "foot",
+    "options": [
+      "foot",
+      "mouth",
+      "face",
+      "eye"
+    ],
+    "replaced": []
+  },
+  "forget": {
+    "correct": "forget",
+    "options": [
+      "forget",
+      "jump",
+      "travel",
+      "see"
+    ],
+    "replaced": []
+  },
+  "four": {
+    "correct": "four",
+    "options": [
+      "four",
+      "eight",
+      "six",
+      "one"
+    ],
+    "replaced": []
+  },
+  "france": {
+    "correct": "france",
+    "options": [
+      "france",
+      "apple",
+      "watermelon",
+      "sun"
+    ],
+    "replaced": []
+  },
+  "friday": {
+    "correct": "friday",
+    "options": [
+      "friday",
+      "snow",
+      "new",
+      "mother"
+    ],
+    "replaced": []
+  },
+  "friend": {
+    "correct": "friend",
+    "options": [
+      "friend",
+      "girl",
+      "baby",
+      "woman"
+    ],
+    "replaced": []
+  },
+  "front": {
+    "correct": "front",
+    "options": [
+      "front",
+      "down",
+      "up",
+      "left"
+    ],
+    "replaced": []
+  },
+  "fruit": {
+    "correct": "fruit",
+    "options": [
+      "fruit",
+      "cake",
+      "banana",
+      "beef"
+    ],
+    "replaced": []
+  },
+  "full": {
+    "correct": "full",
+    "options": [
+      "full",
+      "different",
+      "quiet",
+      "most"
+    ],
+    "replaced": []
+  },
+  "future": {
+    "correct": "future",
+    "options": [
+      "future",
+      "America",
+      "French",
+      "Australia"
+    ],
+    "replaced": []
+  },
+  "gift": {
+    "correct": "gift",
+    "options": [
+      "gift",
+      "world",
+      "Japanese",
+      "university"
+    ],
+    "replaced": []
+  },
+  "girl": {
+    "correct": "girl",
+    "options": [
+      "girl",
+      "woman",
+      "friend",
+      "student"
+    ],
+    "replaced": []
+  },
+  "give": {
+    "correct": "give",
+    "options": [
+      "give",
+      "leave",
+      "sell",
+      "take"
+    ],
+    "replaced": []
+  },
+  "gloves": {
+    "correct": "gloves",
+    "options": [
+      "gloves",
+      "no",
+      "bread",
+      "cake"
+    ],
+    "replaced": []
+  },
+  "go": {
+    "correct": "go",
+    "options": [
+      "go",
+      "love",
+      "sit",
+      "have"
+    ],
+    "replaced": []
+  },
+  "good": {
+    "correct": "good",
+    "options": [
+      "good",
+      "full",
+      "short",
+      "happy"
+    ],
+    "replaced": []
+  },
+  "good_afternoon": {
+    "correct": "good_afternoon",
+    "options": [
+      "good_afternoon",
+      "sister",
+      "woman",
+      "doctor"
+    ],
+    "replaced": []
+  },
+  "good_evening": {
+    "correct": "good_evening",
+    "options": [
+      "good_evening",
+      "farm",
+      "park",
+      "flower"
+    ],
+    "replaced": []
+  },
+  "good_morning": {
+    "correct": "good_morning",
+    "options": [
+      "good_morning",
+      "egg",
+      "postman",
+      "an"
+    ],
+    "replaced": []
+  },
+  "good_night": {
+    "correct": "good_night",
+    "options": [
+      "good_night",
+      "head",
+      "bird",
+      "sleep"
+    ],
+    "replaced": []
+  },
+  "goodbye": {
+    "correct": "goodbye",
+    "options": [
+      "goodbye",
+      "bye",
+      "hi",
+      "hello"
     ],
     "replaced": []
   },
@@ -1409,6 +1409,16 @@
     ],
     "replaced": []
   },
+  "grandmother": {
+    "correct": "grandmother",
+    "options": [
+      "grandmother",
+      "mum",
+      "dad",
+      "grandma"
+    ],
+    "replaced": []
+  },
   "grandpa": {
     "correct": "grandpa",
     "options": [
@@ -1419,33 +1429,183 @@
     ],
     "replaced": []
   },
-  "beautiful": {
-    "correct": "beautiful",
+  "grass": {
+    "correct": "grass",
     "options": [
-      "beautiful",
-      "warm",
-      "kind",
-      "nice"
+      "grass",
+      "flower",
+      "cloud",
+      "sun"
     ],
     "replaced": []
   },
-  "clean": {
-    "correct": "clean",
+  "green": {
+    "correct": "green",
     "options": [
-      "clean",
-      "necessary",
-      "low",
-      "healthy"
+      "green",
+      "orange",
+      "white",
+      "yellow"
     ],
     "replaced": []
   },
-  "dirty": {
-    "correct": "dirty",
+  "grow": {
+    "correct": "grow",
     "options": [
-      "dirty",
-      "warm",
-      "special",
-      "clever"
+      "grow",
+      "visit",
+      "walk",
+      "draw"
+    ],
+    "replaced": []
+  },
+  "grow_up": {
+    "correct": "grow_up",
+    "options": [
+      "grow_up",
+      "can",
+      "finish",
+      "tell"
+    ],
+    "replaced": []
+  },
+  "hand": {
+    "correct": "hand",
+    "options": [
+      "hand",
+      "leg",
+      "mouth",
+      "face"
+    ],
+    "replaced": []
+  },
+  "happy": {
+    "correct": "happy",
+    "options": [
+      "happy",
+      "high",
+      "slow",
+      "national"
+    ],
+    "replaced": []
+  },
+  "hat": {
+    "correct": "hat",
+    "options": [
+      "hat",
+      "shoe",
+      "dress",
+      "sock"
+    ],
+    "replaced": []
+  },
+  "have": {
+    "correct": "have",
+    "options": [
+      "have",
+      "change",
+      "call",
+      "are"
+    ],
+    "replaced": []
+  },
+  "head": {
+    "correct": "head",
+    "options": [
+      "head",
+      "nose",
+      "eye",
+      "hand"
+    ],
+    "replaced": []
+  },
+  "healthy": {
+    "correct": "healthy",
+    "options": [
+      "healthy",
+      "big",
+      "slow",
+      "same"
+    ],
+    "replaced": []
+  },
+  "heavy": {
+    "correct": "heavy",
+    "options": [
+      "heavy",
+      "cold",
+      "successful",
+      "quiet"
+    ],
+    "replaced": []
+  },
+  "hello": {
+    "correct": "hello",
+    "options": [
+      "hello",
+      "hi",
+      "goodbye",
+      "good morning"
+    ],
+    "replaced": []
+  },
+  "help": {
+    "correct": "help",
+    "options": [
+      "help",
+      "find",
+      "run",
+      "come"
+    ],
+    "replaced": []
+  },
+  "hi": {
+    "correct": "hi",
+    "options": [
+      "hi",
+      "good afternoon",
+      "goodbye",
+      "good evening"
+    ],
+    "replaced": []
+  },
+  "high": {
+    "correct": "high",
+    "options": [
+      "high",
+      "strong",
+      "possible",
+      "big"
+    ],
+    "replaced": []
+  },
+  "home": {
+    "correct": "home",
+    "options": [
+      "home",
+      "supermarket",
+      "library",
+      "zoo"
+    ],
+    "replaced": []
+  },
+  "hope": {
+    "correct": "hope",
+    "options": [
+      "hope",
+      "teach",
+      "are",
+      "send"
+    ],
+    "replaced": []
+  },
+  "hospital": {
+    "correct": "hospital",
+    "options": [
+      "hospital",
+      "park",
+      "school",
+      "city"
     ],
     "replaced": []
   },
@@ -1459,113 +1619,203 @@
     ],
     "replaced": []
   },
-  "cold": {
-    "correct": "cold",
+  "how": {
+    "correct": "how",
     "options": [
-      "cold",
-      "successful",
-      "tired",
-      "high"
+      "how",
+      "what",
+      "where",
+      "whose"
     ],
     "replaced": []
   },
-  "warm": {
-    "correct": "warm",
+  "hungry": {
+    "correct": "hungry",
     "options": [
-      "warm",
-      "same",
-      "better",
-      "hot"
-    ],
-    "replaced": []
-  },
-  "cool": {
-    "correct": "cool",
-    "options": [
-      "cool",
       "hungry",
-      "strong",
+      "modern",
+      "best",
       "small"
     ],
     "replaced": []
   },
-  "watch": {
-    "correct": "watch",
+  "if": {
+    "correct": "if",
     "options": [
-      "watch",
-      "are",
-      "hope",
-      "draw"
+      "if",
+      "but",
+      "because",
+      "in"
     ],
     "replaced": []
   },
-  "listen": {
-    "correct": "listen",
+  "important": {
+    "correct": "important",
     "options": [
-      "listen",
-      "give",
-      "start",
-      "walk"
+      "important",
+      "special",
+      "difficult",
+      "tall"
     ],
     "replaced": []
   },
-  "look": {
-    "correct": "look",
+  "in": {
+    "correct": "in",
     "options": [
-      "look",
-      "dance",
-      "draw",
-      "buy"
+      "in",
+      "under",
+      "to",
+      "near"
     ],
     "replaced": []
   },
-  "open": {
-    "correct": "open",
+  "interesting": {
+    "correct": "interesting",
     "options": [
-      "open",
-      "look",
-      "give",
-      "thank"
+      "interesting",
+      "difficult",
+      "sad",
+      "light"
     ],
     "replaced": []
   },
-  "close": {
-    "correct": "close",
+  "international": {
+    "correct": "international",
     "options": [
-      "close",
-      "study",
-      "remember",
-      "believe"
+      "international",
+      "successful",
+      "heavy",
+      "different"
     ],
     "replaced": []
   },
-  "come": {
-    "correct": "come",
+  "japan": {
+    "correct": "japan",
     "options": [
-      "come",
-      "miss",
-      "forget",
-      "read"
+      "japan",
+      "buy",
+      "evening",
+      "stand"
     ],
     "replaced": []
   },
-  "go": {
-    "correct": "go",
+  "jeans": {
+    "correct": "jeans",
     "options": [
-      "go",
-      "love",
+      "jeans",
+      "beef",
+      "may",
+      "fish"
+    ],
+    "replaced": []
+  },
+  "juice": {
+    "correct": "juice",
+    "options": [
+      "juice",
+      "milk",
+      "water",
+      "English"
+    ],
+    "replaced": []
+  },
+  "jump": {
+    "correct": "jump",
+    "options": [
+      "jump",
+      "drink",
+      "wish",
+      "travel"
+    ],
+    "replaced": []
+  },
+  "kind": {
+    "correct": "kind",
+    "options": [
+      "kind",
+      "best",
+      "clean",
+      "easy"
+    ],
+    "replaced": []
+  },
+  "know": {
+    "correct": "know",
+    "options": [
+      "know",
       "sit",
-      "have"
+      "use",
+      "teach"
     ],
     "replaced": []
   },
-  "love": {
-    "correct": "love",
+  "language": {
+    "correct": "language",
     "options": [
-      "love",
-      "read",
-      "think",
-      "jump"
+      "language",
+      "China",
+      "song",
+      "dream"
+    ],
+    "replaced": []
+  },
+  "learn": {
+    "correct": "learn",
+    "options": [
+      "learn",
+      "run",
+      "sing",
+      "make"
+    ],
+    "replaced": []
+  },
+  "leave": {
+    "correct": "leave",
+    "options": [
+      "leave",
+      "hope",
+      "send",
+      "like"
+    ],
+    "replaced": []
+  },
+  "left": {
+    "correct": "left",
+    "options": [
+      "left",
+      "down",
+      "right",
+      "back"
+    ],
+    "replaced": []
+  },
+  "leg": {
+    "correct": "leg",
+    "options": [
+      "leg",
+      "hand",
+      "nose",
+      "mouth"
+    ],
+    "replaced": []
+  },
+  "library": {
+    "correct": "library",
+    "options": [
+      "library",
+      "zoo",
+      "street",
+      "school"
+    ],
+    "replaced": []
+  },
+  "light": {
+    "correct": "light",
+    "options": [
+      "light",
+      "necessary",
+      "clean",
+      "beautiful"
     ],
     "replaced": []
   },
@@ -1579,23 +1829,1343 @@
     ],
     "replaced": []
   },
-  "want": {
-    "correct": "want",
+  "listen": {
+    "correct": "listen",
     "options": [
-      "want",
-      "use",
-      "call",
+      "listen",
+      "give",
+      "start",
+      "walk"
+    ],
+    "replaced": []
+  },
+  "live": {
+    "correct": "live",
+    "options": [
+      "live",
+      "am",
+      "ask",
+      "spell"
+    ],
+    "replaced": []
+  },
+  "long": {
+    "correct": "long",
+    "options": [
+      "long",
+      "modern",
+      "tall",
+      "same"
+    ],
+    "replaced": []
+  },
+  "look": {
+    "correct": "look",
+    "options": [
+      "look",
+      "dance",
+      "draw",
+      "buy"
+    ],
+    "replaced": []
+  },
+  "love": {
+    "correct": "love",
+    "options": [
+      "love",
+      "read",
+      "think",
+      "jump"
+    ],
+    "replaced": []
+  },
+  "low": {
+    "correct": "low",
+    "options": [
+      "low",
+      "boring",
+      "light",
+      "successful"
+    ],
+    "replaced": []
+  },
+  "make": {
+    "correct": "make",
+    "options": [
+      "make",
+      "sit",
+      "change",
       "think"
     ],
     "replaced": []
   },
-  "have": {
-    "correct": "have",
+  "man": {
+    "correct": "man",
     "options": [
+      "man",
+      "woman",
+      "girl",
+      "friend"
+    ],
+    "replaced": []
+  },
+  "math": {
+    "correct": "math",
+    "options": [
+      "math",
+      "art",
+      "Chinese",
+      "PE"
+    ],
+    "replaced": []
+  },
+  "meet": {
+    "correct": "meet",
+    "options": [
+      "meet",
+      "sleep",
+      "see",
+      "ask"
+    ],
+    "replaced": []
+  },
+  "milk": {
+    "correct": "milk",
+    "options": [
+      "milk",
+      "juice",
+      "water",
+      "grandma"
+    ],
+    "replaced": []
+  },
+  "miss": {
+    "correct": "miss",
+    "options": [
+      "miss",
+      "eat",
+      "sing",
+      "show"
+    ],
+    "replaced": []
+  },
+  "modern": {
+    "correct": "modern",
+    "options": [
+      "modern",
+      "clever",
+      "impossible",
+      "best"
+    ],
+    "replaced": []
+  },
+  "monday": {
+    "correct": "monday",
+    "options": [
+      "monday",
+      "nine",
+      "in",
+      "Wednesday"
+    ],
+    "replaced": []
+  },
+  "monkey": {
+    "correct": "monkey",
+    "options": [
+      "monkey",
+      "bear",
+      "cat",
+      "duck"
+    ],
+    "replaced": []
+  },
+  "month": {
+    "correct": "month",
+    "options": [
+      "month",
+      "birthday",
+      "night",
+      "evening"
+    ],
+    "replaced": []
+  },
+  "moon": {
+    "correct": "moon",
+    "options": [
+      "moon",
+      "sun",
+      "cloud",
+      "star"
+    ],
+    "replaced": []
+  },
+  "more": {
+    "correct": "more",
+    "options": [
+      "more",
+      "kind",
+      "strong",
+      "nice"
+    ],
+    "replaced": []
+  },
+  "morning": {
+    "correct": "morning",
+    "options": [
+      "morning",
+      "tomorrow",
+      "today",
+      "yesterday"
+    ],
+    "replaced": []
+  },
+  "most": {
+    "correct": "most",
+    "options": [
+      "most",
+      "boring",
+      "successful",
+      "national"
+    ],
+    "replaced": []
+  },
+  "mother": {
+    "correct": "mother",
+    "options": [
+      "mother",
+      "grandfather",
+      "mum",
+      "sister"
+    ],
+    "replaced": []
+  },
+  "mouth": {
+    "correct": "mouth",
+    "options": [
+      "mouth",
+      "hand",
+      "leg",
+      "eye"
+    ],
+    "replaced": []
+  },
+  "mum": {
+    "correct": "mum",
+    "options": [
+      "mum",
+      "grandpa",
+      "grandma",
+      "sister"
+    ],
+    "replaced": []
+  },
+  "museum": {
+    "correct": "museum",
+    "options": [
+      "museum",
+      "future",
+      "gift",
+      "UK"
+    ],
+    "replaced": []
+  },
+  "music": {
+    "correct": "music",
+    "options": [
+      "music",
+      "PE",
+      "Chinese",
+      "English"
+    ],
+    "replaced": []
+  },
+  "my": {
+    "correct": "my",
+    "options": [
+      "my",
+      "your",
+      "you",
+      "I"
+    ],
+    "replaced": []
+  },
+  "name": {
+    "correct": "name",
+    "options": [
+      "name",
+      "gift",
+      "museum",
+      "theatre"
+    ],
+    "replaced": []
+  },
+  "national": {
+    "correct": "national",
+    "options": [
+      "national",
+      "traditional",
+      "impossible",
+      "easy"
+    ],
+    "replaced": []
+  },
+  "near": {
+    "correct": "near",
+    "options": [
+      "near",
+      "to",
+      "under",
+      "in"
+    ],
+    "replaced": []
+  },
+  "necessary": {
+    "correct": "necessary",
+    "options": [
+      "necessary",
+      "impossible",
+      "tired",
+      "difficult"
+    ],
+    "replaced": []
+  },
+  "never": {
+    "correct": "never",
+    "options": [
+      "never",
+      "often",
+      "quickly",
+      "always"
+    ],
+    "replaced": []
+  },
+  "new": {
+    "correct": "new",
+    "options": [
+      "new",
+      "heavy",
+      "hot",
+      "most"
+    ],
+    "replaced": []
+  },
+  "nice": {
+    "correct": "nice",
+    "options": [
+      "nice",
+      "empty",
+      "same",
+      "sad"
+    ],
+    "replaced": []
+  },
+  "night": {
+    "correct": "night",
+    "options": [
+      "night",
+      "month",
+      "yesterday",
+      "today"
+    ],
+    "replaced": []
+  },
+  "nine": {
+    "correct": "nine",
+    "options": [
+      "nine",
+      "eight",
+      "five",
+      "one"
+    ],
+    "replaced": []
+  },
+  "nose": {
+    "correct": "nose",
+    "options": [
+      "nose",
+      "head",
+      "mouth",
+      "leg"
+    ],
+    "replaced": []
+  },
+  "nurse": {
+    "correct": "nurse",
+    "options": [
+      "nurse",
+      "doctor",
+      "driver",
+      "cook"
+    ],
+    "replaced": []
+  },
+  "often": {
+    "correct": "often",
+    "options": [
+      "often",
+      "sometimes",
+      "quickly",
+      "slowly"
+    ],
+    "replaced": []
+  },
+  "old": {
+    "correct": "old",
+    "options": [
+      "old",
+      "small",
+      "international",
+      "boring"
+    ],
+    "replaced": []
+  },
+  "on": {
+    "correct": "on",
+    "options": [
+      "on",
+      "to",
+      "near",
+      "under"
+    ],
+    "replaced": []
+  },
+  "one": {
+    "correct": "one",
+    "options": [
+      "one",
+      "five",
+      "nine",
+      "eight"
+    ],
+    "replaced": []
+  },
+  "open": {
+    "correct": "open",
+    "options": [
+      "open",
+      "look",
+      "give",
+      "thank"
+    ],
+    "replaced": []
+  },
+  "orange": {
+    "correct": "orange",
+    "options": [
+      "orange",
+      "red",
+      "green",
+      "white"
+    ],
+    "replaced": []
+  },
+  "park": {
+    "correct": "park",
+    "options": [
+      "park",
+      "classroom",
+      "hospital",
+      "city"
+    ],
+    "replaced": []
+  },
+  "pe": {
+    "correct": "pe",
+    "options": [
+      "pe",
+      "low",
+      "snow",
+      "is"
+    ],
+    "replaced": []
+  },
+  "pen": {
+    "correct": "pen",
+    "options": [
+      "pen",
+      "book",
+      "ruler",
+      "bag"
+    ],
+    "replaced": []
+  },
+  "pencil": {
+    "correct": "pencil",
+    "options": [
+      "pencil",
+      "bag",
+      "eraser",
+      "pen"
+    ],
+    "replaced": []
+  },
+  "photo": {
+    "correct": "photo",
+    "options": [
+      "photo",
+      "name",
+      "Japanese",
+      "future"
+    ],
+    "replaced": []
+  },
+  "pig": {
+    "correct": "pig",
+    "options": [
+      "pig",
+      "dog",
+      "bird",
+      "bear"
+    ],
+    "replaced": []
+  },
+  "pink": {
+    "correct": "pink",
+    "options": [
+      "pink",
+      "orange",
+      "green",
+      "yellow"
+    ],
+    "replaced": []
+  },
+  "plane": {
+    "correct": "plane",
+    "options": [
+      "plane",
+      "bus",
+      "ship",
+      "car"
+    ],
+    "replaced": []
+  },
+  "play": {
+    "correct": "play",
+    "options": [
+      "play",
+      "take",
       "have",
+      "jump"
+    ],
+    "replaced": []
+  },
+  "police": {
+    "correct": "police",
+    "options": [
+      "police",
+      "driver",
+      "nurse",
+      "doctor"
+    ],
+    "replaced": []
+  },
+  "popular": {
+    "correct": "popular",
+    "options": [
+      "popular",
+      "hot",
+      "beautiful",
+      "full"
+    ],
+    "replaced": []
+  },
+  "pork": {
+    "correct": "pork",
+    "options": [
+      "pork",
+      "cake",
+      "chicken",
+      "rice"
+    ],
+    "replaced": []
+  },
+  "possible": {
+    "correct": "possible",
+    "options": [
+      "possible",
+      "hungry",
+      "sad",
+      "interesting"
+    ],
+    "replaced": []
+  },
+  "postman": {
+    "correct": "postman",
+    "options": [
+      "postman",
+      "cook",
+      "nurse",
+      "businessman"
+    ],
+    "replaced": []
+  },
+  "purple": {
+    "correct": "purple",
+    "options": [
+      "purple",
+      "black",
+      "blue",
+      "green"
+    ],
+    "replaced": []
+  },
+  "rabbit": {
+    "correct": "rabbit",
+    "options": [
+      "rabbit",
+      "dog",
+      "bird",
+      "bear"
+    ],
+    "replaced": []
+  },
+  "rain": {
+    "correct": "rain",
+    "options": [
+      "rain",
+      "flower",
+      "grass",
+      "moon"
+    ],
+    "replaced": []
+  },
+  "rainy": {
+    "correct": "rainy",
+    "options": [
+      "rainy",
+      "cloudy",
+      "sunny",
+      "windy"
+    ],
+    "replaced": []
+  },
+  "read": {
+    "correct": "read",
+    "options": [
+      "read",
+      "sell",
+      "buy",
+      "love"
+    ],
+    "replaced": []
+  },
+  "red": {
+    "correct": "red",
+    "options": [
+      "red",
+      "green",
+      "white",
+      "pink"
+    ],
+    "replaced": []
+  },
+  "remember": {
+    "correct": "remember",
+    "options": [
+      "remember",
+      "drink",
+      "sleep",
+      "walk"
+    ],
+    "replaced": []
+  },
+  "return": {
+    "correct": "return",
+    "options": [
+      "return",
+      "study",
+      "tell",
+      "sit"
+    ],
+    "replaced": []
+  },
+  "rice": {
+    "correct": "rice",
+    "options": [
+      "rice",
+      "vegetable",
+      "apple",
+      "egg"
+    ],
+    "replaced": []
+  },
+  "right": {
+    "correct": "right",
+    "options": [
+      "right",
+      "front",
+      "up",
+      "left"
+    ],
+    "replaced": []
+  },
+  "road": {
+    "correct": "road",
+    "options": [
+      "road",
+      "home",
+      "hospital",
+      "supermarket"
+    ],
+    "replaced": []
+  },
+  "ruler": {
+    "correct": "ruler",
+    "options": [
+      "ruler",
+      "chair",
+      "book",
+      "pen"
+    ],
+    "replaced": []
+  },
+  "run": {
+    "correct": "run",
+    "options": [
+      "run",
+      "swim",
+      "look",
+      "am"
+    ],
+    "replaced": []
+  },
+  "sad": {
+    "correct": "sad",
+    "options": [
+      "sad",
+      "kind",
+      "cool",
+      "high"
+    ],
+    "replaced": []
+  },
+  "same": {
+    "correct": "same",
+    "options": [
+      "same",
+      "boring",
+      "popular",
+      "clean"
+    ],
+    "replaced": []
+  },
+  "saturday": {
+    "correct": "saturday",
+    "options": [
+      "saturday",
+      "Tuesday",
+      "today",
+      "bad"
+    ],
+    "replaced": []
+  },
+  "say": {
+    "correct": "say",
+    "options": [
+      "say",
+      "make",
+      "come",
+      "start"
+    ],
+    "replaced": []
+  },
+  "school": {
+    "correct": "school",
+    "options": [
+      "school",
+      "park",
+      "classroom",
+      "hospital"
+    ],
+    "replaced": []
+  },
+  "see": {
+    "correct": "see",
+    "options": [
+      "see",
+      "go",
+      "wish",
+      "listen"
+    ],
+    "replaced": []
+  },
+  "sell": {
+    "correct": "sell",
+    "options": [
+      "sell",
+      "come",
+      "learn",
+      "grow"
+    ],
+    "replaced": []
+  },
+  "send": {
+    "correct": "send",
+    "options": [
+      "send",
+      "enjoy",
+      "sing",
+      "like"
+    ],
+    "replaced": []
+  },
+  "seven": {
+    "correct": "seven",
+    "options": [
+      "seven",
+      "one",
+      "six",
+      "two"
+    ],
+    "replaced": []
+  },
+  "ship": {
+    "correct": "ship",
+    "options": [
+      "ship",
+      "bus",
+      "plane",
+      "train"
+    ],
+    "replaced": []
+  },
+  "shirt": {
+    "correct": "shirt",
+    "options": [
+      "shirt",
+      "hat",
+      "sock",
+      "cap"
+    ],
+    "replaced": []
+  },
+  "shoe": {
+    "correct": "shoe",
+    "options": [
+      "shoe",
+      "cap",
+      "skirt",
+      "sock"
+    ],
+    "replaced": []
+  },
+  "shoes": {
+    "correct": "shoes",
+    "options": [
+      "shoes",
+      "will",
+      "weak",
+      "two"
+    ],
+    "replaced": []
+  },
+  "short": {
+    "correct": "short",
+    "options": [
+      "short",
+      "tall",
+      "low",
+      "light"
+    ],
+    "replaced": []
+  },
+  "shorts": {
+    "correct": "shorts",
+    "options": [
+      "shorts",
+      "work",
+      "Monday",
+      "moon"
+    ],
+    "replaced": []
+  },
+  "sing": {
+    "correct": "sing",
+    "options": [
+      "sing",
+      "look",
       "change",
-      "call",
-      "are"
+      "believe"
+    ],
+    "replaced": []
+  },
+  "sister": {
+    "correct": "sister",
+    "options": [
+      "sister",
+      "grandpa",
+      "mum",
+      "grandfather"
+    ],
+    "replaced": []
+  },
+  "sit": {
+    "correct": "sit",
+    "options": [
+      "sit",
+      "open",
+      "study",
+      "say"
+    ],
+    "replaced": []
+  },
+  "six": {
+    "correct": "six",
+    "options": [
+      "six",
+      "one",
+      "eight",
+      "three"
+    ],
+    "replaced": []
+  },
+  "skirt": {
+    "correct": "skirt",
+    "options": [
+      "skirt",
+      "shoe",
+      "shirt",
+      "coat"
+    ],
+    "replaced": []
+  },
+  "sleep": {
+    "correct": "sleep",
+    "options": [
+      "sleep",
+      "open",
+      "fly",
+      "draw"
+    ],
+    "replaced": []
+  },
+  "slow": {
+    "correct": "slow",
+    "options": [
+      "slow",
+      "short",
+      "weak",
+      "full"
+    ],
+    "replaced": []
+  },
+  "slowly": {
+    "correct": "slowly",
+    "options": [
+      "slowly",
+      "often",
+      "usually",
+      "always"
+    ],
+    "replaced": []
+  },
+  "small": {
+    "correct": "small",
+    "options": [
+      "small",
+      "hungry",
+      "clean",
+      "successful"
+    ],
+    "replaced": []
+  },
+  "snow": {
+    "correct": "snow",
+    "options": [
+      "snow",
+      "tree",
+      "moon",
+      "star"
+    ],
+    "replaced": []
+  },
+  "sock": {
+    "correct": "sock",
+    "options": [
+      "sock",
+      "shoe",
+      "hat",
+      "shirt"
+    ],
+    "replaced": []
+  },
+  "socks": {
+    "correct": "socks",
+    "options": [
+      "socks",
+      "grandmother",
+      "high",
+      "mum"
+    ],
+    "replaced": []
+  },
+  "sofa": {
+    "correct": "sofa",
+    "options": [
+      "sofa",
+      "window",
+      "door",
+      "table"
+    ],
+    "replaced": []
+  },
+  "sometimes": {
+    "correct": "sometimes",
+    "options": [
+      "sometimes",
+      "carefully",
+      "always",
+      "slowly"
+    ],
+    "replaced": []
+  },
+  "song": {
+    "correct": "song",
+    "options": [
+      "song",
+      "theatre",
+      "factory",
+      "language"
+    ],
+    "replaced": []
+  },
+  "sorry": {
+    "correct": "sorry",
+    "options": [
+      "sorry",
+      "look forward to",
+      "be good at",
+      "how are you"
+    ],
+    "replaced": []
+  },
+  "special": {
+    "correct": "special",
+    "options": [
+      "special",
+      "dirty",
+      "hungry",
+      "full"
+    ],
+    "replaced": []
+  },
+  "spell": {
+    "correct": "spell",
+    "options": [
+      "spell",
+      "believe",
+      "give",
+      "look"
+    ],
+    "replaced": []
+  },
+  "sport": {
+    "correct": "sport",
+    "options": [
+      "sport",
+      "party",
+      "game",
+      "wish"
+    ],
+    "replaced": []
+  },
+  "spring": {
+    "correct": "spring",
+    "options": [
+      "spring",
+      "autumn",
+      "summer",
+      "winter"
+    ],
+    "replaced": []
+  },
+  "stand": {
+    "correct": "stand",
+    "options": [
+      "stand",
+      "return",
+      "buy",
+      "read"
+    ],
+    "replaced": []
+  },
+  "star": {
+    "correct": "star",
+    "options": [
+      "star",
+      "rain",
+      "sun",
+      "snow"
+    ],
+    "replaced": []
+  },
+  "start": {
+    "correct": "start",
+    "options": [
+      "start",
+      "become",
+      "grow",
+      "visit"
+    ],
+    "replaced": []
+  },
+  "story": {
+    "correct": "story",
+    "options": [
+      "story",
+      "gift",
+      "college",
+      "dream"
+    ],
+    "replaced": []
+  },
+  "strong": {
+    "correct": "strong",
+    "options": [
+      "strong",
+      "important",
+      "impossible",
+      "old"
+    ],
+    "replaced": []
+  },
+  "student": {
+    "correct": "student",
+    "options": [
+      "student",
+      "baby",
+      "friend",
+      "boy"
+    ],
+    "replaced": []
+  },
+  "study": {
+    "correct": "study",
+    "options": [
+      "study",
+      "love",
+      "forget",
+      "like"
+    ],
+    "replaced": []
+  },
+  "successful": {
+    "correct": "successful",
+    "options": [
+      "successful",
+      "thirsty",
+      "hungry",
+      "old"
+    ],
+    "replaced": []
+  },
+  "summer": {
+    "correct": "summer",
+    "options": [
+      "summer",
+      "spring",
+      "winter",
+      "autumn"
+    ],
+    "replaced": []
+  },
+  "sun": {
+    "correct": "sun",
+    "options": [
+      "sun",
+      "grass",
+      "moon",
+      "cloud"
+    ],
+    "replaced": []
+  },
+  "sunday": {
+    "correct": "sunday",
+    "options": [
+      "sunday",
+      "bus",
+      "for",
+      "sorry"
+    ],
+    "replaced": []
+  },
+  "sunny": {
+    "correct": "sunny",
+    "options": [
+      "sunny",
+      "rainy",
+      "windy",
+      "cloudy"
+    ],
+    "replaced": []
+  },
+  "supermarket": {
+    "correct": "supermarket",
+    "options": [
+      "supermarket",
+      "road",
+      "city",
+      "school"
+    ],
+    "replaced": []
+  },
+  "sweater": {
+    "correct": "sweater",
+    "options": [
+      "sweater",
+      "sleep",
+      "moon",
+      "mum"
+    ],
+    "replaced": []
+  },
+  "swim": {
+    "correct": "swim",
+    "options": [
+      "swim",
+      "close",
+      "jump",
+      "sell"
+    ],
+    "replaced": []
+  },
+  "table": {
+    "correct": "table",
+    "options": [
+      "table",
+      "window",
+      "door",
+      "sofa"
+    ],
+    "replaced": []
+  },
+  "take": {
+    "correct": "take",
+    "options": [
+      "take",
+      "jump",
+      "are",
+      "miss"
+    ],
+    "replaced": []
+  },
+  "tall": {
+    "correct": "tall",
+    "options": [
+      "tall",
+      "most",
+      "difficult",
+      "better"
+    ],
+    "replaced": []
+  },
+  "teacher": {
+    "correct": "teacher",
+    "options": [
+      "teacher",
+      "woman",
+      "girl",
+      "man"
+    ],
+    "replaced": []
+  },
+  "tell": {
+    "correct": "tell",
+    "options": [
+      "tell",
+      "become",
+      "walk",
+      "sleep"
+    ],
+    "replaced": []
+  },
+  "ten": {
+    "correct": "ten",
+    "options": [
+      "ten",
+      "eight",
+      "one",
+      "four"
+    ],
+    "replaced": []
+  },
+  "thank": {
+    "correct": "thank",
+    "options": [
+      "thank",
+      "find",
+      "go",
+      "leave"
+    ],
+    "replaced": []
+  },
+  "thank_you": {
+    "correct": "thank_you",
+    "options": [
+      "thank_you",
+      "bird",
+      "farm",
+      "watermelon"
+    ],
+    "replaced": []
+  },
+  "think": {
+    "correct": "think",
+    "options": [
+      "think",
+      "fly",
+      "am",
+      "enjoy"
+    ],
+    "replaced": []
+  },
+  "thirsty": {
+    "correct": "thirsty",
+    "options": [
+      "thirsty",
+      "modern",
+      "tired",
+      "interesting"
+    ],
+    "replaced": []
+  },
+  "three": {
+    "correct": "three",
+    "options": [
+      "three",
+      "eight",
+      "four",
+      "six"
+    ],
+    "replaced": []
+  },
+  "thursday": {
+    "correct": "thursday",
+    "options": [
+      "thursday",
+      "may",
+      "open",
+      "park"
+    ],
+    "replaced": []
+  },
+  "tired": {
+    "correct": "tired",
+    "options": [
+      "tired",
+      "international",
+      "special",
+      "fast"
+    ],
+    "replaced": []
+  },
+  "to": {
+    "correct": "to",
+    "options": [
+      "to",
+      "in",
+      "under",
+      "behind"
     ],
     "replaced": []
   },
@@ -1619,503 +3189,23 @@
     ],
     "replaced": []
   },
-  "yesterday": {
-    "correct": "yesterday",
+  "town": {
+    "correct": "town",
     "options": [
-      "yesterday",
-      "birthday",
-      "tomorrow",
-      "night"
+      "town",
+      "village",
+      "classroom",
+      "park"
     ],
     "replaced": []
   },
-  "spring": {
-    "correct": "spring",
+  "traditional": {
+    "correct": "traditional",
     "options": [
-      "spring",
-      "autumn",
-      "summer",
-      "winter"
-    ],
-    "replaced": []
-  },
-  "summer": {
-    "correct": "summer",
-    "options": [
-      "summer",
-      "spring",
-      "winter",
-      "autumn"
-    ],
-    "replaced": []
-  },
-  "autumn": {
-    "correct": "autumn",
-    "options": [
-      "autumn",
-      "summer",
-      "winter",
-      "spring"
-    ],
-    "replaced": []
-  },
-  "winter": {
-    "correct": "winter",
-    "options": [
-      "winter",
-      "autumn",
-      "spring",
-      "summer"
-    ],
-    "replaced": []
-  },
-  "sun": {
-    "correct": "sun",
-    "options": [
-      "sun",
-      "grass",
-      "moon",
-      "cloud"
-    ],
-    "replaced": []
-  },
-  "moon": {
-    "correct": "moon",
-    "options": [
-      "moon",
-      "sun",
-      "cloud",
-      "star"
-    ],
-    "replaced": []
-  },
-  "star": {
-    "correct": "star",
-    "options": [
-      "star",
-      "rain",
-      "sun",
-      "snow"
-    ],
-    "replaced": []
-  },
-  "tree": {
-    "correct": "tree",
-    "options": [
-      "tree",
-      "snow",
-      "sun",
-      "rain"
-    ],
-    "replaced": []
-  },
-  "flower": {
-    "correct": "flower",
-    "options": [
-      "flower",
-      "moon",
-      "sun",
-      "grass"
-    ],
-    "replaced": []
-  },
-  "grass": {
-    "correct": "grass",
-    "options": [
-      "grass",
-      "flower",
-      "cloud",
-      "sun"
-    ],
-    "replaced": []
-  },
-  "cloud": {
-    "correct": "cloud",
-    "options": [
-      "cloud",
-      "grass",
-      "star",
-      "flower"
-    ],
-    "replaced": []
-  },
-  "rain": {
-    "correct": "rain",
-    "options": [
-      "rain",
-      "flower",
-      "grass",
-      "moon"
-    ],
-    "replaced": []
-  },
-  "snow": {
-    "correct": "snow",
-    "options": [
-      "snow",
-      "tree",
-      "moon",
-      "star"
-    ],
-    "replaced": []
-  },
-  "hospital": {
-    "correct": "hospital",
-    "options": [
-      "hospital",
-      "park",
-      "school",
-      "city"
-    ],
-    "replaced": []
-  },
-  "supermarket": {
-    "correct": "supermarket",
-    "options": [
-      "supermarket",
-      "road",
-      "city",
-      "school"
-    ],
-    "replaced": []
-  },
-  "in": {
-    "correct": "in",
-    "options": [
-      "in",
-      "under",
-      "to",
-      "near"
-    ],
-    "replaced": []
-  },
-  "on": {
-    "correct": "on",
-    "options": [
-      "on",
-      "to",
-      "near",
-      "under"
-    ],
-    "replaced": []
-  },
-  "under": {
-    "correct": "under",
-    "options": [
-      "under",
-      "in",
-      "behind",
-      "to"
-    ],
-    "replaced": []
-  },
-  "behind": {
-    "correct": "behind",
-    "options": [
-      "behind",
-      "to",
-      "in",
-      "under"
-    ],
-    "replaced": []
-  },
-  "near": {
-    "correct": "near",
-    "options": [
-      "near",
-      "to",
-      "under",
-      "in"
-    ],
-    "replaced": []
-  },
-  "left": {
-    "correct": "left",
-    "options": [
-      "left",
-      "down",
-      "right",
-      "back"
-    ],
-    "replaced": []
-  },
-  "right": {
-    "correct": "right",
-    "options": [
-      "right",
-      "front",
-      "up",
-      "left"
-    ],
-    "replaced": []
-  },
-  "front": {
-    "correct": "front",
-    "options": [
-      "front",
-      "down",
-      "up",
-      "left"
-    ],
-    "replaced": []
-  },
-  "back": {
-    "correct": "back",
-    "options": [
-      "back",
-      "up",
-      "left",
-      "down"
-    ],
-    "replaced": []
-  },
-  "up": {
-    "correct": "up",
-    "options": [
-      "up",
-      "back",
-      "front",
-      "right"
-    ],
-    "replaced": []
-  },
-  "down": {
-    "correct": "down",
-    "options": [
-      "down",
-      "up",
-      "left",
-      "front"
-    ],
-    "replaced": []
-  },
-  "help": {
-    "correct": "help",
-    "options": [
-      "help",
-      "find",
-      "run",
-      "come"
-    ],
-    "replaced": []
-  },
-  "find": {
-    "correct": "find",
-    "options": [
-      "find",
-      "remember",
-      "walk",
-      "stand"
-    ],
-    "replaced": []
-  },
-  "see": {
-    "correct": "see",
-    "options": [
-      "see",
-      "go",
-      "wish",
-      "listen"
-    ],
-    "replaced": []
-  },
-  "buy": {
-    "correct": "buy",
-    "options": [
-      "buy",
-      "spell",
-      "work",
-      "watch"
-    ],
-    "replaced": []
-  },
-  "sell": {
-    "correct": "sell",
-    "options": [
-      "sell",
-      "come",
-      "learn",
-      "grow"
-    ],
-    "replaced": []
-  },
-  "make": {
-    "correct": "make",
-    "options": [
-      "make",
-      "sit",
-      "change",
-      "think"
-    ],
-    "replaced": []
-  },
-  "take": {
-    "correct": "take",
-    "options": [
-      "take",
-      "jump",
-      "are",
-      "miss"
-    ],
-    "replaced": []
-  },
-  "give": {
-    "correct": "give",
-    "options": [
-      "give",
-      "leave",
-      "sell",
-      "take"
-    ],
-    "replaced": []
-  },
-  "friend": {
-    "correct": "friend",
-    "options": [
-      "friend",
-      "girl",
-      "baby",
-      "woman"
-    ],
-    "replaced": []
-  },
-  "boy": {
-    "correct": "boy",
-    "options": [
-      "boy",
-      "girl",
-      "friend",
-      "teacher"
-    ],
-    "replaced": []
-  },
-  "girl": {
-    "correct": "girl",
-    "options": [
-      "girl",
-      "woman",
-      "friend",
-      "student"
-    ],
-    "replaced": []
-  },
-  "man": {
-    "correct": "man",
-    "options": [
-      "man",
-      "woman",
-      "girl",
-      "friend"
-    ],
-    "replaced": []
-  },
-  "woman": {
-    "correct": "woman",
-    "options": [
-      "woman",
-      "friend",
-      "girl",
-      "baby"
-    ],
-    "replaced": []
-  },
-  "baby": {
-    "correct": "baby",
-    "options": [
-      "baby",
-      "student",
-      "teacher",
-      "friend"
-    ],
-    "replaced": []
-  },
-  "bed": {
-    "correct": "bed",
-    "options": [
-      "bed",
-      "window",
-      "table",
-      "sofa"
-    ],
-    "replaced": []
-  },
-  "table": {
-    "correct": "table",
-    "options": [
-      "table",
-      "window",
-      "door",
-      "sofa"
-    ],
-    "replaced": []
-  },
-  "door": {
-    "correct": "door",
-    "options": [
-      "door",
-      "sofa",
-      "table",
-      "bed"
-    ],
-    "replaced": []
-  },
-  "window": {
-    "correct": "window",
-    "options": [
-      "window",
-      "table",
-      "sofa",
-      "door"
-    ],
-    "replaced": []
-  },
-  "sofa": {
-    "correct": "sofa",
-    "options": [
-      "sofa",
-      "window",
-      "door",
-      "table"
-    ],
-    "replaced": []
-  },
-  "car": {
-    "correct": "car",
-    "options": [
-      "car",
-      "bike",
-      "train",
-      "ship"
-    ],
-    "replaced": []
-  },
-  "bus": {
-    "correct": "bus",
-    "options": [
-      "bus",
-      "train",
-      "car",
-      "plane"
-    ],
-    "replaced": []
-  },
-  "bike": {
-    "correct": "bike",
-    "options": [
-      "bike",
-      "car",
-      "ship",
-      "bus"
-    ],
-    "replaced": []
-  },
-  "plane": {
-    "correct": "plane",
-    "options": [
-      "plane",
-      "bus",
-      "ship",
-      "car"
+      "traditional",
+      "long",
+      "interesting",
+      "different"
     ],
     "replaced": []
   },
@@ -2129,143 +3219,263 @@
     ],
     "replaced": []
   },
-  "ship": {
-    "correct": "ship",
+  "travel": {
+    "correct": "travel",
     "options": [
-      "ship",
-      "bus",
-      "plane",
-      "train"
+      "travel",
+      "wish",
+      "sleep",
+      "remember"
     ],
     "replaced": []
   },
-  "young": {
-    "correct": "young",
+  "tree": {
+    "correct": "tree",
     "options": [
-      "young",
-      "active",
-      "international",
-      "different"
+      "tree",
+      "snow",
+      "sun",
+      "rain"
     ],
     "replaced": []
   },
-  "clever": {
-    "correct": "clever",
+  "tshirt": {
+    "correct": "tshirt",
     "options": [
-      "clever",
-      "successful",
-      "easy",
-      "traditional"
+      "tshirt",
+      "need",
+      "pork",
+      "moon"
     ],
     "replaced": []
   },
-  "kind": {
-    "correct": "kind",
+  "tuesday": {
+    "correct": "tuesday",
     "options": [
-      "kind",
-      "best",
-      "clean",
-      "easy"
+      "tuesday",
+      "stand",
+      "orange",
+      "window"
     ],
     "replaced": []
   },
-  "angry": {
-    "correct": "angry",
+  "two": {
+    "correct": "two",
     "options": [
-      "angry",
-      "short",
-      "important",
-      "quiet"
+      "two",
+      "ten",
+      "four",
+      "five"
     ],
     "replaced": []
   },
-  "tired": {
-    "correct": "tired",
+  "uk": {
+    "correct": "uk",
     "options": [
-      "tired",
-      "international",
-      "special",
-      "fast"
+      "uk",
+      "cake",
+      "at",
+      "sell"
     ],
     "replaced": []
   },
-  "hungry": {
-    "correct": "hungry",
+  "under": {
+    "correct": "under",
     "options": [
-      "hungry",
-      "modern",
-      "best",
-      "small"
+      "under",
+      "in",
+      "behind",
+      "to"
     ],
     "replaced": []
   },
-  "thirsty": {
-    "correct": "thirsty",
+  "understand": {
+    "correct": "understand",
     "options": [
-      "thirsty",
-      "modern",
-      "tired",
-      "interesting"
-    ],
-    "replaced": []
-  },
-  "think": {
-    "correct": "think",
-    "options": [
-      "think",
+      "understand",
       "fly",
-      "am",
-      "enjoy"
+      "return",
+      "miss"
     ],
     "replaced": []
   },
-  "know": {
-    "correct": "know",
+  "up": {
+    "correct": "up",
     "options": [
-      "know",
-      "sit",
+      "up",
+      "back",
+      "front",
+      "right"
+    ],
+    "replaced": []
+  },
+  "use": {
+    "correct": "use",
+    "options": [
       "use",
-      "teach"
+      "make",
+      "travel",
+      "thank"
     ],
     "replaced": []
   },
-  "learn": {
-    "correct": "learn",
+  "usually": {
+    "correct": "usually",
     "options": [
-      "learn",
-      "run",
-      "sing",
-      "make"
+      "usually",
+      "often",
+      "sometimes",
+      "always"
     ],
     "replaced": []
   },
-  "study": {
-    "correct": "study",
+  "vegetable": {
+    "correct": "vegetable",
     "options": [
-      "study",
-      "love",
-      "forget",
-      "like"
+      "vegetable",
+      "fruit",
+      "apple",
+      "bread"
     ],
     "replaced": []
   },
-  "live": {
-    "correct": "live",
+  "village": {
+    "correct": "village",
     "options": [
-      "live",
-      "am",
-      "ask",
-      "spell"
+      "village",
+      "classroom",
+      "city",
+      "library"
     ],
     "replaced": []
   },
-  "work": {
-    "correct": "work",
+  "visit": {
+    "correct": "visit",
     "options": [
-      "work",
-      "believe",
-      "write",
+      "visit",
+      "jump",
+      "find",
       "think"
+    ],
+    "replaced": []
+  },
+  "walk": {
+    "correct": "walk",
+    "options": [
+      "walk",
+      "leave",
+      "sell",
+      "have"
+    ],
+    "replaced": []
+  },
+  "want": {
+    "correct": "want",
+    "options": [
+      "want",
+      "use",
+      "call",
+      "think"
+    ],
+    "replaced": []
+  },
+  "warm": {
+    "correct": "warm",
+    "options": [
+      "warm",
+      "same",
+      "better",
+      "hot"
+    ],
+    "replaced": []
+  },
+  "watch": {
+    "correct": "watch",
+    "options": [
+      "watch",
+      "are",
+      "hope",
+      "draw"
+    ],
+    "replaced": []
+  },
+  "water": {
+    "correct": "water",
+    "options": [
+      "water",
+      "milk",
+      "juice",
+      "listen"
+    ],
+    "replaced": []
+  },
+  "weak": {
+    "correct": "weak",
+    "options": [
+      "weak",
+      "beautiful",
+      "strong",
+      "tall"
+    ],
+    "replaced": []
+  },
+  "wear": {
+    "correct": "wear",
+    "options": [
+      "wear",
+      "fly",
+      "teach",
+      "wish"
+    ],
+    "replaced": []
+  },
+  "wednesday": {
+    "correct": "wednesday",
+    "options": [
+      "wednesday",
+      "chicken",
+      "dirty",
+      "hot"
+    ],
+    "replaced": []
+  },
+  "week": {
+    "correct": "week",
+    "options": [
+      "week",
+      "birthday",
+      "yesterday",
+      "year"
+    ],
+    "replaced": []
+  },
+  "welcome": {
+    "correct": "welcome",
+    "options": [
+      "welcome",
+      "grow up",
+      "what's your name",
+      "how are you"
+    ],
+    "replaced": []
+  },
+  "what": {
+    "correct": "what",
+    "options": [
+      "what",
+      "who",
+      "why",
+      "whose"
+    ],
+    "replaced": []
+  },
+  "when": {
+    "correct": "when",
+    "options": [
+      "when",
+      "whose",
+      "where",
+      "why"
     ],
     "replaced": []
   },
@@ -2279,13 +3489,13 @@
     ],
     "replaced": []
   },
-  "when": {
-    "correct": "when",
+  "white": {
+    "correct": "white",
     "options": [
-      "when",
-      "whose",
-      "where",
-      "why"
+      "white",
+      "purple",
+      "yellow",
+      "black"
     ],
     "replaced": []
   },
@@ -2319,43 +3529,63 @@
     ],
     "replaced": []
   },
-  "city": {
-    "correct": "city",
+  "window": {
+    "correct": "window",
     "options": [
-      "city",
-      "road",
-      "classroom",
-      "park"
+      "window",
+      "table",
+      "sofa",
+      "door"
     ],
     "replaced": []
   },
-  "town": {
-    "correct": "town",
+  "windy": {
+    "correct": "windy",
     "options": [
-      "town",
-      "village",
-      "classroom",
-      "park"
+      "windy",
+      "cloudy",
+      "rainy",
+      "sunny"
     ],
     "replaced": []
   },
-  "village": {
-    "correct": "village",
+  "winter": {
+    "correct": "winter",
     "options": [
-      "village",
-      "classroom",
-      "city",
-      "library"
+      "winter",
+      "autumn",
+      "spring",
+      "summer"
     ],
     "replaced": []
   },
-  "road": {
-    "correct": "road",
+  "wish": {
+    "correct": "wish",
     "options": [
-      "road",
-      "home",
-      "hospital",
-      "supermarket"
+      "wish",
+      "work",
+      "answer",
+      "believe"
+    ],
+    "replaced": []
+  },
+  "woman": {
+    "correct": "woman",
+    "options": [
+      "woman",
+      "friend",
+      "girl",
+      "baby"
+    ],
+    "replaced": []
+  },
+  "work": {
+    "correct": "work",
+    "options": [
+      "work",
+      "believe",
+      "write",
+      "think"
     ],
     "replaced": []
   },
@@ -2366,386 +3596,6 @@
       "Australia",
       "film",
       "language"
-    ],
-    "replaced": []
-  },
-  "country": {
-    "correct": "country",
-    "options": [
-      "country",
-      "film",
-      "UK",
-      "world"
-    ],
-    "replaced": []
-  },
-  "important": {
-    "correct": "important",
-    "options": [
-      "important",
-      "special",
-      "difficult",
-      "tall"
-    ],
-    "replaced": []
-  },
-  "interesting": {
-    "correct": "interesting",
-    "options": [
-      "interesting",
-      "difficult",
-      "sad",
-      "light"
-    ],
-    "replaced": []
-  },
-  "boring": {
-    "correct": "boring",
-    "options": [
-      "boring",
-      "special",
-      "popular",
-      "international"
-    ],
-    "replaced": []
-  },
-  "difficult": {
-    "correct": "difficult",
-    "options": [
-      "difficult",
-      "cool",
-      "clean",
-      "international"
-    ],
-    "replaced": []
-  },
-  "easy": {
-    "correct": "easy",
-    "options": [
-      "easy",
-      "small",
-      "popular",
-      "beautiful"
-    ],
-    "replaced": []
-  },
-  "healthy": {
-    "correct": "healthy",
-    "options": [
-      "healthy",
-      "big",
-      "slow",
-      "same"
-    ],
-    "replaced": []
-  },
-  "strong": {
-    "correct": "strong",
-    "options": [
-      "strong",
-      "important",
-      "impossible",
-      "old"
-    ],
-    "replaced": []
-  },
-  "weak": {
-    "correct": "weak",
-    "options": [
-      "weak",
-      "beautiful",
-      "strong",
-      "tall"
-    ],
-    "replaced": []
-  },
-  "fast": {
-    "correct": "fast",
-    "options": [
-      "fast",
-      "low",
-      "traditional",
-      "worst"
-    ],
-    "replaced": []
-  },
-  "slow": {
-    "correct": "slow",
-    "options": [
-      "slow",
-      "short",
-      "weak",
-      "full"
-    ],
-    "replaced": []
-  },
-  "high": {
-    "correct": "high",
-    "options": [
-      "high",
-      "strong",
-      "possible",
-      "big"
-    ],
-    "replaced": []
-  },
-  "low": {
-    "correct": "low",
-    "options": [
-      "low",
-      "boring",
-      "light",
-      "successful"
-    ],
-    "replaced": []
-  },
-  "light": {
-    "correct": "light",
-    "options": [
-      "light",
-      "necessary",
-      "clean",
-      "beautiful"
-    ],
-    "replaced": []
-  },
-  "heavy": {
-    "correct": "heavy",
-    "options": [
-      "heavy",
-      "cold",
-      "successful",
-      "quiet"
-    ],
-    "replaced": []
-  },
-  "full": {
-    "correct": "full",
-    "options": [
-      "full",
-      "different",
-      "quiet",
-      "most"
-    ],
-    "replaced": []
-  },
-  "empty": {
-    "correct": "empty",
-    "options": [
-      "empty",
-      "traditional",
-      "most",
-      "clean"
-    ],
-    "replaced": []
-  },
-  "slowly": {
-    "correct": "slowly",
-    "options": [
-      "slowly",
-      "often",
-      "usually",
-      "always"
-    ],
-    "replaced": []
-  },
-  "always": {
-    "correct": "always",
-    "options": [
-      "always",
-      "usually",
-      "sometimes",
-      "often"
-    ],
-    "replaced": []
-  },
-  "often": {
-    "correct": "often",
-    "options": [
-      "often",
-      "sometimes",
-      "quickly",
-      "slowly"
-    ],
-    "replaced": []
-  },
-  "sometimes": {
-    "correct": "sometimes",
-    "options": [
-      "sometimes",
-      "carefully",
-      "always",
-      "slowly"
-    ],
-    "replaced": []
-  },
-  "never": {
-    "correct": "never",
-    "options": [
-      "never",
-      "often",
-      "quickly",
-      "always"
-    ],
-    "replaced": []
-  },
-  "usually": {
-    "correct": "usually",
-    "options": [
-      "usually",
-      "often",
-      "sometimes",
-      "always"
-    ],
-    "replaced": []
-  },
-  "if": {
-    "correct": "if",
-    "options": [
-      "if",
-      "but",
-      "because",
-      "in"
-    ],
-    "replaced": []
-  },
-  "but": {
-    "correct": "but",
-    "options": [
-      "but",
-      "because",
-      "if",
-      "spring"
-    ],
-    "replaced": []
-  },
-  "use": {
-    "correct": "use",
-    "options": [
-      "use",
-      "make",
-      "travel",
-      "thank"
-    ],
-    "replaced": []
-  },
-  "start": {
-    "correct": "start",
-    "options": [
-      "start",
-      "become",
-      "grow",
-      "visit"
-    ],
-    "replaced": []
-  },
-  "finish": {
-    "correct": "finish",
-    "options": [
-      "finish",
-      "tell",
-      "remember",
-      "close"
-    ],
-    "replaced": []
-  },
-  "visit": {
-    "correct": "visit",
-    "options": [
-      "visit",
-      "jump",
-      "find",
-      "think"
-    ],
-    "replaced": []
-  },
-  "leave": {
-    "correct": "leave",
-    "options": [
-      "leave",
-      "hope",
-      "send",
-      "like"
-    ],
-    "replaced": []
-  },
-  "remember": {
-    "correct": "remember",
-    "options": [
-      "remember",
-      "drink",
-      "sleep",
-      "walk"
-    ],
-    "replaced": []
-  },
-  "forget": {
-    "correct": "forget",
-    "options": [
-      "forget",
-      "jump",
-      "travel",
-      "see"
-    ],
-    "replaced": []
-  },
-  "vegetable": {
-    "correct": "vegetable",
-    "options": [
-      "vegetable",
-      "fruit",
-      "apple",
-      "bread"
-    ],
-    "replaced": []
-  },
-  "fruit": {
-    "correct": "fruit",
-    "options": [
-      "fruit",
-      "cake",
-      "banana",
-      "beef"
-    ],
-    "replaced": []
-  },
-  "beef": {
-    "correct": "beef",
-    "options": [
-      "beef",
-      "apple",
-      "egg",
-      "rice"
-    ],
-    "replaced": []
-  },
-  "pork": {
-    "correct": "pork",
-    "options": [
-      "pork",
-      "cake",
-      "chicken",
-      "rice"
-    ],
-    "replaced": []
-  },
-  "better": {
-    "correct": "better",
-    "options": [
-      "better",
-      "nice",
-      "impossible",
-      "weak"
-    ],
-    "replaced": []
-  },
-  "best": {
-    "correct": "best",
-    "options": [
-      "best",
-      "angry",
-      "full",
-      "worse"
     ],
     "replaced": []
   },
@@ -2769,593 +3619,133 @@
     ],
     "replaced": []
   },
-  "more": {
-    "correct": "more",
+  "write": {
+    "correct": "write",
     "options": [
-      "more",
-      "kind",
-      "strong",
-      "nice"
+      "write",
+      "buy",
+      "have",
+      "return"
     ],
     "replaced": []
   },
-  "most": {
-    "correct": "most",
+  "yellow": {
+    "correct": "yellow",
     "options": [
-      "most",
-      "boring",
-      "successful",
-      "national"
+      "yellow",
+      "white",
+      "red",
+      "pink"
     ],
     "replaced": []
   },
-  "successful": {
-    "correct": "successful",
+  "yesterday": {
+    "correct": "yesterday",
     "options": [
-      "successful",
-      "thirsty",
-      "hungry",
-      "old"
-    ],
-    "replaced": []
-  },
-  "popular": {
-    "correct": "popular",
-    "options": [
-      "popular",
-      "hot",
-      "beautiful",
-      "full"
-    ],
-    "replaced": []
-  },
-  "special": {
-    "correct": "special",
-    "options": [
-      "special",
-      "dirty",
-      "hungry",
-      "full"
-    ],
-    "replaced": []
-  },
-  "different": {
-    "correct": "different",
-    "options": [
-      "different",
-      "important",
-      "slow",
-      "big"
-    ],
-    "replaced": []
-  },
-  "same": {
-    "correct": "same",
-    "options": [
-      "same",
-      "boring",
-      "popular",
-      "clean"
-    ],
-    "replaced": []
-  },
-  "enjoy": {
-    "correct": "enjoy",
-    "options": [
-      "enjoy",
-      "fly",
-      "draw",
-      "stand"
-    ],
-    "replaced": []
-  },
-  "hope": {
-    "correct": "hope",
-    "options": [
-      "hope",
-      "teach",
-      "are",
-      "send"
-    ],
-    "replaced": []
-  },
-  "wish": {
-    "correct": "wish",
-    "options": [
-      "wish",
-      "work",
-      "answer",
-      "believe"
-    ],
-    "replaced": []
-  },
-  "miss": {
-    "correct": "miss",
-    "options": [
-      "miss",
-      "eat",
-      "sing",
-      "show"
-    ],
-    "replaced": []
-  },
-  "believe": {
-    "correct": "believe",
-    "options": [
-      "believe",
-      "grow",
-      "bring",
-      "write"
-    ],
-    "replaced": []
-  },
-  "understand": {
-    "correct": "understand",
-    "options": [
-      "understand",
-      "fly",
-      "return",
-      "miss"
-    ],
-    "replaced": []
-  },
-  "week": {
-    "correct": "week",
-    "options": [
-      "week",
-      "birthday",
       "yesterday",
-      "year"
-    ],
-    "replaced": []
-  },
-  "month": {
-    "correct": "month",
-    "options": [
-      "month",
       "birthday",
-      "night",
-      "evening"
+      "tomorrow",
+      "night"
     ],
     "replaced": []
   },
-  "birthday": {
-    "correct": "birthday",
+  "you": {
+    "correct": "you",
     "options": [
-      "birthday",
-      "morning",
-      "year",
-      "yesterday"
+      "you",
+      "your",
+      "my",
+      "I"
     ],
     "replaced": []
   },
-  "sport": {
-    "correct": "sport",
+  "young": {
+    "correct": "young",
     "options": [
-      "sport",
-      "party",
-      "game",
-      "wish"
+      "young",
+      "active",
+      "international",
+      "different"
     ],
     "replaced": []
   },
-  "story": {
-    "correct": "story",
+  "your": {
+    "correct": "your",
     "options": [
-      "story",
-      "gift",
-      "college",
-      "dream"
+      "your",
+      "you",
+      "I",
+      "my"
     ],
     "replaced": []
   },
-  "song": {
-    "correct": "song",
+  "zoo": {
+    "correct": "zoo",
     "options": [
-      "song",
-      "theatre",
-      "factory",
-      "language"
+      "zoo",
+      "park",
+      "school",
+      "street"
     ],
     "replaced": []
   },
-  "film": {
-    "correct": "film",
+  "星期三": {
+    "correct": "星期三",
     "options": [
-      "film",
-      "world",
-      "future",
-      "song"
+      "星期三",
+      "monkey",
+      "flower",
+      "egg"
     ],
     "replaced": []
   },
-  "photo": {
-    "correct": "photo",
+  "星期二": {
+    "correct": "星期二",
     "options": [
-      "photo",
-      "name",
-      "Japanese",
-      "future"
+      "星期二",
+      "come",
+      "orange",
+      "grandfather"
     ],
     "replaced": []
   },
-  "gift": {
-    "correct": "gift",
+  "星期五": {
+    "correct": "星期五",
     "options": [
-      "gift",
-      "world",
-      "Japanese",
-      "university"
+      "星期五",
+      "what",
+      "which",
+      "healthy"
     ],
     "replaced": []
   },
-  "doctor": {
-    "correct": "doctor",
+  "星期六": {
+    "correct": "星期六",
     "options": [
-      "doctor",
-      "cook",
-      "driver",
-      "businessman"
-    ],
-    "replaced": []
-  },
-  "nurse": {
-    "correct": "nurse",
-    "options": [
-      "nurse",
-      "doctor",
-      "driver",
+      "星期六",
+      "sleep",
+      "of",
       "cook"
     ],
     "replaced": []
   },
-  "driver": {
-    "correct": "driver",
+  "星期四": {
+    "correct": "星期四",
     "options": [
-      "driver",
-      "doctor",
-      "postman",
-      "farmer"
+      "星期四",
+      "father",
+      "egg",
+      "dad"
     ],
     "replaced": []
   },
-  "farmer": {
-    "correct": "farmer",
+  "星期日": {
+    "correct": "星期日",
     "options": [
-      "farmer",
-      "driver",
-      "businessman",
-      "postman"
-    ],
-    "replaced": []
-  },
-  "cook": {
-    "correct": "cook",
-    "options": [
-      "cook",
-      "driver",
-      "doctor",
-      "police"
-    ],
-    "replaced": []
-  },
-  "police": {
-    "correct": "police",
-    "options": [
-      "police",
-      "driver",
-      "nurse",
-      "doctor"
-    ],
-    "replaced": []
-  },
-  "postman": {
-    "correct": "postman",
-    "options": [
-      "postman",
-      "cook",
-      "nurse",
-      "businessman"
-    ],
-    "replaced": []
-  },
-  "businessman": {
-    "correct": "businessman",
-    "options": [
-      "businessman",
-      "nurse",
-      "farmer",
-      "doctor"
-    ],
-    "replaced": []
-  },
-  "wear": {
-    "correct": "wear",
-    "options": [
-      "wear",
-      "fly",
-      "teach",
-      "wish"
-    ],
-    "replaced": []
-  },
-  "call": {
-    "correct": "call",
-    "options": [
-      "call",
-      "remember",
-      "am",
-      "ask"
-    ],
-    "replaced": []
-  },
-  "answer": {
-    "correct": "answer",
-    "options": [
-      "answer",
-      "grow",
-      "close",
-      "fly"
-    ],
-    "replaced": []
-  },
-  "ask": {
-    "correct": "ask",
-    "options": [
-      "ask",
-      "become",
-      "take",
-      "find"
-    ],
-    "replaced": []
-  },
-  "tell": {
-    "correct": "tell",
-    "options": [
-      "tell",
-      "become",
-      "walk",
-      "sleep"
-    ],
-    "replaced": []
-  },
-  "say": {
-    "correct": "say",
-    "options": [
-      "say",
-      "make",
-      "come",
-      "start"
-    ],
-    "replaced": []
-  },
-  "spell": {
-    "correct": "spell",
-    "options": [
-      "spell",
-      "believe",
-      "give",
-      "look"
-    ],
-    "replaced": []
-  },
-  "language": {
-    "correct": "language",
-    "options": [
-      "language",
-      "China",
-      "song",
-      "dream"
-    ],
-    "replaced": []
-  },
-  "Australian": {
-    "correct": "Australian",
-    "options": [
-      "Australian",
-      "Canadian",
-      "American",
-      "British"
-    ],
-    "replaced": []
-  },
-  "American": {
-    "correct": "American",
-    "options": [
-      "American",
-      "Australian",
-      "Canadian",
-      "British"
-    ],
-    "replaced": []
-  },
-  "national": {
-    "correct": "national",
-    "options": [
-      "national",
-      "traditional",
-      "impossible",
-      "easy"
-    ],
-    "replaced": []
-  },
-  "international": {
-    "correct": "international",
-    "options": [
-      "international",
-      "successful",
-      "heavy",
-      "different"
-    ],
-    "replaced": []
-  },
-  "traditional": {
-    "correct": "traditional",
-    "options": [
-      "traditional",
-      "long",
-      "interesting",
-      "different"
-    ],
-    "replaced": []
-  },
-  "modern": {
-    "correct": "modern",
-    "options": [
-      "modern",
-      "clever",
-      "impossible",
-      "best"
-    ],
-    "replaced": []
-  },
-  "become": {
-    "correct": "become",
-    "options": [
-      "become",
-      "remember",
-      "finish",
-      "ask"
-    ],
-    "replaced": []
-  },
-  "change": {
-    "correct": "change",
-    "options": [
-      "change",
-      "make",
-      "jump",
-      "work"
-    ],
-    "replaced": []
-  },
-  "grow": {
-    "correct": "grow",
-    "options": [
-      "grow",
-      "visit",
-      "walk",
-      "draw"
-    ],
-    "replaced": []
-  },
-  "fly": {
-    "correct": "fly",
-    "options": [
-      "fly",
-      "think",
-      "see",
-      "visit"
-    ],
-    "replaced": []
-  },
-  "travel": {
-    "correct": "travel",
-    "options": [
-      "travel",
-      "wish",
-      "sleep",
-      "remember"
-    ],
-    "replaced": []
-  },
-  "return": {
-    "correct": "return",
-    "options": [
-      "return",
-      "study",
-      "tell",
-      "sit"
-    ],
-    "replaced": []
-  },
-  "bring": {
-    "correct": "bring",
-    "options": [
-      "bring",
-      "visit",
-      "learn",
-      "use"
-    ],
-    "replaced": []
-  },
-  "send": {
-    "correct": "send",
-    "options": [
-      "send",
-      "enjoy",
-      "sing",
-      "like"
-    ],
-    "replaced": []
-  },
-  "company": {
-    "correct": "company",
-    "options": [
-      "company",
-      "museum",
-      "college",
-      "song"
-    ],
-    "replaced": []
-  },
-  "factory": {
-    "correct": "factory",
-    "options": [
-      "factory",
-      "Japanese",
-      "dream",
-      "language"
-    ],
-    "replaced": []
-  },
-  "museum": {
-    "correct": "museum",
-    "options": [
-      "museum",
-      "future",
-      "gift",
-      "UK"
-    ],
-    "replaced": []
-  },
-  "possible": {
-    "correct": "possible",
-    "options": [
-      "possible",
-      "hungry",
-      "sad",
-      "interesting"
-    ],
-    "replaced": []
-  },
-  "necessary": {
-    "correct": "necessary",
-    "options": [
-      "necessary",
-      "impossible",
-      "tired",
-      "difficult"
-    ],
-    "replaced": []
-  },
-  "future": {
-    "correct": "future",
-    "options": [
-      "future",
-      "America",
-      "French",
-      "Australia"
-    ],
-    "replaced": []
-  },
-  "dream": {
-    "correct": "dream",
-    "options": [
-      "dream",
-      "Australia",
-      "photo",
-      "language"
+      "星期日",
+      "six",
+      "my",
+      "hand"
     ],
     "replaced": []
   }
