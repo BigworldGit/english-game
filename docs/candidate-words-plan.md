@@ -1,99 +1,56 @@
-# 候选词优化方案 (更新版)
+# 候选词优化方案 (最终版)
 
-## 问题分析
+## 核心思路
 
-### 当前问题
-1. 图片颜色导致误判 (evening → red)
-2. 单词特征导致混淆 (tall (树) → tree)
+不是分析所有图片，而是**直接为每张图片预生成4个候选词**，让AI判定这3个干扰项与图片的关联度，关联度高的就替换掉。
 
-### 游戏现状
-- ✅ 有年级选择 (1-6年级)
-- ✅ 已使用 `getWordsUpToGrade(currentGrade)` 筛选题目
-- ❌ 候选词未按年级限制
-- ❌ 无图片内容分析
+## 具体流程
 
----
+### 步骤1: 获取1-3年级所有单词
+- 从 words.js 获取所有1-3年级的单词（约200+个）
 
-## 解决方案
+### 步骤2: 为每个单词生成候选词组
+对每个单词，生成一组候选词：
+- 正确答案 + 3个随机干扰项（来自同年级或低年级）
 
-### 1. 年级限制 (必须实现)
+### 步骤3: AI判定关联度
+对每张图片，调用AI分析：
+- 提供4个候选词
+- 让AI判断每个词与图片的关联程度
+- 关联度高的标记为"不适合"
 
-候选词只能来自 ≤ 用户选择的年级：
+### 步骤4: 替换不适合的干扰项
+- 如果某个干扰项关联度过高
+- 从同年级词库中重新选择替换
+- 直到4个候选词都合格
 
-```javascript
-// 修改 generateOptions
-const allowedWords = allWords.filter(w =>
-    w.grade <= currentGrade &&  // 不高于用户年级
-    w.word !== correctAnswer
-);
-```
-
-### 2. AI 图片分析 (新方案)
-
-用 AI 分析每张图片，生成"关联词表"：
-
-**分析维度**:
-- 颜色 (颜色词)
-- 主体 (核心物品)
-- 场景 (环境/背景)
-- 动作 (如果有人物)
-
-**实现步骤**:
-
-1. **批量分析图片**:
-   - 用 AI 视觉模型分析每张图片
-   - 输出图片中的主要颜色、物体、场景
-
-2. **生成关联词表** (JSON):
+### 步骤5: 保存结果
+- 最终结果保存为 JSON：
 ```json
 {
   "evening": {
-    "colors": ["red", "orange", "yellow", "purple"],
-    "objects": ["sun", "sky", "moon", "cloud"],
-    "scenes": ["sunset", "dusk", "evening"]
+    "correct": "evening",
+    "options": ["evening", "afternoon", "morning", "night"],
+    "replaced": ["noon"]  // 被替换掉的词
   },
-  "tall": {
-    "colors": ["green", "brown"],
-    "objects": ["tree", "building", "tower"],
-    "features": ["height", "big", "tall"]
-  }
+  ...
 }
 ```
 
-3. **过滤候选词**:
-```javascript
-// 生成候选词时
-const relatedWords = imageRelevanceTable[correctAnswer] || {};
-const excludeList = [
-    ...relatedWords.colors,      // 颜色
-    ...relatedWords.objects,    // 物体
-    ...relatedWords.scenes      // 场景
-];
+## 优势
 
-// 从候选词中排除
-candidates = candidates.filter(w => !excludeList.includes(w));
-```
+1. **数量少**: 只需分析 ~200 张图片（1-3年级）
+2. **更精准**: 直接判定4选1的场景，比通用分析更准确
+3. **游戏运行快**: 预生成结果，游戏直接读取，无需复杂计算
 
-### 3. 保留首字母相同的词
-- ❌ 不再排除首字母相同的词
+## 输出文件
 
----
+- `docs/candidate-words-fixed.json` - 最终候选词表
 
-## 执行计划
+## 游戏集成
 
-### 阶段1: 基础修复 (立即)
-1. 修改候选词生成逻辑，按年级限制
-2. 基本过滤（颜色黑名单）
-
-### 阶段2: AI 分析 (后续)
-1. 批量用 AI 分析所有图片
-2. 生成关联词表
-3. 实现智能过滤
-
----
-
-## 待确认
-
-1. **是否立即实现阶段1？** (年级限制 + 基础过滤)
-2. **阶段2需要分析所有图片**，工作量较大，是否稍后处理？
+修改 game.js：
+1. 启动时加载 `candidate-words-fixed.json`
+2. 生成选项时直接使用预生成的结果
+3. 无需运行时计算和过滤
 
