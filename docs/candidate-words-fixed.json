@@ -154,10 +154,16 @@
     "options": [
       "apple",
       "beef",
-      "fruit",
+      "banana",
       "rice"
     ],
-    "replaced": []
+    "replaced": [
+      {
+        "original": "fruit",
+        "reason": "在排除规则中 (规则词: fruit)",
+        "replacement": "banana"
+      }
+    ]
   },
   "are": {
     "correct": "are",
@@ -345,9 +351,15 @@
       "big",
       "tired",
       "nice",
-      "small"
+      "tall"
     ],
-    "replaced": []
+    "replaced": [
+      {
+        "original": "small",
+        "reason": "在排除规则中 (规则词: small)",
+        "replacement": "tall"
+      }
+    ]
   },
   "bike": {
     "correct": "bike",
@@ -574,10 +586,16 @@
     "options": [
       "cat",
       "fish",
-      "dog",
+      "rabbit",
       "bird"
     ],
-    "replaced": []
+    "replaced": [
+      {
+        "original": "dog",
+        "reason": "在排除规则中 (规则词: dog)",
+        "replacement": "rabbit"
+      }
+    ]
   },
   "chair": {
     "correct": "chair",
@@ -693,11 +711,22 @@
     "correct": "cloudy",
     "options": [
       "cloudy",
-      "sunny",
-      "rainy",
+      "snowy",
+      "warm",
       "windy"
     ],
-    "replaced": []
+    "replaced": [
+      {
+        "original": "sunny",
+        "reason": "在排除规则中 (规则词: sunny)",
+        "replacement": "snowy"
+      },
+      {
+        "original": "rainy",
+        "reason": "在排除规则中 (规则词: rain)",
+        "replacement": "warm"
+      }
+    ]
   },
   "coat": {
     "correct": "coat",
@@ -1045,19 +1074,31 @@
       "eye",
       "foot",
       "leg",
-      "face"
+      "head"
     ],
-    "replaced": []
+    "replaced": [
+      {
+        "original": "face",
+        "reason": "在排除规则中 (规则词: face)",
+        "replacement": "head"
+      }
+    ]
   },
   "face": {
     "correct": "face",
     "options": [
       "face",
       "leg",
-      "mouth",
+      "ear",
       "head"
     ],
-    "replaced": []
+    "replaced": [
+      {
+        "original": "mouth",
+        "reason": "在排除规则中 (规则词: mouth)",
+        "replacement": "ear"
+      }
+    ]
   },
   "factory": {
     "correct": "factory",
@@ -1383,11 +1424,17 @@
     "correct": "goodbye",
     "options": [
       "goodbye",
-      "bye",
+      "good morning",
       "hi",
       "hello"
     ],
-    "replaced": []
+    "replaced": [
+      {
+        "original": "bye",
+        "reason": "在排除规则中 (规则词: bye)",
+        "replacement": "good morning"
+      }
+    ]
   },
   "grandfather": {
     "correct": "grandfather",
@@ -2433,11 +2480,17 @@
     "correct": "rainy",
     "options": [
       "rainy",
-      "cloudy",
+      "snowy",
       "sunny",
       "windy"
     ],
-    "replaced": []
+    "replaced": [
+      {
+        "original": "cloudy",
+        "reason": "在排除规则中 (规则词: cloud)",
+        "replacement": "snowy"
+      }
+    ]
   },
   "read": {
     "correct": "read",

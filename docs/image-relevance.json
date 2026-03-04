@@ -1,0 +1,772 @@
+{
+  "afternoon": {
+    "colors": ["blue", "green", "yellow", "white"],
+    "objects": ["sun", "clouds", "sky", "grass"],
+    "scenes": ["sunny day", "outdoor", "landscape"]
+  },
+  "always": {
+    "colors": ["grey", "brown", "blue", "green", "yellow", "white", "red", "orange", "pink", "black"],
+    "objects": ["clock", "clock face", "numbers", "clock hands", "stone blocks", "wood planks"],
+    "scenes": ["minecraft build", "pixel art", "voxel art", "video game environment"]
+  },
+  "am": {
+    "colors": ["cyan", "brown", "tan", "indigo", "grey", "black", "white", "light grey"],
+    "objects": ["minecraft character", "steve", "pixel art sprite", "blue shirt", "blue jeans", "grid background"],
+    "scenes": ["video game character portrait", "pixel art design", "minecraft concept art"]
+  },
+  "america": {
+    "colors": ["blue", "red", "white", "green", "brown"],
+    "objects": ["statue of liberty", "torch", "book", "crown", "sea", "sky"],
+    "scenes": ["landmark", "america", "freedom", "sunny day"]
+  },
+  "American": {
+    "colors": ["blue", "red", "white", "green", "brown", "black"],
+    "objects": ["character", "steve", "red shirt", "blue pants", "flag", "grass"],
+    "scenes": ["minecraft world", "video game", "outdoor", "american flag"]
+  },
+  "angry": {
+    "colors": ["gray", "red", "black", "white", "beige"],
+    "objects": ["face", "furrowed eyebrows", "square eyes", "frowning mouth", "stone block"],
+    "scenes": ["retro video game", "pixel art", "anger", "dungeon"]
+  },
+  "answer": {
+    "colors": ["cyan", "blue", "tan", "brown", "white", "grey"],
+    "objects": ["character", "steve", "speech bubble", "arm raised"],
+    "scenes": ["question and answer", "classroom", "student answering"]
+  },
+  "apple": {
+    "colors": ["red", "green", "brown", "beige", "grey"],
+    "objects": ["apple", "stem", "leaf", "pixel art"],
+    "scenes": ["fruit icon", "video game item"]
+  },
+  "are": {
+    "colors": ["cyan", "green", "brown", "purple", "blue"],
+    "objects": ["characters", "steve", "blocks", "grass", "question mark"],
+    "scenes": ["minecraft world", "group playing", "outdoor"]
+  },
+  "art": {
+    "colors": ["red", "blue", "yellow", "green", "purple", "brown", "white"],
+    "objects": ["paintbrush", "paint", "bottles", "tubes", "table", "books"],
+    "scenes": ["art studio", "creative workspace", "painting"]
+  },
+  "ask": {
+    "colors": ["green", "brown", "grey", "blue"],
+    "objects": ["question mark", "blocks", "dirt", "stone", "wood"],
+    "scenes": ["minecraft world", "inquiry", "asking question"]
+  },
+  "australia": {
+    "colors": ["blue", "green", "brown", "grey", "red-brown", "white"],
+    "objects": ["koala", "kangaroo", "tree", "clouds", "grass"],
+    "scenes": ["australian outback", "zoo", "nature", "sunny day"]
+  },
+  "Australian": {
+    "colors": ["blue", "green", "brown", "grey", "red-brown"],
+    "objects": ["koala", "kangaroo", "tree", "grass", "australian flag"],
+    "scenes": ["australia", "wildlife", "nature"]
+  },
+  "baby": {
+    "colors": ["green", "blue", "brown", "white", "yellow", "peach"],
+    "objects": ["baby", "diaper", "grass", "tree", "sun", "sky"],
+    "scenes": ["outdoor", "sunny day", "baby playing"]
+  },
+  "banana": {
+    "colors": ["yellow", "brown", "gold", "grey", "white"],
+    "objects": ["banana", "fruit", "stem", "pixel art"],
+    "scenes": ["fruit icon", "food"]
+  },
+  "bed": {
+    "colors": ["red", "white", "brown", "yellow"],
+    "objects": ["bed", "pillows", "blanket", "lamp", "wooden floor"],
+    "scenes": ["bedroom", "cozy room", "indoor"]
+  },
+  "bird": {
+    "colors": ["red", "blue", "yellow", "green", "grey", "black"],
+    "objects": ["bird", "parrot", "wings", "beak", "tail", "feet"],
+    "scenes": ["toy parrot", "pixel art", "colorful bird"]
+  },
+  "big": {
+    "colors": ["grey", "brown", "beige", "white"],
+    "objects": ["elephant", "trunk", "tusks", "large ears"],
+    "scenes": ["zoo", "animal", "large size"]
+  },
+  "bike": {
+    "colors": ["red", "green", "blue", "brown", "black", "white"],
+    "objects": ["bicycle", "wheels", "seat", "handlebars", "frame"],
+    "scenes": ["voxel art", "3d blocks", "transportation"]
+  },
+  "birthday": {
+    "colors": ["pink", "yellow", "light blue", "orange", "green", "white"],
+    "objects": ["cake", "candles", "flames", "layers", "grass"],
+    "scenes": ["birthday party", "celebration", "pixel art"]
+  },
+  "black": {
+    "colors": ["black", "dark grey", "light grey"],
+    "objects": ["cube", "block", "square"],
+    "scenes": ["voxel art", "3d block", "solid color"]
+  },
+  "blue": {
+    "colors": ["blue", "light blue", "dark blue"],
+    "objects": ["cube", "blocks", "squares"],
+    "scenes": ["voxel art", "3d block", "solid color"]
+  },
+  "book": {
+    "colors": ["green", "blue", "brown", "white", "pink"],
+    "objects": ["open book", "pages", "text", "character", "monster", "pig", "trees", "castle"],
+    "scenes": ["storybook", "reading", "adventure"]
+  },
+  "boy": {
+    "colors": ["blue", "green", "brown", "red", "white"],
+    "objects": ["boy", "shirt", "shorts", "shoes", "grass", "sky", "hair"],
+    "scenes": ["outdoor", "happy child", "sunny day"]
+  },
+  "bus": {
+    "colors": ["yellow", "black", "grey", "light blue"],
+    "objects": ["school bus", "wheels", "windows", "bumper", "lights"],
+    "scenes": ["transportation", "school", "vehicle"]
+  },
+  "car": {
+    "colors": ["red", "green", "black", "white", "grey"],
+    "objects": ["car", "wheels", "headlights", "windows", "bumper", "grass", "path"],
+    "scenes": ["road", "parking", "outdoor"]
+  },
+  "cat": {
+    "colors": ["orange", "white", "green", "brown"],
+    "objects": ["cat", "ears", "eyes", "paws", "tail", "grass"],
+    "scenes": ["pet", "outdoor", "sitting"]
+  },
+  "chair": {
+    "colors": ["brown", "tan", "beige", "off-white"],
+    "objects": ["chair", "legs", "seat", "backrest"],
+    "scenes": ["furniture", "indoor", "wooden"]
+  },
+  "chicken": {
+    "colors": ["beige", "light brown", "pink", "white", "black", "gray"],
+    "objects": ["chicken leg", "drumstick", "bone", "meat"],
+    "scenes": ["food", "cooked chicken", "meat"]
+  },
+  "china": {
+    "colors": ["grey", "red", "green", "blue", "brown", "white"],
+    "objects": ["great wall", "watchtower", "mountains", "stairs", "clouds", "sky"],
+    "scenes": ["china landmark", "historical site", "minecraft recreation"]
+  },
+  "city": {
+    "colors": ["blue", "grey", "brown", "red", "yellow", "white"],
+    "objects": ["buildings", "skyscrapers", "windows", "sun", "sky", "roofs"],
+    "scenes": ["urban", "cityscape", "modern city"]
+  },
+  "cloud": {
+    "colors": ["white", "light blue", "grey"],
+    "objects": ["cloud", "cubes"],
+    "scenes": ["sky", "weather", "floating"]
+  },
+  "doctor": {
+    "colors": ["white", "teal", "brown", "black", "red"],
+    "objects": ["doctor", "stethoscope", "glasses", "lab coat", "medical chart", "red cross"],
+    "scenes": ["hospital", "clinic", "medical"]
+  },
+  "dog": {
+    "colors": ["brown", "tan", "green", "black", "beige"],
+    "objects": ["dog", "ears", "tail", "nose", "paws", "grass"],
+    "scenes": ["pet", "outdoor", "happy dog"]
+  },
+  "door": {
+    "colors": ["brown", "tan", "grey", "beige"],
+    "objects": ["door", "frame", "handle", "hinge", "wood planks"],
+    "scenes": ["furniture", "indoor", "wooden door"]
+  },
+  "drink": {
+    "colors": ["teal", "purple", "green", "brown", "light blue"],
+    "objects": ["character", "glass mug", "water", "trees", "grass"],
+    "scenes": ["drinking", "outdoor", "having drink"]
+  },
+  "eat": {
+    "colors": ["green", "brown", "red", "yellow", "peach"],
+    "objects": ["character", "apple", "hand", "shirt"],
+    "scenes": ["eating", "food", "character eating"]
+  },
+  "egg": {
+    "colors": ["white", "light gray", "green", "brown"],
+    "objects": ["egg", "grass", "ground", "pixel block"],
+    "scenes": ["easter egg", "outdoor", "egg standing"]
+  },
+  "evening": {
+    "colors": ["orange", "red", "yellow", "purple", "green", "pink"],
+    "objects": ["sun", "clouds", "trees", "grass", "ground", "sky"],
+    "scenes": ["sunset", "dusk", "evening landscape"]
+  },
+  "factory": {
+    "colors": ["grey", "red", "black", "white"],
+    "objects": ["chimney", "smoke", "bricks", "windows", "door", "roof"],
+    "scenes": ["industrial", "building", "smoke emission"]
+  },
+  "farmer": {
+    "colors": ["green", "brown", "grey", "tan"],
+    "objects": ["shovel", "straw hat", "overalls", "boots", "farmer"],
+    "scenes": ["farm", "agriculture", "farming"]
+  },
+  "father": {
+    "colors": ["teal", "brown", "beige", "sky blue", "green"],
+    "objects": ["man", "beard", "shirt", "straps", "trees", "clouds"],
+    "scenes": ["outdoor", "father figure", "family"]
+  },
+  "fish": {
+    "colors": ["blue", "red", "yellow", "green", "purple", "beige"],
+    "objects": ["fish", "fins", "tail", "scales", "eye", "mouth", "water", "seabed"],
+    "scenes": ["underwater", "ocean", "swimming"]
+  },
+  "flower": {
+    "colors": ["red", "green", "yellow", "orange", "light blue"],
+    "objects": ["flower", "petals", "stem", "leaves", "grass", "blocks"],
+    "scenes": ["garden", "nature", "outdoor"]
+  },
+  "fly": {
+    "colors": ["black", "white", "grey", "brown", "green"],
+    "objects": ["fly", "insect", "wings", "legs", "large eyes"],
+    "scenes": ["insect", "flying", "bug"]
+  },
+  "friend": {
+    "colors": ["blue", "red", "green", "yellow", "brown", "white"],
+    "objects": ["boy", "girl", "sun", "grass", "hat", "dress", "clouds"],
+    "scenes": ["friendship", "holding hands", "sunny day"]
+  },
+  "fruit": {
+    "colors": ["red", "green", "pink", "brown", "black", "white"],
+    "objects": ["apple", "watermelon", "leaf", "stem", "seeds"],
+    "scenes": ["fruit bowl", "healthy food", "fresh fruit"]
+  },
+  "girl": {
+    "colors": ["pink", "blue", "brown", "white", "teal"],
+    "objects": ["girl", "hair", "pigtails", "shirt", "skirt", "shoes", "clouds"],
+    "scenes": ["outdoor", "happy child", "sunny day"]
+  },
+  "goodbye": {
+    "colors": ["cyan", "bright green", "brown", "red", "sky blue"],
+    "objects": ["character", "steve", "diamonds", "hearts", "grass", "clouds"],
+    "scenes": ["waving", "farewell", "minecraft world"]
+  },
+  "green": {
+    "colors": ["green", "brown", "light blue", "white"],
+    "objects": ["trees", "grass", "leaves", "dirt blocks", "hill"],
+    "scenes": ["nature", "outdoor", "landscape"]
+  },
+  "happy": {
+    "colors": ["yellow", "blue", "brown", "black", "white"],
+    "objects": ["face", "smile", "eyes", "pixel blocks"],
+    "scenes": ["emoji", "emotion", "happiness"]
+  },
+  "hello": {
+    "colors": ["blue", "yellow", "red", "green", "orange", "purple", "black"],
+    "objects": ["hand", "palm", "fingers", "thumb", "squares"],
+    "scenes": ["waving", "greeting", "hand gesture"]
+  },
+  "hospital": {
+    "colors": ["white", "red", "grey"],
+    "objects": ["hospital", "building", "cross", "windows", "door", "roof"],
+    "scenes": ["medical building", "healthcare", "emergency"]
+  },
+  "juice": {
+    "colors": ["orange", "light blue", "brown", "gray", "black"],
+    "objects": ["glass", "orange juice", "orange slice", "table", "tiles"],
+    "scenes": ["drink", "beverage", "food"]
+  },
+  "jump": {
+    "colors": ["blue", "green", "brown", "tan", "white"],
+    "objects": ["character", "grass blocks", "sky", "clouds", "legs"],
+    "scenes": ["jumping", "minecraft world", "action"]
+  },
+  "kind": {
+    "colors": ["teal", "purple", "brown", "beige"],
+    "objects": ["voxel character", "t-shirt", "pants", "smile"],
+    "scenes": ["friendly", "kind person", "character"]
+  },
+  "leg": {
+    "colors": ["peach", "tan", "green", "blue", "black"],
+    "objects": ["leg", "foot", "toes", "grass", "sky", "blocks"],
+    "scenes": ["body part", "outdoor", "standing"]
+  },
+  "light": {
+    "colors": ["sky blue", "white", "light grey"],
+    "objects": ["feather", "clouds", "sky"],
+    "scenes": ["floating", "lightness", "sky"]
+  },
+  "live": {
+    "colors": ["brown", "green", "grey", "blue", "red"],
+    "objects": ["house", "family", "chickens", "fence", "flowers", "trees", "windows"],
+    "scenes": ["home", "residence", "family living"]
+  },
+  "man": {
+    "colors": ["green", "blue", "brown", "gray", "beige"],
+    "objects": ["t-shirt", "pants", "shoes", "hair", "face", "character"],
+    "scenes": ["person", "male", "standing"]
+  },
+  "milk": {
+    "colors": ["white", "light blue", "beige", "black"],
+    "objects": ["glass", "milk"],
+    "scenes": ["drink", "beverage", "dairy"]
+  },
+  "moon": {
+    "colors": ["grey", "white", "dark blue", "black"],
+    "objects": ["moon", "craters", "stars", "night sky"],
+    "scenes": ["night", "space", "moonlight"]
+  },
+  "morning": {
+    "colors": ["blue", "yellow", "green", "white", "orange"],
+    "objects": ["sun", "clouds", "grass", "trees", "sky"],
+    "scenes": ["sunrise", "morning", "daytime"]
+  },
+  "mother": {
+    "colors": ["pink", "brown", "teal", "beige", "blue"],
+    "objects": ["woman", "dress", "hair", "flowers", "apron"],
+    "scenes": ["family", "mother figure", "cooking"]
+  },
+  "music": {
+    "colors": ["brown", "black", "white", "red", "gold"],
+    "objects": ["piano", "keys", "music notes", "bench"],
+    "scenes": ["musical instrument", "playing piano", "music class"]
+  },
+  "name": {
+    "colors": ["blue", "white", "yellow", "green", "brown"],
+    "objects": ["sign", "letters", "wood", "post"],
+    "scenes": ["name tag", "signage", "label"]
+  },
+  "night": {
+    "colors": ["dark blue", "black", "white", "grey", "yellow"],
+    "objects": ["moon", "stars", "sky", "buildings", "windows"],
+    "scenes": ["nighttime", "city night", "evening"]
+  },
+  "nurse": {
+    "colors": ["white", "pink", "red", "brown", "grey"],
+    "objects": ["nurse", "uniform", "cap", "cross", "stethoscope"],
+    "scenes": ["hospital", "medical", "healthcare"]
+  },
+  "old": {
+    "colors": ["grey", "brown", "white", "black", "green"],
+    "objects": ["old man", "walking stick", "beard", "wrinkles", "clothes"],
+    "scenes": ["elderly person", "aging", "old age"]
+  },
+  "one": {
+    "colors": ["white", "black", "red", "blue", "yellow"],
+    "objects": ["finger", "number one", "hand"],
+    "scenes": ["counting", "gesture", "number"]
+  },
+  "orange": {
+    "colors": ["orange", "green", "brown", "white"],
+    "objects": ["orange fruit", "leaf", "stem"],
+    "scenes": ["fruit", "food", "citrus"]
+  },
+  "plane": {
+    "colors": ["white", "blue", "grey", "red", "yellow"],
+    "objects": ["airplane", "wings", "windows", "fuselage", "clouds"],
+    "scenes": ["flying", "air travel", "sky"]
+  },
+  "play": {
+    "colors": ["green", "blue", "brown", "yellow", "red"],
+    "objects": ["character", "ball", "grass", "sun", "trees"],
+    "scenes": ["playing", "outdoor", "recreation"]
+  },
+  "police": {
+    "colors": ["blue", "black", "white", "grey", "yellow"],
+    "objects": ["police officer", "uniform", "hat", "badge", "car"],
+    "scenes": ["law enforcement", "police station", "emergency"]
+  },
+  "popular": {
+    "colors": ["yellow", "red", "blue", "green", "white"],
+    "objects": ["star", "hearts", "crowd", "characters"],
+    "scenes": ["famous", "liked", "celebrity"]
+  },
+  "postman": {
+    "colors": ["blue", "grey", "brown", "red", "white"],
+    "objects": ["postman", "uniform", "bag", "letters", "bike"],
+    "scenes": ["mail delivery", "postal service", "outdoor"]
+  },
+  "purple": {
+    "colors": ["purple", "light purple", "dark purple"],
+    "objects": ["cube", "blocks", "squares"],
+    "scenes": ["voxel art", "color block"]
+  },
+  "rain": {
+    "colors": ["grey", "blue", "green", "white", "dark blue"],
+    "objects": ["raindrops", "clouds", "umbrella", "puddles", "ground"],
+    "scenes": ["rainy day", "weather", "storm"]
+  },
+  "read": {
+    "colors": ["brown", "white", "blue", "green", "yellow"],
+    "objects": ["book", "character", "pages", "desk", "lamp"],
+    "scenes": ["reading", "studying", "library"]
+  },
+  "red": {
+    "colors": ["red", "dark red", "light red"],
+    "objects": ["cube", "blocks", "heart"],
+    "scenes": ["voxel art", "color block", "heart"]
+  },
+  "rice": {
+    "colors": ["white", "grey", "green", "brown", "black"],
+    "objects": ["rice", "bowl", "chopsticks", "table"],
+    "scenes": ["food", "asian cuisine", "meal"]
+  },
+  "run": {
+    "colors": ["blue", "green", "brown", "cyan", "tan"],
+    "objects": ["character", "legs", "arms", "grass", "trees"],
+    "scenes": ["running", "exercise", "outdoor"]
+  },
+  "sad": {
+    "colors": ["blue", "grey", "white", "black", "teal"],
+    "objects": ["face", "tear", "frown", "downcast eyes"],
+    "scenes": ["sadness", "crying", "emotion"]
+  },
+  "school": {
+    "colors": ["red", "brown", "grey", "white", "blue", "yellow"],
+    "objects": ["school building", "windows", "door", "flag", "clock"],
+    "scenes": ["education", "school", "learning"]
+  },
+  "ship": {
+    "colors": ["brown", "grey", "white", "blue", "red"],
+    "objects": ["ship", "sail", "mast", "hull", "ocean", "waves"],
+    "scenes": ["sailing", "ocean", "travel"]
+  },
+  "short": {
+    "colors": ["brown", "tan", "blue", "green", "beige"],
+    "objects": ["short pants", "legs", "character"],
+    "scenes": ["clothing", "summer", "short length"]
+  },
+  "sing": {
+    "colors": ["pink", "blue", "brown", "yellow", "green"],
+    "objects": ["character", "microphone", "music notes", "stage"],
+    "scenes": ["singing", "performing", "music"]
+  },
+  "sit": {
+    "colors": ["brown", "grey", "blue", "green", "beige"],
+    "objects": ["chair", "character", "desk", "table"],
+    "scenes": ["sitting", "classroom", "indoor"]
+  },
+  "sleep": {
+    "colors": ["blue", "white", "brown", "grey", "pink"],
+    "objects": ["bed", "pillow", "blanket", "character", "closed eyes"],
+    "scenes": ["sleeping", "bedroom", "resting"]
+  },
+  "small": {
+    "colors": ["green", "brown", "grey", "blue", "yellow"],
+    "objects": ["small character", "ant", "small building", "grass"],
+    "scenes": ["small size", "tiny", "small thing"]
+  },
+  "snow": {
+    "colors": ["white", "light blue", "grey", "green", "blue"],
+    "objects": ["snow", "snowflakes", "snowman", "trees", "ground"],
+    "scenes": ["winter", "cold weather", "snowing"]
+  },
+  "song": {
+    "colors": ["purple", "blue", "yellow", "pink", "green"],
+    "objects": ["musical notes", "guitar", "microphone", "character"],
+    "scenes": ["music", "singing", "performance"]
+  },
+  "sorry": {
+    "colors": ["teal", "brown", "blue", "white", "red"],
+    "objects": ["character", "steve", "sad face", "hands together"],
+    "scenes": ["apology", "sorry gesture", "regret"]
+  },
+  "special": {
+    "colors": ["yellow", "red", "blue", "green", "purple", "pink"],
+    "objects": ["star", "gift", "ribbon", "cake"],
+    "scenes": ["celebration", "special event", "gift"]
+  },
+  "sport": {
+    "colors": ["green", "blue", "white", "red", "yellow"],
+    "objects": ["ball", "net", "players", "court", "racket"],
+    "scenes": ["sports", "athletics", "game"]
+  },
+  "stand": {
+    "colors": ["cyan", "blue", "brown", "green", "grey"],
+    "objects": ["character", "steve", "standing pose", "grass"],
+    "scenes": ["standing", "idle pose", "outdoor"]
+  },
+  "star": {
+    "colors": ["yellow", "white", "gold", "blue", "black"],
+    "objects": ["star", "five-pointed shape", "shining"],
+    "scenes": ["space", "night sky", "celebration"]
+  },
+  "story": {
+    "colors": ["brown", "white", "blue", "green", "yellow"],
+    "objects": ["book", "pages", "character", "castle", "tree"],
+    "scenes": ["reading", "storybook", "adventure"]
+  },
+  "strong": {
+    "colors": ["brown", "grey", "red", "blue", "green"],
+    "objects": ["muscles", "arm", "character", "bicep"],
+    "scenes": ["strength", "workout", "power"]
+  },
+  "study": {
+    "colors": ["brown", "white", "blue", "green", "yellow"],
+    "objects": ["desk", "lamp", "book", "character", "chair"],
+    "scenes": ["studying", "learning", "homework"]
+  },
+  "sun": {
+    "colors": ["yellow", "orange", "red", "white", "blue"],
+    "objects": ["sun", "rays", "face", "smile"],
+    "scenes": ["sunny day", "daytime", "weather"]
+  },
+  "sunny": {
+    "colors": ["yellow", "blue", "white", "green", "orange"],
+    "objects": ["sun", "clouds", "sky", "grass", "trees"],
+    "scenes": ["sunny day", "clear weather", "bright"]
+  },
+  "swim": {
+    "colors": ["blue", "cyan", "green", "yellow", "brown"],
+    "objects": ["character", "water", "waves", "swimsuit", "pool"],
+    "scenes": ["swimming", "water", "pool"]
+  },
+  "table": {
+    "colors": ["brown", "grey", "white", "beige"],
+    "objects": ["table", "legs", "surface", "wood"],
+    "scenes": ["furniture", "indoor", "dining"]
+  },
+  "tall": {
+    "colors": ["green", "brown", "grey", "blue", "white"],
+    "objects": ["tall building", "skyscraper", "tree", "clouds"],
+    "scenes": ["city", "tall structure", "height"]
+  },
+  "tea": {
+    "colors": ["brown", "green", "white", "red", "yellow"],
+    "objects": ["tea cup", "tea", "steam", "saucer"],
+    "scenes": ["drink", "beverage", "tea time"]
+  },
+  "teacher": {
+    "colors": ["brown", "blue", "white", "black", "grey"],
+    "objects": ["teacher", "glasses", "book", "pointer", "board"],
+    "scenes": ["school", "classroom", "education"]
+  },
+  "thank": {
+    "colors": ["teal", "brown", "blue", "yellow", "green"],
+    "objects": ["character", "steve", "hands together", "smile"],
+    "scenes": ["gratitude", "thanking", "polite"]
+  },
+  "think": {
+    "colors": ["blue", "white", "grey", "brown", "yellow"],
+    "objects": ["character", "thinking", "hand on chin", "question marks"],
+    "scenes": ["thinking", "deep thought", "pondering"]
+  },
+  "three": {
+    "colors": ["red", "blue", "yellow", "green", "white"],
+    "objects": ["three fingers", "hand", "number three"],
+    "scenes": ["counting", "number", "gesture"]
+  },
+  "tired": {
+    "colors": ["blue", "grey", "brown", "black", "white"],
+    "objects": ["character", "closed eyes", "yawning", "bed"],
+    "scenes": ["tiredness", "sleepy", "exhausted"]
+  },
+  "today": {
+    "colors": ["blue", "yellow", "green", "white", "brown"],
+    "objects": ["calendar", "date", "sun", "today sign"],
+    "scenes": ["present day", "current day", "calendar"]
+  },
+  "tomorrow": {
+    "colors": ["blue", "yellow", "green", "white", "grey"],
+    "objects": ["calendar", "sunrise", "tomorrow sign", "clouds"],
+    "scenes": ["future", "next day", "tomorrow"]
+  },
+  "town": {
+    "colors": ["brown", "grey", "blue", "green", "red", "yellow"],
+    "objects": ["buildings", "houses", "church", "trees", "road"],
+    "scenes": ["town", "village", "urban area"]
+  },
+  "tree": {
+    "colors": ["green", "brown", "light green", "white", "blue"],
+    "objects": ["tree", "trunk", "leaves", "branches", "grass"],
+    "scenes": ["nature", "forest", "outdoor"]
+  },
+  "two": {
+    "colors": ["blue", "red", "yellow", "green", "white"],
+    "objects": ["two fingers", "hand", "number two"],
+    "scenes": ["counting", "number", "gesture"]
+  },
+  "umbrella": {
+    "colors": ["red", "blue", "yellow", "brown", "grey"],
+    "objects": ["umbrella", "handle", "rain", "drops"],
+    "scenes": ["rainy weather", "protection", "rain"]
+  },
+  "use": {
+    "colors": ["blue", "grey", "brown", "green", "yellow"],
+    "objects": ["character", "computer", "tools", "hands"],
+    "scenes": ["using", "technology", "working"]
+  },
+  "vegetable": {
+    "colors": ["green", "red", "orange", "yellow", "brown"],
+    "objects": ["carrot", "broccoli", "tomato", "lettuce", "vegetables"],
+    "scenes": ["healthy food", "vegetables", "nutrition"]
+  },
+  "village": {
+    "colors": ["brown", "green", "grey", "blue", "yellow"],
+    "objects": ["houses", "trees", "road", "fence", "animals"],
+    "scenes": ["rural area", "village", "countryside"]
+  },
+  "visit": {
+    "colors": ["blue", "green", "brown", "yellow", "grey"],
+    "objects": ["character", "building", "door", "friends"],
+    "scenes": ["visiting", "guest", "social visit"]
+  },
+  "wait": {
+    "colors": ["blue", "grey", "brown", "white", "yellow"],
+    "objects": ["character", "clock", "waiting", "hourglass"],
+    "scenes": ["waiting", "patience", "time"]
+  },
+  "walk": {
+    "colors": ["green", "blue", "brown", "cyan", "yellow"],
+    "objects": ["character", "legs", "road", "trees", "clouds"],
+    "scenes": ["walking", "outdoor", "moving"]
+  },
+  "want": {
+    "colors": ["blue", "red", "yellow", "green", "brown"],
+    "objects": ["character", "heart", "star", "gift", "wish"],
+    "scenes": ["desire", "wanting", "wishes"]
+  },
+  "warm": {
+    "colors": ["orange", "yellow", "red", "brown", "white"],
+    "objects": ["sun", "fire", "heat", "cozy room"],
+    "scenes": ["warmth", "cozy", "heat"]
+  },
+  "wash": {
+    "colors": ["blue", "white", "grey", "brown", "green"],
+    "objects": ["water", "sink", "hands", "soap", "faucet"],
+    "scenes": ["washing", "cleaning", "hygiene"]
+  },
+  "watch": {
+    "colors": ["brown", "grey", "black", "white", "yellow"],
+    "objects": ["watch", "time", "hands", "face"],
+    "scenes": ["time", "wearing", "checking time"]
+  },
+  "water": {
+    "colors": ["blue", "light blue", "white", "cyan"],
+    "objects": ["water", "ocean", "waves", "sea", "fish"],
+    "scenes": ["ocean", "sea", "underwater", "beach"]
+  },
+  "weak": {
+    "colors": ["grey", "blue", "brown", "white", "green"],
+    "objects": ["character", "thin arms", "tired expression"],
+    "scenes": ["weakness", "tiredness", "strength"]
+  },
+  "wear": {
+    "colors": ["blue", "red", "green", "brown", "yellow"],
+    "objects": ["character", "clothes", "shirt", "pants", "dress"],
+    "scenes": ["wearing", "clothing", "fashion"]
+  },
+  "week": {
+    "colors": ["blue", "white", "grey", "yellow"],
+    "objects": ["calendar", "days", "dates"],
+    "scenes": ["calendar", "time", "week"]
+  },
+  "welcome": {
+    "colors": ["blue", "green", "yellow", "brown", "white"],
+    "objects": ["character", "wave", "smile", "door", "welcome mat"],
+    "scenes": ["greeting", "welcome", "hospitality"]
+  },
+  "what": {
+    "colors": ["blue", "white", "yellow", "green", "brown"],
+    "objects": ["question mark", "character", "confused face"],
+    "scenes": ["question", "asking", "confusion"]
+  },
+  "when": {
+    "colors": ["blue", "yellow", "green", "white", "brown"],
+    "objects": ["calendar", "clock", "question mark"],
+    "scenes": ["time", "question", "timing"]
+  },
+  "where": {
+    "colors": ["blue", "green", "brown", "yellow", "grey"],
+    "objects": ["map", "question mark", "location marker"],
+    "scenes": ["location", "question", "direction"]
+  },
+  "white": {
+    "colors": ["white", "light grey", "black"],
+    "objects": ["cube", "snow", "paper", "clouds"],
+    "scenes": ["voxel art", "color", "snowy"]
+  },
+  "who": {
+    "colors": ["blue", "white", "yellow", "green"],
+    "objects": ["question mark", "character", "face"],
+    "scenes": ["question", "identity", "asking"]
+  },
+  "why": {
+    "colors": ["blue", "yellow", "white", "green", "brown"],
+    "objects": ["question mark", "character", "thinking"],
+    "scenes": ["question", "curiosity", "reason"]
+  },
+  "window": {
+    "colors": ["blue", "white", "brown", "grey", "light blue"],
+    "objects": ["window", "glass", "frame", "view", "clouds"],
+    "scenes": ["indoor", "view", "house"]
+  },
+  "windy": {
+    "colors": ["blue", "grey", "white", "green", "yellow"],
+    "objects": ["wind", "clouds", "trees", "leaves blowing"],
+    "scenes": ["windy weather", "storm", "breezy"]
+  },
+  "winter": {
+    "colors": ["white", "blue", "grey", "green", "light blue"],
+    "objects": ["snow", "snowman", "trees", "ice", "cold"],
+    "scenes": ["winter", "cold weather", "snow"]
+  },
+  "wish": {
+    "colors": ["blue", "yellow", "green", "white", "pink"],
+    "objects": ["star", "candle", "wish", "character"],
+    "scenes": ["wishing", "hope", "birthday"]
+  },
+  "woman": {
+    "colors": ["pink", "blue", "brown", "white", "teal"],
+    "objects": ["woman", "dress", "hair", "skirt"],
+    "scenes": ["female", "person", "adult"]
+  },
+  "work": {
+    "colors": ["grey", "blue", "brown", "white", "yellow"],
+    "objects": ["computer", "desk", "lamp", "papers"],
+    "scenes": ["working", "office", "job"]
+  },
+  "world": {
+    "colors": ["blue", "green", "brown", "white", "grey"],
+    "objects": ["globe", "earth", "continents", "oceans"],
+    "scenes": ["world", "globe", "earth"]
+  },
+  "worse": {
+    "colors": ["grey", "black", "blue", "brown", "green"],
+    "objects": ["character", "sad face", "thumbs down"],
+    "scenes": ["bad", "worse", "negative"]
+  },
+  "worst": {
+    "colors": ["grey", "black", "red", "blue", "brown"],
+    "objects": ["character", "very sad face", "storm"],
+    "scenes": ["terrible", "worst", "bad"]
+  },
+  "write": {
+    "colors": ["brown", "white", "blue", "yellow", "grey"],
+    "objects": ["paper", "pen", "pencil", "writing"],
+    "scenes": ["writing", "homework", "study"]
+  },
+  "yellow": {
+    "colors": ["yellow", "gold", "white", "light yellow"],
+    "objects": ["sun", "banana", "star", "cube"],
+    "scenes": ["color", "sunny", "bright"]
+  },
+  "yesterday": {
+    "colors": ["blue", "yellow", "green", "white", "grey"],
+    "objects": ["calendar", "yesterday sign", "past"],
+    "scenes": ["past", "yesterday", "time"]
+  },
+  "you": {
+    "colors": ["blue", "green", "brown", "yellow", "white"],
+    "objects": ["character", "pointing", "person"],
+    "scenes": ["pointing", "addressing", "you"]
+  },
+  "young": {
+    "colors": ["green", "blue", "brown", "pink", "yellow"],
+    "objects": ["young person", "child", "youth"],
+    "scenes": ["young", "youth", "child"]
+  },
+  "your": {
+    "colors": ["blue", "green", "yellow", "brown", "white"],
+    "objects": ["character", "possessive", "belonging"],
+    "scenes": ["possessive", "yours", "your"]
+  },
+  "zoo": {
+    "colors": ["green", "brown", "blue", "yellow", "grey"],
+    "objects": ["animals", "enclosure", "trees", "visitors"],
+    "scenes": ["zoo", "animals", "outing"]
+  }
+}
