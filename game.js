@@ -2723,25 +2723,6 @@ function tryLoadWordImage(word, canvas) {
     ctx.fillStyle = '#5CAB5C'; // Grass
     ctx.fillRect(0, canvas.height * 0.75, canvas.width, canvas.height * 0.25);
     
-    const img = new Image();
-    img.onload = function() {
-        // Clear and draw the loaded image
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        // Cover with sky blue first
-        ctx.fillStyle = '#87CEEB';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        // Draw image centered and scaled
-        const scale = Math.min(canvas.width / img.width, canvas.height / img.height);
-        const x = (canvas.width - img.width * scale) / 2;
-        const y = (canvas.height - img.height * scale) / 2;
-        ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
-    };
-    img.onerror = function() {
-        // Image failed to load, trigger fallback drawing
-        img.onerror = null;
-        img.onload = null;
-    };
-    
     // Try to load from all grade folders
     const paths = [
         'images/grade1/' + getImageFilename(word, 1) + '.png',
@@ -2749,13 +2730,41 @@ function tryLoadWordImage(word, canvas) {
         'images/grade3/' + getImageFilename(word, 3) + '.png'
     ];
     
-    for (const path of paths) {
-        img.src = path;
-        if (img.complete) continue;
-        return true; // Image is loading
+    // Create new image for each path to properly track loading state
+    // Use recursive approach to try each path sequentially
+    return tryLoadImagePath(paths, 0, ctx, canvas.width, canvas.height);
+}
+
+function tryLoadImagePath(paths, index, ctx, width, height) {
+    if (index >= paths.length) {
+        return false; // All images failed
     }
     
-    return false;
+    const img = new Image();
+    let loaded = false;
+    
+    img.onload = function() {
+        loaded = true;
+        // Success! Draw the image
+        ctx.clearRect(0, 0, width, height);
+        ctx.fillStyle = '#87CEEB';
+        ctx.fillRect(0, 0, width, height);
+        const scale = Math.min(width / img.width, height / img.height);
+        const x = (width - img.width * scale) / 2;
+        const y = (height - img.height * scale) / 2;
+        ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+    };
+    
+    img.onerror = function() {
+        // Try next path
+        tryLoadImagePath(paths, index + 1, ctx, width, height);
+    };
+    
+    img.src = paths[index];
+    
+    // Return true if we started loading (not yet complete or failed)
+    // The onload/onerror handlers will handle the actual drawing
+    return true;
 }
 
 // ============================================
