@@ -1206,7 +1206,7 @@
       "flower",
       "moon",
       "sun",
-      "grass"
+      "train"
     ],
     "replaced": []
   },
@@ -1274,9 +1274,9 @@
     "correct": "friend",
     "options": [
       "friend",
-      "girl",
-      "baby",
-      "woman"
+      "teacher",
+      "doctor",
+      "book"
     ],
     "replaced": []
   },
@@ -1491,8 +1491,8 @@
     "options": [
       "green",
       "orange",
-      "white",
-      "yellow"
+      "purple",
+      "black"
     ],
     "replaced": []
   },
@@ -2301,8 +2301,8 @@
     "options": [
       "orange",
       "red",
-      "green",
-      "white"
+      "purple",
+      "black"
     ],
     "replaced": []
   },
@@ -2917,8 +2917,8 @@
     "options": [
       "sport",
       "party",
-      "game",
-      "wish"
+      "wish",
+      "story"
     ],
     "replaced": []
   },
@@ -3246,9 +3246,9 @@
     "correct": "town",
     "options": [
       "town",
-      "village",
       "classroom",
-      "park"
+      "park",
+      "hospital"
     ],
     "replaced": []
   },
@@ -3548,7 +3548,7 @@
       "white",
       "purple",
       "yellow",
-      "black"
+      "pink"
     ],
     "replaced": []
   },
@@ -3686,9 +3686,9 @@
     "correct": "yellow",
     "options": [
       "yellow",
-      "white",
       "red",
-      "pink"
+      "pink",
+      "purple"
     ],
     "replaced": []
   },

@@ -1,9 +1,17 @@
 preamble: |
-  Deploy Minecraft English Learning Game for Shenzhen Primary Students
+  Deploy Minecraft English Learning Game with Express API and persistent storage
 
 services:
-  - type: static
+  - type: web
     name: english-game
-    env: static
-    buildCommand: echo "No build needed"
-    staticPublishPath: .
+    runtime: node
+    buildCommand: npm install --prefix server
+    startCommand: node server/server.js
+    healthCheckPath: /healthz
+    disk:
+      name: app-data
+      mountPath: /var/data
+      sizeGB: 5
+    envVars:
+      - key: DATA_DIR
+        value: /var/data/english-game

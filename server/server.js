@@ -10,6 +10,9 @@ const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+const DATA_DIR = process.env.DATA_DIR
+    ? path.resolve(process.env.DATA_DIR)
+    : path.join(__dirname, 'data');
 
 // 中间件
 app.use(cors());
@@ -22,7 +25,6 @@ app.use(express.static(path.join(__dirname, '..')));
 app.use('/admin', express.static(path.join(__dirname, '..', 'admin')));
 
 // 数据文件路径
-const DATA_DIR = path.join(__dirname, 'data');
 const USERS_FILE = path.join(DATA_DIR, 'users.json');
 const ANSWERS_FILE = path.join(DATA_DIR, 'answers.json');
 
@@ -209,6 +211,14 @@ app.get('/api/stats', (req, res) => {
     }
 });
 
+// 5.5 健康检查
+app.get('/healthz', (_req, res) => {
+    res.json({
+        ok: true,
+        dataDir: DATA_DIR
+    });
+});
+
 // 6. 清除所有数据（管理用）
 app.delete('/api/clear', (req, res) => {
     try {
@@ -225,4 +235,5 @@ app.delete('/api/clear', (req, res) => {
 app.listen(PORT, () => {
     console.log(`English Game Server 运行在 http://localhost:${PORT}`);
     console.log(`管理后台地址: http://localhost:${PORT}/admin.html`);
+    console.log(`数据目录: ${DATA_DIR}`);
 });

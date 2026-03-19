@@ -43,7 +43,7 @@ const elements = {
 };
 
 // 后端 API 地址
-const API_BASE = 'http://localhost:3001/api';
+const API_BASE = `${window.location.origin}/api`;
 
 // 用户数据存储
 let allUsers = [];

@@ -22,9 +22,23 @@ let currentMusicIndex = 0;
 
 // 预定义的候选词表
 let candidateWords = {};
+let candidateWordsLoaded = false;
+const API_BASE = window.location.origin;
 
 // 游戏配置
 const QUESTIONS_PER_LEVEL = 10;
+const EXCLUDED_IMAGE_WORDS = new Set([
+    "I'm",
+    'good morning',
+    'good afternoon',
+    'good evening',
+    'good night',
+    'how are you',
+    'thanks',
+    'thank you',
+    "what's your name",
+    'nice to meet you'
+]);
 
 // 图片预加载
 const imagePreloadCache = new Map();
@@ -94,6 +108,8 @@ function initGame() {
 
     // 加载预定义的候选词表
     loadCandidateWords();
+    updateStartButton();
+    updateContinueButton();
 
     // 隐藏加载动画
     setTimeout(() => {
@@ -107,11 +123,17 @@ function loadCandidateWords() {
         .then(response => response.json())
         .then(data => {
             candidateWords = data;
+            candidateWordsLoaded = true;
             console.log('候选词表已加载，共 ' + Object.keys(candidateWords).length + ' 个单词');
+            updateStartButton();
+            updateContinueButton();
         })
         .catch(error => {
             console.error('加载候选词表失败:', error);
             candidateWords = {};
+            candidateWordsLoaded = true;
+            updateStartButton();
+            updateContinueButton();
         });
 }
 
@@ -158,10 +180,21 @@ function setupEventListeners() {
 // ============================================
 function updateStartButton() {
     const username = elements.username.value.trim();
-    elements.startBtn.disabled = !(username.length >= 2 && selectedGrade);
+    elements.startBtn.disabled = !(username.length >= 2 && selectedGrade && candidateWordsLoaded);
+}
+
+function updateContinueButton() {
+    if (elements.continueBtn) {
+        elements.continueBtn.disabled = !candidateWordsLoaded;
+    }
 }
 
 function startGame() {
+    if (!candidateWordsLoaded) {
+        alert('候选词仍在加载中，请稍等片刻');
+        return;
+    }
+
     const username = elements.username.value.trim();
     if (username.length < 2) {
         alert('请输入至少2个字符的名字');
@@ -214,9 +247,16 @@ function showUserInfo() {
             elements.currentQuestion.textContent = currentQuestion;
         }
     }
+
+    updateContinueButton();
 }
 
 function continueGame() {
+    if (!candidateWordsLoaded) {
+        alert('候选词仍在加载中，请稍等片刻');
+        return;
+    }
+
     try {
         currentGrade = currentUser.grade;
         prepareWords();
@@ -242,7 +282,9 @@ function generateUserId() {
 // 游戏逻辑
 // ============================================
 function prepareWords() {
-    allWords = getWordsUpToGrade(currentGrade);
+    allWords = getWordsUpToGrade(currentGrade).filter(wordData =>
+        !EXCLUDED_IMAGE_WORDS.has(wordData.word)
+    );
     // 随机打乱
     allWords = shuffleArray([...allWords]);
 }
@@ -2643,7 +2685,7 @@ function saveProgress() {
 // 后端数据提交
 // ============================================
 function submitAnswerToServer(answerData) {
-    const serverUrl = 'http://localhost:3001/api/answers';
+    const serverUrl = `${API_BASE}/api/answers`;
 
     fetch(serverUrl, {
         method: 'POST',
