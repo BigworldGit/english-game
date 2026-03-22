@@ -19,7 +19,13 @@ let selectedGrade = null;
 let audioContext = null;
 let isPlaying = false;
 let bgMusic = null;
-let bgMusicFiles = ['audio/bg1.mp3', 'audio/bg2.mp3', 'audio/bg3.mp3'];
+let bgMusicFiles = [
+    'audio/starlight-lullaby.mp4',
+    'audio/embers-and-marshmallows.mp4',
+    'audio/pixel-power-up.mp4',
+    'audio/sunny-learning-fiesta.mp4',
+    'audio/global-dream-team.mp4'
+];
 let currentMusicIndex = 0;
 
 // 预定义的候选词表
