@@ -46,8 +46,8 @@ const EXCLUDED_IMAGE_WORDS = new Set([
 const imagePreloadCache = new Map();
 const PRELOAD_BATCH_SIZE = 3;
 const CONCRETE_CATEGORIES = new Set([
-    'animal', 'body', 'clothes', 'drink', 'family', 'food', 'furniture',
-    'job', 'nature', 'noun', 'person', 'place', 'room', 'school', 'subject', 'vehicle'
+    'animal', 'body', 'clothes', 'color', 'drink', 'family', 'food', 'furniture',
+    'job', 'nature', 'noun', 'number', 'person', 'place', 'room', 'school', 'subject', 'vehicle'
 ]);
 const CONFLICT_GROUPS = {
     greetings: ['hello', 'hi', 'goodbye', 'bye', 'good morning', 'good afternoon', 'good evening', 'good night'],
@@ -55,12 +55,18 @@ const CONFLICT_GROUPS = {
     colors: ['red', 'blue', 'green', 'yellow', 'black', 'white', 'orange', 'pink', 'purple', 'brown'],
     time: ['morning', 'afternoon', 'evening', 'night', 'today', 'tomorrow', 'yesterday', 'week', 'month', 'year', 'birthday'],
     weather: ['sunny', 'rainy', 'cloudy', 'windy', 'snowy', 'hot', 'cold', 'warm', 'cool'],
-    places: ['town', 'city', 'village', 'park', 'school', 'hospital', 'zoo', 'farm', 'library', 'supermarket', 'classroom'],
+    places: ['town', 'city', 'village', 'park', 'school', 'hospital', 'zoo', 'farm', 'library', 'supermarket', 'classroom', 'home'],
     directions: ['left', 'right', 'up', 'down', 'front', 'back', 'behind', 'in', 'on', 'under', 'near', 'to'],
     transport: ['car', 'bus', 'bike', 'train', 'plane', 'ship'],
     family: ['father', 'mother', 'brother', 'sister', 'grandfather', 'grandmother', 'grandpa', 'grandma', 'dad', 'mum'],
     weekdays: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'],
-    seasons: ['spring', 'summer', 'autumn', 'winter']
+    seasons: ['spring', 'summer', 'autumn', 'winter'],
+    nationality: ['american', 'australian', 'british', 'canadian', 'chinese', 'america', 'australia', 'britain', 'canada', 'china'],
+    subjects: ['chinese', 'english', 'math', 'music', 'art', 'pe', 'science'],
+    frequency: ['always', 'usually', 'often', 'sometimes', 'never'],
+    pronouns: ['i', 'you', 'he', 'she', 'it', 'we', 'they', 'me', 'him', 'her', 'us', 'them', 'my', 'your', 'his', 'our', 'their'],
+    be: ['am', 'is', 'are', 'was', 'were', 'be'],
+    numbers: ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
 };
 
 // 音频对象池
@@ -512,6 +518,11 @@ const COLOR_BLACKLIST = {
     'rock': ['rock', 'stone', 'gray', 'grey', 'hard'],
     'stone': ['stone', 'rock', 'gray', 'grey', 'hard'],
     'sand': ['sand', 'yellow', 'beach', 'desert', 'brown'],
+    'one': ['hello', 'hi', 'goodbye', 'bye', 'wave'],
+    'two': ['hello', 'hi', 'goodbye', 'bye', 'wave'],
+    'three': ['hello', 'hi', 'goodbye', 'bye', 'wave'],
+    'four': ['hello', 'hi', 'goodbye', 'bye', 'wave'],
+    'five': ['hello', 'hi', 'goodbye', 'bye', 'wave'],
     'wood': ['wood', 'brown', 'tree', 'forest', 'natural'],
     'paper': ['paper', 'white', 'read', 'write', 'book'],
     'blood': ['blood', 'red', 'warm', 'life'],
@@ -603,6 +614,11 @@ function shouldAvoidCandidate(correctAnswer, candidateWord) {
     return false;
 }
 
+function isWeakDistractor(candidateWord) {
+    const meta = getWordMeta(candidateWord);
+    return !meta || !CONCRETE_CATEGORIES.has(meta.category);
+}
+
 function chooseDistractor(correctAnswer, usedWords, preferredWords = []) {
     const correctMeta = getWordMeta(correctAnswer);
     const correctGroup = getConflictGroup(correctAnswer);
@@ -663,7 +679,8 @@ function repairPredefinedOptions(correctAnswer, predefinedOptions) {
 
         const validOption = isOptionAllowedForCurrentGrade(option, allowedWordSet) &&
             !shouldAvoidCandidate(correctAnswer, option) &&
-            !usedWords.has(option);
+            !usedWords.has(option) &&
+            !isWeakDistractor(option);
 
         if (validOption) {
             repaired.push(option);
@@ -675,6 +692,16 @@ function repairPredefinedOptions(correctAnswer, predefinedOptions) {
         if (replacement) {
             repaired.push(replacement);
             usedWords.add(replacement);
+            continue;
+        }
+
+        if (
+            isOptionAllowedForCurrentGrade(option, allowedWordSet) &&
+            !shouldAvoidCandidate(correctAnswer, option) &&
+            !usedWords.has(option)
+        ) {
+            repaired.push(option);
+            usedWords.add(option);
         }
     }
 

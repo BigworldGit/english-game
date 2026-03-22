@@ -3,9 +3,9 @@
     "correct": "American",
     "options": [
       "American",
-      "Australian",
-      "Canadian",
-      "British"
+      "story",
+      "song",
+      "film"
     ],
     "replaced": []
   },
@@ -13,9 +13,9 @@
     "correct": "Australian",
     "options": [
       "Australian",
-      "Canadian",
-      "American",
-      "British"
+      "story",
+      "song",
+      "film"
     ],
     "replaced": []
   },
@@ -33,9 +33,9 @@
     "correct": "I",
     "options": [
       "I",
-      "your",
-      "my",
-      "you"
+      "name",
+      "red",
+      "blue"
     ],
     "replaced": []
   },
@@ -44,34 +44,18 @@
     "options": [
       "Monday",
       "monkey",
-      "moon",
+      "name",
       "mother"
     ],
-    "replaced": [
-      {
-        "original": "Thursday",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "monkey"
-      },
-      {
-        "original": "Saturday",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "moon"
-      },
-      {
-        "original": "Sunday",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "mother"
-      }
-    ]
+    "replaced": []
   },
   "OK": {
     "correct": "OK",
     "options": [
       "OK",
-      "be good at",
-      "come from",
-      "grow up"
+      "name",
+      "red",
+      "blue"
     ],
     "replaced": []
   },
@@ -79,77 +63,39 @@
     "correct": "Sunday",
     "options": [
       "Sunday",
-      "sock",
-      "sofa",
-      "song"
+      "name",
+      "cat",
+      "dog"
     ],
-    "replaced": [
-      {
-        "original": "Tuesday",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "sock"
-      },
-      {
-        "original": "Wednesday",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "sofa"
-      },
-      {
-        "original": "Saturday",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "song"
-      }
-    ]
+    "replaced": []
   },
   "Wednesday": {
     "correct": "Wednesday",
     "options": [
       "Wednesday",
       "chicken",
-      "China",
-      "Chinese"
+      "name",
+      "cat"
     ],
-    "replaced": [
-      {
-        "original": "Sunday",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "chicken"
-      },
-      {
-        "original": "Tuesday",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "China"
-      },
-      {
-        "original": "Thursday",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "Chinese"
-      }
-    ]
+    "replaced": []
   },
   "afternoon": {
     "correct": "afternoon",
     "options": [
       "afternoon",
-      "today",
-      "snow",
-      "birthday"
+      "name",
+      "red",
+      "one"
     ],
-    "replaced": [
-      {
-        "original": "evening",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "snow"
-      }
-    ]
+    "replaced": []
   },
   "always": {
     "correct": "always",
     "options": [
       "always",
-      "usually",
-      "sometimes",
-      "often"
+      "tree",
+      "flower",
+      "grass"
     ],
     "replaced": []
   },
@@ -157,19 +103,19 @@
     "correct": "am",
     "options": [
       "am",
-      "are",
-      "send",
-      "return"
+      "name",
+      "red",
+      "yellow"
     ],
     "replaced": []
   },
   "america": {
-    "correct": "america",
+    "correct": "America",
     "options": [
-      "america",
-      "close",
+      "America",
+      "yellow",
       "train",
-      "will"
+      "cat"
     ],
     "replaced": []
   },
@@ -177,9 +123,9 @@
     "correct": "angry",
     "options": [
       "angry",
-      "short",
-      "important",
-      "quiet"
+      "English",
+      "Chinese",
+      "math"
     ],
     "replaced": []
   },
@@ -197,9 +143,9 @@
     "correct": "answer",
     "options": [
       "answer",
-      "grow",
-      "close",
-      "fly"
+      "Chinese",
+      "math",
+      "English"
     ],
     "replaced": []
   },
@@ -207,25 +153,19 @@
     "correct": "apple",
     "options": [
       "apple",
-      "beef",
+      "pencil",
       "banana",
       "rice"
     ],
-    "replaced": [
-      {
-        "original": "fruit",
-        "reason": "在排除规则中 (规则词: fruit)",
-        "replacement": "banana"
-      }
-    ]
+    "replaced": []
   },
   "are": {
     "correct": "are",
     "options": [
       "are",
-      "write",
-      "enjoy",
-      "tell"
+      "name",
+      "red",
+      "yellow"
     ],
     "replaced": []
   },
@@ -233,9 +173,9 @@
     "correct": "art",
     "options": [
       "art",
-      "music",
+      "name",
       "Chinese",
-      "PE"
+      "cat"
     ],
     "replaced": []
   },
@@ -243,19 +183,19 @@
     "correct": "ask",
     "options": [
       "ask",
-      "become",
-      "take",
-      "find"
+      "cat",
+      "red",
+      "yellow"
     ],
     "replaced": []
   },
   "australia": {
-    "correct": "australia",
+    "correct": "Australia",
     "options": [
-      "australia",
-      "farmer",
-      "you",
-      "angry"
+      "Australia",
+      "cat",
+      "yellow",
+      "one"
     ],
     "replaced": []
   },
@@ -264,26 +204,10 @@
     "options": [
       "autumn",
       "teacher",
-      "town",
-      "train"
+      "name",
+      "cat"
     ],
-    "replaced": [
-      {
-        "original": "summer",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "teacher"
-      },
-      {
-        "original": "winter",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "town"
-      },
-      {
-        "original": "spring",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "train"
-      }
-    ]
+    "replaced": []
   },
   "baby": {
     "correct": "baby",
@@ -299,27 +223,11 @@
     "correct": "back",
     "options": [
       "back",
-      "vegetable",
-      "village",
+      "name",
+      "cat",
       "water"
     ],
-    "replaced": [
-      {
-        "original": "up",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "vegetable"
-      },
-      {
-        "original": "left",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "village"
-      },
-      {
-        "original": "down",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "water"
-      }
-    ]
+    "replaced": []
   },
   "bag": {
     "correct": "bag",
@@ -336,8 +244,8 @@
     "options": [
       "banana",
       "rice",
-      "beef",
-      "vegetable"
+      "name",
+      "cat"
     ],
     "replaced": []
   },
@@ -355,9 +263,9 @@
     "correct": "beautiful",
     "options": [
       "beautiful",
-      "warm",
-      "kind",
-      "nice"
+      "hat",
+      "cap",
+      "sister"
     ],
     "replaced": []
   },
@@ -365,9 +273,9 @@
     "correct": "become",
     "options": [
       "become",
-      "remember",
-      "finish",
-      "ask"
+      "vegetable",
+      "fruit",
+      "beef"
     ],
     "replaced": []
   },
@@ -395,30 +303,19 @@
     "correct": "behind",
     "options": [
       "behind",
-      "to",
+      "name",
       "Chinese",
-      "America"
+      "cat"
     ],
-    "replaced": [
-      {
-        "original": "in",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "Chinese"
-      },
-      {
-        "original": "under",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "America"
-      }
-    ]
+    "replaced": []
   },
   "believe": {
     "correct": "believe",
     "options": [
       "believe",
-      "grow",
-      "bring",
-      "write"
+      "friend",
+      "boy",
+      "girl"
     ],
     "replaced": []
   },
@@ -426,9 +323,9 @@
     "correct": "best",
     "options": [
       "best",
-      "angry",
-      "full",
-      "worse"
+      "living room",
+      "kitchen",
+      "bathroom"
     ],
     "replaced": []
   },
@@ -436,9 +333,9 @@
     "correct": "better",
     "options": [
       "better",
-      "nice",
-      "impossible",
-      "weak"
+      "red",
+      "name",
+      "blue"
     ],
     "replaced": []
   },
@@ -446,17 +343,11 @@
     "correct": "big",
     "options": [
       "big",
-      "tired",
-      "nice",
-      "tall"
+      "name",
+      "red",
+      "blue"
     ],
-    "replaced": [
-      {
-        "original": "small",
-        "reason": "在排除规则中 (规则词: small)",
-        "replacement": "tall"
-      }
-    ]
+    "replaced": []
   },
   "bike": {
     "correct": "bike",
@@ -464,33 +355,17 @@
       "bike",
       "mouth",
       "mum",
-      "museum"
+      "nose"
     ],
-    "replaced": [
-      {
-        "original": "car",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "mouth"
-      },
-      {
-        "original": "ship",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "mum"
-      },
-      {
-        "original": "bus",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "museum"
-      }
-    ]
+    "replaced": []
   },
   "bird": {
     "correct": "bird",
     "options": [
       "bird",
       "dog",
-      "rabbit",
-      "pig"
+      "name",
+      "eye"
     ],
     "replaced": []
   },
@@ -498,9 +373,9 @@
     "correct": "birthday",
     "options": [
       "birthday",
-      "morning",
-      "year",
-      "yesterday"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -508,53 +383,21 @@
     "correct": "black",
     "options": [
       "black",
-      "window",
-      "woman",
-      "world"
+      "name",
+      "cat",
+      "dog"
     ],
-    "replaced": [
-      {
-        "original": "yellow",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "window"
-      },
-      {
-        "original": "white",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "woman"
-      },
-      {
-        "original": "red",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "world"
-      }
-    ]
+    "replaced": []
   },
   "blue": {
     "correct": "blue",
     "options": [
       "blue",
-      "rice",
-      "road",
-      "ruler"
+      "name",
+      "one",
+      "two"
     ],
-    "replaced": [
-      {
-        "original": "pink",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "rice"
-      },
-      {
-        "original": "orange",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "road"
-      },
-      {
-        "original": "green",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "ruler"
-      }
-    ]
+    "replaced": []
   },
   "book": {
     "correct": "book",
@@ -570,9 +413,9 @@
     "correct": "boring",
     "options": [
       "boring",
-      "special",
-      "popular",
-      "international"
+      "Chinese",
+      "English",
+      "math"
     ],
     "replaced": []
   },
@@ -590,7 +433,7 @@
     "correct": "bread",
     "options": [
       "bread",
-      "pork",
+      "name",
       "apple",
       "banana"
     ],
@@ -600,9 +443,9 @@
     "correct": "bring",
     "options": [
       "bring",
-      "visit",
-      "learn",
-      "use"
+      "name",
+      "red",
+      "blue"
     ],
     "replaced": []
   },
@@ -610,79 +453,31 @@
     "correct": "brother",
     "options": [
       "brother",
-      "America",
+      "name",
       "apple",
       "art"
     ],
-    "replaced": [
-      {
-        "original": "grandfather",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "America"
-      },
-      {
-        "original": "dad",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "apple"
-      },
-      {
-        "original": "mum",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "art"
-      }
-    ]
+    "replaced": []
   },
   "brown": {
     "correct": "brown",
     "options": [
       "brown",
-      "train",
-      "tree",
-      "UK"
+      "name",
+      "cat",
+      "dog"
     ],
-    "replaced": [
-      {
-        "original": "white",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "train"
-      },
-      {
-        "original": "blue",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "tree"
-      },
-      {
-        "original": "green",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "UK"
-      }
-    ]
+    "replaced": []
   },
   "bus": {
     "correct": "bus",
     "options": [
       "bus",
       "star",
-      "story",
+      "name",
       "student"
     ],
-    "replaced": [
-      {
-        "original": "train",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "star"
-      },
-      {
-        "original": "car",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "story"
-      },
-      {
-        "original": "plane",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "student"
-      }
-    ]
+    "replaced": []
   },
   "businessman": {
     "correct": "businessman",
@@ -698,9 +493,9 @@
     "correct": "but",
     "options": [
       "but",
-      "because",
-      "if",
-      "spring"
+      "name",
+      "red",
+      "blue"
     ],
     "replaced": []
   },
@@ -708,9 +503,9 @@
     "correct": "buy",
     "options": [
       "buy",
-      "spell",
-      "work",
-      "watch"
+      "name",
+      "cat",
+      "red"
     ],
     "replaced": []
   },
@@ -718,27 +513,11 @@
     "correct": "bye",
     "options": [
       "bye",
-      "bike",
-      "bird",
-      "book"
+      "name",
+      "red",
+      "blue"
     ],
-    "replaced": [
-      {
-        "original": "good night",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "bike"
-      },
-      {
-        "original": "goodbye",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "bird"
-      },
-      {
-        "original": "good evening",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "book"
-      }
-    ]
+    "replaced": []
   },
   "cake": {
     "correct": "cake",
@@ -746,7 +525,7 @@
       "cake",
       "apple",
       "rice",
-      "vegetable"
+      "juice"
     ],
     "replaced": []
   },
@@ -754,9 +533,9 @@
     "correct": "call",
     "options": [
       "call",
-      "remember",
-      "am",
-      "ask"
+      "Chinese",
+      "English",
+      "math"
     ],
     "replaced": []
   },
@@ -778,23 +557,7 @@
       "sock",
       "sofa"
     ],
-    "replaced": [
-      {
-        "original": "bike",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "snow"
-      },
-      {
-        "original": "train",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "sock"
-      },
-      {
-        "original": "ship",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "sofa"
-      }
-    ]
+    "replaced": []
   },
   "careful": {
     "correct": "careful",
@@ -811,16 +574,10 @@
     "options": [
       "cat",
       "fish",
-      "rabbit",
+      "name",
       "bird"
     ],
-    "replaced": [
-      {
-        "original": "dog",
-        "reason": "在排除规则中 (规则词: dog)",
-        "replacement": "rabbit"
-      }
-    ]
+    "replaced": []
   },
   "chair": {
     "correct": "chair",
@@ -836,9 +593,9 @@
     "correct": "change",
     "options": [
       "change",
-      "make",
-      "jump",
-      "work"
+      "vegetable",
+      "fruit",
+      "beef"
     ],
     "replaced": []
   },
@@ -846,35 +603,29 @@
     "correct": "chicken",
     "options": [
       "chicken",
-      "vegetable",
+      "name",
       "bread",
       "banana"
     ],
     "replaced": []
   },
   "china": {
-    "correct": "china",
+    "correct": "China",
     "options": [
-      "china",
+      "China",
       "milk",
-      "love",
+      "yellow",
       "apple"
     ],
-    "replaced": [
-      {
-        "original": "sit",
-        "reason": "与图片直观元素冲突，改为跨类别干扰词",
-        "replacement": "apple"
-      }
-    ]
+    "replaced": []
   },
   "chinese": {
-    "correct": "chinese",
+    "correct": "Chinese",
     "options": [
-      "chinese",
-      "beef",
-      "Tuesday",
-      "autumn"
+      "Chinese",
+      "name",
+      "red",
+      "cat"
     ],
     "replaced": []
   },
@@ -886,47 +637,25 @@
       "monkey",
       "moon"
     ],
-    "replaced": [
-      {
-        "original": "classroom",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "monkey"
-      },
-      {
-        "original": "park",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "moon"
-      }
-    ]
+    "replaced": []
   },
   "classroom": {
     "correct": "classroom",
     "options": [
       "classroom",
       "fish",
-      "road",
-      "flower"
+      "cat",
+      "dog"
     ],
-    "replaced": [
-      {
-        "original": "village",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "fish"
-      },
-      {
-        "original": "park",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "flower"
-      }
-    ]
+    "replaced": []
   },
   "clean": {
     "correct": "clean",
     "options": [
       "clean",
-      "necessary",
-      "low",
-      "healthy"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -934,9 +663,9 @@
     "correct": "clever",
     "options": [
       "clever",
-      "successful",
-      "easy",
-      "traditional"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -944,9 +673,9 @@
     "correct": "close",
     "options": [
       "close",
-      "study",
-      "remember",
-      "believe"
+      "eraser",
+      "bag",
+      "school"
     ],
     "replaced": []
   },
@@ -964,37 +693,11 @@
     "correct": "cloudy",
     "options": [
       "cloudy",
-      "window",
-      "woman",
-      "world"
+      "name",
+      "cat",
+      "dog"
     ],
-    "replaced": [
-      {
-        "original": "sunny",
-        "reason": "在排除规则中 (规则词: sunny)",
-        "replacement": "snowy"
-      },
-      {
-        "original": "rainy",
-        "reason": "在排除规则中 (规则词: rain)",
-        "replacement": "warm"
-      },
-      {
-        "original": "snowy",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "window"
-      },
-      {
-        "original": "warm",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "woman"
-      },
-      {
-        "original": "windy",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "world"
-      }
-    ]
+    "replaced": []
   },
   "coat": {
     "correct": "coat",
@@ -1010,9 +713,9 @@
     "correct": "cold",
     "options": [
       "cold",
-      "successful",
-      "tired",
-      "high"
+      "Chinese",
+      "English",
+      "math"
     ],
     "replaced": []
   },
@@ -1020,9 +723,9 @@
     "correct": "come",
     "options": [
       "come",
-      "miss",
-      "forget",
-      "read"
+      "cap",
+      "hat",
+      "sister"
     ],
     "replaced": []
   },
@@ -1060,9 +763,9 @@
     "correct": "cool",
     "options": [
       "cool",
-      "hungry",
-      "strong",
-      "small"
+      "name",
+      "cat",
+      "red"
     ],
     "replaced": []
   },
@@ -1070,7 +773,7 @@
     "correct": "country",
     "options": [
       "country",
-      "film",
+      "cat",
       "UK",
       "world"
     ],
@@ -1080,35 +783,19 @@
     "correct": "dad",
     "options": [
       "dad",
-      "juice",
-      "language",
+      "name",
+      "cat",
       "leg"
     ],
-    "replaced": [
-      {
-        "original": "grandfather",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "juice"
-      },
-      {
-        "original": "grandpa",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "language"
-      },
-      {
-        "original": "sister",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "leg"
-      }
-    ]
+    "replaced": []
   },
   "dance": {
     "correct": "dance",
     "options": [
       "dance",
-      "sit",
-      "leave",
-      "like"
+      "red",
+      "name",
+      "cat"
     ],
     "replaced": []
   },
@@ -1126,9 +813,9 @@
     "correct": "different",
     "options": [
       "different",
-      "important",
-      "slow",
-      "big"
+      "sun",
+      "moon",
+      "star"
     ],
     "replaced": []
   },
@@ -1136,9 +823,9 @@
     "correct": "difficult",
     "options": [
       "difficult",
-      "cool",
-      "clean",
-      "international"
+      "red",
+      "blue",
+      "name"
     ],
     "replaced": []
   },
@@ -1146,9 +833,9 @@
     "correct": "dirty",
     "options": [
       "dirty",
-      "warm",
-      "special",
-      "clever"
+      "star",
+      "sun",
+      "moon"
     ],
     "replaced": []
   },
@@ -1167,7 +854,7 @@
     "options": [
       "dog",
       "bird",
-      "bear",
+      "name",
       "duck"
     ],
     "replaced": []
@@ -1186,35 +873,19 @@
     "correct": "down",
     "options": [
       "down",
-      "fruit",
-      "future",
-      "gift"
+      "name",
+      "cat",
+      "dog"
     ],
-    "replaced": [
-      {
-        "original": "up",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "fruit"
-      },
-      {
-        "original": "left",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "future"
-      },
-      {
-        "original": "front",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "gift"
-      }
-    ]
+    "replaced": []
   },
   "draw": {
     "correct": "draw",
     "options": [
       "draw",
-      "go",
-      "tell",
-      "grow"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -1242,9 +913,9 @@
     "correct": "drink",
     "options": [
       "drink",
-      "hope",
-      "use",
-      "live"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -1262,9 +933,9 @@
     "correct": "duck",
     "options": [
       "duck",
-      "pig",
+      "name",
       "fish",
-      "monkey"
+      "eye"
     ],
     "replaced": []
   },
@@ -1272,9 +943,9 @@
     "correct": "easy",
     "options": [
       "easy",
-      "small",
-      "popular",
-      "beautiful"
+      "English",
+      "Chinese",
+      "math"
     ],
     "replaced": []
   },
@@ -1282,9 +953,9 @@
     "correct": "eat",
     "options": [
       "eat",
-      "work",
-      "understand",
-      "spell"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -1292,8 +963,8 @@
     "correct": "egg",
     "options": [
       "egg",
-      "pork",
-      "fruit",
+      "name",
+      "cat",
       "banana"
     ],
     "replaced": []
@@ -1302,9 +973,9 @@
     "correct": "eight",
     "options": [
       "eight",
-      "seven",
-      "ten",
-      "five"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -1322,19 +993,19 @@
     "correct": "empty",
     "options": [
       "empty",
-      "traditional",
-      "most",
-      "clean"
+      "bread",
+      "milk",
+      "water"
     ],
     "replaced": []
   },
   "english": {
-    "correct": "english",
+    "correct": "English",
     "options": [
-      "english",
-      "bus",
-      "close",
-      "driver"
+      "English",
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -1342,9 +1013,9 @@
     "correct": "enjoy",
     "options": [
       "enjoy",
-      "fly",
-      "draw",
-      "stand"
+      "name",
+      "red",
+      "blue"
     ],
     "replaced": []
   },
@@ -1362,17 +1033,11 @@
     "correct": "evening",
     "options": [
       "evening",
-      "month",
-      "today",
-      "rabbit"
+      "name",
+      "blue",
+      "one"
     ],
-    "replaced": [
-      {
-        "original": "morning",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "rabbit"
-      }
-    ]
+    "replaced": []
   },
   "eye": {
     "correct": "eye",
@@ -1382,29 +1047,17 @@
       "leg",
       "head"
     ],
-    "replaced": [
-      {
-        "original": "face",
-        "reason": "在排除规则中 (规则词: face)",
-        "replacement": "head"
-      }
-    ]
+    "replaced": []
   },
   "face": {
     "correct": "face",
     "options": [
       "face",
       "leg",
-      "ear",
+      "name",
       "head"
     ],
-    "replaced": [
-      {
-        "original": "mouth",
-        "reason": "在排除规则中 (规则词: mouth)",
-        "replacement": "ear"
-      }
-    ]
+    "replaced": []
   },
   "factory": {
     "correct": "factory",
@@ -1430,9 +1083,9 @@
     "correct": "fast",
     "options": [
       "fast",
-      "low",
-      "traditional",
-      "worst"
+      "red",
+      "name",
+      "cat"
     ],
     "replaced": []
   },
@@ -1440,34 +1093,18 @@
     "correct": "father",
     "options": [
       "father",
-      "road",
-      "ruler",
-      "school"
+      "cat",
+      "dog",
+      "bird"
     ],
-    "replaced": [
-      {
-        "original": "grandpa",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "road"
-      },
-      {
-        "original": "grandfather",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "ruler"
-      },
-      {
-        "original": "dad",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "school"
-      }
-    ]
+    "replaced": []
   },
   "film": {
     "correct": "film",
     "options": [
       "film",
       "world",
-      "future",
+      "cat",
       "song"
     ],
     "replaced": []
@@ -1476,9 +1113,9 @@
     "correct": "find",
     "options": [
       "find",
-      "remember",
-      "walk",
-      "stand"
+      "name",
+      "red",
+      "blue"
     ],
     "replaced": []
   },
@@ -1486,9 +1123,9 @@
     "correct": "finish",
     "options": [
       "finish",
-      "tell",
-      "remember",
-      "close"
+      "Chinese",
+      "English",
+      "math"
     ],
     "replaced": []
   },
@@ -1498,7 +1135,7 @@
       "fish",
       "dog",
       "cat",
-      "rabbit"
+      "name"
     ],
     "replaced": []
   },
@@ -1516,9 +1153,9 @@
     "correct": "five",
     "options": [
       "five",
-      "one",
-      "four",
-      "eight"
+      "name",
+      "red",
+      "blue"
     ],
     "replaced": []
   },
@@ -1528,7 +1165,7 @@
       "flower",
       "moon",
       "sun",
-      "train"
+      "name"
     ],
     "replaced": []
   },
@@ -1536,9 +1173,9 @@
     "correct": "fly",
     "options": [
       "fly",
-      "think",
-      "see",
-      "visit"
+      "coat",
+      "shoe",
+      "sock"
     ],
     "replaced": []
   },
@@ -1556,9 +1193,9 @@
     "correct": "forget",
     "options": [
       "forget",
-      "jump",
-      "travel",
-      "see"
+      "boy",
+      "friend",
+      "girl"
     ],
     "replaced": []
   },
@@ -1566,9 +1203,9 @@
     "correct": "four",
     "options": [
       "four",
-      "eight",
-      "six",
-      "one"
+      "name",
+      "red",
+      "blue"
     ],
     "replaced": []
   },
@@ -1583,11 +1220,11 @@
     "replaced": []
   },
   "friday": {
-    "correct": "friday",
+    "correct": "Friday",
     "options": [
-      "friday",
-      "snow",
-      "new",
+      "Friday",
+      "name",
+      "cat",
       "mother"
     ],
     "replaced": []
@@ -1597,7 +1234,7 @@
     "options": [
       "friend",
       "teacher",
-      "doctor",
+      "duck",
       "book"
     ],
     "replaced": []
@@ -1610,23 +1247,7 @@
       "PE",
       "pen"
     ],
-    "replaced": [
-      {
-        "original": "down",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "park"
-      },
-      {
-        "original": "up",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "PE"
-      },
-      {
-        "original": "left",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "pen"
-      }
-    ]
+    "replaced": []
   },
   "fruit": {
     "correct": "fruit",
@@ -1642,9 +1263,9 @@
     "correct": "full",
     "options": [
       "full",
-      "different",
-      "quiet",
-      "most"
+      "vegetable",
+      "beef",
+      "fruit"
     ],
     "replaced": []
   },
@@ -1663,8 +1284,8 @@
     "options": [
       "gift",
       "world",
-      "Japanese",
-      "university"
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -1682,9 +1303,9 @@
     "correct": "give",
     "options": [
       "give",
-      "leave",
-      "sell",
-      "take"
+      "Chinese",
+      "English",
+      "math"
     ],
     "replaced": []
   },
@@ -1702,9 +1323,9 @@
     "correct": "go",
     "options": [
       "go",
-      "love",
-      "sit",
-      "have"
+      "name",
+      "red",
+      "blue"
     ],
     "replaced": []
   },
@@ -1712,9 +1333,9 @@
     "correct": "good",
     "options": [
       "good",
-      "full",
-      "short",
-      "happy"
+      "name",
+      "red",
+      "blue"
     ],
     "replaced": []
   },
@@ -1762,58 +1383,21 @@
     "correct": "goodbye",
     "options": [
       "goodbye",
-      "nose",
-      "nurse",
-      "park"
+      "name",
+      "yellow",
+      "one"
     ],
-    "replaced": [
-      {
-        "original": "bye",
-        "reason": "在排除规则中 (规则词: bye)",
-        "replacement": "good morning"
-      },
-      {
-        "original": "good morning",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "nose"
-      },
-      {
-        "original": "hi",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "nurse"
-      },
-      {
-        "original": "hello",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "park"
-      }
-    ]
+    "replaced": []
   },
   "grandfather": {
     "correct": "grandfather",
     "options": [
       "grandfather",
       "book",
-      "boy",
+      "name",
       "bread"
     ],
-    "replaced": [
-      {
-        "original": "grandmother",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "book"
-      },
-      {
-        "original": "grandma",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "boy"
-      },
-      {
-        "original": "dad",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "bread"
-      }
-    ]
+    "replaced": []
   },
   "grandma": {
     "correct": "grandma",
@@ -1821,77 +1405,29 @@
       "grandma",
       "apple",
       "art",
-      "Australia"
+      "name"
     ],
-    "replaced": [
-      {
-        "original": "mother",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "apple"
-      },
-      {
-        "original": "grandfather",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "art"
-      },
-      {
-        "original": "father",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "Australia"
-      }
-    ]
+    "replaced": []
   },
   "grandmother": {
     "correct": "grandmother",
     "options": [
       "grandmother",
-      "world",
+      "name",
       "zoo",
       "Chinese"
     ],
-    "replaced": [
-      {
-        "original": "mum",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "world"
-      },
-      {
-        "original": "dad",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "zoo"
-      },
-      {
-        "original": "grandma",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "Chinese"
-      }
-    ]
+    "replaced": []
   },
   "grandpa": {
     "correct": "grandpa",
     "options": [
       "grandpa",
-      "film",
+      "name",
       "fish",
-      "flower"
+      "cat"
     ],
-    "replaced": [
-      {
-        "original": "grandmother",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "film"
-      },
-      {
-        "original": "mother",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "fish"
-      },
-      {
-        "original": "sister",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "flower"
-      }
-    ]
+    "replaced": []
   },
   "grass": {
     "correct": "grass",
@@ -1907,35 +1443,19 @@
     "correct": "green",
     "options": [
       "green",
-      "world",
-      "zoo",
-      "Chinese"
+      "name",
+      "one",
+      "two"
     ],
-    "replaced": [
-      {
-        "original": "orange",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "world"
-      },
-      {
-        "original": "purple",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "zoo"
-      },
-      {
-        "original": "black",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "Chinese"
-      }
-    ]
+    "replaced": []
   },
   "grow": {
     "correct": "grow",
     "options": [
       "grow",
-      "visit",
-      "walk",
-      "draw"
+      "university",
+      "college",
+      "company"
     ],
     "replaced": []
   },
@@ -1963,9 +1483,9 @@
     "correct": "happy",
     "options": [
       "happy",
-      "high",
-      "slow",
-      "national"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -1983,9 +1503,9 @@
     "correct": "have",
     "options": [
       "have",
-      "change",
-      "call",
-      "are"
+      "sun",
+      "moon",
+      "star"
     ],
     "replaced": []
   },
@@ -2003,9 +1523,9 @@
     "correct": "healthy",
     "options": [
       "healthy",
-      "big",
-      "slow",
-      "same"
+      "red",
+      "blue",
+      "name"
     ],
     "replaced": []
   },
@@ -2013,9 +1533,9 @@
     "correct": "heavy",
     "options": [
       "heavy",
-      "cold",
-      "successful",
-      "quiet"
+      "friend",
+      "supermarket",
+      "boy"
     ],
     "replaced": []
   },
@@ -2023,35 +1543,19 @@
     "correct": "hello",
     "options": [
       "hello",
-      "window",
-      "woman",
-      "world"
+      "name",
+      "one",
+      "two"
     ],
-    "replaced": [
-      {
-        "original": "hi",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "window"
-      },
-      {
-        "original": "goodbye",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "woman"
-      },
-      {
-        "original": "good morning",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "world"
-      }
-    ]
+    "replaced": []
   },
   "help": {
     "correct": "help",
     "options": [
       "help",
-      "find",
-      "run",
-      "come"
+      "name",
+      "red",
+      "blue"
     ],
     "replaced": []
   },
@@ -2059,35 +1563,19 @@
     "correct": "hi",
     "options": [
       "hi",
-      "milk",
-      "monkey",
-      "moon"
+      "name",
+      "red",
+      "blue"
     ],
-    "replaced": [
-      {
-        "original": "good afternoon",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "milk"
-      },
-      {
-        "original": "goodbye",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "monkey"
-      },
-      {
-        "original": "good evening",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "moon"
-      }
-    ]
+    "replaced": []
   },
   "high": {
     "correct": "high",
     "options": [
       "high",
-      "strong",
-      "possible",
-      "big"
+      "fruit",
+      "vegetable",
+      "beef"
     ],
     "replaced": []
   },
@@ -2095,9 +1583,9 @@
     "correct": "home",
     "options": [
       "home",
-      "supermarket",
-      "library",
-      "zoo"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -2105,9 +1593,9 @@
     "correct": "hope",
     "options": [
       "hope",
-      "teach",
-      "are",
-      "send"
+      "red",
+      "blue",
+      "name"
     ],
     "replaced": []
   },
@@ -2115,77 +1603,39 @@
     "correct": "hospital",
     "options": [
       "hospital",
-      "table",
+      "name",
       "teacher",
-      "train"
+      "cat"
     ],
-    "replaced": [
-      {
-        "original": "park",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "table"
-      },
-      {
-        "original": "school",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "teacher"
-      },
-      {
-        "original": "city",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "train"
-      }
-    ]
+    "replaced": []
   },
   "hot": {
     "correct": "hot",
     "options": [
       "hot",
       "shoe",
-      "most",
-      "tired"
+      "name",
+      "cat"
     ],
-    "replaced": [
-      {
-        "original": "warm",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "shoe"
-      }
-    ]
+    "replaced": []
   },
   "how": {
     "correct": "how",
     "options": [
       "how",
-      "sister",
-      "skirt",
-      "snow"
+      "name",
+      "red",
+      "blue"
     ],
-    "replaced": [
-      {
-        "original": "what",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "sister"
-      },
-      {
-        "original": "where",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "skirt"
-      },
-      {
-        "original": "whose",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "snow"
-      }
-    ]
+    "replaced": []
   },
   "hungry": {
     "correct": "hungry",
     "options": [
       "hungry",
-      "modern",
-      "best",
-      "small"
+      "name",
+      "cat",
+      "red"
     ],
     "replaced": []
   },
@@ -2193,9 +1643,9 @@
     "correct": "if",
     "options": [
       "if",
-      "but",
-      "because",
-      "in"
+      "name",
+      "red",
+      "blue"
     ],
     "replaced": []
   },
@@ -2203,9 +1653,9 @@
     "correct": "important",
     "options": [
       "important",
-      "special",
-      "difficult",
-      "tall"
+      "name",
+      "red",
+      "blue"
     ],
     "replaced": []
   },
@@ -2214,24 +1664,18 @@
     "options": [
       "in",
       "pen",
-      "to",
-      "near"
+      "name",
+      "cat"
     ],
-    "replaced": [
-      {
-        "original": "under",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "pen"
-      }
-    ]
+    "replaced": []
   },
   "interesting": {
     "correct": "interesting",
     "options": [
       "interesting",
-      "difficult",
-      "sad",
-      "light"
+      "Chinese",
+      "English",
+      "math"
     ],
     "replaced": []
   },
@@ -2239,9 +1683,9 @@
     "correct": "international",
     "options": [
       "international",
-      "successful",
-      "heavy",
-      "different"
+      "language",
+      "Japanese",
+      "French"
     ],
     "replaced": []
   },
@@ -2271,7 +1715,7 @@
       "juice",
       "milk",
       "water",
-      "English"
+      "name"
     ],
     "replaced": []
   },
@@ -2279,9 +1723,9 @@
     "correct": "jump",
     "options": [
       "jump",
-      "drink",
-      "wish",
-      "travel"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -2289,9 +1733,9 @@
     "correct": "kind",
     "options": [
       "kind",
-      "best",
-      "clean",
-      "easy"
+      "Chinese",
+      "math",
+      "English"
     ],
     "replaced": []
   },
@@ -2299,9 +1743,9 @@
     "correct": "know",
     "options": [
       "know",
-      "sit",
-      "use",
-      "teach"
+      "English",
+      "Chinese",
+      "math"
     ],
     "replaced": []
   },
@@ -2311,7 +1755,7 @@
       "language",
       "China",
       "song",
-      "dream"
+      "doctor"
     ],
     "replaced": []
   },
@@ -2319,9 +1763,9 @@
     "correct": "learn",
     "options": [
       "learn",
-      "run",
-      "sing",
-      "make"
+      "shirt",
+      "skirt",
+      "dress"
     ],
     "replaced": []
   },
@@ -2329,9 +1773,9 @@
     "correct": "leave",
     "options": [
       "leave",
-      "hope",
-      "send",
-      "like"
+      "road",
+      "world",
+      "country"
     ],
     "replaced": []
   },
@@ -2340,26 +1784,10 @@
     "options": [
       "left",
       "friend",
-      "fruit",
-      "future"
+      "name",
+      "cat"
     ],
-    "replaced": [
-      {
-        "original": "down",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "friend"
-      },
-      {
-        "original": "right",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "fruit"
-      },
-      {
-        "original": "back",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "future"
-      }
-    ]
+    "replaced": []
   },
   "leg": {
     "correct": "leg",
@@ -2375,30 +1803,19 @@
     "correct": "library",
     "options": [
       "library",
-      "bus",
-      "street",
-      "businessman"
+      "name",
+      "cat",
+      "dog"
     ],
-    "replaced": [
-      {
-        "original": "zoo",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "bus"
-      },
-      {
-        "original": "school",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "businessman"
-      }
-    ]
+    "replaced": []
   },
   "light": {
     "correct": "light",
     "options": [
       "light",
-      "necessary",
-      "clean",
-      "beautiful"
+      "car",
+      "bus",
+      "bike"
     ],
     "replaced": []
   },
@@ -2406,9 +1823,9 @@
     "correct": "like",
     "options": [
       "like",
-      "see",
-      "thank",
-      "use"
+      "name",
+      "red",
+      "cat"
     ],
     "replaced": []
   },
@@ -2416,9 +1833,9 @@
     "correct": "listen",
     "options": [
       "listen",
-      "give",
-      "start",
-      "walk"
+      "name",
+      "cat",
+      "red"
     ],
     "replaced": []
   },
@@ -2427,24 +1844,18 @@
     "options": [
       "live",
       "school",
-      "ask",
-      "spell"
+      "city",
+      "town"
     ],
-    "replaced": [
-      {
-        "original": "am",
-        "reason": "与图片直观元素冲突，改为跨类别干扰词",
-        "replacement": "school"
-      }
-    ]
+    "replaced": []
   },
   "long": {
     "correct": "long",
     "options": [
       "long",
-      "modern",
-      "tall",
-      "same"
+      "shirt",
+      "dress",
+      "skirt"
     ],
     "replaced": []
   },
@@ -2452,9 +1863,9 @@
     "correct": "look",
     "options": [
       "look",
-      "dance",
-      "draw",
-      "buy"
+      "moon",
+      "star",
+      "sun"
     ],
     "replaced": []
   },
@@ -2462,9 +1873,9 @@
     "correct": "love",
     "options": [
       "love",
-      "read",
-      "think",
-      "jump"
+      "red",
+      "name",
+      "blue"
     ],
     "replaced": []
   },
@@ -2472,9 +1883,9 @@
     "correct": "low",
     "options": [
       "low",
-      "boring",
-      "light",
-      "successful"
+      "red",
+      "blue",
+      "name"
     ],
     "replaced": []
   },
@@ -2482,9 +1893,9 @@
     "correct": "make",
     "options": [
       "make",
-      "sit",
-      "change",
-      "think"
+      "red",
+      "name",
+      "cat"
     ],
     "replaced": []
   },
@@ -2502,9 +1913,9 @@
     "correct": "math",
     "options": [
       "math",
-      "art",
+      "name",
       "Chinese",
-      "PE"
+      "cat"
     ],
     "replaced": []
   },
@@ -2512,9 +1923,9 @@
     "correct": "meet",
     "options": [
       "meet",
-      "sleep",
-      "see",
-      "ask"
+      "name",
+      "red",
+      "blue"
     ],
     "replaced": []
   },
@@ -2522,9 +1933,9 @@
     "correct": "milk",
     "options": [
       "milk",
-      "juice",
+      "name",
       "water",
-      "grandma"
+      "cat"
     ],
     "replaced": []
   },
@@ -2532,9 +1943,9 @@
     "correct": "miss",
     "options": [
       "miss",
-      "eat",
-      "sing",
-      "show"
+      "red",
+      "blue",
+      "name"
     ],
     "replaced": []
   },
@@ -2542,27 +1953,21 @@
     "correct": "modern",
     "options": [
       "modern",
-      "clever",
-      "impossible",
-      "best"
+      "red",
+      "name",
+      "blue"
     ],
     "replaced": []
   },
   "monday": {
-    "correct": "monday",
+    "correct": "Monday",
     "options": [
-      "monday",
+      "Monday",
       "nine",
-      "in",
+      "name",
       "monkey"
     ],
-    "replaced": [
-      {
-        "original": "Wednesday",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "monkey"
-      }
-    ]
+    "replaced": []
   },
   "monkey": {
     "correct": "monkey",
@@ -2578,9 +1983,9 @@
     "correct": "month",
     "options": [
       "month",
-      "birthday",
-      "night",
-      "evening"
+      "vegetable",
+      "fruit",
+      "beef"
     ],
     "replaced": []
   },
@@ -2592,21 +1997,15 @@
       "cloud",
       "school"
     ],
-    "replaced": [
-      {
-        "original": "star",
-        "reason": "与图片直观元素冲突，改为跨类别干扰词",
-        "replacement": "school"
-      }
-    ]
+    "replaced": []
   },
   "more": {
     "correct": "more",
     "options": [
       "more",
-      "kind",
-      "strong",
-      "nice"
+      "Chinese",
+      "English",
+      "math"
     ],
     "replaced": []
   },
@@ -2614,9 +2013,9 @@
     "correct": "morning",
     "options": [
       "morning",
-      "tomorrow",
-      "today",
-      "yesterday"
+      "name",
+      "red",
+      "one"
     ],
     "replaced": []
   },
@@ -2624,9 +2023,9 @@
     "correct": "most",
     "options": [
       "most",
-      "boring",
-      "successful",
-      "national"
+      "moon",
+      "star",
+      "sun"
     ],
     "replaced": []
   },
@@ -2635,26 +2034,10 @@
     "options": [
       "mother",
       "mouth",
-      "museum",
-      "music"
+      "face",
+      "head"
     ],
-    "replaced": [
-      {
-        "original": "grandfather",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "mouth"
-      },
-      {
-        "original": "mum",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "museum"
-      },
-      {
-        "original": "sister",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "music"
-      }
-    ]
+    "replaced": []
   },
   "mouth": {
     "correct": "mouth",
@@ -2670,27 +2053,11 @@
     "correct": "mum",
     "options": [
       "mum",
-      "woman",
-      "world",
-      "zoo"
+      "cat",
+      "dog",
+      "bird"
     ],
-    "replaced": [
-      {
-        "original": "grandpa",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "woman"
-      },
-      {
-        "original": "grandma",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "world"
-      },
-      {
-        "original": "sister",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "zoo"
-      }
-    ]
+    "replaced": []
   },
   "museum": {
     "correct": "museum",
@@ -2706,9 +2073,9 @@
     "correct": "music",
     "options": [
       "music",
-      "PE",
+      "name",
       "Chinese",
-      "English"
+      "cat"
     ],
     "replaced": []
   },
@@ -2716,9 +2083,9 @@
     "correct": "my",
     "options": [
       "my",
-      "your",
-      "you",
-      "I"
+      "name",
+      "red",
+      "blue"
     ],
     "replaced": []
   },
@@ -2726,9 +2093,9 @@
     "correct": "name",
     "options": [
       "name",
-      "gift",
-      "museum",
-      "theatre"
+      "red",
+      "one",
+      "two"
     ],
     "replaced": []
   },
@@ -2736,9 +2103,9 @@
     "correct": "national",
     "options": [
       "national",
-      "traditional",
-      "impossible",
-      "easy"
+      "father",
+      "mother",
+      "mum"
     ],
     "replaced": []
   },
@@ -2746,9 +2113,9 @@
     "correct": "near",
     "options": [
       "near",
-      "to",
-      "under",
-      "in"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -2756,9 +2123,9 @@
     "correct": "necessary",
     "options": [
       "necessary",
-      "impossible",
-      "tired",
-      "difficult"
+      "Chinese",
+      "English",
+      "math"
     ],
     "replaced": []
   },
@@ -2766,9 +2133,9 @@
     "correct": "never",
     "options": [
       "never",
-      "often",
-      "quickly",
-      "always"
+      "name",
+      "red",
+      "cat"
     ],
     "replaced": []
   },
@@ -2776,9 +2143,9 @@
     "correct": "new",
     "options": [
       "new",
-      "heavy",
-      "hot",
-      "most"
+      "Chinese",
+      "English",
+      "math"
     ],
     "replaced": []
   },
@@ -2786,9 +2153,9 @@
     "correct": "nice",
     "options": [
       "nice",
-      "empty",
-      "same",
-      "sad"
+      "name",
+      "red",
+      "blue"
     ],
     "replaced": []
   },
@@ -2796,9 +2163,9 @@
     "correct": "night",
     "options": [
       "night",
-      "month",
-      "yesterday",
-      "today"
+      "name",
+      "red",
+      "green"
     ],
     "replaced": []
   },
@@ -2806,9 +2173,9 @@
     "correct": "nine",
     "options": [
       "nine",
-      "eight",
-      "five",
-      "one"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -2836,9 +2203,9 @@
     "correct": "often",
     "options": [
       "often",
-      "sometimes",
-      "quickly",
-      "slowly"
+      "UK",
+      "Australia",
+      "vegetable"
     ],
     "replaced": []
   },
@@ -2846,9 +2213,9 @@
     "correct": "old",
     "options": [
       "old",
-      "small",
-      "international",
-      "boring"
+      "red",
+      "name",
+      "cat"
     ],
     "replaced": []
   },
@@ -2856,35 +2223,35 @@
     "correct": "on",
     "options": [
       "on",
-      "to",
-      "near",
+      "friend",
+      "boy",
       "cake"
     ],
-    "replaced": [
-      {
-        "original": "under",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "cake"
-      }
-    ]
+    "replaced": []
   },
   "one": {
     "correct": "one",
     "options": [
       "one",
-      "five",
-      "nine",
-      "eight"
+      "name",
+      "green",
+      "am"
     ],
-    "replaced": []
+    "replaced": [
+      {
+        "original": "hello",
+        "reason": "与图片直观元素冲突，改为跨类别干扰词",
+        "replacement": "am"
+      }
+    ]
   },
   "open": {
     "correct": "open",
     "options": [
       "open",
-      "look",
-      "give",
-      "thank"
+      "bear",
+      "rabbit",
+      "pig"
     ],
     "replaced": []
   },
@@ -2892,61 +2259,29 @@
     "correct": "orange",
     "options": [
       "orange",
-      "world",
-      "zoo",
-      "Chinese"
+      "name",
+      "cat",
+      "dog"
     ],
-    "replaced": [
-      {
-        "original": "red",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "world"
-      },
-      {
-        "original": "purple",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "zoo"
-      },
-      {
-        "original": "black",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "Chinese"
-      }
-    ]
+    "replaced": []
   },
   "park": {
     "correct": "park",
     "options": [
       "park",
-      "train",
-      "tree",
-      "UK"
+      "name",
+      "cat",
+      "dog"
     ],
-    "replaced": [
-      {
-        "original": "classroom",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "train"
-      },
-      {
-        "original": "hospital",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "tree"
-      },
-      {
-        "original": "city",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "UK"
-      }
-    ]
+    "replaced": []
   },
   "pe": {
-    "correct": "pe",
+    "correct": "PE",
     "options": [
-      "pe",
-      "low",
-      "snow",
-      "is"
+      "PE",
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -2975,8 +2310,8 @@
     "options": [
       "photo",
       "name",
-      "Japanese",
-      "future"
+      "vegetable",
+      "fruit"
     ],
     "replaced": []
   },
@@ -2995,26 +2330,10 @@
     "options": [
       "pink",
       "leg",
-      "library",
-      "man"
+      "name",
+      "cat"
     ],
-    "replaced": [
-      {
-        "original": "orange",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "leg"
-      },
-      {
-        "original": "green",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "library"
-      },
-      {
-        "original": "yellow",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "man"
-      }
-    ]
+    "replaced": []
   },
   "plane": {
     "correct": "plane",
@@ -3024,31 +2343,15 @@
       "sock",
       "sofa"
     ],
-    "replaced": [
-      {
-        "original": "bus",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "snow"
-      },
-      {
-        "original": "ship",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "sock"
-      },
-      {
-        "original": "car",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "sofa"
-      }
-    ]
+    "replaced": []
   },
   "play": {
     "correct": "play",
     "options": [
       "play",
-      "take",
-      "have",
-      "jump"
+      "park",
+      "zoo",
+      "library"
     ],
     "replaced": []
   },
@@ -3066,9 +2369,9 @@
     "correct": "popular",
     "options": [
       "popular",
-      "hot",
-      "beautiful",
-      "full"
+      "story",
+      "song",
+      "film"
     ],
     "replaced": []
   },
@@ -3086,9 +2389,9 @@
     "correct": "possible",
     "options": [
       "possible",
-      "hungry",
-      "sad",
-      "interesting"
+      "brown",
+      "black",
+      "white"
     ],
     "replaced": []
   },
@@ -3106,27 +2409,11 @@
     "correct": "purple",
     "options": [
       "purple",
-      "grandfather",
-      "grandma",
-      "grandmother"
+      "name",
+      "cat",
+      "dog"
     ],
-    "replaced": [
-      {
-        "original": "black",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "grandfather"
-      },
-      {
-        "original": "blue",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "grandma"
-      },
-      {
-        "original": "green",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "grandmother"
-      }
-    ]
+    "replaced": []
   },
   "rabbit": {
     "correct": "rabbit",
@@ -3152,40 +2439,19 @@
     "correct": "rainy",
     "options": [
       "rainy",
-      "skirt",
-      "snow",
-      "sock"
+      "name",
+      "cat",
+      "dog"
     ],
-    "replaced": [
-      {
-        "original": "cloudy",
-        "reason": "在排除规则中 (规则词: cloud)",
-        "replacement": "snowy"
-      },
-      {
-        "original": "snowy",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "skirt"
-      },
-      {
-        "original": "sunny",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "snow"
-      },
-      {
-        "original": "windy",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "sock"
-      }
-    ]
+    "replaced": []
   },
   "read": {
     "correct": "read",
     "options": [
       "read",
-      "sell",
-      "buy",
-      "love"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -3193,35 +2459,19 @@
     "correct": "red",
     "options": [
       "red",
-      "dream",
-      "dress",
-      "driver"
+      "name",
+      "one",
+      "two"
     ],
-    "replaced": [
-      {
-        "original": "green",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "dream"
-      },
-      {
-        "original": "white",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "dress"
-      },
-      {
-        "original": "pink",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "driver"
-      }
-    ]
+    "replaced": []
   },
   "remember": {
     "correct": "remember",
     "options": [
       "remember",
-      "drink",
-      "sleep",
-      "walk"
+      "name",
+      "red",
+      "blue"
     ],
     "replaced": []
   },
@@ -3229,9 +2479,9 @@
     "correct": "return",
     "options": [
       "return",
-      "study",
-      "tell",
-      "sit"
+      "rice",
+      "book",
+      "pen"
     ],
     "replaced": []
   },
@@ -3239,43 +2489,21 @@
     "correct": "rice",
     "options": [
       "rice",
-      "ship",
+      "name",
       "apple",
       "egg"
     ],
-    "replaced": [
-      {
-        "original": "vegetable",
-        "reason": "与图片直观元素冲突，改为跨类别干扰词",
-        "replacement": "ship"
-      }
-    ]
+    "replaced": []
   },
   "right": {
     "correct": "right",
     "options": [
       "right",
-      "police",
-      "pork",
-      "postman"
+      "sun",
+      "moon",
+      "star"
     ],
-    "replaced": [
-      {
-        "original": "front",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "police"
-      },
-      {
-        "original": "up",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "pork"
-      },
-      {
-        "original": "left",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "postman"
-      }
-    ]
+    "replaced": []
   },
   "road": {
     "correct": "road",
@@ -3301,9 +2529,9 @@
     "correct": "run",
     "options": [
       "run",
-      "swim",
-      "look",
-      "am"
+      "name",
+      "cat",
+      "red"
     ],
     "replaced": []
   },
@@ -3311,9 +2539,9 @@
     "correct": "sad",
     "options": [
       "sad",
-      "kind",
-      "cool",
-      "high"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -3321,35 +2549,29 @@
     "correct": "same",
     "options": [
       "same",
-      "boring",
-      "popular",
-      "clean"
+      "name",
+      "red",
+      "blue"
     ],
     "replaced": []
   },
   "saturday": {
-    "correct": "saturday",
+    "correct": "Saturday",
     "options": [
-      "saturday",
+      "Saturday",
       "school",
-      "today",
-      "bad"
+      "name",
+      "cat"
     ],
-    "replaced": [
-      {
-        "original": "Tuesday",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "school"
-      }
-    ]
+    "replaced": []
   },
   "say": {
     "correct": "say",
     "options": [
       "say",
-      "make",
-      "come",
-      "start"
+      "photo",
+      "gift",
+      "doctor"
     ],
     "replaced": []
   },
@@ -3357,35 +2579,19 @@
     "correct": "school",
     "options": [
       "school",
-      "bike",
+      "name",
       "bird",
       "book"
     ],
-    "replaced": [
-      {
-        "original": "park",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "bike"
-      },
-      {
-        "original": "classroom",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "bird"
-      },
-      {
-        "original": "hospital",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "book"
-      }
-    ]
+    "replaced": []
   },
   "see": {
     "correct": "see",
     "options": [
       "see",
-      "go",
-      "wish",
-      "listen"
+      "mouth",
+      "nose",
+      "face"
     ],
     "replaced": []
   },
@@ -3393,9 +2599,9 @@
     "correct": "sell",
     "options": [
       "sell",
-      "come",
-      "learn",
-      "grow"
+      "pink",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -3403,9 +2609,9 @@
     "correct": "send",
     "options": [
       "send",
-      "enjoy",
-      "sing",
-      "like"
+      "park",
+      "zoo",
+      "library"
     ],
     "replaced": []
   },
@@ -3413,9 +2619,9 @@
     "correct": "seven",
     "options": [
       "seven",
-      "one",
-      "six",
-      "two"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -3423,27 +2629,11 @@
     "correct": "ship",
     "options": [
       "ship",
-      "postman",
+      "bathroom",
       "rabbit",
       "rain"
     ],
-    "replaced": [
-      {
-        "original": "bus",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "postman"
-      },
-      {
-        "original": "plane",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "rabbit"
-      },
-      {
-        "original": "train",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "rain"
-      }
-    ]
+    "replaced": []
   },
   "shirt": {
     "correct": "shirt",
@@ -3479,9 +2669,9 @@
     "correct": "short",
     "options": [
       "short",
-      "tall",
-      "low",
-      "light"
+      "red",
+      "name",
+      "cat"
     ],
     "replaced": []
   },
@@ -3499,9 +2689,9 @@
     "correct": "sing",
     "options": [
       "sing",
-      "look",
-      "change",
-      "believe"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -3509,35 +2699,19 @@
     "correct": "sister",
     "options": [
       "sister",
-      "America",
+      "name",
       "apple",
       "art"
     ],
-    "replaced": [
-      {
-        "original": "grandpa",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "America"
-      },
-      {
-        "original": "mum",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "apple"
-      },
-      {
-        "original": "grandfather",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "art"
-      }
-    ]
+    "replaced": []
   },
   "sit": {
     "correct": "sit",
     "options": [
       "sit",
-      "open",
-      "study",
-      "say"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -3545,9 +2719,9 @@
     "correct": "six",
     "options": [
       "six",
-      "one",
-      "eight",
-      "three"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -3565,9 +2739,9 @@
     "correct": "sleep",
     "options": [
       "sleep",
-      "open",
-      "fly",
-      "draw"
+      "Chinese",
+      "English",
+      "math"
     ],
     "replaced": []
   },
@@ -3575,9 +2749,9 @@
     "correct": "slow",
     "options": [
       "slow",
-      "short",
-      "weak",
-      "full"
+      "skirt",
+      "dress",
+      "coat"
     ],
     "replaced": []
   },
@@ -3585,9 +2759,9 @@
     "correct": "slowly",
     "options": [
       "slowly",
-      "often",
-      "usually",
-      "always"
+      "Chinese",
+      "English",
+      "math"
     ],
     "replaced": []
   },
@@ -3595,9 +2769,9 @@
     "correct": "small",
     "options": [
       "small",
-      "hungry",
-      "clean",
-      "successful"
+      "Chinese",
+      "English",
+      "math"
     ],
     "replaced": []
   },
@@ -3609,13 +2783,7 @@
       "moon",
       "star"
     ],
-    "replaced": [
-      {
-        "original": "tree",
-        "reason": "与图片直观元素冲突，改为跨类别干扰词",
-        "replacement": "rice"
-      }
-    ]
+    "replaced": []
   },
   "sock": {
     "correct": "sock",
@@ -3651,9 +2819,9 @@
     "correct": "sometimes",
     "options": [
       "sometimes",
-      "carefully",
-      "always",
-      "slowly"
+      "moon",
+      "sun",
+      "star"
     ],
     "replaced": []
   },
@@ -3661,9 +2829,9 @@
     "correct": "song",
     "options": [
       "song",
-      "theatre",
-      "factory",
-      "language"
+      "cat",
+      "dog",
+      "bird"
     ],
     "replaced": []
   },
@@ -3671,9 +2839,9 @@
     "correct": "sorry",
     "options": [
       "sorry",
-      "look forward to",
-      "be good at",
-      "how are you"
+      "name",
+      "yellow",
+      "green"
     ],
     "replaced": []
   },
@@ -3681,9 +2849,9 @@
     "correct": "special",
     "options": [
       "special",
-      "dirty",
-      "hungry",
-      "full"
+      "leg",
+      "foot",
+      "mother"
     ],
     "replaced": []
   },
@@ -3691,9 +2859,9 @@
     "correct": "spell",
     "options": [
       "spell",
-      "believe",
-      "give",
-      "look"
+      "friend",
+      "boy",
+      "girl"
     ],
     "replaced": []
   },
@@ -3701,8 +2869,8 @@
     "correct": "sport",
     "options": [
       "sport",
-      "party",
-      "wish",
+      "vegetable",
+      "fruit",
       "story"
     ],
     "replaced": []
@@ -3711,35 +2879,19 @@
     "correct": "spring",
     "options": [
       "spring",
-      "vegetable",
-      "village",
+      "name",
+      "cat",
       "water"
     ],
-    "replaced": [
-      {
-        "original": "autumn",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "vegetable"
-      },
-      {
-        "original": "summer",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "village"
-      },
-      {
-        "original": "winter",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "water"
-      }
-    ]
+    "replaced": []
   },
   "stand": {
     "correct": "stand",
     "options": [
       "stand",
-      "return",
-      "buy",
-      "read"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -3757,9 +2909,9 @@
     "correct": "start",
     "options": [
       "start",
-      "become",
-      "grow",
-      "visit"
+      "art",
+      "PE",
+      "shirt"
     ],
     "replaced": []
   },
@@ -3768,8 +2920,8 @@
     "options": [
       "story",
       "gift",
-      "college",
-      "dream"
+      "Chinese",
+      "English"
     ],
     "replaced": []
   },
@@ -3777,9 +2929,9 @@
     "correct": "strong",
     "options": [
       "strong",
-      "important",
-      "impossible",
-      "old"
+      "English",
+      "Chinese",
+      "math"
     ],
     "replaced": []
   },
@@ -3787,9 +2939,9 @@
     "correct": "student",
     "options": [
       "student",
-      "baby",
-      "friend",
-      "boy"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -3797,9 +2949,9 @@
     "correct": "study",
     "options": [
       "study",
-      "love",
-      "forget",
-      "like"
+      "city",
+      "ship",
+      "town"
     ],
     "replaced": []
   },
@@ -3807,9 +2959,9 @@
     "correct": "successful",
     "options": [
       "successful",
-      "thirsty",
-      "hungry",
-      "old"
+      "name",
+      "red",
+      "blue"
     ],
     "replaced": []
   },
@@ -3819,25 +2971,9 @@
       "summer",
       "ruler",
       "school",
-      "ship"
+      "sun"
     ],
-    "replaced": [
-      {
-        "original": "spring",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "ruler"
-      },
-      {
-        "original": "winter",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "school"
-      },
-      {
-        "original": "autumn",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "ship"
-      }
-    ]
+    "replaced": []
   },
   "sun": {
     "correct": "sun",
@@ -3850,12 +2986,12 @@
     "replaced": []
   },
   "sunday": {
-    "correct": "sunday",
+    "correct": "Sunday",
     "options": [
-      "sunday",
-      "bus",
-      "for",
-      "sorry"
+      "Sunday",
+      "name",
+      "cat",
+      "red"
     ],
     "replaced": []
   },
@@ -3864,47 +3000,20 @@
     "options": [
       "sunny",
       "juice",
-      "language",
+      "cat",
       "leg"
     ],
-    "replaced": [
-      {
-        "original": "rainy",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "juice"
-      },
-      {
-        "original": "windy",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "language"
-      },
-      {
-        "original": "cloudy",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "leg"
-      }
-    ]
+    "replaced": []
   },
   "supermarket": {
     "correct": "supermarket",
     "options": [
       "supermarket",
-      "road",
+      "name",
       "pencil",
-      "photo"
+      "cat"
     ],
-    "replaced": [
-      {
-        "original": "city",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "pencil"
-      },
-      {
-        "original": "school",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "photo"
-      }
-    ]
+    "replaced": []
   },
   "sweater": {
     "correct": "sweater",
@@ -3920,9 +3029,9 @@
     "correct": "swim",
     "options": [
       "swim",
-      "close",
-      "jump",
-      "sell"
+      "cat",
+      "black",
+      "dog"
     ],
     "replaced": []
   },
@@ -3934,21 +3043,15 @@
       "mother",
       "sofa"
     ],
-    "replaced": [
-      {
-        "original": "door",
-        "reason": "与图片直观元素冲突，改为跨类别干扰词",
-        "replacement": "mother"
-      }
-    ]
+    "replaced": []
   },
   "take": {
     "correct": "take",
     "options": [
       "take",
-      "jump",
-      "are",
-      "miss"
+      "cap",
+      "hat",
+      "sock"
     ],
     "replaced": []
   },
@@ -3956,9 +3059,9 @@
     "correct": "tall",
     "options": [
       "tall",
-      "most",
-      "difficult",
-      "better"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -3966,9 +3069,9 @@
     "correct": "teacher",
     "options": [
       "teacher",
-      "woman",
-      "girl",
-      "man"
+      "name",
+      "dog",
+      "bird"
     ],
     "replaced": []
   },
@@ -3976,9 +3079,9 @@
     "correct": "tell",
     "options": [
       "tell",
-      "become",
-      "walk",
-      "sleep"
+      "vegetable",
+      "fruit",
+      "beef"
     ],
     "replaced": []
   },
@@ -3986,9 +3089,9 @@
     "correct": "ten",
     "options": [
       "ten",
-      "eight",
-      "one",
-      "four"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -3996,9 +3099,9 @@
     "correct": "thank",
     "options": [
       "thank",
-      "find",
-      "go",
-      "leave"
+      "name",
+      "red",
+      "one"
     ],
     "replaced": []
   },
@@ -4016,9 +3119,9 @@
     "correct": "think",
     "options": [
       "think",
-      "fly",
-      "am",
-      "enjoy"
+      "name",
+      "red",
+      "cat"
     ],
     "replaced": []
   },
@@ -4026,9 +3129,9 @@
     "correct": "thirsty",
     "options": [
       "thirsty",
-      "modern",
-      "tired",
-      "interesting"
+      "name",
+      "red",
+      "cat"
     ],
     "replaced": []
   },
@@ -4036,18 +3139,29 @@
     "correct": "three",
     "options": [
       "three",
-      "eight",
-      "four",
-      "six"
+      "name",
+      "am",
+      "morning"
     ],
-    "replaced": []
+    "replaced": [
+      {
+        "original": "bye",
+        "reason": "与图片直观元素冲突，改为跨类别干扰词",
+        "replacement": "am"
+      },
+      {
+        "original": "hello",
+        "reason": "与图片直观元素冲突，改为跨类别干扰词",
+        "replacement": "morning"
+      }
+    ]
   },
   "thursday": {
-    "correct": "thursday",
+    "correct": "Thursday",
     "options": [
-      "thursday",
-      "may",
-      "open",
+      "Thursday",
+      "cat",
+      "dog",
       "park"
     ],
     "replaced": []
@@ -4056,9 +3170,9 @@
     "correct": "tired",
     "options": [
       "tired",
-      "international",
-      "special",
-      "fast"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -4066,9 +3180,9 @@
     "correct": "to",
     "options": [
       "to",
-      "in",
-      "under",
-      "behind"
+      "name",
+      "red",
+      "blue"
     ],
     "replaced": []
   },
@@ -4076,9 +3190,9 @@
     "correct": "today",
     "options": [
       "today",
-      "month",
-      "evening",
-      "year"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -4086,9 +3200,9 @@
     "correct": "tomorrow",
     "options": [
       "tomorrow",
-      "yesterday",
-      "afternoon",
-      "evening"
+      "banana",
+      "bread",
+      "milk"
     ],
     "replaced": []
   },
@@ -4097,34 +3211,18 @@
     "options": [
       "town",
       "desk",
-      "doctor",
+      "dress",
       "dog"
     ],
-    "replaced": [
-      {
-        "original": "classroom",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "desk"
-      },
-      {
-        "original": "park",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "doctor"
-      },
-      {
-        "original": "hospital",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "dog"
-      }
-    ]
+    "replaced": []
   },
   "traditional": {
     "correct": "traditional",
     "options": [
       "traditional",
-      "long",
-      "interesting",
-      "different"
+      "living room",
+      "kitchen",
+      "bathroom"
     ],
     "replaced": []
   },
@@ -4133,34 +3231,18 @@
     "options": [
       "train",
       "mum",
-      "museum",
+      "name",
       "music"
     ],
-    "replaced": [
-      {
-        "original": "car",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "mum"
-      },
-      {
-        "original": "bus",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "museum"
-      },
-      {
-        "original": "plane",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "music"
-      }
-    ]
+    "replaced": []
   },
   "travel": {
     "correct": "travel",
     "options": [
       "travel",
-      "wish",
-      "sleep",
-      "remember"
+      "Chinese",
+      "English",
+      "math"
     ],
     "replaced": []
   },
@@ -4185,12 +3267,12 @@
     "replaced": []
   },
   "tuesday": {
-    "correct": "tuesday",
+    "correct": "Tuesday",
     "options": [
-      "tuesday",
-      "stand",
+      "Tuesday",
+      "red",
       "orange",
-      "window"
+      "name"
     ],
     "replaced": []
   },
@@ -4198,19 +3280,30 @@
     "correct": "two",
     "options": [
       "two",
-      "ten",
-      "four",
-      "five"
+      "name",
+      "am",
+      "morning"
     ],
-    "replaced": []
+    "replaced": [
+      {
+        "original": "bye",
+        "reason": "与图片直观元素冲突，改为跨类别干扰词",
+        "replacement": "am"
+      },
+      {
+        "original": "hello",
+        "reason": "与图片直观元素冲突，改为跨类别干扰词",
+        "replacement": "morning"
+      }
+    ]
   },
   "uk": {
-    "correct": "uk",
+    "correct": "UK",
     "options": [
-      "uk",
+      "UK",
       "cake",
-      "at",
-      "sell"
+      "cat",
+      "red"
     ],
     "replaced": []
   },
@@ -4220,28 +3313,17 @@
       "under",
       "park",
       "PE",
-      "to"
+      "name"
     ],
-    "replaced": [
-      {
-        "original": "in",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "park"
-      },
-      {
-        "original": "behind",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "PE"
-      }
-    ]
+    "replaced": []
   },
   "understand": {
     "correct": "understand",
     "options": [
       "understand",
-      "fly",
-      "return",
-      "miss"
+      "Chinese",
+      "English",
+      "math"
     ],
     "replaced": []
   },
@@ -4253,31 +3335,15 @@
       "ship",
       "shirt"
     ],
-    "replaced": [
-      {
-        "original": "back",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "school"
-      },
-      {
-        "original": "front",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "ship"
-      },
-      {
-        "original": "right",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "shirt"
-      }
-    ]
+    "replaced": []
   },
   "use": {
     "correct": "use",
     "options": [
       "use",
-      "make",
-      "travel",
-      "thank"
+      "moon",
+      "sun",
+      "star"
     ],
     "replaced": []
   },
@@ -4285,9 +3351,9 @@
     "correct": "usually",
     "options": [
       "usually",
-      "often",
-      "sometimes",
-      "always"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -4309,31 +3375,15 @@
       "math",
       "milk"
     ],
-    "replaced": [
-      {
-        "original": "classroom",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "man"
-      },
-      {
-        "original": "city",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "math"
-      },
-      {
-        "original": "library",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "milk"
-      }
-    ]
+    "replaced": []
   },
   "visit": {
     "correct": "visit",
     "options": [
       "visit",
-      "jump",
-      "find",
-      "think"
+      "window",
+      "sofa",
+      "car"
     ],
     "replaced": []
   },
@@ -4341,9 +3391,9 @@
     "correct": "walk",
     "options": [
       "walk",
-      "leave",
-      "sell",
-      "have"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -4351,9 +3401,9 @@
     "correct": "want",
     "options": [
       "want",
-      "use",
-      "call",
-      "think"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -4361,25 +3411,19 @@
     "correct": "warm",
     "options": [
       "warm",
-      "same",
-      "better",
+      "name",
+      "cat",
       "school"
     ],
-    "replaced": [
-      {
-        "original": "hot",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "school"
-      }
-    ]
+    "replaced": []
   },
   "watch": {
     "correct": "watch",
     "options": [
       "watch",
-      "are",
-      "hope",
-      "draw"
+      "red",
+      "name",
+      "blue"
     ],
     "replaced": []
   },
@@ -4388,8 +3432,8 @@
     "options": [
       "water",
       "milk",
-      "juice",
-      "listen"
+      "name",
+      "cat"
     ],
     "replaced": []
   },
@@ -4397,9 +3441,9 @@
     "correct": "weak",
     "options": [
       "weak",
-      "beautiful",
-      "strong",
-      "tall"
+      "name",
+      "yellow",
+      "one"
     ],
     "replaced": []
   },
@@ -4407,19 +3451,19 @@
     "correct": "wear",
     "options": [
       "wear",
-      "fly",
-      "teach",
-      "wish"
+      "story",
+      "song",
+      "film"
     ],
     "replaced": []
   },
   "wednesday": {
-    "correct": "wednesday",
+    "correct": "Wednesday",
     "options": [
-      "wednesday",
+      "Wednesday",
       "chicken",
-      "dirty",
-      "hot"
+      "name",
+      "cat"
     ],
     "replaced": []
   },
@@ -4427,9 +3471,9 @@
     "correct": "week",
     "options": [
       "week",
-      "birthday",
-      "yesterday",
-      "year"
+      "eye",
+      "nose",
+      "mouth"
     ],
     "replaced": []
   },
@@ -4437,9 +3481,9 @@
     "correct": "welcome",
     "options": [
       "welcome",
-      "grow up",
-      "what's your name",
-      "how are you"
+      "name",
+      "red",
+      "one"
     ],
     "replaced": []
   },
@@ -4447,53 +3491,21 @@
     "correct": "what",
     "options": [
       "what",
-      "home",
-      "hospital",
-      "juice"
+      "name",
+      "red",
+      "one"
     ],
-    "replaced": [
-      {
-        "original": "who",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "home"
-      },
-      {
-        "original": "why",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "hospital"
-      },
-      {
-        "original": "whose",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "juice"
-      }
-    ]
+    "replaced": []
   },
   "when": {
     "correct": "when",
     "options": [
       "when",
       "sofa",
-      "song",
+      "name",
       "star"
     ],
-    "replaced": [
-      {
-        "original": "whose",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "sofa"
-      },
-      {
-        "original": "where",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "song"
-      },
-      {
-        "original": "why",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "star"
-      }
-    ]
+    "replaced": []
   },
   "where": {
     "correct": "where",
@@ -4503,49 +3515,17 @@
       "apple",
       "art"
     ],
-    "replaced": [
-      {
-        "original": "what",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "America"
-      },
-      {
-        "original": "why",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "apple"
-      },
-      {
-        "original": "how",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "art"
-      }
-    ]
+    "replaced": []
   },
   "white": {
     "correct": "white",
     "options": [
       "white",
-      "coat",
-      "company",
-      "cook"
+      "name",
+      "cat",
+      "dog"
     ],
-    "replaced": [
-      {
-        "original": "purple",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "coat"
-      },
-      {
-        "original": "yellow",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "company"
-      },
-      {
-        "original": "pink",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "cook"
-      }
-    ]
+    "replaced": []
   },
   "who": {
     "correct": "who",
@@ -4555,75 +3535,27 @@
       "English",
       "eraser"
     ],
-    "replaced": [
-      {
-        "original": "where",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "elephant"
-      },
-      {
-        "original": "when",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "English"
-      },
-      {
-        "original": "what",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "eraser"
-      }
-    ]
+    "replaced": []
   },
   "whose": {
     "correct": "whose",
     "options": [
       "whose",
       "nose",
-      "nurse",
+      "name",
       "park"
     ],
-    "replaced": [
-      {
-        "original": "where",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "nose"
-      },
-      {
-        "original": "why",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "nurse"
-      },
-      {
-        "original": "how",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "park"
-      }
-    ]
+    "replaced": []
   },
   "why": {
     "correct": "why",
     "options": [
       "why",
-      "farmer",
+      "name",
       "father",
-      "film"
+      "cat"
     ],
-    "replaced": [
-      {
-        "original": "what",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "farmer"
-      },
-      {
-        "original": "when",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "father"
-      },
-      {
-        "original": "whose",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "film"
-      }
-    ]
+    "replaced": []
   },
   "window": {
     "correct": "window",
@@ -4633,73 +3565,35 @@
       "sofa",
       "ship"
     ],
-    "replaced": [
-      {
-        "original": "door",
-        "reason": "与图片直观元素冲突，改为跨类别干扰词",
-        "replacement": "ship"
-      }
-    ]
+    "replaced": []
   },
   "windy": {
     "correct": "windy",
     "options": [
       "windy",
       "rice",
-      "road",
+      "name",
       "ruler"
     ],
-    "replaced": [
-      {
-        "original": "cloudy",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "rice"
-      },
-      {
-        "original": "rainy",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "road"
-      },
-      {
-        "original": "sunny",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "ruler"
-      }
-    ]
+    "replaced": []
   },
   "winter": {
     "correct": "winter",
     "options": [
       "winter",
       "sock",
-      "sofa",
-      "song"
+      "name",
+      "cat"
     ],
-    "replaced": [
-      {
-        "original": "autumn",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "sock"
-      },
-      {
-        "original": "spring",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "sofa"
-      },
-      {
-        "original": "summer",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "song"
-      }
-    ]
+    "replaced": []
   },
   "wish": {
     "correct": "wish",
     "options": [
       "wish",
-      "work",
-      "answer",
-      "believe"
+      "bathroom",
+      "kitchen",
+      "bed"
     ],
     "replaced": []
   },
@@ -4717,9 +3611,9 @@
     "correct": "work",
     "options": [
       "work",
-      "believe",
-      "write",
-      "think"
+      "name",
+      "red",
+      "green"
     ],
     "replaced": []
   },
@@ -4728,8 +3622,8 @@
     "options": [
       "world",
       "Australia",
-      "film",
-      "language"
+      "sun",
+      "moon"
     ],
     "replaced": []
   },
@@ -4737,9 +3631,9 @@
     "correct": "worse",
     "options": [
       "worse",
-      "most",
-      "clean",
-      "light"
+      "name",
+      "red",
+      "yellow"
     ],
     "replaced": []
   },
@@ -4747,9 +3641,9 @@
     "correct": "worst",
     "options": [
       "worst",
-      "different",
-      "short",
-      "slow"
+      "yellow",
+      "green",
+      "one"
     ],
     "replaced": []
   },
@@ -4757,9 +3651,9 @@
     "correct": "write",
     "options": [
       "write",
-      "buy",
-      "have",
-      "return"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -4767,35 +3661,19 @@
     "correct": "yellow",
     "options": [
       "yellow",
-      "bag",
-      "bear",
-      "bed"
+      "name",
+      "one",
+      "two"
     ],
-    "replaced": [
-      {
-        "original": "red",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "bag"
-      },
-      {
-        "original": "pink",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "bear"
-      },
-      {
-        "original": "purple",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "bed"
-      }
-    ]
+    "replaced": []
   },
   "yesterday": {
     "correct": "yesterday",
     "options": [
       "yesterday",
-      "birthday",
-      "tomorrow",
-      "night"
+      "name",
+      "cat",
+      "dog"
     ],
     "replaced": []
   },
@@ -4803,30 +3681,19 @@
     "correct": "you",
     "options": [
       "you",
-      "head",
-      "my",
-      "home"
+      "name",
+      "red",
+      "one"
     ],
-    "replaced": [
-      {
-        "original": "your",
-        "reason": "与图片直观元素冲突，改为跨类别干扰词",
-        "replacement": "head"
-      },
-      {
-        "original": "I",
-        "reason": "与图片直观元素冲突，改为跨类别干扰词",
-        "replacement": "home"
-      }
-    ]
+    "replaced": []
   },
   "young": {
     "correct": "young",
     "options": [
       "young",
-      "active",
-      "international",
-      "different"
+      "red",
+      "name",
+      "cat"
     ],
     "replaced": []
   },
@@ -4834,43 +3701,21 @@
     "correct": "your",
     "options": [
       "your",
-      "pork",
-      "postman",
-      "my"
+      "name",
+      "red",
+      "one"
     ],
-    "replaced": [
-      {
-        "original": "you",
-        "reason": "与图片直观元素冲突，改为跨类别干扰词",
-        "replacement": "pork"
-      },
-      {
-        "original": "I",
-        "reason": "与图片直观元素冲突，改为跨类别干扰词",
-        "replacement": "postman"
-      }
-    ]
+    "replaced": []
   },
   "zoo": {
     "correct": "zoo",
     "options": [
       "zoo",
-      "brother",
-      "bus",
-      "street"
+      "name",
+      "cat",
+      "dog"
     ],
-    "replaced": [
-      {
-        "original": "park",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "brother"
-      },
-      {
-        "original": "school",
-        "reason": "同簇歧义，改为跨类别干扰词",
-        "replacement": "bus"
-      }
-    ]
+    "replaced": []
   },
   "星期三": {
     "correct": "星期三",
