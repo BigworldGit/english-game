@@ -109,6 +109,10 @@ const elements = {
     prevQuestionBtn: document.getElementById('prevQuestionBtn'),
     nextQuestionBtn: document.getElementById('nextQuestionBtn'),
     questionModeLabel: document.getElementById('questionModeLabel'),
+    answerStatusText: document.getElementById('answerStatusText'),
+    answeredCount: document.getElementById('answeredCount'),
+    liveCorrectCount: document.getElementById('liveCorrectCount'),
+    liveWrongCount: document.getElementById('liveWrongCount'),
     progressBar: document.getElementById('progressBar'),
     feedback: document.getElementById('feedback'),
     correctCount: document.getElementById('correctCount'),
@@ -372,11 +376,44 @@ function setQuestionMode(answerRecord) {
     if (!answerRecord) {
         elements.questionModeLabel.textContent = '答题中';
         elements.wordHint.textContent = 'Look at the picture and choose the correct word!';
+        if (elements.answerStatusText) {
+            elements.answerStatusText.textContent = '本题还没作答，选一个最合适的答案吧。';
+        }
         return;
     }
 
     elements.questionModeLabel.textContent = answerRecord.correct ? '回看：答对了' : '回看：答错了';
     elements.wordHint.textContent = `已作答：你选了 ${answerRecord.selected}`;
+    if (elements.answerStatusText) {
+        elements.answerStatusText.textContent = answerRecord.correct
+            ? `这题答对了，正确答案是 ${answerRecord.word}。`
+            : `这题答错了，你选的是 ${answerRecord.selected}，正确答案是 ${answerRecord.word}。`;
+    }
+}
+
+function updateAnswerStatusPanel(answerRecord) {
+    if (!elements.answeredCount || !elements.liveCorrectCount || !elements.liveWrongCount) {
+        return;
+    }
+
+    const answeredList = answers.filter(Boolean);
+    const correctTotal = answeredList.filter(answer => answer.correct).length;
+    const wrongTotal = answeredList.length - correctTotal;
+
+    elements.answeredCount.textContent = answeredList.length;
+    elements.liveCorrectCount.textContent = correctTotal;
+    elements.liveWrongCount.textContent = wrongTotal;
+
+    if (!elements.answerStatusText || answerRecord) {
+        return;
+    }
+
+    if (answeredList.length === 0) {
+        elements.answerStatusText.textContent = '本题还没作答，选一个最合适的答案吧。';
+        return;
+    }
+
+    elements.answerStatusText.textContent = `目前已完成 ${answeredList.length} / ${QUESTIONS_PER_LEVEL} 题。`;
 }
 
 function goToPreviousQuestion() {
@@ -470,6 +507,7 @@ function loadQuestion() {
     setQuestionMode(answerRecord);
 
     // 更新进度条
+    updateAnswerStatusPanel(answerRecord);
     updateProgressBar();
     syncQuestionNav();
 

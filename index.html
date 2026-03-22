@@ -99,28 +99,52 @@
             </div>
 
             <div class="game-content">
-                <!-- 单词图片区域 -->
-                <div class="word-image-container">
-                    <canvas id="wordCanvas" width="240" height="240"></canvas>
-                    <div class="word-hint" id="wordHint">Look at the picture and choose the correct word!</div>
-                </div>
+                <div class="play-area">
+                    <!-- 单词图片区域 -->
+                    <div class="word-image-container">
+                        <canvas id="wordCanvas" width="240" height="240"></canvas>
+                        <div class="word-hint" id="wordHint">Look at the picture and choose the correct word!</div>
+                    </div>
 
-                <!-- 选项区域 -->
-                <div class="options-container" id="optionsContainer">
-                    <!-- 选项将通过JS生成 -->
-                </div>
-
-                <div class="question-nav">
-                    <button class="nav-btn" id="prevQuestionBtn">上一题</button>
-                    <div class="question-mode" id="questionModeLabel">答题中</div>
-                    <button class="nav-btn" id="nextQuestionBtn">下一题</button>
-                </div>
-
-                <!-- 进度条 -->
-                <div class="progress-container">
-                    <div class="progress-bar" id="progressBar"></div>
+                    <!-- 选项区域 -->
+                    <div class="options-container" id="optionsContainer">
+                        <!-- 选项将通过JS生成 -->
+                    </div>
                 </div>
             </div>
+
+            <aside class="game-status-panel">
+                <div class="status-card">
+                    <div class="status-title">答题正确性</div>
+                    <div class="status-grid">
+                        <div class="status-stat">
+                            <span class="status-value" id="answeredCount">0</span>
+                            <span class="status-label">已答</span>
+                        </div>
+                        <div class="status-stat">
+                            <span class="status-value" id="liveCorrectCount">0</span>
+                            <span class="status-label">正确</span>
+                        </div>
+                        <div class="status-stat">
+                            <span class="status-value" id="liveWrongCount">0</span>
+                            <span class="status-label">错误</span>
+                        </div>
+                    </div>
+                    <div class="question-mode" id="questionModeLabel">答题中</div>
+                    <div class="status-note" id="answerStatusText">本题还没作答，选一个最合适的答案吧。</div>
+                </div>
+
+                <div class="status-card">
+                    <div class="status-title">题目导航</div>
+                    <div class="question-nav">
+                        <button class="nav-btn" id="prevQuestionBtn">上一题</button>
+                        <button class="nav-btn" id="nextQuestionBtn">下一题</button>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                </div>
+            </aside>
 
             <!-- 反馈动画 -->
             <div class="feedback" id="feedback">
