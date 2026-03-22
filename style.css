@@ -694,10 +694,12 @@ html, body {
 .page-game {
     padding: 20px;
     height: 100%;
-    display: flex;
-    flex-direction: row;
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(180px, 220px) minmax(0, 1fr) minmax(220px, 260px);
     gap: 20px;
     align-items: stretch;
+    justify-content: center;
 }
 
 .game-header {
@@ -705,8 +707,8 @@ html, body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: stretch;
-    width: 220px;
-    flex: 0 0 220px;
+    width: 100%;
+    min-width: 0;
     padding: 16px;
     background: rgba(255, 255, 255, 0.95);
     border-radius: 8px;
@@ -756,19 +758,18 @@ html, body {
 }
 
 .game-content {
-    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding: 6px 20px 20px;
+    padding: 6px 12px 20px;
     overflow-y: auto;
     min-width: 0;
 }
 
 .play-area {
     width: 100%;
-    max-width: 760px;
+    max-width: 900px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -789,7 +790,7 @@ html, body {
     box-shadow: 0 0 0 4px rgba(255, 241, 213, 0.35), 8px 8px 0 rgba(124, 65, 28, 0.25);
     background: #87CEEB;
     image-rendering: pixelated;
-    width: min(100%, 520px);
+    width: min(100%, 620px);
     height: auto;
 }
 
@@ -808,7 +809,7 @@ html, body {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
     width: 100%;
-    max-width: 640px;
+    max-width: 760px;
 }
 
 .option-btn {
@@ -987,8 +988,8 @@ html, body {
 }
 
 .game-status-panel {
-    width: 260px;
-    flex: 0 0 260px;
+    width: 100%;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -1046,6 +1047,57 @@ html, body {
 .status-note {
     margin-top: 12px;
     line-height: 1.5;
+}
+
+@media (max-width: 1180px) {
+    .page-game {
+        grid-template-columns: minmax(180px, 220px) minmax(0, 1fr);
+        grid-template-areas:
+            "header content"
+            "status content";
+        align-items: start;
+    }
+
+    .game-header {
+        grid-area: header;
+    }
+
+    .game-content {
+        grid-area: content;
+    }
+
+    .game-status-panel {
+        grid-area: status;
+    }
+
+    #wordCanvas {
+        width: min(100%, 560px);
+    }
+}
+
+@media (max-width: 920px) {
+    .page-game {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "header"
+            "content"
+            "status";
+    }
+
+    .game-header,
+    .game-status-panel,
+    .game-content {
+        width: 100%;
+    }
+
+    .game-content {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    #wordCanvas {
+        width: min(100%, 520px);
+    }
 }
 
 /* Minecraft 风格进度显示 */

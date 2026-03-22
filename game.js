@@ -20,11 +20,15 @@ let audioContext = null;
 let isPlaying = false;
 let bgMusic = null;
 let bgMusicFiles = [
-    'audio/starlight-lullaby.mp4',
-    'audio/embers-and-marshmallows.mp4',
-    'audio/pixel-power-up.mp4',
-    'audio/sunny-learning-fiesta.mp4',
-    'audio/global-dream-team.mp4'
+    'audio/colors-and-cheers.mp3',
+    'audio/pixelated-fury.mp3',
+    'audio/jungle-jamboree.mp3',
+    'audio/starlight-symphony.mp3',
+    'audio/embers-and-marshmallows.mp3',
+    'audio/pixel-power-up.mp3',
+    'audio/sunny-learning-fiesta.mp3',
+    'audio/global-dream-team.mp3',
+    'audio/starlight-lullaby.mp3'
 ];
 let currentMusicIndex = 0;
 
