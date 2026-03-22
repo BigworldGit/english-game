@@ -11,6 +11,8 @@ let currentLevel = 1;
 let currentQuestion = 1;
 let currentWord = null;
 let allWords = [];
+let questionSequence = [];
+let questionCache = {};
 let currentOptions = [];
 let answers = [];
 let selectedGrade = null;
@@ -43,6 +45,23 @@ const EXCLUDED_IMAGE_WORDS = new Set([
 // 图片预加载
 const imagePreloadCache = new Map();
 const PRELOAD_BATCH_SIZE = 3;
+const CONCRETE_CATEGORIES = new Set([
+    'animal', 'body', 'clothes', 'drink', 'family', 'food', 'furniture',
+    'job', 'nature', 'noun', 'person', 'place', 'room', 'school', 'subject', 'vehicle'
+]);
+const CONFLICT_GROUPS = {
+    greetings: ['hello', 'hi', 'goodbye', 'bye', 'good morning', 'good afternoon', 'good evening', 'good night'],
+    question: ['what', 'who', 'why', 'where', 'when', 'whose', 'how'],
+    colors: ['red', 'blue', 'green', 'yellow', 'black', 'white', 'orange', 'pink', 'purple', 'brown'],
+    time: ['morning', 'afternoon', 'evening', 'night', 'today', 'tomorrow', 'yesterday', 'week', 'month', 'year', 'birthday'],
+    weather: ['sunny', 'rainy', 'cloudy', 'windy', 'snowy', 'hot', 'cold', 'warm', 'cool'],
+    places: ['town', 'city', 'village', 'park', 'school', 'hospital', 'zoo', 'farm', 'library', 'supermarket', 'classroom'],
+    directions: ['left', 'right', 'up', 'down', 'front', 'back', 'behind', 'in', 'on', 'under', 'near', 'to'],
+    transport: ['car', 'bus', 'bike', 'train', 'plane', 'ship'],
+    family: ['father', 'mother', 'brother', 'sister', 'grandfather', 'grandmother', 'grandpa', 'grandma', 'dad', 'mum'],
+    weekdays: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'],
+    seasons: ['spring', 'summer', 'autumn', 'winter']
+};
 
 // 音频对象池
 const audioPool = {
@@ -75,6 +94,9 @@ const elements = {
     questionNum: document.getElementById('questionNum'),
     wordCanvas: document.getElementById('wordCanvas'),
     optionsContainer: document.getElementById('optionsContainer'),
+    prevQuestionBtn: document.getElementById('prevQuestionBtn'),
+    nextQuestionBtn: document.getElementById('nextQuestionBtn'),
+    questionModeLabel: document.getElementById('questionModeLabel'),
     progressBar: document.getElementById('progressBar'),
     feedback: document.getElementById('feedback'),
     correctCount: document.getElementById('correctCount'),
@@ -162,6 +184,13 @@ function setupEventListeners() {
     // 下一关
     elements.nextLevelBtn.addEventListener('click', nextLevel);
 
+    if (elements.prevQuestionBtn) {
+        elements.prevQuestionBtn.addEventListener('click', goToPreviousQuestion);
+    }
+    if (elements.nextQuestionBtn) {
+        elements.nextQuestionBtn.addEventListener('click', goToNextQuestion);
+    }
+
     // 返回主页
     elements.homeBtn.addEventListener('click', goHome);
 
@@ -216,6 +245,7 @@ function startGame() {
     currentLevel = 1;
     currentQuestion = 1;
     answers = [];
+    questionCache = {};
 
     // 保存用户信息
     localStorage.setItem('minecraft_english_user', JSON.stringify(currentUser));
@@ -243,6 +273,7 @@ function showUserInfo() {
             currentLevel = progress.level;
             currentQuestion = progress.question;
             answers = progress.answers || [];
+            questionSequence = progress.questionSequence || [];
             elements.currentLevel.textContent = currentLevel;
             elements.currentQuestion.textContent = currentQuestion;
         }
@@ -278,15 +309,102 @@ function generateUserId() {
     return 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
 }
 
+function normalizeWord(word) {
+    return String(word).trim().toLowerCase();
+}
+
+function getConflictGroup(word) {
+    const normalized = normalizeWord(word);
+    for (const [groupName, words] of Object.entries(CONFLICT_GROUPS)) {
+        if (words.includes(normalized)) {
+            return groupName;
+        }
+    }
+    return null;
+}
+
+function getWordMeta(word) {
+    return allWords.find(item => normalizeWord(item.word) === normalizeWord(word)) || null;
+}
+
+function getAllowedWordSet() {
+    return new Set(allWords.map(item => normalizeWord(item.word)));
+}
+
+function getAnswerRecord(questionNumber) {
+    return answers[questionNumber - 1] || null;
+}
+
+function getReviewedQuestionLimit() {
+    return Math.min(answers.length + 1, QUESTIONS_PER_LEVEL);
+}
+
+function isAnsweredQuestion(questionNumber) {
+    return Boolean(getAnswerRecord(questionNumber));
+}
+
+function syncQuestionNav() {
+    if (!elements.prevQuestionBtn || !elements.nextQuestionBtn) {
+        return;
+    }
+
+    elements.prevQuestionBtn.disabled = currentQuestion <= 1;
+    elements.nextQuestionBtn.disabled = currentQuestion >= getReviewedQuestionLimit();
+}
+
+function setQuestionMode(answerRecord) {
+    if (!elements.questionModeLabel || !elements.wordHint) {
+        return;
+    }
+
+    if (!answerRecord) {
+        elements.questionModeLabel.textContent = '答题中';
+        elements.wordHint.textContent = 'Look at the picture and choose the correct word!';
+        return;
+    }
+
+    elements.questionModeLabel.textContent = answerRecord.correct ? '回看：答对了' : '回看：答错了';
+    elements.wordHint.textContent = `已作答：你选了 ${answerRecord.selected}`;
+}
+
+function goToPreviousQuestion() {
+    if (currentQuestion <= 1) {
+        return;
+    }
+    currentQuestion--;
+    loadQuestion();
+}
+
+function goToNextQuestion() {
+    if (currentQuestion >= getReviewedQuestionLimit()) {
+        return;
+    }
+    currentQuestion++;
+    loadQuestion();
+}
+
 // ============================================
 // 游戏逻辑
 // ============================================
 function prepareWords() {
-    allWords = getWordsUpToGrade(currentGrade).filter(wordData =>
+    const filteredWords = getWordsUpToGrade(currentGrade).filter(wordData =>
         !EXCLUDED_IMAGE_WORDS.has(wordData.word)
     );
-    // 随机打乱
-    allWords = shuffleArray([...allWords]);
+    const lookup = new Map(filteredWords.map(wordData => [wordData.word, wordData]));
+
+    if (questionSequence.length > 0) {
+        const restored = questionSequence
+            .map(word => lookup.get(word))
+            .filter(Boolean);
+        if (restored.length >= QUESTIONS_PER_LEVEL) {
+            allWords = restored;
+            questionSequence = restored.map(wordData => wordData.word);
+            return;
+        }
+    }
+
+    allWords = shuffleArray([...filteredWords]);
+    questionSequence = allWords.map(wordData => wordData.word);
 }
 
 function initGameRound() {
@@ -308,32 +426,40 @@ function loadQuestion() {
     // 更新题目序号显示
     updateProgressUI();
 
-    // 获取单词
-    const wordIndex = (currentLevel - 1) * QUESTIONS_PER_LEVEL + (currentQuestion - 1);
-    if (wordIndex >= allWords.length) {
-        // 单词不够，重新循环
-        prepareWords();
+    const answerRecord = getAnswerRecord(currentQuestion);
+    const cachedState = questionCache[currentQuestion];
+
+    if (answerRecord) {
+        currentWord = getWordMeta(answerRecord.word) || { word: answerRecord.word, category: 'unknown' };
+        currentOptions = [...answerRecord.options];
+    } else if (cachedState) {
+        currentWord = cachedState.wordData;
+        currentOptions = [...cachedState.options];
+    } else {
+        const wordIndex = (currentLevel - 1) * QUESTIONS_PER_LEVEL + (currentQuestion - 1);
+        if (wordIndex >= allWords.length) {
+            prepareWords();
+        }
+
+        currentWord = allWords[wordIndex % allWords.length];
+        currentOptions = generateOptions();
+        questionCache[currentQuestion] = {
+            wordData: currentWord,
+            options: [...currentOptions]
+        };
     }
-
-    currentWord = allWords[wordIndex % allWords.length];
-
-    // 显示单词含义提示
-    if (elements.wordHint) {
-        // 不显示中文提示，让用户看图猜词
-    }
-
-    // 生成选项
-    generateOptions();
 
     // 绘制图片
     drawWordImage(currentWord);
     applyWordAnimation(currentWord.word);
 
     // 渲染选项
-    renderOptions();
+    renderOptions(answerRecord);
+    setQuestionMode(answerRecord);
 
     // 更新进度条
     updateProgressBar();
+    syncQuestionNav();
 
     // 预加载下一题的答题图片
     preloadNextQuestionImages();
@@ -417,215 +543,207 @@ function isInBlacklist(candidate, blacklist) {
     );
 }
 
-function generateOptions() {
-    const correctAnswer = currentWord.word;
-    const wrongAnswers = [];
-    
-    // ========== 优先使用预定义的候选词 ==========
-    // 检查当前单词是否有预定义的候选词（尝试多种大小写形式）
-    const lowerWord = correctAnswer.toLowerCase();
-    const originalWord = currentWord.word; // 保持原始大小写
-    
-    // 尝试多种 key 形式：原始形式、小写形式、首字母大写形式
-    const keysToTry = [
-        originalWord,           // 原始形式（如 "American"）
-        lowerWord,              // 小写形式（如 "american"）
-        originalWord.charAt(0).toUpperCase() + originalWord.slice(1).toLowerCase(), // 首字母大写
-    ];
-    
-    let predefinedData = null;
-    for (const key of keysToTry) {
-        if (candidateWords[key] && candidateWords[key].options && candidateWords[key].options.length >= 4) {
-            predefinedData = candidateWords[key];
-            break;
-        }
-    }
-    
-    if (predefinedData) {
-        // 使用预定义的选项（打乱顺序）
-        const predefinedOptions = [...predefinedData.options];
-        currentOptions = shuffleArray(predefinedOptions);
-        
-        // 确保正确答案在选项中
-        if (!currentOptions.includes(correctAnswer)) {
-            console.warn('预定义选项中缺少正确答案:', correctAnswer, '，选项:', predefinedOptions);
-        }
-        return; // 使用预定义选项，函数结束
-    }
-    
-    // ========== 没有预定义候选词，记录警告 ==========
-    console.warn('单词没有预定义候选词:', correctAnswer, '，将使用备用逻辑');
-    
-    // ========== 备用逻辑：基于词库生成干扰项 ==========
-    
-    // 获取当前单词的颜色黑名单
-    const colorBlacklist = getColorBlacklist(correctAnswer);
-    
-    // 定义避免同时出现的词组（语义关联，避免歧义）
-    const avoidPairs = [
-        // 颜色 + 物品
-        ['red', 'apple'], ['red', 'flower'], ['red', 'ball'],
-        ['blue', 'sky'], ['blue', 'water'], ['blue', 'sea'],
-        ['yellow', 'sun'], ['yellow', 'banana'], ['yellow', 'flower'],
-        ['green', 'grass'], ['green', 'tree'], ['green', 'leaf'],
-        ['pink', 'flower'], ['pink', 'pig'],
-        ['purple', 'grape'], ['purple', 'flower'],
-        ['white', 'snow'], ['white', 'milk'], ['white', 'paper'],
-        ['black', 'cat'], ['black', 'dog'], ['black', 'night'],
-        // 形容词 + 名词
-        ['big', 'elephant'], ['big', 'dog'], ['big', 'bear'],
-        ['small', 'mouse'], ['small', 'cat'], ['small', 'bird'],
-        ['happy', 'face'], ['sad', 'face'], ['angry', 'face'],
-        ['long', 'hair'], ['short', 'hair'], ['long', 'snake'],
-        ['fast', 'car'], ['fast', 'train'], ['slow', 'turtle'],
-        ['hot', 'sun'], ['hot', 'summer'], ['cold', 'winter'], ['cold', 'snow'],
-        ['good', 'morning'], ['good', 'afternoon'], ['good', 'evening'], ['good', 'night'],
-        // 物品组合
-        ['birthday', 'cake'], ['birthday', 'party'],
-        ['ice', 'cream'], ['hot', 'dog'],
-        ['Chinese', 'China'], ['American', 'America'], ['British', 'UK'],
-        ['English', 'book'], ['Chinese', 'book'],
-        ['bed', 'room'], ['bath', 'room'], ['living', 'room'],
-        ['basketball', 'ball'], ['football', 'ball'], ['volleyball', 'ball'],
-        // 反义词对（避免同时出现）
-        ['big', 'small'], ['long', 'short'], ['tall', 'short'],
-        ['old', 'new'], ['young', 'old'], ['good', 'bad'],
-        ['fast', 'slow'], ['hot', 'cold'], ['happy', 'sad'],
-        ['light', 'heavy'], ['full', 'empty'], ['strong', 'weak'],
-        ['high', 'low'], ['fast', 'slow'], ['easy', 'difficult'],
-        ['early', 'late'], ['near', 'far'], ['inside', 'outside'],
-        ['open', 'close'], ['start', 'finish'], ['buy', 'sell'],
-        ['come', 'go'], ['sit', 'stand'], ['sleep', 'wake'],
-        ['white', 'black'], ['day', 'night'], ['sun', 'moon'],
-        ['best', 'worst'], ['better', 'worse'], ['most', 'least'],
-        ['wake', 'sleep'], ['remember', 'forget'], ['give', 'take'],
-    ];
-    
-    // 检查词是否应该避免
-    function shouldAvoid(word) {
-        const lowerWord = word.toLowerCase();
-        const lowerCorrect = correctAnswer.toLowerCase();
-        
-        // 1. 检查是否在避免列表中
-        for (const [a, b] of avoidPairs) {
-            if ((lowerWord === a && lowerCorrect === b) || 
-                (lowerWord === b && lowerCorrect === a)) {
-                return true;
-            }
-        }
-        
-        // 2. 如果正确答案是复合词，检查干扰项是否是其中一部分
-        if (lowerCorrect.includes(' ')) {
-            const correctParts = lowerCorrect.split(' ');
-            for (const part of correctParts) {
-                if (lowerWord === part || lowerWord.includes(part)) {
-                    return true;
-                }
-            }
-        }
-        
-        // 3. 如果干扰项是复合词的一部分
-        if (lowerWord.includes(' ')) {
-            const wordParts = lowerWord.split(' ');
-            for (const part of wordParts) {
-                if (part === lowerCorrect || lowerCorrect.includes(part)) {
-                    return true;
-                }
-            }
-        }
-        
-        // 4. 颜色黑名单过滤 - 如果当前单词有颜色黑名单，排除相关颜色词
-        if (colorBlacklist.length > 0) {
-            if (isInBlacklist(lowerWord, colorBlacklist)) {
-                return true;
-            }
-        }
-        
-        // 5. 如果当前单词是颜色词，排除其他颜色词（避免颜色混淆）
-        if (isColorWord(lowerCorrect) && isColorWord(lowerWord) && lowerWord !== lowerCorrect) {
-            return true;
-        }
-        
-        return false;
-    }
+function getCandidateEntry(word) {
+    const originalWord = word;
+    const lowerWord = normalizeWord(word);
+    const titleWord = originalWord.charAt(0).toUpperCase() + originalWord.slice(1).toLowerCase();
 
-    // 1. 优先选择同类别、长度相近的单词作为干扰项（混淆效果）
-    const sameCategory = allWords.filter(w =>
-        w.category === currentWord.category && w.word !== correctAnswer && !shouldAvoid(w.word)
-    );
-
-    // 2. 找长度相近的单词
-    const lengthDiff = 2;
-    const similarLength = allWords.filter(w =>
-        w.word !== correctAnswer &&
-        Math.abs(w.word.length - correctAnswer.length) <= lengthDiff &&
-        !shouldAvoid(w.word)
-    );
-
-    // 3. 找首字母相同的单词
-    const sameInitial = allWords.filter(w =>
-        w.word !== correctAnswer &&
-        w.word.charAt(0) === correctAnswer.charAt(0) &&
-        !shouldAvoid(w.word)
-    );
-
-    // 4. 找不同类别的单词
-    const differentCategory = allWords.filter(w =>
-        w.word !== correctAnswer &&
-        w.category !== currentWord.category &&
-        !shouldAvoid(w.word)
-    );
-
-    // 合并候选词：同类别 > 长度相近 > 首字母相同 > 不同类别 > 其他
-    let candidates = [
-        ...shuffleArray(sameCategory).slice(0, 8),
-        ...shuffleArray(similarLength).slice(0, 6),
-        ...shuffleArray(sameInitial).slice(0, 4),
-        ...shuffleArray(differentCategory).slice(0, 10),
-        ...shuffleArray(allWords.filter(w => w.word !== correctAnswer && !shouldAvoid(w.word))).slice(0, 10)
-    ];
-
-    // 去重
-    candidates = [...new Set(candidates.map(w => w.word))];
-
-    // 获取3个干扰项
-    while (wrongAnswers.length < 3 && candidates.length > 0) {
-        const candidate = candidates.pop();
-        if (candidate !== correctAnswer && !shouldAvoid(candidate)) {
-            wrongAnswers.push(candidate);
+    for (const key of [originalWord, lowerWord, titleWord]) {
+        if (candidateWords[key] && Array.isArray(candidateWords[key].options) && candidateWords[key].options.length >= 4) {
+            return candidateWords[key];
         }
     }
 
-    // 如果干扰项不够，随机生成（避开相关词）
-    while (wrongAnswers.length < 3) {
-        const randomWord = allWords[Math.floor(Math.random() * allWords.length)];
-        if (randomWord.word !== correctAnswer && 
-            !wrongAnswers.includes(randomWord.word) && 
-            !shouldAvoid(randomWord.word)) {
-            wrongAnswers.push(randomWord.word);
-        }
-    }
-
-    // 合并并打乱
-    currentOptions = shuffleArray([correctAnswer, ...wrongAnswers]);
+    return null;
 }
 
-function renderOptions() {
+function isOptionAllowedForCurrentGrade(option, allowedWordSet) {
+    return allowedWordSet.has(normalizeWord(option));
+}
+
+function shouldAvoidCandidate(correctAnswer, candidateWord) {
+    const lowerWord = normalizeWord(candidateWord);
+    const lowerCorrect = normalizeWord(correctAnswer);
+    const correctGroup = getConflictGroup(lowerCorrect);
+    const candidateGroup = getConflictGroup(lowerWord);
+
+    if (lowerWord === lowerCorrect) {
+        return true;
+    }
+
+    if (correctGroup && candidateGroup && correctGroup === candidateGroup) {
+        return true;
+    }
+
+    if (lowerCorrect.includes(' ')) {
+        for (const part of lowerCorrect.split(' ')) {
+            if (lowerWord === part || lowerWord.includes(part)) {
+                return true;
+            }
+        }
+    }
+
+    if (lowerWord.includes(' ')) {
+        for (const part of lowerWord.split(' ')) {
+            if (part === lowerCorrect || lowerCorrect.includes(part)) {
+                return true;
+            }
+        }
+    }
+
+    const colorBlacklist = getColorBlacklist(correctAnswer);
+    if (colorBlacklist.length > 0 && isInBlacklist(lowerWord, colorBlacklist)) {
+        return true;
+    }
+
+    if (isColorWord(lowerCorrect) && isColorWord(lowerWord) && lowerWord !== lowerCorrect) {
+        return true;
+    }
+
+    return false;
+}
+
+function chooseDistractor(correctAnswer, usedWords, preferredWords = []) {
+    const correctMeta = getWordMeta(correctAnswer);
+    const correctGroup = getConflictGroup(correctAnswer);
+    const normalizedUsed = new Set([...usedWords].map(normalizeWord));
+
+    const isValidCandidate = wordData => {
+        if (!wordData || normalizedUsed.has(normalizeWord(wordData.word))) {
+            return false;
+        }
+
+        return !shouldAvoidCandidate(correctAnswer, wordData.word);
+    };
+
+    for (const preferred of preferredWords) {
+        if (isValidCandidate(preferred)) {
+            return preferred.word;
+        }
+    }
+
+    const shuffledPool = shuffleArray([...allWords]);
+    const passes = [
+        wordData => isValidCandidate(wordData) &&
+            correctMeta &&
+            wordData.category !== correctMeta.category &&
+            CONCRETE_CATEGORIES.has(wordData.category) &&
+            (!correctGroup || getConflictGroup(wordData.word) !== correctGroup),
+        wordData => isValidCandidate(wordData) &&
+            correctMeta &&
+            wordData.category !== correctMeta.category &&
+            (!correctGroup || getConflictGroup(wordData.word) !== correctGroup),
+        wordData => isValidCandidate(wordData) &&
+            (!correctGroup || getConflictGroup(wordData.word) !== correctGroup),
+        wordData => isValidCandidate(wordData)
+    ];
+
+    for (const allow of passes) {
+        const found = shuffledPool.find(allow);
+        if (found) {
+            return found.word;
+        }
+    }
+
+    return null;
+}
+
+function repairPredefinedOptions(correctAnswer, predefinedOptions) {
+    const allowedWordSet = getAllowedWordSet();
+    const repaired = [correctAnswer];
+    const usedWords = new Set([correctAnswer]);
+    const preferredPool = allWords.filter(wordData =>
+        wordData.category !== currentWord.category && CONCRETE_CATEGORIES.has(wordData.category)
+    );
+
+    for (const option of predefinedOptions) {
+        if (normalizeWord(option) === normalizeWord(correctAnswer)) {
+            continue;
+        }
+
+        const validOption = isOptionAllowedForCurrentGrade(option, allowedWordSet) &&
+            !shouldAvoidCandidate(correctAnswer, option) &&
+            !usedWords.has(option);
+
+        if (validOption) {
+            repaired.push(option);
+            usedWords.add(option);
+            continue;
+        }
+
+        const replacement = chooseDistractor(correctAnswer, usedWords, preferredPool);
+        if (replacement) {
+            repaired.push(replacement);
+            usedWords.add(replacement);
+        }
+    }
+
+    while (repaired.length < 4) {
+        const replacement = chooseDistractor(correctAnswer, usedWords, preferredPool);
+        if (!replacement) {
+            break;
+        }
+        repaired.push(replacement);
+        usedWords.add(replacement);
+    }
+
+    return repaired.slice(0, 4);
+}
+
+function generateOptions() {
+    const correctAnswer = currentWord.word;
+    const predefinedData = getCandidateEntry(correctAnswer);
+
+    if (predefinedData) {
+        return shuffleArray(repairPredefinedOptions(correctAnswer, predefinedData.options));
+    }
+
+    console.warn('单词没有预定义候选词:', correctAnswer, '，将使用运行时安全逻辑');
+
+    const options = [correctAnswer];
+    while (options.length < 4) {
+        const replacement = chooseDistractor(correctAnswer, new Set(options));
+        if (!replacement) {
+            break;
+        }
+        options.push(replacement);
+    }
+
+    return shuffleArray(options);
+}
+
+function renderOptions(answerRecord = null) {
     elements.optionsContainer.innerHTML = '';
 
     currentOptions.forEach(option => {
         const btn = document.createElement('button');
         btn.className = 'option-btn';
         btn.textContent = option;
-        btn.addEventListener('click', () => {
-            playSound('click'); // 播放点击音效
-            handleAnswer(option, btn);
-        });
+
+        if (answerRecord) {
+            btn.disabled = true;
+            if (option === answerRecord.word) {
+                btn.classList.add('correct', 'correct-answer');
+            }
+            if (option === answerRecord.selected && !answerRecord.correct) {
+                btn.classList.add('wrong', 'wrong-answer');
+            }
+        } else {
+            btn.addEventListener('click', () => {
+                playSound('click');
+                handleAnswer(option, btn);
+            });
+        }
+
         elements.optionsContainer.appendChild(btn);
     });
 }
 
 function handleAnswer(selected, btn) {
+    if (isAnsweredQuestion(currentQuestion)) {
+        return;
+    }
+
     // 禁用所有按钮
     const buttons = elements.optionsContainer.querySelectorAll('.option-btn');
     buttons.forEach(b => b.disabled = true);
@@ -633,12 +751,13 @@ function handleAnswer(selected, btn) {
     const isCorrect = selected === currentWord.word;
 
     // 记录答案
-    answers.push({
+    answers[currentQuestion - 1] = {
         question: currentQuestion,
         word: currentWord.word,
+        options: [...currentOptions],
         selected: selected,
         correct: isCorrect
-    });
+    };
 
     // 上传答题数据到后端服务器
     if (currentUser) {
@@ -680,7 +799,7 @@ function handleAnswer(selected, btn) {
     // 1.5秒后进入下一题
     setTimeout(() => {
         hideFeedback();
-        currentQuestion++;
+        currentQuestion = Math.min(answers.length + 1, QUESTIONS_PER_LEVEL + 1);
         loadQuestion();
     }, 1500);
 }
@@ -695,26 +814,22 @@ function hideFeedback() {
 }
 
 function updateProgressBar() {
-    // 统计当前关卡的正确数
-    const correctCount = answers.filter(a => a.correct).length;
-    
     // Minecraft 风格进度显示
     let progressHTML = '';
     for (let i = 0; i < QUESTIONS_PER_LEVEL; i++) {
-        if (i < correctCount) {
-            // 已正确 - 绿宝石 💎
+        const answer = answers[i];
+        if (answer && answer.correct) {
             progressHTML += '<span class="progress-emerald">💎</span>';
-        } else if (i < currentQuestion - 1) {
-            // 已答题但错误 - 红石 🟥
+        } else if (answer) {
             progressHTML += '<span class="progress-redstone">🟥</span>';
+        } else if (i === currentQuestion - 1) {
+            progressHTML += '<span class="progress-current">🟨</span>';
         } else {
-            // 未答题 - 空方块 ⬜
             progressHTML += '<span class="progress-empty">⬜</span>';
         }
     }
     
-    // 10题完成显示钻石
-    if (correctCount === QUESTIONS_PER_LEVEL) {
+    if (answers.length === QUESTIONS_PER_LEVEL && answers.every(answer => answer && answer.correct)) {
         progressHTML = '<span class="progress-diamond">💎💎💎💎💎💎💎💎💎💎</span>';
     }
     
@@ -2628,6 +2743,7 @@ function nextLevel() {
     currentLevel++;
     currentQuestion = 1;
     answers = [];
+    questionCache = {};
     saveProgress();
     showPage('game');
     initGameRound();
@@ -2675,7 +2791,8 @@ function saveProgress() {
         grade: currentGrade,
         level: currentLevel,
         question: currentQuestion,
-        answers: answers
+        answers: answers,
+        questionSequence: questionSequence
     };
 
     localStorage.setItem('minecraft_english_progress', JSON.stringify(progress));
@@ -2881,6 +2998,10 @@ function handleKeyPress(e) {
         if (buttons[index] && !buttons[index].disabled) {
             buttons[index].click();
         }
+    } else if (e.key === 'ArrowLeft') {
+        goToPreviousQuestion();
+    } else if (e.key === 'ArrowRight') {
+        goToNextQuestion();
     }
 }
 

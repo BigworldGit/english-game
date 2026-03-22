@@ -29,11 +29,11 @@
             <div class="tree"></div>
         </div>
         <!-- 动态背景元素 -->
-        <div class="bird bird1">🐦</div>
-        <div class="bird bird2">🐦</div>
-        <div class="leaf leaf1">🍂</div>
-        <div class="leaf leaf2">🍂</div>
-        <div class="leaf leaf3">🍂</div>
+        <div class="bird bird1" aria-hidden="true"></div>
+        <div class="bird bird2" aria-hidden="true"></div>
+        <div class="leaf leaf1" aria-hidden="true"></div>
+        <div class="leaf leaf2" aria-hidden="true"></div>
+        <div class="leaf leaf3" aria-hidden="true"></div>
     </div>
 
     <!-- 音乐控制 -->
@@ -108,6 +108,12 @@
                 <!-- 选项区域 -->
                 <div class="options-container" id="optionsContainer">
                     <!-- 选项将通过JS生成 -->
+                </div>
+
+                <div class="question-nav">
+                    <button class="nav-btn" id="prevQuestionBtn">上一题</button>
+                    <div class="question-mode" id="questionModeLabel">答题中</div>
+                    <button class="nav-btn" id="nextQuestionBtn">下一题</button>
                 </div>
 
                 <!-- 进度条 -->
