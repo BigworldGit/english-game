@@ -277,119 +277,128 @@ html, body {
     position: absolute;
     opacity: 0;
     z-index: 5;
-    width: 30px;
-    height: 18px;
-    filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.25));
+    width: 56px;
+    height: 32px;
+    filter: drop-shadow(3px 3px 0 rgba(0, 0, 0, 0.22));
+    background:
+        linear-gradient(180deg, #1d2a3b 0 100%);
+    clip-path: polygon(20% 52%, 34% 34%, 56% 34%, 68% 46%, 80% 48%, 92% 58%, 80% 70%, 58% 74%, 42% 72%, 30% 62%);
 }
 
 .bird::before,
 .bird::after {
     content: '';
     position: absolute;
+    top: 4px;
+    width: 26px;
+    height: 14px;
+    background:
+        linear-gradient(180deg, #2f4867 0 38%, #89b9e9 38% 62%, #2f4867 62% 100%);
+    border: 2px solid #162333;
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.08);
 }
 
 .bird::before {
-    inset: 0;
-    background:
-        linear-gradient(90deg, transparent 0 10%, #20334e 10% 22%, #8cc7ff 22% 35%, #20334e 35% 48%, transparent 48% 100%),
-        linear-gradient(90deg, transparent 0 42%, #20334e 42% 70%, transparent 70% 100%);
-    clip-path: polygon(0 62%, 18% 35%, 35% 35%, 48% 0, 76% 0, 100% 40%, 74% 55%, 58% 100%, 28% 100%, 18% 78%);
+    left: -4px;
+    transform-origin: right center;
+    clip-path: polygon(0 88%, 24% 34%, 86% 0, 100% 12%, 66% 76%, 16% 100%);
+    animation: flapLeft 0.7s steps(2, end) infinite;
 }
 
 .bird::after {
-    right: -4px;
-    top: 7px;
-    width: 8px;
-    height: 5px;
-    background: #f0c25a;
-    clip-path: polygon(0 50%, 100% 0, 100% 100%);
+    right: -2px;
+    transform-origin: left center;
+    clip-path: polygon(0 12%, 14% 0, 76% 34%, 100% 88%, 84% 100%, 34% 76%);
+    animation: flapRight 0.7s steps(2, end) infinite;
 }
 
 .bird1 {
-    top: 15%;
-    left: -50px;
-    animation: flyBird 18s ease-in-out infinite;
-    animation-delay: 3s;
+    top: 13%;
+    left: -70px;
+    transform: scale(1);
+    animation: flyBirdNear 18s linear infinite;
+    animation-delay: 2s;
 }
 
 .bird2 {
-    top: 25%;
-    left: -50px;
-    animation: flyBird 22s ease-in-out infinite;
-    animation-delay: 10s;
+    top: 23%;
+    left: -70px;
+    transform: scale(0.82);
+    animation: flyBirdFar 24s linear infinite;
+    animation-delay: 9s;
 }
 
-@keyframes flyBird {
+@keyframes flapLeft {
     0% {
-        left: -50px;
-        opacity: 0;
-        transform: translateY(0) rotate(0deg);
-    }
-    5% {
-        opacity: 0.8;
+        transform: rotate(12deg) translateY(1px);
     }
     50% {
-        transform: translateY(20px) rotate(5deg);
-    }
-    95% {
-        opacity: 0.8;
+        transform: rotate(-20deg) translateY(-4px);
     }
     100% {
-        left: calc(100% + 50px);
-        opacity: 0;
-        transform: translateY(-10px) rotate(-5deg);
+        transform: rotate(12deg) translateY(1px);
     }
 }
 
-/* 飘落的树叶 */
-.leaf {
-    position: absolute;
-    opacity: 0;
-    z-index: 5;
-    width: 14px;
-    height: 14px;
-    background: linear-gradient(135deg, #d97829 0%, #f2b24c 100%);
-    border: 2px solid #8b4d1c;
-    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
-}
-
-.leaf1 {
-    top: -20px;
-    left: 20%;
-    animation: fallLeaf 12s ease-in-out infinite;
-    animation-delay: 1s;
-}
-
-.leaf2 {
-    top: -20px;
-    left: 60%;
-    animation: fallLeaf 15s ease-in-out infinite;
-    animation-delay: 5s;
-}
-
-.leaf3 {
-    top: -20px;
-    left: 80%;
-    animation: fallLeaf 10s ease-in-out infinite;
-    animation-delay: 8s;
-}
-
-@keyframes fallLeaf {
+@keyframes flapRight {
     0% {
-        top: -20px;
-        opacity: 0;
-        transform: translateX(0) rotate(0deg);
+        transform: rotate(-12deg) translateY(1px);
     }
-    10% {
-        opacity: 0.8;
-    }
-    90% {
-        opacity: 0.8;
+    50% {
+        transform: rotate(20deg) translateY(-4px);
     }
     100% {
-        top: calc(100% + 20px);
+        transform: rotate(-12deg) translateY(1px);
+    }
+}
+
+@keyframes flyBirdNear {
+    0% {
+        left: -90px;
         opacity: 0;
-        transform: translateX(30px) rotate(360deg);
+        transform: translateY(0) scale(1) rotate(-1deg);
+    }
+    7% {
+        opacity: 0.82;
+    }
+    30% {
+        transform: translateY(-10px) scale(1.02) rotate(1deg);
+    }
+    60% {
+        transform: translateY(6px) scale(0.98) rotate(-1deg);
+    }
+    93% {
+        opacity: 0.82;
+    }
+    100% {
+        left: calc(100% + 90px);
+        opacity: 0;
+        transform: translateY(-6px) scale(1) rotate(0deg);
+    }
+}
+
+@keyframes flyBirdFar {
+    0% {
+        left: -90px;
+        opacity: 0;
+        transform: translateY(0) scale(0.82) rotate(0deg);
+    }
+    8% {
+        opacity: 0.64;
+    }
+    38% {
+        transform: translateY(8px) scale(0.84) rotate(1deg);
+    }
+    68% {
+        transform: translateY(-7px) scale(0.8) rotate(-1deg);
+    }
+    92% {
+        opacity: 0.64;
+    }
+    100% {
+        left: calc(100% + 90px);
+        opacity: 0;
+        transform: translateY(2px) scale(0.82) rotate(0deg);
     }
 }
 
