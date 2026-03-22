@@ -469,48 +469,60 @@ html, body {
 
 .title {
     font-family: 'VT323', monospace;
-    font-size: 42px;
-    color: var(--text-dark);
+    font-size: 48px;
+    color: #1f2f1d;
     line-height: 1.2;
-    margin-bottom: 8px;
-    text-shadow: 3px 3px 0 rgba(255, 255, 255, 0.5);
+    margin-bottom: 10px;
+    text-shadow: 4px 4px 0 rgba(231, 248, 224, 0.85), 8px 8px 0 rgba(65, 97, 49, 0.18);
 }
 
 .subtitle {
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 32px;
+    font-size: 17px;
+    color: #355235;
+    margin-bottom: 28px;
+    letter-spacing: 1px;
 }
 
 /* Login Form */
 .login-form {
-    background: var(--bg-card);
+    background:
+        linear-gradient(180deg, rgba(248, 243, 224, 0.98) 0%, rgba(238, 230, 202, 0.98) 100%);
     border-radius: 8px;
     padding: 28px;
-    box-shadow: 0 0 0 4px rgba(115, 73, 31, 0.85), 10px 10px 0 rgba(80, 48, 20, 0.25);
+    box-shadow:
+        0 0 0 4px rgba(89, 61, 30, 0.95),
+        0 0 0 10px rgba(170, 125, 70, 0.28),
+        12px 12px 0 rgba(80, 48, 20, 0.24);
     transition: var(--transition-normal);
+    border-top: 6px solid rgba(255, 247, 211, 0.9);
 }
 
 .login-form:hover {
-    box-shadow: var(--shadow-lg), 0 0 30px var(--primary-glow);
+    box-shadow:
+        0 0 0 4px rgba(89, 61, 30, 0.95),
+        0 0 0 10px rgba(170, 125, 70, 0.35),
+        12px 12px 0 rgba(80, 48, 20, 0.24),
+        0 0 28px rgba(122, 195, 99, 0.22);
 }
 
 .form-group input {
     width: 100%;
     padding: 18px;
     font-size: 18px;
-    border: 3px solid #E0E0E0;
+    border: 4px solid #9f8a62;
     border-radius: 4px;
     outline: none;
     transition: var(--transition-normal);
     text-align: center;
     font-family: 'Noto Sans SC', sans-serif;
-    background: linear-gradient(135deg, #FAFAFA 0%, #FFFFFF 100%);
+    background:
+        linear-gradient(180deg, #fffdfa 0%, #f4ecd7 100%);
+    box-shadow: inset 0 4px 0 rgba(255,255,255,0.8);
 }
 
 .form-group input:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 4px var(--primary-glow);
+    border-color: #5a9e43;
+    box-shadow: 0 0 0 4px rgba(100, 179, 78, 0.22);
     transform: translateY(-2px);
 }
 
@@ -526,8 +538,9 @@ html, body {
 .grade-select label {
     display: block;
     margin-bottom: 12px;
-    font-size: 14px;
-    color: #666;
+    font-size: 15px;
+    color: #4b603f;
+    font-weight: 700;
 }
 
 .grade-buttons {
@@ -544,11 +557,11 @@ html, body {
     font-weight: 700;
     border: none;
     border-radius: 4px;
-    background: linear-gradient(135deg, #F5F5F5 0%, #EEEEEE 100%);
-    color: #666;
+    background: linear-gradient(180deg, #f8f1df 0%, #e0d4b2 100%);
+    color: #5a4623;
     cursor: pointer;
     transition: var(--transition-normal);
-    box-shadow: 0 0 0 3px rgba(71, 71, 71, 0.18), 0 6px 0 #9f9f9f;
+    box-shadow: 0 0 0 3px rgba(98, 78, 44, 0.2), 0 6px 0 #a68f66;
     position: relative;
     overflow: hidden;
     font-family: 'VT323', monospace;
@@ -568,7 +581,7 @@ html, body {
 
 .grade-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 0 #BDBDBD, var(--shadow-md);
+    box-shadow: 0 6px 0 #b59f78, var(--shadow-md);
 }
 
 .grade-btn:hover::before {
@@ -576,9 +589,9 @@ html, body {
 }
 
 .grade-btn.selected {
-    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
-    color: white;
-    box-shadow: 0 4px 0 var(--primary-dark), 0 0 20px var(--primary-glow);
+    background: linear-gradient(180deg, #8ad266 0%, #5ea83d 100%);
+    color: #17310f;
+    box-shadow: 0 4px 0 #3f7729, 0 0 20px rgba(109, 204, 78, 0.28);
     transform: translateY(-2px);
 }
 
@@ -587,13 +600,13 @@ html, body {
     padding: 20px 32px;
     font-size: 22px;
     font-weight: 700;
-    color: white;
-    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-dark) 100%);
+    color: #17310f;
+    background: linear-gradient(180deg, #93dc6f 0%, #5fa93d 100%);
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: var(--transition-normal);
-    box-shadow: 0 0 0 3px rgba(31, 88, 33, 0.22), 0 6px 0 #1E8449;
+    box-shadow: 0 0 0 3px rgba(31, 88, 33, 0.22), 0 6px 0 #346d23;
     font-family: 'VT323', monospace;
     letter-spacing: 1px;
     position: relative;
@@ -613,7 +626,7 @@ html, body {
 
 .start-btn:hover:not(:disabled) {
     transform: translateY(-3px);
-    box-shadow: 0 6px 0 #1E8449, var(--shadow-glow), 0 0 30px var(--primary-glow);
+    box-shadow: 0 6px 0 #346d23, var(--shadow-glow), 0 0 30px rgba(109, 204, 78, 0.3);
 }
 
 .start-btn:hover::before {
@@ -622,7 +635,7 @@ html, body {
 
 .start-btn:active {
     transform: translateY(2px);
-    box-shadow: 0 2px 0 #33691E;
+    box-shadow: 0 2px 0 #305f1f;
 }
 
 .start-btn:disabled {
@@ -633,41 +646,48 @@ html, body {
 
 /* User Info */
 .user-info {
-    background: var(--card-bg);
-    border-radius: 16px;
+    background: linear-gradient(180deg, rgba(246, 239, 216, 0.98) 0%, rgba(232, 221, 188, 0.98) 100%);
+    border-radius: 8px;
     padding: 24px;
-    box-shadow: var(--shadow);
+    box-shadow:
+        0 0 0 4px rgba(89, 61, 30, 0.95),
+        0 0 0 10px rgba(170, 125, 70, 0.28),
+        12px 12px 0 rgba(80, 48, 20, 0.22);
 }
 
 .welcome-text {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 700;
-    color: var(--text-dark);
-    margin-bottom: 8px;
+    color: #284027;
+    margin-bottom: 10px;
+    font-family: 'VT323', monospace;
+    letter-spacing: 1px;
 }
 
 .progress-text {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 24px;
+    font-size: 15px;
+    color: #57684d;
+    margin-bottom: 14px;
 }
 
 .reset-btn {
     width: 100%;
     padding: 14px 24px;
     font-size: 16px;
-    color: #666;
-    background: #F5F5F5;
+    color: #5e4725;
+    background: linear-gradient(180deg, #f7f0db 0%, #dcccaa 100%);
     border: none;
     border-radius: 4px;
     cursor: pointer;
     margin-top: 12px;
     transition: var(--transition);
-    font-family: 'Noto Sans SC', sans-serif;
+    font-family: 'VT323', monospace;
+    letter-spacing: 1px;
+    box-shadow: 0 0 0 3px rgba(98, 78, 44, 0.16), 0 5px 0 #b7aa84;
 }
 
 .reset-btn:hover {
-    background: #E0E0E0;
+    background: linear-gradient(180deg, #fff5df 0%, #e7d8b8 100%);
 }
 
 /* Game Page */
@@ -1108,16 +1128,21 @@ html, body {
 .result-content {
     text-align: center;
     padding: 32px 20px;
-    background: var(--card-bg);
+    background: linear-gradient(180deg, rgba(246, 239, 216, 0.98) 0%, rgba(231, 220, 186, 0.98) 100%);
     border-radius: 8px;
-    box-shadow: 0 0 0 4px rgba(115, 73, 31, 0.85), 10px 10px 0 rgba(80, 48, 20, 0.25);
+    box-shadow:
+        0 0 0 4px rgba(89, 61, 30, 0.95),
+        0 0 0 10px rgba(170, 125, 70, 0.28),
+        12px 12px 0 rgba(80, 48, 20, 0.24);
+    border-top: 6px solid rgba(255, 247, 211, 0.9);
 }
 
 .result-title {
     font-family: 'VT323', monospace;
-    font-size: 36px;
-    color: var(--text-dark);
+    font-size: 44px;
+    color: #284027;
     margin-bottom: 24px;
+    text-shadow: 3px 3px 0 rgba(231, 248, 224, 0.8);
 }
 
 .result-stats {
@@ -1129,6 +1154,11 @@ html, body {
 
 .stat-item {
     text-align: center;
+    min-width: 120px;
+    padding: 16px 14px;
+    background: rgba(255, 251, 239, 0.78);
+    border-radius: 6px;
+    box-shadow: inset 0 0 0 3px rgba(117, 88, 45, 0.12), 0 5px 0 rgba(126, 94, 53, 0.16);
 }
 
 .stat-icon {
@@ -1137,14 +1167,15 @@ html, body {
 }
 
 .stat-value {
-    font-size: 36px;
+    font-size: 40px;
     font-weight: 700;
-    color: var(--text-dark);
+    color: #284027;
+    font-family: 'VT323', monospace;
 }
 
 .stat-label {
-    font-size: 14px;
-    color: #666;
+    font-size: 15px;
+    color: #5b684b;
 }
 
 .accuracy-display {
@@ -1154,42 +1185,48 @@ html, body {
 .accuracy-circle {
     width: 140px;
     height: 140px;
-    border-radius: 50%;
+    border-radius: 8px;
     background: conic-gradient(var(--primary) 0deg, #E0E0E0 0deg);
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 12px;
     transition: background 0.5s ease;
+    box-shadow: 0 0 0 4px rgba(112, 80, 40, 0.22), 0 8px 0 rgba(112, 80, 40, 0.18);
+    clip-path: polygon(0 12%, 12% 12%, 12% 0, 88% 0, 88% 12%, 100% 12%, 100% 88%, 88% 88%, 88% 100%, 12% 100%, 12% 88%, 0 88%);
 }
 
 .accuracy-circle::before {
     content: '';
     width: 110px;
     height: 110px;
-    border-radius: 50%;
-    background: white;
+    border-radius: 6px;
+    background: #fffdf6;
     position: absolute;
+    clip-path: inherit;
 }
 
 .accuracy-value {
     position: relative;
-    font-size: 32px;
+    font-size: 36px;
     font-weight: 700;
-    color: var(--text-dark);
+    color: #284027;
+    font-family: 'VT323', monospace;
 }
 
 .accuracy-label {
-    font-size: 16px;
-    color: #666;
+    font-size: 17px;
+    color: #56664c;
 }
 
 .result-message {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 500;
-    color: var(--text-dark);
+    color: #355235;
     margin-bottom: 24px;
     min-height: 28px;
+    font-family: 'VT323', monospace;
+    letter-spacing: 1px;
 }
 
 .result-buttons {
@@ -1201,30 +1238,36 @@ html, body {
 .result-btn {
     width: 100%;
     padding: 16px 24px;
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 700;
     border: none;
-    border-radius: 12px;
+    border-radius: 4px;
     cursor: pointer;
     transition: var(--transition);
-    font-family: 'Noto Sans SC', sans-serif;
+    font-family: 'VT323', monospace;
+    letter-spacing: 1px;
 }
 
 .continue-btn {
-    background: linear-gradient(180deg, #7CB342 0%, #558B2F 100%);
-    color: white;
-    box-shadow: 0 4px 0 #33691E;
+    background: linear-gradient(180deg, #93dc6f 0%, #5fa93d 100%);
+    color: #17310f;
+    box-shadow: 0 0 0 3px rgba(31, 88, 33, 0.22), 0 6px 0 #346d23;
 }
 
 .continue-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 0 #33691E;
+    box-shadow: 0 0 0 3px rgba(31, 88, 33, 0.22), 0 6px 0 #346d23, 0 0 20px rgba(109, 204, 78, 0.25);
 }
 
 .home-btn {
-    background: #F5F5F5;
-    color: #666;
-    box-shadow: 0 4px 0 #E0E0E0;
+    background: linear-gradient(180deg, #f7f0db 0%, #dcccaa 100%);
+    color: #5e4725;
+    box-shadow: 0 0 0 3px rgba(98, 78, 44, 0.16), 0 5px 0 #b7aa84;
+}
+
+.home-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 3px rgba(98, 78, 44, 0.16), 0 6px 0 #b7aa84;
 }
 
 .home-btn:hover {
