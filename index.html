@@ -86,7 +86,7 @@
         <div class="page page-game" id="gamePage">
             <div class="game-header">
                 <div class="user-badge">
-                    <span class="badge-icon">👤</span>
+                    <span class="badge-icon" aria-hidden="true"></span>
                     <span id="gameUserName"></span>
                 </div>
                 <div class="level-info">
@@ -111,7 +111,7 @@
             </div>
 
             <aside class="game-status-panel">
-                <div class="status-card">
+                <div class="status-card status-card-stats">
                     <div class="status-title">答题正确性</div>
                     <div class="status-grid">
                         <div class="status-stat">
@@ -131,7 +131,7 @@
                     <div class="status-note" id="answerStatusText">本题还没作答，选一个最合适的答案吧。</div>
                 </div>
 
-                <div class="status-card">
+                <div class="status-card status-card-nav">
                     <div class="status-title">题目导航</div>
                     <div class="question-nav">
                         <button class="nav-btn" id="prevQuestionBtn">上一题</button>
