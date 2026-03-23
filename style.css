@@ -624,10 +624,10 @@ html, body {
     box-shadow: 0 0 0 4px rgba(255, 241, 213, 0.35), 8px 8px 0 rgba(124, 65, 28, 0.25);
     background: #87CEEB;
     image-rendering: pixelated;
-    width: min(100%, 680px);
-    max-height: 52vh;
+    width: min(100%, 680px, 52vh);
+    height: min(100%, 680px, 52vh);
     aspect-ratio: 1 / 1;
-    height: auto;
+    flex: 0 0 auto;
 }
 
 .word-hint {
@@ -910,7 +910,8 @@ html, body {
     }
 
     #wordCanvas {
-        width: min(100%, 560px);
+        width: min(100%, 560px, 50vh);
+        height: min(100%, 560px, 50vh);
     }
 }
 
@@ -935,7 +936,8 @@ html, body {
     }
 
     #wordCanvas {
-        width: min(100%, 520px);
+        width: min(100%, 520px, 48vh);
+        height: min(100%, 520px, 48vh);
     }
 }
 
@@ -1251,8 +1253,8 @@ html, body {
     }
 
     #wordCanvas {
-        width: min(100%, 320px);
-        height: auto;
+        width: min(100%, 320px, 42vh);
+        height: min(100%, 320px, 42vh);
     }
 
     .option-btn {
@@ -1306,8 +1308,8 @@ html, body {
     }
 
     #wordCanvas {
-        width: min(100%, 420px);
-        height: auto;
+        width: min(100%, 420px, 44vh);
+        height: min(100%, 420px, 44vh);
     }
 
     .options-container {
@@ -1345,8 +1347,8 @@ html, body {
     }
 
     #wordCanvas {
-        width: min(100%, 220px);
-        height: auto;
+        width: min(100%, 220px, 60vh);
+        height: min(100%, 220px, 60vh);
     }
 
     .options-container {
