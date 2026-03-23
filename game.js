@@ -117,6 +117,7 @@ const elements = {
     answeredCount: document.getElementById('answeredCount'),
     liveCorrectCount: document.getElementById('liveCorrectCount'),
     liveWrongCount: document.getElementById('liveWrongCount'),
+    liveAccuracyRate: document.getElementById('liveAccuracyRate'),
     progressBar: document.getElementById('progressBar'),
     feedback: document.getElementById('feedback'),
     correctCount: document.getElementById('correctCount'),
@@ -396,7 +397,7 @@ function setQuestionMode(answerRecord) {
 }
 
 function updateAnswerStatusPanel(answerRecord) {
-    if (!elements.answeredCount || !elements.liveCorrectCount || !elements.liveWrongCount) {
+    if (!elements.answeredCount || !elements.liveCorrectCount || !elements.liveWrongCount || !elements.liveAccuracyRate) {
         return;
     }
 
@@ -407,6 +408,9 @@ function updateAnswerStatusPanel(answerRecord) {
     elements.answeredCount.textContent = answeredList.length;
     elements.liveCorrectCount.textContent = correctTotal;
     elements.liveWrongCount.textContent = wrongTotal;
+    elements.liveAccuracyRate.textContent = answeredList.length === 0
+        ? '0%'
+        : `${Math.round((correctTotal / answeredList.length) * 100)}%`;
 
     if (!elements.answerStatusText || answerRecord) {
         return;
@@ -889,23 +893,24 @@ function hideFeedback() {
 }
 
 function updateProgressBar() {
-    // Minecraft 风格进度显示
     let progressHTML = '';
     for (let i = 0; i < QUESTIONS_PER_LEVEL; i++) {
         const answer = answers[i];
         if (answer && answer.correct) {
-            progressHTML += '<span class="progress-emerald">💎</span>';
+            progressHTML += '<span class="progress-chip progress-correct" aria-label="答对"></span>';
         } else if (answer) {
-            progressHTML += '<span class="progress-redstone">🟥</span>';
+            progressHTML += '<span class="progress-chip progress-wrong" aria-label="答错"></span>';
         } else if (i === currentQuestion - 1) {
-            progressHTML += '<span class="progress-current">🟨</span>';
+            progressHTML += '<span class="progress-chip progress-current" aria-label="当前题"></span>';
         } else {
-            progressHTML += '<span class="progress-empty">⬜</span>';
+            progressHTML += '<span class="progress-chip progress-empty" aria-label="未作答"></span>';
         }
     }
     
     if (answers.length === QUESTIONS_PER_LEVEL && answers.every(answer => answer && answer.correct)) {
-        progressHTML = '<span class="progress-diamond">💎💎💎💎💎💎💎💎💎💎</span>';
+        progressHTML = new Array(QUESTIONS_PER_LEVEL)
+            .fill('<span class="progress-chip progress-perfect" aria-label="全对"></span>')
+            .join('');
     }
     
     elements.progressBar.innerHTML = progressHTML;
