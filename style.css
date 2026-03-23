@@ -423,11 +423,20 @@ html, body {
 .page {
     position: absolute;
     width: 100%;
-    max-width: 500px;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.5s ease, transform 0.5s ease;
     transform: translateY(30px) scale(0.95);
+}
+
+.page-welcome,
+.page-result {
+    max-width: 500px;
+}
+
+.page-game {
+    max-width: min(1600px, calc(100vw - 32px));
+    max-height: calc(100vh - 32px);
 }
 
 .page.active {
