@@ -67,6 +67,7 @@
 - `their ... light` 拆分为 `their` 与 `light`
 - `hill ... find` 拆分为 `hill` 与 `find`
 - `meeting / room` 合并为 `meeting room`
+- `snack + bar` 合并修正为 `snack bar`
 
 ## 当前词数统计
 
