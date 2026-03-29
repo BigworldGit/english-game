@@ -50,7 +50,10 @@ const EXCLUDED_IMAGE_WORDS = new Set([
     'thanks',
     'thank you',
     "what's your name",
-    'nice to meet you'
+    'nice to meet you',
+    'name',
+    'draw',
+    'learn'
 ]);
 
 // 图片预加载
