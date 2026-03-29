@@ -40,6 +40,10 @@ let activeImageRenderToken = 0;
 
 // 游戏配置
 const QUESTIONS_PER_LEVEL = 10;
+// 已确认不适合继续作为“看图猜词”题目的词。
+// 原因包括：
+// 1. 词本身过于抽象或属于寒暄短语
+// 2. 现有图片资源表达错误、表达过弱，或容易和其他词混淆
 const EXCLUDED_IMAGE_WORDS = new Set([
     "I'm",
     'good morning',
