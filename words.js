@@ -88,7 +88,6 @@ const WORD_DATA = {
         { word: "hamburger", meaning: "汉堡包", category: "food" },
         { word: "pizza", meaning: "比萨", category: "food" },
         { word: "cake", meaning: "蛋糕", category: "food" },
-        { word: "snack bar", meaning: "小吃店", category: "place" },
         { word: "moo", meaning: "哞", category: "sound" },
         { word: "that", meaning: "那个", category: "pronoun" },
         { word: "cow", meaning: "奶牛", category: "animal" },

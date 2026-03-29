@@ -67,7 +67,7 @@
 - `their ... light` 拆分为 `their` 与 `light`
 - `hill ... find` 拆分为 `hill` 与 `find`
 - `meeting / room` 合并为 `meeting room`
-- `snack + bar` 合并修正为 `snack bar`
+- `snack + bar` 曾尝试合并为 `snack bar`，后经再次复核，已整体从一年级词库移除
 
 ## 当前词数统计
 
