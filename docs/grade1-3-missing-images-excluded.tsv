@@ -2,10 +2,8 @@ grade	word	expected_image	reason
 1-1	me	me.png	manual_exclusion
 1-1	a	a.png	manual_exclusion
 1-1	please	please.png	category_phrase
-1-1	on	on.png	category_prep
 1-1	this	this.png	manual_exclusion
 1-1	is	is.png	manual_exclusion
-1-1	look	look.png	verb_not_good_for_single_image
 1-1	no	no.png	category_adv
 1-1	not	not.png	category_adv
 1-1	can	can.png	manual_exclusion
@@ -18,21 +16,17 @@ grade	word	expected_image	reason
 1-1	at	at.png	category_prep
 1-1	the	the.png	manual_exclusion
 1-1	May	may.png	verb_not_good_for_single_image
-1-1	have	have.png	verb_not_good_for_single_image
 1-1	moo	moo.png	category_sound
 1-1	that	that.png	manual_exclusion
 1-1	peep	peep.png	category_sound
 1-1	oink	oink.png	category_sound
 1-1	quack	quack.png	category_sound
-1-1	go	go.png	verb_not_good_for_single_image
 1-2	stand up	stand_up.png	manual_exclusion
-1-2	like	like.png	verb_not_good_for_single_image
 1-2	super	super.png	adj_not_good_for_single_image
 1-2	sweet	sweet.png	adj_not_good_for_single_image
 1-2	for	for.png	category_prep
 1-2	and	and.png	category_conj
 1-2	very much	very_much.png	manual_exclusion
-1-2	go	go.png	verb_not_good_for_single_image
 1-2	need	need.png	verb_not_good_for_single_image
 1-2	don't	dont.png	manual_exclusion
 1-2	lie	lie.png	verb_not_good_for_single_image
@@ -42,10 +36,8 @@ grade	word	expected_image	reason
 2-1	yes	yes.png	category_adv
 2-1	ride a bicycle	ride_a_bicycle.png	category_phrase
 2-1	can't	cant.png	manual_exclusion
-2-1	look	look.png	verb_not_good_for_single_image
 2-1	has	has.png	manual_exclusion
 2-1	the	the.png	manual_exclusion
-2-1	on	on.png	category_prep
 2-1	look at	look_at.png	manual_exclusion
 2-1	ready	ready.png	adj_not_good_for_single_image
 2-1	fly around	fly_around.png	manual_exclusion
@@ -78,18 +70,15 @@ grade	word	expected_image	reason
 2-2	fly a kite	fly_a_kite.png	category_phrase
 2-2	sleeping	sleeping.png	verb_not_good_for_single_image
 2-2	stop	stop.png	verb_not_good_for_single_image
-2-2	go	go.png	verb_not_good_for_single_image
 2-2	woof	woof.png	category_sound
 2-2	play yo-yo	play_yo_yo.png	category_phrase
 2-2	play cards	play_cards.png	category_phrase
 2-2	play football	play_football.png	manual_exclusion
-2-2	want	want.png	verb_not_good_for_single_image
 2-2	want to	want_to.png	manual_exclusion
 2-2	little	little.png	adj_not_good_for_single_image
 3-1	Mr	mr.png	category_title
 3-1	Mrs	mrs.png	category_title
 3-1	fine	fine.png	adj_not_good_for_single_image
-3-1	thank	thank.png	verb_not_good_for_single_image
 3-1	no	no.png	category_adv
 3-1	not	not.png	category_adv
 3-1	yes	yes.png	category_adv

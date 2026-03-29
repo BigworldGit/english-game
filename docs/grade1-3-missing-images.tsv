@@ -3,32 +3,19 @@ grade	word	expected_image
 1-1	me	me.png
 1-1	a	a.png
 1-1	please	please.png
-1-1	ruler	ruler.png
-1-1	pencil	pencil.png
 1-1	rubber	rubber.png
-1-1	on	on.png
-1-1	Sunday	Sunday.png
 1-1	this	this.png
 1-1	is	is.png
 1-1	ear	ear.png
 1-1	touch	touch.png
 1-1	picture	picture.png
-1-1	look	look.png
 1-1	no	no.png
 1-1	not	not.png
 1-1	can	can.png
-1-1	sing	sing.png
-1-1	dance	dance.png
-1-1	read	read.png
-1-1	draw	draw.png
 1-1	do	do.png
 1-1	she	she.png
-1-1	grandmother	grandmother.png
 1-1	he	he.png
-1-1	grandfather	grandfather.png
 1-1	yes	yes.png
-1-1	tall	tall.png
-1-1	short	short.png
 1-1	fat	fat.png
 1-1	thin	thin.png
 1-1	classmate	classmate.png
@@ -39,9 +26,7 @@ grade	word	expected_image
 1-1	peach	peach.png
 1-1	at	at.png
 1-1	the	the.png
-1-1	supermarket	supermarket.png
 1-1	May	may.png
-1-1	have	have.png
 1-1	pie	pie.png
 1-1	hamburger	hamburger.png
 1-1	pizza	pizza.png
@@ -50,36 +35,26 @@ grade	word	expected_image
 1-1	cow	cow.png
 1-1	chick	chick.png
 1-1	peep	peep.png
-1-1	pig	pig.png
 1-1	oink	oink.png
 1-1	quack	quack.png
 1-1	cut	cut.png
 1-1	stick	stick.png
-1-1	monkey	monkey.png
-1-1	bear	bear.png
 1-1	panda	panda.png
 1-1	tiger	tiger.png
 1-1	colour	colour.png
-1-1	go	go.png
-1-2	see	see.png
 1-2	frog	frog.png
-1-2	rabbit	rabbit.png
 1-2	bee	bee.png
-1-2	listen	listen.png
 1-2	hear	hear.png
 1-2	sheep	sheep.png
 1-2	hen	hen.png
-1-2	home	home.png
 1-2	smell	smell.png
 1-2	taste	taste.png
 1-2	soup	soup.png
 1-2	noodles	noodles.png
 1-2	yummy	yummy.png
 1-2	restaurant	restaurant.png
-1-2	help	help.png
 1-2	stand up	stand_up.png
 1-2	toy	toy.png
-1-2	like	like.png
 1-2	ball	ball.png
 1-2	doll	doll.png
 1-2	kite	kite.png
@@ -98,30 +73,16 @@ grade	word	expected_image
 1-2	cola	cola.png
 1-2	party	party.png
 1-2	season	season.png
-1-2	spring	spring.png
-1-2	autumn	autumn.png
-1-2	summer	summer.png
-1-2	winter	winter.png
-1-2	grass	grass.png
 1-2	watermelon	watermelon.png
 1-2	weather	weather.png
-1-2	cloudy	cloudy.png
-1-2	sunny	sunny.png
-1-2	rainy	rainy.png
-1-2	windy	windy.png
-1-2	go	go.png
 1-2	beach	beach.png
 1-2	clothes	clothes.png
 1-2	need	need.png
-1-2	T-shirt	tshirt.png
-1-2	dress	dress.png
-1-2	shorts	shorts.png
 1-2	blouse	blouse.png
 1-2	don't	dont.png
 1-2	activity	activity.png
 1-2	ride	ride.png
 1-2	skip	skip.png
-1-2	play	play.png
 1-2	playtime	playtime.png
 1-2	football	football.png
 1-2	rope	rope.png
@@ -129,45 +90,27 @@ grade	word	expected_image
 1-2	card	card.png
 1-2	firecracker	firecracker.png
 1-2	firework	firework.png
-1-2	make	make.png
-1-2	write	write.png
 1-2	fold	fold.png
 1-2	shopping	shopping.png
 1-2	wolf	wolf.png
 1-2	narrator	narrator.png
-1-2	come	come.png
 1-2	bad	bad.png
 1-2	poor	poor.png
 1-2	lie	lie.png
 1-2	run away	run_away.png
-2-1	afternoon	afternoon.png
 2-1	day	day.png
-2-1	mum	mum.png
-2-1	today	today.png
 2-1	very well	very_well.png
 2-1	ant	ant.png
-2-1	tall	tall.png
-2-1	short	short.png
 2-1	no	no.png
 2-1	yes	yes.png
-2-1	seven	seven.png
-2-1	eight	eight.png
-2-1	nine	nine.png
-2-1	ten	ten.png
-2-1	write	write.png
 2-1	ride a bicycle	ride_a_bicycle.png
 2-1	can't	cant.png
 2-1	giraffe	giraffe.png
 2-1	family	family.png
-2-1	brother	brother.png
-2-1	sister	sister.png
 2-1	insect	insect.png
 2-1	jellyfish	jellyfish.png
 2-1	hair	hair.png
-2-1	head	head.png
-2-1	long	long.png
 2-1	now	now.png
-2-1	look	look.png
 2-1	kangaroo	kangaroo.png
 2-1	lion	lion.png
 2-1	has	has.png
@@ -179,9 +122,7 @@ grade	word	expected_image
 2-1	room	room.png
 2-1	put	put.png
 2-1	the	the.png
-2-1	dad	dad.png
 2-1	box	box.png
-2-1	on	on.png
 2-1	look at	look_at.png
 2-1	pencil case	pencil_case.png
 2-1	ox	ox.png
@@ -196,14 +137,12 @@ grade	word	expected_image
 2-1	run around	run_around.png
 2-1	sky	sky.png
 2-1	bright	bright.png
-2-1	star	star.png
 2-1	snake	snake.png
 2-1	king	king.png
 2-1	forest	forest.png
 2-1	fox	fox.png
 2-1	meat	meat.png
 2-1	hippo	hippo.png
-2-1	grass	grass.png
 2-1	wild	wild.png
 2-1	animal	animal.png
 2-1	cute	cute.png
@@ -216,8 +155,6 @@ grade	word	expected_image
 2-1	pick	pick.png
 2-1	climb	climb.png
 2-1	cut	cut.png
-2-1	nice	nice.png
-2-1	beautiful	beautiful.png
 2-1	cry	cry.png
 2-1	yak	yak.png
 2-1	zebra	zebra.png
@@ -230,10 +167,7 @@ grade	word	expected_image
 2-2	for	for.png
 2-2	guess	guess.png
 2-2	pencil case	pencil_case.png
-2-2	open	open.png
 2-2	wow	wow.png
-2-2	watch	watch.png
-2-2	listen	listen.png
 2-2	beside	beside.png
 2-2	can't	cant.png
 2-2	thing	thing.png
@@ -255,7 +189,6 @@ grade	word	expected_image
 2-2	salad	salad.png
 2-2	sure	sure.png
 2-2	don't	dont.png
-2-2	nice	nice.png
 2-2	yummy	yummy.png
 2-2	zebra	zebra.png
 2-2	giraffe	giraffe.png
@@ -263,27 +196,18 @@ grade	word	expected_image
 2-2	lion	lion.png
 2-2	toy shop	toy_shop.png
 2-2	toy	toy.png
-2-2	autumn	autumn.png
-2-2	cool	cool.png
-2-2	winter	winter.png
-2-2	cold	cold.png
 2-2	fly a kite	fly_a_kite.png
 2-2	sleeping	sleeping.png
 2-2	traffic	traffic.png
 2-2	rule	rule.png
 2-2	stop	stop.png
-2-2	go	go.png
 2-2	wait	wait.png
-2-2	sweater	sweater.png
-2-2	shirt	shirt.png
-2-2	coat	coat.png
 2-2	trousers	trousers.png
 2-2	woof	woof.png
 2-2	play yo-yo	play_yo_yo.png
 2-2	play cards	play_cards.png
 2-2	play football	play_football.png
 2-2	Teachers' Day	teachers_day.png
-2-2	today	today.png
 2-2	September	september.png
 2-2	idea	idea.png
 2-2	card	card.png
@@ -294,13 +218,11 @@ grade	word	expected_image
 2-2	Mama Bear	mama_bear.png
 2-2	Baby Bear	baby_bear.png
 2-2	house	house.png
-2-2	want	want.png
 2-2	want to	want_to.png
 2-2	little	little.png
 3-1	Mr	mr.png
 3-1	Mrs	mrs.png
 3-1	fine	fine.png
-3-1	thank	thank.png
 3-1	no	no.png
 3-1	not	not.png
 3-1	yes	yes.png
@@ -310,16 +232,10 @@ grade	word	expected_image
 3-1	he	he.png
 3-1	this	this.png
 3-1	she	she.png
-3-1	father	father.png
-3-1	mother	mother.png
 3-1	me	me.png
 3-1	family	family.png
 3-1	hair	hair.png
-3-1	eye	eye.png
 3-1	ear	ear.png
-3-1	nose	nose.png
-3-1	mouth	mouth.png
-3-1	face	face.png
 3-1	blackboard	blackboard.png
 3-1	please	please.png
 3-1	late	late.png
@@ -328,31 +244,14 @@ grade	word	expected_image
 3-1	a	a.png
 3-1	an	an.png
 3-1	pear	pear.png
-3-1	dad	dad.png
 3-1	here	here.png
 3-1	how much	how_much.png
 3-1	they	they.png
 3-1	it	it.png
-3-1	desk	desk.png
-3-1	pen	pen.png
 3-1	schoolbag	schoolbag.png
 3-1	these	these.png
-3-1	pencil	pencil.png
-3-1	ruler	ruler.png
-3-1	mum	mum.png
-3-1	one	one.png
-3-1	two	two.png
-3-1	three	three.png
-3-1	four	four.png
-3-1	five	five.png
-3-1	six	six.png
-3-1	seven	seven.png
-3-1	eight	eight.png
-3-1	nine	nine.png
-3-1	ten	ten.png
 3-1	how many	how_many.png
 3-1	mouse	mouse.png
-3-1	rabbit	rabbit.png
 3-1	it's	its.png
 3-1	tail	tail.png
 3-2	and	and.png
@@ -366,10 +265,7 @@ grade	word	expected_image
 3-2	taste	taste.png
 3-2	can	can.png
 3-2	hear	hear.png
-3-2	bear	bear.png
-3-2	elephant	elephant.png
 3-2	lion	lion.png
-3-2	monkey	monkey.png
 3-2	panda	panda.png
 3-2	tiger	tiger.png
 3-2	our	our.png
@@ -396,19 +292,14 @@ grade	word	expected_image
 3-2	how old	how_old.png
 3-2	cow	cow.png
 3-2	horse	horse.png
-3-2	pig	pig.png
 3-2	sheep	sheep.png
 3-2	farm	farm.png
 3-2	great	great.png
 3-2	litter	litter.png
 3-2	stone	stone.png
 3-2	throw	throw.png
-3-2	head	head.png
 3-2	body	body.png
 3-2	arm	arm.png
-3-2	hand	hand.png
-3-2	leg	leg.png
-3-2	foot	foot.png
 3-2	tea	tea.png
 3-2	cup	cup.png
 3-2	day	day.png
