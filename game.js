@@ -36,6 +36,7 @@ let currentMusicIndex = 0;
 let candidateWords = {};
 let candidateWordsLoaded = false;
 const API_BASE = window.location.origin;
+let activeImageRenderToken = 0;
 
 // 游戏配置
 const QUESTIONS_PER_LEVEL = 10;
@@ -374,13 +375,12 @@ function syncQuestionNav() {
 }
 
 function setQuestionMode(answerRecord) {
-    if (!elements.questionModeLabel || !elements.wordHint) {
+    if (!elements.questionModeLabel) {
         return;
     }
 
     if (!answerRecord) {
         elements.questionModeLabel.textContent = '答题中';
-        elements.wordHint.textContent = 'Look at the picture and choose the correct word!';
         if (elements.answerStatusText) {
             elements.answerStatusText.textContent = '本题还没作答，选一个最合适的答案吧。';
         }
@@ -388,7 +388,6 @@ function setQuestionMode(answerRecord) {
     }
 
     elements.questionModeLabel.textContent = answerRecord.correct ? '回看：答对了' : '回看：答错了';
-    elements.wordHint.textContent = `已作答：你选了 ${answerRecord.selected}`;
     if (elements.answerStatusText) {
         elements.answerStatusText.textContent = answerRecord.correct
             ? `这题答对了，正确答案是 ${answerRecord.word}。`
@@ -928,12 +927,14 @@ async function drawWordImage(wordData) {
     try {
         const canvas = elements.wordCanvas;
         if (!canvas) return;
+        const renderToken = ++activeImageRenderToken;
         
         // 先尝试加载外部图片，使用 await 确保图片加载完成后再返回
-        const imageLoaded = await tryLoadWordImage(wordData.word, canvas);
+        const imageLoaded = await tryLoadWordImage(wordData.word, canvas, renderToken);
         if (imageLoaded) {
             return; // 图片加载成功并已绘制
         }
+        if (renderToken !== activeImageRenderToken) return;
         
         // 图片加载失败，使用默认绘制
         const ctx = canvas.getContext('2d');
@@ -3107,10 +3108,11 @@ if (typeof window !== 'undefined') {
 // ============================================
 // 图片加载辅助函数
 // ============================================
-function tryLoadWordImage(word, canvas) {
+function tryLoadWordImage(word, canvas, renderToken) {
     if (!canvas) return Promise.resolve(false);
     const ctx = canvas.getContext('2d');
     if (!ctx) return Promise.resolve(false);
+    if (renderToken !== activeImageRenderToken) return Promise.resolve(false);
     
     // Show loading state - clear canvas with a placeholder
     ctx.fillStyle = '#87CEEB'; // Sky blue background
@@ -3127,10 +3129,10 @@ function tryLoadWordImage(word, canvas) {
     
     // Create new image for each path to properly track loading state
     // Use Promise to wait for image to actually load before returning
-    return tryLoadImagePath(paths, 0, ctx, canvas.width, canvas.height);
+    return tryLoadImagePath(paths, 0, ctx, canvas.width, canvas.height, renderToken);
 }
 
-function tryLoadImagePath(paths, index, ctx, width, height) {
+function tryLoadImagePath(paths, index, ctx, width, height, renderToken) {
     if (index >= paths.length) {
         return Promise.resolve(false); // All images failed
     }
@@ -3139,6 +3141,10 @@ function tryLoadImagePath(paths, index, ctx, width, height) {
         const img = new Image();
         
         img.onload = function() {
+            if (renderToken !== activeImageRenderToken) {
+                resolve(false);
+                return;
+            }
             // Success! Draw the image
             ctx.clearRect(0, 0, width, height);
             ctx.fillStyle = '#87CEEB';
@@ -3152,7 +3158,7 @@ function tryLoadImagePath(paths, index, ctx, width, height) {
         
         img.onerror = function() {
             // Try next path
-            tryLoadImagePath(paths, index + 1, ctx, width, height)
+            tryLoadImagePath(paths, index + 1, ctx, width, height, renderToken)
                 .then(resolve)
                 .catch(() => resolve(false));
         };
