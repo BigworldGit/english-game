@@ -60,6 +60,67 @@ const EXCLUDED_IMAGE_WORDS = new Set([
     'learn'
 ]);
 
+// 当前仓库中 1-3 年级已存在的图片资源清单。
+// 词库可以先完整，但图片题只从这份集合里出题，避免“有词无图”破坏当前玩法。
+const AVAILABLE_IMAGE_WORDS = new Set([
+    'afternoon', 'always', 'am', 'america', 'american', 'angry', 'answer', 'apple', 'are', 'art',
+    'ask', 'australia', 'australian', 'autumn', 'baby', 'back', 'bag', 'banana', 'bear', 'beautiful',
+    'become', 'bed', 'beef', 'behind', 'believe', 'best', 'better', 'big', 'bike', 'bird',
+    'birthday', 'black', 'blue', 'book', 'boring', 'boy', 'bread', 'bring', 'brother', 'brown',
+    'bus', 'businessman', 'but', 'buy', 'bye', 'cake', 'call', 'cap', 'car', 'careful',
+    'cat', 'chair', 'change', 'chicken', 'china', 'chinese', 'city', 'classroom', 'clean', 'clever',
+    'close', 'cloud', 'cloudy', 'coat', 'cold', 'come', 'come from', 'company', 'cook', 'cool',
+    'country', 'dad', 'dance', 'desk', 'different', 'difficult', 'dirty', 'doctor', 'dog', 'door',
+    'down', 'draw', 'dream', 'dress', 'drink', 'driver', 'duck', 'easy', 'eat', 'egg',
+    'eight', 'elephant', 'empty', 'english', 'enjoy', 'eraser', 'evening', 'eye', 'face', 'factory',
+    'farmer', 'fast', 'father', 'film', 'find', 'finish', 'fish', 'five', 'flower', 'fly',
+    'foot', 'forget', 'four', 'france', 'friday', 'friend', 'front', 'fruit', 'full', 'future',
+    'gift', 'girl', 'give', 'gloves', 'go', 'good', 'good afternoon', 'good evening', 'good morning', 'good night',
+    'goodbye', 'grandfather', 'grandma', 'grandmother', 'grandpa', 'grass', 'green', 'grow', 'grow up', 'hand',
+    'happy', 'hat', 'have', 'head', 'healthy', 'heavy', 'hello', 'help', 'hi', 'high',
+    'home', 'hope', 'hospital', 'hot', 'how', 'hungry', 'i', 'if', 'important', 'in',
+    'interesting', 'international', 'japan', 'jeans', 'juice', 'jump', 'kind', 'know', 'language', 'learn',
+    'leave', 'left', 'leg', 'library', 'light', 'like', 'listen', 'live', 'long', 'look',
+    'love', 'low', 'make', 'man', 'math', 'meet', 'milk', 'miss', 'modern', 'monday',
+    'monkey', 'month', 'moon', 'more', 'morning', 'most', 'mother', 'mouth', 'mum', 'museum',
+    'music', 'my', 'name', 'national', 'near', 'necessary', 'never', 'new', 'nice', 'night',
+    'nine', 'nose', 'nurse', 'often', 'ok', 'old', 'on', 'one', 'open', 'orange',
+    'park', 'pe', 'pen', 'pencil', 'photo', 'pig', 'pink', 'plane', 'play', 'police',
+    'popular', 'pork', 'possible', 'postman', 'purple', 'rabbit', 'rain', 'rainy', 'read', 'red',
+    'remember', 'return', 'rice', 'right', 'road', 'ruler', 'run', 'sad', 'same', 'saturday',
+    'say', 'school', 'see', 'sell', 'send', 'seven', 'ship', 'shirt', 'shoe', 'shoes',
+    'short', 'shorts', 'sing', 'sister', 'sit', 'six', 'skirt', 'sleep', 'slow', 'slowly',
+    'small', 'snow', 'sock', 'socks', 'sofa', 'sometimes', 'song', 'sorry', 'special', 'spell',
+    'sport', 'spring', 'stand', 'star', 'start', 'story', 'strong', 'student', 'study', 'successful',
+    'summer', 'sun', 'sunday', 'sunny', 'supermarket', 'sweater', 'swim', 'table', 'take', 'tall',
+    'teacher', 'tell', 'ten', 'thank', 'thank you', 'think', 'thirsty', 'three', 'thursday', 'tired',
+    'to', 'today', 'tomorrow', 'town', 'traditional', 'train', 'travel', 'tree', 'tshirt', 'tuesday',
+    'two', 'uk', 'under', 'understand', 'up', 'use', 'usually', 'vegetable', 'village', 'visit',
+    'walk', 'want', 'warm', 'watch', 'water', 'weak', 'wear', 'wednesday', 'week', 'welcome',
+    'what', 'when', 'where', 'white', 'who', 'whose', 'why', 'window', 'windy', 'winter',
+    'wish', 'woman', 'work', 'world', 'worse', 'worst', 'write', 'yellow', 'yesterday', 'you',
+    'young', 'your', 'zoo'
+]);
+const IMAGE_WORD_ALIASES = {
+    't-shirt': 'tshirt',
+    'maths': 'math'
+};
+
+function normalizeWordKey(word) {
+    return String(word)
+        .toLowerCase()
+        .replace(/\.{3}/g, ' ')
+        .replace(/[()]/g, ' ')
+        .replace(/['"]/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+}
+
+function hasPlayableImageAsset(word) {
+    const key = normalizeWordKey(word);
+    return AVAILABLE_IMAGE_WORDS.has(key) || AVAILABLE_IMAGE_WORDS.has(IMAGE_WORD_ALIASES[key]);
+}
+
 // 图片预加载
 const imagePreloadCache = new Map();
 const PRELOAD_BATCH_SIZE = 3;
@@ -451,7 +512,8 @@ function goToNextQuestion() {
 // ============================================
 function prepareWords() {
     const filteredWords = getWordsUpToGrade(currentGrade).filter(wordData =>
-        !EXCLUDED_IMAGE_WORDS.has(wordData.word)
+        !EXCLUDED_IMAGE_WORDS.has(wordData.word) &&
+        hasPlayableImageAsset(wordData.word)
     );
     const lookup = new Map(filteredWords.map(wordData => [wordData.word, wordData]));
 
@@ -3211,8 +3273,13 @@ function getImageFilename(word, grade) {
     if (uppercaseMap[key]) {
         return uppercaseMap[key];
     }
-    
-    return word.toLowerCase() + ".png";
+
+    const alias = IMAGE_WORD_ALIASES[key];
+    const fileKey = alias || key;
+
+    return fileKey
+        .replace(/[^a-z0-9]+/g, '_')
+        .replace(/^_+|_+$/g, '') + ".png";
 }
 
 const wordAnimations = {
