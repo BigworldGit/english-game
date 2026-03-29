@@ -3115,6 +3115,14 @@ if (typeof window !== 'undefined') {
 // ============================================
 // 图片加载辅助函数
 // ============================================
+function buildImagePaths(word) {
+    return [
+        'images/grade1/' + getImageFilename(word, 1),
+        'images/grade2/' + getImageFilename(word, 2),
+        'images/grade3/' + getImageFilename(word, 3)
+    ];
+}
+
 function tryLoadWordImage(word, canvas, renderToken) {
     if (!canvas) return Promise.resolve(false);
     const ctx = canvas.getContext('2d');
@@ -3128,11 +3136,19 @@ function tryLoadWordImage(word, canvas, renderToken) {
     ctx.fillRect(0, canvas.height * 0.75, canvas.width, canvas.height * 0.25);
     
     // Try to load from all grade folders
-    const paths = [
-        'images/grade1/' + getImageFilename(word, 1),
-        'images/grade2/' + getImageFilename(word, 2),
-        'images/grade3/' + getImageFilename(word, 3)
-    ];
+    const preloadedImage = getPreloadedImage(word);
+    if (preloadedImage && preloadedImage.complete) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#87CEEB';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        const scale = Math.min(canvas.width / preloadedImage.width, canvas.height / preloadedImage.height);
+        const x = (canvas.width - preloadedImage.width * scale) / 2;
+        const y = (canvas.height - preloadedImage.height * scale) / 2;
+        ctx.drawImage(preloadedImage, x, y, preloadedImage.width * scale, preloadedImage.height * scale);
+        return Promise.resolve(true);
+    }
+
+    const paths = buildImagePaths(word);
     
     // Create new image for each path to properly track loading state
     // Use Promise to wait for image to actually load before returning
@@ -3247,33 +3263,48 @@ function preloadNextQuestionImages() {
 }
 
 function preloadImage(word) {
-    if (imagePreloadCache.has(word)) {
-        return; // 已缓存
+    const cached = imagePreloadCache.get(word);
+    if (cached?.status === 'loaded' || cached?.status === 'loading') {
+        return cached.promise || Promise.resolve(cached.img || null);
     }
-    
-    const img = new Image();
-    const paths = [
-        'images/grade1/' + getImageFilename(word, 1),
-        'images/grade2/' + getImageFilename(word, 2),
-        'images/grade3/' + getImageFilename(word, 3)
-    ];
-    
-    // 尝试加载第一张存在的图片
-    for (const path of paths) {
-        img.src = path;
-        if (img.complete) {
-            imagePreloadCache.set(word, img);
-            return;
-        }
-        // 如果图片加载成功，缓存它
-        img.onload = () => {
-            imagePreloadCache.set(word, img);
-        };
-    }
+
+    const paths = buildImagePaths(word);
+    const promise = loadImageByPaths(paths).then(img => {
+        imagePreloadCache.set(word, {
+            status: img ? 'loaded' : 'missing',
+            img: img || null,
+            promise: null
+        });
+        return img;
+    });
+
+    imagePreloadCache.set(word, {
+        status: 'loading',
+        img: null,
+        promise
+    });
+
+    return promise;
 }
 
 function getPreloadedImage(word) {
-    return imagePreloadCache.get(word);
+    const cached = imagePreloadCache.get(word);
+    return cached?.img || null;
+}
+
+function loadImageByPaths(paths, index = 0) {
+    if (index >= paths.length) {
+        return Promise.resolve(null);
+    }
+
+    return new Promise(resolve => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = () => {
+            loadImageByPaths(paths, index + 1).then(resolve);
+        };
+        img.src = paths[index];
+    });
 }
 
 // ============================================
