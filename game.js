@@ -101,6 +101,28 @@ const AVAILABLE_IMAGE_WORDS = new Set([
     'wish', 'woman', 'work', 'world', 'worse', 'worst', 'write', 'yellow', 'yesterday', 'you',
     'young', 'your', 'zoo'
 ]);
+const NEWLY_IMPORTED_IMAGE_WORDS = new Set([
+    'activity', 'animal', 'ant', 'arm', 'baby bear', 'bad', 'ball', 'balloon', 'beach', 'bee',
+    'bicycle', 'biscuit', 'blackboard', 'blouse', 'blow', 'body', 'bowl', 'box', 'breakfast', 'bright',
+    'candy', 'card', 'chick', 'child', 'chopsticks', 'classmate', 'climb', 'clothes', 'cola', 'colour',
+    'count', 'cow', 'cup', 'cut', 'cute', 'day', 'dinner', 'doll', 'dove', 'ear',
+    'family', 'farm', 'fat', 'feel', 'firecracker', 'firework', 'fold', 'food', 'football', 'forest',
+    'fox', 'frog', 'giraffe', 'guess', 'hair', 'hamburger', 'hard', 'hear', 'hen', 'here',
+    'hippo', 'hop', 'horse', 'house', 'ice cream', 'idea', 'insect', 'jelly', 'jellyfish', 'kangaroo',
+    'king', 'kite', 'lemon', 'lion', 'litter', 'mama bear', 'meat', 'mouse', 'narrator', 'new year',
+    'nightingale', 'noodle', 'noodles', 'now', 'ox', 'panda', 'papa bear', 'party', 'peach', 'pear',
+    'pencil case', 'pick', 'picture', 'pie', 'pizza', 'plate', 'playground', 'playtime', 'poor', 'put',
+    'queen bee', 'restaurant', 'ride', 'robot', 'room', 'rope', 'rubber', 'rule', 'salad', 'schoolbag',
+    'season', 'seesaw', 'september', 'sheep', 'shopping', 'skate', 'skip', 'sky', 'slide', 'smell',
+    'snake', 'soft', 'soup', 'spoon', 'stick', 'stone', 'street', 'swan', 'swing', 'tail',
+    'taste', 'tea', 'teachers day', 'teatime', 'there', 'thin', 'thing', 'tie', 'tiger', 'touch',
+    'toy', 'toy bear', 'toy shop', 'traffic', 'trousers', 'wait', 'watermelon', 'weather', 'wild', 'wolf',
+    'worker', 'yak', 'yummy', 'zebra'
+]);
+const PLAYABLE_IMAGE_WORDS = new Set([
+    ...AVAILABLE_IMAGE_WORDS,
+    ...NEWLY_IMPORTED_IMAGE_WORDS
+]);
 const IMAGE_WORD_ALIASES = {
     't-shirt': 'tshirt',
     'maths': 'math'
@@ -118,7 +140,7 @@ function normalizeWordKey(word) {
 
 function hasPlayableImageAsset(word) {
     const key = normalizeWordKey(word);
-    return AVAILABLE_IMAGE_WORDS.has(key) || AVAILABLE_IMAGE_WORDS.has(IMAGE_WORD_ALIASES[key]);
+    return PLAYABLE_IMAGE_WORDS.has(key) || PLAYABLE_IMAGE_WORDS.has(IMAGE_WORD_ALIASES[key]);
 }
 
 // 图片预加载
