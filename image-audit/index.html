@@ -2,121 +2,374 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>English-Game 图片审核</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:linear-gradient(135deg,#667eea,#764ba2);min-height:100vh;padding:15px}
-.container{max-width:1200px;margin:0 auto}
-h1{color:white;text-align:center;margin-bottom:10px}
-.toolbar{background:white;padding:12px;border-radius:10px;margin-bottom:15px;display:flex;justify-content:space-between}
-.stats{display:flex;gap:8px}
-.stat{padding:6px 12px;background:#f5f5f5;border-radius:6px}
-.stat b{font-size:16px;display:block}
-.stat.ok b{color:#4caf50}
-.stat.bad b{color:#f44336}
-.btn{padding:8px 14px;border:none;border-radius:6px;cursor:pointer;background:#667eea;color:white}
-.grade{margin-bottom:20px}
-.grade h2{background:white;padding:10px;border-radius:10px 10px 0 0}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;background:white;padding:12px;border-radius:0 0 10px 10px}
-.card{background:#f9f9f9;padding:8px;border-radius:8px;text-align:center;border:2px solid transparent;cursor:pointer}
-.card:hover{border-color:#667eea}
-.card.bad{border-color:#f44336;background:#ffe0e0}
-.card.ok{border-color:#4caf50;background:#e0ffe0}
-.card img{width:100%;height:80px;object-fit:contain;background:#fff}
-.card .word{font-size:12px;margin:5px 0;font-weight:bold}
-.btns{display:flex;gap:3px;margin-top:4px}
-.btns button{flex:1;padding:4px;border:1px solid #ddd;background:#fff;cursor:pointer;border-radius:3px}
-.btns button.ok.on{background:#4caf50;color:white}
-.btns button.on{background:#f44336;color:white}
-.lb{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.9);z-index:200;display:none;align-items:center;justify-content:center;flex-direction:column}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif;background:#eef3f8;color:#1f2937;min-height:100vh}
+.container{max-width:1400px;margin:0 auto;padding:20px}
+h1{font-size:32px;margin-bottom:8px}
+.sub{color:#475569;margin-bottom:16px}
+.toolbar,.grade{background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border:1px solid rgba(148,163,184,.25);border-radius:18px;box-shadow:0 16px 40px rgba(15,23,42,.08)}
+.toolbar{padding:16px 18px;margin-bottom:18px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.stats,.filters,.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.stat{min-width:92px;padding:10px 14px;border-radius:12px;background:#f8fafc;border:1px solid rgba(148,163,184,.2)}
+.stat b{display:block;font-size:24px;line-height:1.1}
+.stat.keep b{color:#16a34a}
+.stat.redo b{color:#dc2626}
+.stat.exclude b{color:#6b7280}
+.stat.pending b{color:#2563eb}
+label{font-size:14px;color:#475569}
+select,input{height:40px;border-radius:10px;border:1px solid rgba(148,163,184,.4);padding:0 12px;background:white;color:#1f2937}
+input{min-width:220px}
+.btn{height:40px;padding:0 14px;border:none;border-radius:10px;cursor:pointer;background:#2563eb;color:#fff;font-weight:600}
+.btn.secondary{background:#e2e8f0;color:#0f172a}
+.btn.ghost{background:transparent;border:1px solid rgba(148,163,184,.4);color:#334155}
+.grade{margin-bottom:18px;overflow:hidden}
+.grade-head{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-bottom:1px solid rgba(148,163,184,.18)}
+.grade-head h2{font-size:20px}
+.grade-head .meta{font-size:14px;color:#64748b}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;padding:16px}
+.card{background:#fff;border:2px solid rgba(148,163,184,.18);border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:8px;box-shadow:0 8px 20px rgba(15,23,42,.05)}
+.card.keep{border-color:#22c55e;background:#f0fdf4}
+.card.redo{border-color:#ef4444;background:#fef2f2}
+.card.exclude{border-color:#94a3b8;background:#f8fafc}
+.thumb{width:100%;aspect-ratio:1/1;border-radius:12px;background:linear-gradient(135deg,#dbeafe,#eff6ff);overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:zoom-in}
+.thumb img{width:100%;height:100%;object-fit:contain}
+.word{font-size:16px;font-weight:700;line-height:1.25;word-break:break-word}
+.info{font-size:12px;color:#64748b;display:flex;justify-content:space-between;gap:8px}
+.btns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.btns button{height:34px;border-radius:10px;border:1px solid rgba(148,163,184,.25);background:#fff;cursor:pointer;font-size:13px;font-weight:700}
+.btns button.keep.on{background:#22c55e;color:#fff;border-color:#22c55e}
+.btns button.redo.on{background:#ef4444;color:#fff;border-color:#ef4444}
+.btns button.exclude.on{background:#64748b;color:#fff;border-color:#64748b}
+.empty{padding:28px 16px;color:#64748b;text-align:center}
+.lb{position:fixed;inset:0;background:rgba(15,23,42,.78);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
 .lb.on{display:flex}
-.lb img{max-width:90%;max-height:70%;border-radius:8px}
-.lb .wd{color:white;font-size:24px;font-weight:bold;margin:15px 0}
-.lb .cl{position:absolute;top:20px;right:30px;color:white;font-size:40px;cursor:pointer}
-.lb .acts{display:flex;gap:15px;margin-top:20px}
-.lb .acts button{padding:12px 30px;font-size:16px;border:none;border-radius:8px;cursor:pointer}
-.lb .acts .pass{background:#4caf50;color:white}
-.lb .acts .redo{background:#f44336;color:white}
+.panel{width:min(1100px,100%);background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 25px 80px rgba(15,23,42,.35)}
+.panel-main{display:grid;grid-template-columns:minmax(320px,1fr) 320px}
+.preview{padding:20px;background:#eff6ff;display:flex;align-items:center;justify-content:center;min-height:560px}
+.preview img{max-width:100%;max-height:78vh;object-fit:contain}
+.side{padding:22px;display:flex;flex-direction:column;gap:16px}
+.side h3{font-size:28px;line-height:1.2}
+.side .meta{display:grid;gap:8px;font-size:14px;color:#475569}
+.side .acts{display:grid;gap:10px;margin-top:auto}
+.side .acts button{height:46px;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer}
+.side .acts .keep{background:#22c55e;color:#fff}
+.side .acts .redo{background:#ef4444;color:#fff}
+.side .acts .exclude{background:#64748b;color:#fff}
+.close{position:absolute;top:18px;right:22px;font-size:34px;color:#fff;cursor:pointer;line-height:1}
+pre{white-space:pre-wrap;word-break:break-word;background:#0f172a;color:#e2e8f0;border-radius:14px;padding:16px;max-height:55vh;overflow:auto}
+@media (max-width:960px){
+  .panel-main{grid-template-columns:1fr}
+  .preview{min-height:320px}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+}
 </style>
 </head>
 <body>
 <div class="container">
-<h1>English-Game 图片审核</h1>
-<div class="toolbar">
-<div class="stats">
-<div class="stat ok"><b id="ok">0</b>通过</div>
-<div class="stat bad"><b id="bad">0</b>重做</div>
+  <h1>English-Game 图片审核</h1>
+  <div class="sub">当前页面只展示这次新导入的图片，支持人工标记为保留、重做或剔除。</div>
+
+  <div class="toolbar">
+    <div class="stats">
+      <div class="stat pending"><b id="pendingCount">0</b>待审核</div>
+      <div class="stat keep"><b id="keepCount">0</b>保留</div>
+      <div class="stat redo"><b id="redoCount">0</b>重做</div>
+      <div class="stat exclude"><b id="excludeCount">0</b>剔除</div>
+    </div>
+    <div class="filters">
+      <label>学期
+        <select id="gradeFilter">
+          <option value="all">全部</option>
+        </select>
+      </label>
+      <label>状态
+        <select id="statusFilter">
+          <option value="all">全部</option>
+          <option value="pending">待审核</option>
+          <option value="keep">保留</option>
+          <option value="redo">重做</option>
+          <option value="exclude">剔除</option>
+        </select>
+      </label>
+      <label>搜索
+        <input id="searchInput" type="text" placeholder="输入单词筛选">
+      </label>
+    </div>
+    <div class="actions">
+      <button class="btn ghost" id="clearBtn" type="button">清空当前标记</button>
+      <button class="btn secondary" id="copyBtn" type="button">复制审核结果</button>
+      <button class="btn" id="reportBtn" type="button">查看审核报告</button>
+    </div>
+  </div>
+
+  <div id="list"></div>
 </div>
-<button class="btn" onclick="showReport()">查看报告</button>
+
+<div class="lb" id="lightbox">
+  <div class="close" id="closeLightbox">×</div>
+  <div class="panel">
+    <div class="panel-main">
+      <div class="preview"><img id="previewImage" alt=""></div>
+      <div class="side">
+        <h3 id="previewWord"></h3>
+        <div class="meta">
+          <div>学期：<strong id="previewGrade"></strong></div>
+          <div>图片文件：<strong id="previewImageName"></strong></div>
+          <div>当前状态：<strong id="previewStatus">待审核</strong></div>
+        </div>
+        <div class="acts">
+          <button class="keep" type="button" data-status="keep">保留</button>
+          <button class="redo" type="button" data-status="redo">重做</button>
+          <button class="exclude" type="button" data-status="exclude">剔除</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<div id="list"></div>
-</div>
-<div class="lb" id="lb" onclick="closeLb()">
-<div class="cl">×</div>
-<img id="lbImg">
-<div class="wd" id="lbWd"></div>
-<div class="acts">
-<button class="pass" onclick="setSt('ok')">通过</button>
-<button class="redo" onclick="setSt('bad')">重做</button>
-</div>
-</div>
+
 <script>
-const words = {
-    3: ["close"]
-};
-let st = JSON.parse(localStorage.getItem('rev_st')||'{}');
-function save(){localStorage.setItem('rev_st',JSON.stringify(st));render()}
-function update(){
-    let ok=0,bad=0;
-    for(let g in words){
-        words[g].forEach(w=>{
-            let key = g+'-'+w;
-            if(st[key]==='ok')ok++;
-            if(st[key]==='bad')bad++;
-        });
+const STORAGE_KEY = 'image_audit_imported_batch_status';
+let items = [];
+let statusMap = {};
+let currentItem = null;
+
+function loadStatus() {
+  try {
+    statusMap = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  } catch (error) {
+    statusMap = {};
+  }
+}
+
+function saveStatus() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(statusMap));
+  render();
+}
+
+function getStatus(item) {
+  return statusMap[item.word] || 'pending';
+}
+
+function setStatus(item, status) {
+  statusMap[item.word] = status;
+  saveStatus();
+  if (currentItem && currentItem.word === item.word) {
+    updateLightboxStatus();
+  }
+}
+
+function clearCurrentViewStatuses() {
+  getFilteredItems().forEach(item => {
+    delete statusMap[item.word];
+  });
+  saveStatus();
+}
+
+function updateToolbarCounts() {
+  let pending = 0;
+  let keep = 0;
+  let redo = 0;
+  let exclude = 0;
+  for (const item of items) {
+    const status = getStatus(item);
+    if (status === 'keep') keep++;
+    else if (status === 'redo') redo++;
+    else if (status === 'exclude') exclude++;
+    else pending++;
+  }
+  document.getElementById('pendingCount').textContent = pending;
+  document.getElementById('keepCount').textContent = keep;
+  document.getElementById('redoCount').textContent = redo;
+  document.getElementById('excludeCount').textContent = exclude;
+}
+
+function getFilteredItems() {
+  const gradeFilter = document.getElementById('gradeFilter').value;
+  const statusFilter = document.getElementById('statusFilter').value;
+  const search = document.getElementById('searchInput').value.trim().toLowerCase();
+  return items.filter(item => {
+    const status = getStatus(item);
+    if (gradeFilter !== 'all' && item.grade !== gradeFilter) return false;
+    if (statusFilter !== 'all' && status !== statusFilter) return false;
+    if (search && !item.word.toLowerCase().includes(search)) return false;
+    return true;
+  });
+}
+
+function buildGradeOptions() {
+  const select = document.getElementById('gradeFilter');
+  const grades = [...new Set(items.map(item => item.grade))];
+  for (const grade of grades) {
+    const option = document.createElement('option');
+    option.value = grade;
+    option.textContent = grade;
+    select.appendChild(option);
+  }
+}
+
+function openLightbox(item) {
+  currentItem = item;
+  document.getElementById('previewImage').src = item.image;
+  document.getElementById('previewWord').textContent = item.word;
+  document.getElementById('previewGrade').textContent = item.grade;
+  document.getElementById('previewImageName').textContent = item.expected_image;
+  updateLightboxStatus();
+  document.getElementById('lightbox').classList.add('on');
+}
+
+function closeLightbox() {
+  currentItem = null;
+  document.getElementById('lightbox').classList.remove('on');
+}
+
+function updateLightboxStatus() {
+  if (!currentItem) return;
+  const labelMap = {
+    pending: '待审核',
+    keep: '保留',
+    redo: '重做',
+    exclude: '剔除'
+  };
+  document.getElementById('previewStatus').textContent = labelMap[getStatus(currentItem)];
+}
+
+function render() {
+  updateToolbarCounts();
+  const grouped = new Map();
+  for (const item of getFilteredItems()) {
+    if (!grouped.has(item.grade)) grouped.set(item.grade, []);
+    grouped.get(item.grade).push(item);
+  }
+
+  const list = document.getElementById('list');
+  if (grouped.size === 0) {
+    list.innerHTML = '<div class="grade"><div class="empty">当前筛选条件下没有图片。</div></div>';
+    return;
+  }
+
+  let html = '';
+  for (const [grade, gradeItems] of grouped.entries()) {
+    const done = gradeItems.filter(item => getStatus(item) !== 'pending').length;
+    html += '<section class="grade">';
+    html += '<div class="grade-head"><h2>' + grade + '</h2><div class="meta">已标记 ' + done + ' / ' + gradeItems.length + '</div></div>';
+    html += '<div class="grid">';
+    for (const item of gradeItems) {
+      const status = getStatus(item);
+      html += '<article class="card ' + status + '">';
+      html += '<div class="thumb" data-word="' + escapeAttr(item.word) + '"><img src="' + item.image + '" alt="' + escapeAttr(item.word) + '"></div>';
+      html += '<div class="word">' + escapeHtml(item.word) + '</div>';
+      html += '<div class="info"><span>' + item.grade + '</span><span>' + escapeHtml(item.expected_image) + '</span></div>';
+      html += '<div class="btns">';
+      html += buttonHtml(item.word, 'keep', '保留', status);
+      html += buttonHtml(item.word, 'redo', '重做', status);
+      html += buttonHtml(item.word, 'exclude', '剔除', status);
+      html += '</div></article>';
     }
-    document.getElementById('ok').textContent=ok;
-    document.getElementById('bad').textContent=bad;
+    html += '</div></section>';
+  }
+  list.innerHTML = html;
+
+  list.querySelectorAll('.thumb').forEach(node => {
+    node.addEventListener('click', () => {
+      const item = items.find(entry => entry.word === node.dataset.word);
+      if (item) openLightbox(item);
+    });
+  });
+
+  list.querySelectorAll('[data-set-status]').forEach(node => {
+    node.addEventListener('click', event => {
+      const item = items.find(entry => entry.word === node.dataset.word);
+      if (item) setStatus(item, node.dataset.setStatus);
+      event.stopPropagation();
+    });
+  });
 }
-function render(){
-    let html = '';
-    for(let g in words){
-        html += '<div class="grade"><h2>年级'+g+'</h2><div class="grid">';
-        words[g].forEach(w=>{
-            let key = g+'-'+w;
-            let s = st[key]||'';
-            let cls = 'card'+(s==='ok'?' ok':s==='bad'?' bad':'');
-            html += '<div class="'+cls+'" onclick="openLb('+g+',&#39;'+w+'&#39;)">'+
-                '<img src="/images/grade'+g+'/'+w+'.png">'+
-                '<div class="word">'+w+'</div>'+
-                '<div class="btns"><button class="ok'+(s==='ok'?' on':'')+'" onclick="event.stopPropagation();st[\''+key+'\']=\'ok\';save()">通过</button>'+
-                '<button class="'+(s==='bad'?' on':'')+'" onclick="event.stopPropagation();st[\''+key+'\']=\'bad\';save()">重做</button></div></div>';
-        });
-        html += '</div></div>';
-    }
-    document.getElementById('list').innerHTML = html;
-    update();
+
+function buttonHtml(word, status, label, currentStatus) {
+  return '<button type="button" class="' + status + (currentStatus === status ? ' on' : '') + '" data-word="' + escapeAttr(word) + '" data-set-status="' + status + '">' + label + '</button>';
 }
-function openLb(g,w){
-    current = {g,w,key:g+'-'+w};
-    document.getElementById('lbImg').src = '/images/grade'+g+'/'+w+'.png';
-    document.getElementById('lbWd').textContent = w;
-    document.getElementById('lb').classList.add('on');
+
+function escapeHtml(value) {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
-function closeLb(){document.getElementById('lb').classList.remove('on')}
-function setSt(s){if(current){st[current.key]=s;save();closeLb()}}
-function showReport(){
-    let ok=[],bad=[];
-    for(let g in words){
-        words[g].forEach(w=>{
-            let key = g+'-'+w;
-            if(st[key]==='ok')ok.push(w);
-            if(st[key]==='bad')bad.push(w);
-        });
-    }
-    alert('通过: '+(ok.length?ok.join(', '):'无')+'\n重做: '+(bad.length?bad.join(', '):'无'));
+
+function escapeAttr(value) {
+  return escapeHtml(value);
 }
-render();
+
+function buildReport() {
+  const keep = [];
+  const redo = [];
+  const exclude = [];
+  for (const item of items) {
+    const status = getStatus(item);
+    const row = item.grade + '\\t' + item.word + '\\t' + item.expected_image;
+    if (status === 'keep') keep.push(row);
+    else if (status === 'redo') redo.push(row);
+    else if (status === 'exclude') exclude.push(row);
+  }
+  return [
+    '保留',
+    keep.length ? keep.join('\\n') : '无',
+    '',
+    '重做',
+    redo.length ? redo.join('\\n') : '无',
+    '',
+    '剔除',
+    exclude.length ? exclude.join('\\n') : '无'
+  ].join('\\n');
+}
+
+async function copyReport() {
+  const report = buildReport();
+  try {
+    await navigator.clipboard.writeText(report);
+    alert('审核结果已复制到剪贴板。');
+  } catch (error) {
+    alert(report);
+  }
+}
+
+function showReport() {
+  alert(buildReport());
+}
+
+async function init() {
+  loadStatus();
+  const response = await fetch('./imported-batch.json');
+  const data = await response.json();
+  items = data.items || [];
+  buildGradeOptions();
+  render();
+}
+
+document.getElementById('gradeFilter').addEventListener('change', render);
+document.getElementById('statusFilter').addEventListener('change', render);
+document.getElementById('searchInput').addEventListener('input', render);
+document.getElementById('clearBtn').addEventListener('click', clearCurrentViewStatuses);
+document.getElementById('copyBtn').addEventListener('click', copyReport);
+document.getElementById('reportBtn').addEventListener('click', showReport);
+document.getElementById('closeLightbox').addEventListener('click', closeLightbox);
+document.getElementById('lightbox').addEventListener('click', event => {
+  if (event.target.id === 'lightbox') closeLightbox();
+});
+document.querySelectorAll('.acts button').forEach(button => {
+  button.addEventListener('click', () => {
+    if (currentItem) setStatus(currentItem, button.dataset.status);
+  });
+});
+
+init().catch(error => {
+  document.getElementById('list').innerHTML = '<div class="grade"><div class="empty">加载审核数据失败：' + escapeHtml(String(error)) + '</div></div>';
+});
 </script>
 </body>
 </html>

@@ -1,0 +1,929 @@
+{
+  "generatedAt": "2026-03-30T13:34:16.605Z",
+  "items": [
+    {
+      "grade": "1-1",
+      "word": "chick",
+      "expected_image": "chick.png",
+      "image": "../images/grade3/chick.png"
+    },
+    {
+      "grade": "1-1",
+      "word": "classmate",
+      "expected_image": "classmate.png",
+      "image": "../images/grade3/classmate.png"
+    },
+    {
+      "grade": "1-1",
+      "word": "colour",
+      "expected_image": "colour.png",
+      "image": "../images/grade3/colour.png"
+    },
+    {
+      "grade": "1-1",
+      "word": "count",
+      "expected_image": "count.png",
+      "image": "../images/grade3/count.png"
+    },
+    {
+      "grade": "1-1",
+      "word": "cow",
+      "expected_image": "cow.png",
+      "image": "../images/grade3/cow.png"
+    },
+    {
+      "grade": "1-1",
+      "word": "cut",
+      "expected_image": "cut.png",
+      "image": "../images/grade3/cut.png"
+    },
+    {
+      "grade": "1-1",
+      "word": "day",
+      "expected_image": "day.png",
+      "image": "../images/grade3/day.png"
+    },
+    {
+      "grade": "1-1",
+      "word": "ear",
+      "expected_image": "ear.png",
+      "image": "../images/grade3/ear.png"
+    },
+    {
+      "grade": "1-1",
+      "word": "fat",
+      "expected_image": "fat.png",
+      "image": "../images/grade3/fat.png"
+    },
+    {
+      "grade": "1-1",
+      "word": "hamburger",
+      "expected_image": "hamburger.png",
+      "image": "../images/grade3/hamburger.png"
+    },
+    {
+      "grade": "1-1",
+      "word": "panda",
+      "expected_image": "panda.png",
+      "image": "../images/grade3/panda.png"
+    },
+    {
+      "grade": "1-1",
+      "word": "peach",
+      "expected_image": "peach.png",
+      "image": "../images/grade3/peach.png"
+    },
+    {
+      "grade": "1-1",
+      "word": "pear",
+      "expected_image": "pear.png",
+      "image": "../images/grade3/pear.png"
+    },
+    {
+      "grade": "1-1",
+      "word": "picture",
+      "expected_image": "picture.png",
+      "image": "../images/grade3/picture.png"
+    },
+    {
+      "grade": "1-1",
+      "word": "pie",
+      "expected_image": "pie.png",
+      "image": "../images/grade3/pie.png"
+    },
+    {
+      "grade": "1-1",
+      "word": "pizza",
+      "expected_image": "pizza.png",
+      "image": "../images/grade3/pizza.png"
+    },
+    {
+      "grade": "1-1",
+      "word": "rubber",
+      "expected_image": "rubber.png",
+      "image": "../images/grade3/rubber.png"
+    },
+    {
+      "grade": "1-1",
+      "word": "stick",
+      "expected_image": "stick.png",
+      "image": "../images/grade3/stick.png"
+    },
+    {
+      "grade": "1-1",
+      "word": "thin",
+      "expected_image": "thin.png",
+      "image": "../images/grade3/thin.png"
+    },
+    {
+      "grade": "1-1",
+      "word": "tiger",
+      "expected_image": "tiger.png",
+      "image": "../images/grade3/tiger.png"
+    },
+    {
+      "grade": "1-1",
+      "word": "touch",
+      "expected_image": "touch.png",
+      "image": "../images/grade3/touch.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "activity",
+      "expected_image": "activity.png",
+      "image": "../images/grade3/activity.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "bad",
+      "expected_image": "bad.png",
+      "image": "../images/grade3/bad.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "ball",
+      "expected_image": "ball.png",
+      "image": "../images/grade3/ball.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "beach",
+      "expected_image": "beach.png",
+      "image": "../images/grade3/beach.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "bee",
+      "expected_image": "bee.png",
+      "image": "../images/grade3/bee.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "bicycle",
+      "expected_image": "bicycle.png",
+      "image": "../images/grade3/bicycle.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "biscuit",
+      "expected_image": "biscuit.png",
+      "image": "../images/grade3/biscuit.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "blouse",
+      "expected_image": "blouse.png",
+      "image": "../images/grade3/blouse.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "card",
+      "expected_image": "card.png",
+      "image": "../images/grade3/card.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "clothes",
+      "expected_image": "clothes.png",
+      "image": "../images/grade3/clothes.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "cola",
+      "expected_image": "cola.png",
+      "image": "../images/grade3/cola.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "doll",
+      "expected_image": "doll.png",
+      "image": "../images/grade3/doll.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "firecracker",
+      "expected_image": "firecracker.png",
+      "image": "../images/grade3/firecracker.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "firework",
+      "expected_image": "firework.png",
+      "image": "../images/grade3/firework.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "fold",
+      "expected_image": "fold.png",
+      "image": "../images/grade3/fold.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "food",
+      "expected_image": "food.png",
+      "image": "../images/grade3/food.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "football",
+      "expected_image": "football.png",
+      "image": "../images/grade3/football.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "frog",
+      "expected_image": "frog.png",
+      "image": "../images/grade3/frog.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "hear",
+      "expected_image": "hear.png",
+      "image": "../images/grade3/hear.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "hen",
+      "expected_image": "hen.png",
+      "image": "../images/grade3/hen.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "ice cream",
+      "expected_image": "ice_cream.png",
+      "image": "../images/grade3/ice_cream.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "jelly",
+      "expected_image": "jelly.png",
+      "image": "../images/grade3/jelly.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "kite",
+      "expected_image": "kite.png",
+      "image": "../images/grade3/kite.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "narrator",
+      "expected_image": "narrator.png",
+      "image": "../images/grade3/narrator.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "new year",
+      "expected_image": "new_year.png",
+      "image": "../images/grade3/new_year.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "noodles",
+      "expected_image": "noodles.png",
+      "image": "../images/grade3/noodles.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "party",
+      "expected_image": "party.png",
+      "image": "../images/grade3/party.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "playtime",
+      "expected_image": "playtime.png",
+      "image": "../images/grade3/playtime.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "poor",
+      "expected_image": "poor.png",
+      "image": "../images/grade3/poor.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "restaurant",
+      "expected_image": "restaurant.png",
+      "image": "../images/grade3/restaurant.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "ride",
+      "expected_image": "ride.png",
+      "image": "../images/grade3/ride.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "rope",
+      "expected_image": "rope.png",
+      "image": "../images/grade3/rope.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "season",
+      "expected_image": "season.png",
+      "image": "../images/grade3/season.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "sheep",
+      "expected_image": "sheep.png",
+      "image": "../images/grade3/sheep.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "shopping",
+      "expected_image": "shopping.png",
+      "image": "../images/grade3/shopping.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "skip",
+      "expected_image": "skip.png",
+      "image": "../images/grade3/skip.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "smell",
+      "expected_image": "smell.png",
+      "image": "../images/grade3/smell.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "soup",
+      "expected_image": "soup.png",
+      "image": "../images/grade3/soup.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "taste",
+      "expected_image": "taste.png",
+      "image": "../images/grade3/taste.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "teatime",
+      "expected_image": "teatime.png",
+      "image": "../images/grade3/teatime.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "toy",
+      "expected_image": "toy.png",
+      "image": "../images/grade3/toy.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "toy shop",
+      "expected_image": "toy_shop.png",
+      "image": "../images/grade3/toy_shop.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "watermelon",
+      "expected_image": "watermelon.png",
+      "image": "../images/grade3/watermelon.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "weather",
+      "expected_image": "weather.png",
+      "image": "../images/grade3/weather.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "wolf",
+      "expected_image": "wolf.png",
+      "image": "../images/grade3/wolf.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "yummy",
+      "expected_image": "yummy.png",
+      "image": "../images/grade3/yummy.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "animal",
+      "expected_image": "animal.png",
+      "image": "../images/grade3/animal.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "ant",
+      "expected_image": "ant.png",
+      "image": "../images/grade3/ant.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "bowl",
+      "expected_image": "bowl.png",
+      "image": "../images/grade3/bowl.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "box",
+      "expected_image": "box.png",
+      "image": "../images/grade3/box.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "bright",
+      "expected_image": "bright.png",
+      "image": "../images/grade3/bright.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "chopsticks",
+      "expected_image": "chopsticks.png",
+      "image": "../images/grade3/chopsticks.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "climb",
+      "expected_image": "climb.png",
+      "image": "../images/grade3/climb.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "cute",
+      "expected_image": "cute.png",
+      "image": "../images/grade3/cute.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "dinner",
+      "expected_image": "dinner.png",
+      "image": "../images/grade3/dinner.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "dove",
+      "expected_image": "dove.png",
+      "image": "../images/grade3/dove.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "family",
+      "expected_image": "family.png",
+      "image": "../images/grade3/family.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "forest",
+      "expected_image": "forest.png",
+      "image": "../images/grade3/forest.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "fox",
+      "expected_image": "fox.png",
+      "image": "../images/grade3/fox.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "giraffe",
+      "expected_image": "giraffe.png",
+      "image": "../images/grade3/giraffe.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "hair",
+      "expected_image": "hair.png",
+      "image": "../images/grade3/hair.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "hippo",
+      "expected_image": "hippo.png",
+      "image": "../images/grade3/hippo.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "insect",
+      "expected_image": "insect.png",
+      "image": "../images/grade3/insect.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "jellyfish",
+      "expected_image": "jellyfish.png",
+      "image": "../images/grade3/jellyfish.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "kangaroo",
+      "expected_image": "kangaroo.png",
+      "image": "../images/grade3/kangaroo.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "king",
+      "expected_image": "king.png",
+      "image": "../images/grade3/king.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "lion",
+      "expected_image": "lion.png",
+      "image": "../images/grade3/lion.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "meat",
+      "expected_image": "meat.png",
+      "image": "../images/grade3/meat.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "nightingale",
+      "expected_image": "nightingale.png",
+      "image": "../images/grade3/nightingale.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "now",
+      "expected_image": "now.png",
+      "image": "../images/grade3/now.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "ox",
+      "expected_image": "ox.png",
+      "image": "../images/grade3/ox.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "pencil case",
+      "expected_image": "pencil_case.png",
+      "image": "../images/grade3/pencil_case.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "pick",
+      "expected_image": "pick.png",
+      "image": "../images/grade3/pick.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "plate",
+      "expected_image": "plate.png",
+      "image": "../images/grade3/plate.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "playground",
+      "expected_image": "playground.png",
+      "image": "../images/grade3/playground.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "put",
+      "expected_image": "put.png",
+      "image": "../images/grade3/put.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "queen bee",
+      "expected_image": "queen_bee.png",
+      "image": "../images/grade3/queen_bee.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "room",
+      "expected_image": "room.png",
+      "image": "../images/grade3/room.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "seesaw",
+      "expected_image": "seesaw.png",
+      "image": "../images/grade3/seesaw.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "sky",
+      "expected_image": "sky.png",
+      "image": "../images/grade3/sky.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "slide",
+      "expected_image": "slide.png",
+      "image": "../images/grade3/slide.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "snake",
+      "expected_image": "snake.png",
+      "image": "../images/grade3/snake.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "spoon",
+      "expected_image": "spoon.png",
+      "image": "../images/grade3/spoon.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "street",
+      "expected_image": "street.png",
+      "image": "../images/grade3/street.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "swan",
+      "expected_image": "swan.png",
+      "image": "../images/grade3/swan.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "swing",
+      "expected_image": "swing.png",
+      "image": "../images/grade3/swing.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "wild",
+      "expected_image": "wild.png",
+      "image": "../images/grade3/wild.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "yak",
+      "expected_image": "yak.png",
+      "image": "../images/grade3/yak.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "zebra",
+      "expected_image": "zebra.png",
+      "image": "../images/grade3/zebra.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "baby bear",
+      "expected_image": "baby_bear.png",
+      "image": "../images/grade3/baby_bear.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "balloon",
+      "expected_image": "balloon.png",
+      "image": "../images/grade3/balloon.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "blow",
+      "expected_image": "blow.png",
+      "image": "../images/grade3/blow.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "feel",
+      "expected_image": "feel.png",
+      "image": "../images/grade3/feel.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "guess",
+      "expected_image": "guess.png",
+      "image": "../images/grade3/guess.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "hard",
+      "expected_image": "hard.png",
+      "image": "../images/grade3/hard.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "hop",
+      "expected_image": "hop.png",
+      "image": "../images/grade3/hop.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "house",
+      "expected_image": "house.png",
+      "image": "../images/grade3/house.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "idea",
+      "expected_image": "idea.png",
+      "image": "../images/grade3/idea.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "mama bear",
+      "expected_image": "mama_bear.png",
+      "image": "../images/grade3/mama_bear.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "papa bear",
+      "expected_image": "papa_bear.png",
+      "image": "../images/grade3/papa_bear.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "rule",
+      "expected_image": "rule.png",
+      "image": "../images/grade3/rule.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "salad",
+      "expected_image": "salad.png",
+      "image": "../images/grade3/salad.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "september",
+      "expected_image": "september.png",
+      "image": "../images/grade3/september.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "skate",
+      "expected_image": "skate.png",
+      "image": "../images/grade3/skate.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "soft",
+      "expected_image": "soft.png",
+      "image": "../images/grade3/soft.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "teachers day",
+      "expected_image": "teachers_day.png",
+      "image": "../images/grade3/teachers_day.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "thing",
+      "expected_image": "thing.png",
+      "image": "../images/grade3/thing.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "tie",
+      "expected_image": "tie.png",
+      "image": "../images/grade3/tie.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "traffic",
+      "expected_image": "traffic.png",
+      "image": "../images/grade3/traffic.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "trousers",
+      "expected_image": "trousers.png",
+      "image": "../images/grade3/trousers.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "wait",
+      "expected_image": "wait.png",
+      "image": "../images/grade3/wait.png"
+    },
+    {
+      "grade": "3-1",
+      "word": "blackboard",
+      "expected_image": "blackboard.png",
+      "image": "../images/grade3/blackboard.png"
+    },
+    {
+      "grade": "3-1",
+      "word": "here",
+      "expected_image": "here.png",
+      "image": "../images/grade3/here.png"
+    },
+    {
+      "grade": "3-1",
+      "word": "mouse",
+      "expected_image": "mouse.png",
+      "image": "../images/grade3/mouse.png"
+    },
+    {
+      "grade": "3-1",
+      "word": "schoolbag",
+      "expected_image": "schoolbag.png",
+      "image": "../images/grade3/schoolbag.png"
+    },
+    {
+      "grade": "3-1",
+      "word": "tail",
+      "expected_image": "tail.png",
+      "image": "../images/grade3/tail.png"
+    },
+    {
+      "grade": "3-2",
+      "word": "arm",
+      "expected_image": "arm.png",
+      "image": "../images/grade3/arm.png"
+    },
+    {
+      "grade": "3-2",
+      "word": "body",
+      "expected_image": "body.png",
+      "image": "../images/grade3/body.png"
+    },
+    {
+      "grade": "3-2",
+      "word": "breakfast",
+      "expected_image": "breakfast.png",
+      "image": "../images/grade3/breakfast.png"
+    },
+    {
+      "grade": "3-2",
+      "word": "candy",
+      "expected_image": "candy.png",
+      "image": "../images/grade3/candy.png"
+    },
+    {
+      "grade": "3-2",
+      "word": "child",
+      "expected_image": "child.png",
+      "image": "../images/grade3/child.png"
+    },
+    {
+      "grade": "3-2",
+      "word": "cup",
+      "expected_image": "cup.png",
+      "image": "../images/grade3/cup.png"
+    },
+    {
+      "grade": "3-2",
+      "word": "farm",
+      "expected_image": "farm.png",
+      "image": "../images/grade3/farm.png"
+    },
+    {
+      "grade": "3-2",
+      "word": "horse",
+      "expected_image": "horse.png",
+      "image": "../images/grade3/horse.png"
+    },
+    {
+      "grade": "3-2",
+      "word": "lemon",
+      "expected_image": "lemon.png",
+      "image": "../images/grade3/lemon.png"
+    },
+    {
+      "grade": "3-2",
+      "word": "litter",
+      "expected_image": "litter.png",
+      "image": "../images/grade3/litter.png"
+    },
+    {
+      "grade": "3-2",
+      "word": "noodle",
+      "expected_image": "noodle.png",
+      "image": "../images/grade3/noodle.png"
+    },
+    {
+      "grade": "3-2",
+      "word": "robot",
+      "expected_image": "robot.png",
+      "image": "../images/grade3/robot.png"
+    },
+    {
+      "grade": "3-2",
+      "word": "stone",
+      "expected_image": "stone.png",
+      "image": "../images/grade3/stone.png"
+    },
+    {
+      "grade": "3-2",
+      "word": "tea",
+      "expected_image": "tea.png",
+      "image": "../images/grade3/tea.png"
+    },
+    {
+      "grade": "3-2",
+      "word": "there",
+      "expected_image": "there.png",
+      "image": "../images/grade3/there.png"
+    },
+    {
+      "grade": "3-2",
+      "word": "toy bear",
+      "expected_image": "toy_bear.png",
+      "image": "../images/grade3/toy_bear.png"
+    },
+    {
+      "grade": "3-2",
+      "word": "worker",
+      "expected_image": "worker.png",
+      "image": "../images/grade3/worker.png"
+    }
+  ]
+}
