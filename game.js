@@ -556,6 +556,8 @@ function prepareWords() {
 }
 
 function initGameRound() {
+    preloadCurrentRoundImages();
+
     // 更新界面
     elements.gameUserName.textContent = currentUser.name;
     updateProgressUI();
@@ -718,6 +720,8 @@ function isOptionAllowedForCurrentGrade(option, allowedWordSet) {
 function shouldAvoidCandidate(correctAnswer, candidateWord) {
     const lowerWord = normalizeWord(candidateWord);
     const lowerCorrect = normalizeWord(correctAnswer);
+    const correctMeta = getWordMeta(correctAnswer);
+    const candidateMeta = getWordMeta(candidateWord);
     const correctGroup = getConflictGroup(lowerCorrect);
     const candidateGroup = getConflictGroup(lowerWord);
 
@@ -751,6 +755,14 @@ function shouldAvoidCandidate(correctAnswer, candidateWord) {
     }
 
     if (isColorWord(lowerCorrect) && isColorWord(lowerWord) && lowerWord !== lowerCorrect) {
+        return true;
+    }
+
+    if (
+        candidateMeta?.category === 'family' &&
+        correctMeta &&
+        !['family', 'person'].includes(correctMeta.category)
+    ) {
         return true;
     }
 
@@ -3213,24 +3225,24 @@ function tryLoadWordImage(word, canvas, renderToken) {
     const ctx = canvas.getContext('2d');
     if (!ctx) return Promise.resolve(false);
     if (renderToken !== activeImageRenderToken) return Promise.resolve(false);
-    
-    // Show loading state - clear canvas with a placeholder
-    ctx.fillStyle = '#87CEEB'; // Sky blue background
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#5CAB5C'; // Grass
-    ctx.fillRect(0, canvas.height * 0.75, canvas.width, canvas.height * 0.25);
-    
-    // Try to load from all grade folders
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
     const preloadedImage = getPreloadedImage(word);
     if (preloadedImage && preloadedImage.complete) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#87CEEB';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        const scale = Math.min(canvas.width / preloadedImage.width, canvas.height / preloadedImage.height);
-        const x = (canvas.width - preloadedImage.width * scale) / 2;
-        const y = (canvas.height - preloadedImage.height * scale) / 2;
-        ctx.drawImage(preloadedImage, x, y, preloadedImage.width * scale, preloadedImage.height * scale);
+        drawLoadedImageToCanvas(ctx, canvas, preloadedImage);
         return Promise.resolve(true);
+    }
+
+    const cached = imagePreloadCache.get(word);
+    if (cached?.status === 'loading' && cached.promise) {
+        return cached.promise.then(img => {
+            if (!img || renderToken !== activeImageRenderToken) {
+                return false;
+            }
+            drawLoadedImageToCanvas(ctx, canvas, img);
+            return true;
+        });
     }
 
     const paths = buildImagePaths(word);
@@ -3253,14 +3265,7 @@ function tryLoadImagePath(paths, index, ctx, width, height, renderToken) {
                 resolve(false);
                 return;
             }
-            // Success! Draw the image
-            ctx.clearRect(0, 0, width, height);
-            ctx.fillStyle = '#87CEEB';
-            ctx.fillRect(0, 0, width, height);
-            const scale = Math.min(width / img.width, height / img.height);
-            const x = (width - img.width * scale) / 2;
-            const y = (height - img.height * scale) / 2;
-            ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+            drawLoadedImageToCanvas(ctx, { width, height }, img);
             resolve(true); // Resolve with true when image is loaded
         };
         
@@ -3273,6 +3278,14 @@ function tryLoadImagePath(paths, index, ctx, width, height, renderToken) {
         
         img.src = paths[index];
     });
+}
+
+function drawLoadedImageToCanvas(ctx, canvas, img) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const scale = Math.min(canvas.width / img.width, canvas.height / img.height);
+    const x = (canvas.width - img.width * scale) / 2;
+    const y = (canvas.height - img.height * scale) / 2;
+    ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
 }
 
 // ============================================
@@ -3344,10 +3357,22 @@ function preloadNextQuestionImages() {
     const endIndex = Math.min(currentQuestion + PRELOAD_BATCH_SIZE, QUESTIONS_PER_LEVEL);
     
     for (let i = startIndex; i < endIndex; i++) {
-        const nextWordIndex = (currentLevel - 1) * QUESTIONS_PER_LEVEL + (i - 1);
+        const nextWordIndex = (currentLevel - 1) * QUESTIONS_PER_LEVEL + i;
         if (nextWordIndex < allWords.length) {
             const nextWord = allWords[nextWordIndex % allWords.length];
             preloadImage(nextWord.word);
+        }
+    }
+}
+
+function preloadCurrentRoundImages() {
+    const startIndex = (currentLevel - 1) * QUESTIONS_PER_LEVEL;
+    const endIndex = Math.min(startIndex + QUESTIONS_PER_LEVEL, allWords.length);
+
+    for (let i = startIndex; i < endIndex; i++) {
+        const wordData = allWords[i];
+        if (wordData?.word) {
+            preloadImage(wordData.word);
         }
     }
 }

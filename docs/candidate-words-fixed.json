@@ -2103,9 +2103,9 @@
     "correct": "national",
     "options": [
       "national",
-      "father",
-      "mother",
-      "mum"
+      "city",
+      "school",
+      "book"
     ],
     "replaced": []
   },
@@ -3552,7 +3552,7 @@
     "options": [
       "why",
       "name",
-      "father",
+      "book",
       "cat"
     ],
     "replaced": []
@@ -3761,7 +3761,7 @@
     "correct": "星期四",
     "options": [
       "星期四",
-      "father",
+      "apple",
       "egg",
       "dad"
     ],

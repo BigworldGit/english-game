@@ -75,7 +75,7 @@ pre{white-space:pre-wrap;word-break:break-word;background:#0f172a;color:#e2e8f0;
 <body>
 <div class="container">
   <h1>English-Game 图片审核</h1>
-  <div class="sub">当前页面只展示这次新导入的图片，支持人工标记为保留、重做或剔除。</div>
+  <div class="sub">当前页面展示全部可出题的图片词，支持人工标记为保留、重做或剔除。</div>
 
   <div class="toolbar">
     <div class="stats">
@@ -136,7 +136,7 @@ pre{white-space:pre-wrap;word-break:break-word;background:#0f172a;color:#e2e8f0;
 </div>
 
 <script>
-const STORAGE_KEY = 'image_audit_imported_batch_status';
+const STORAGE_KEY = 'image_audit_playable_words_status';
 let items = [];
 let statusMap = {};
 let currentItem = null;
@@ -349,7 +349,7 @@ function showReport() {
 
 async function init() {
   loadStatus();
-  const response = await fetch('./imported-batch.json');
+  const response = await fetch('./current-playable-words.json');
   const data = await response.json();
   items = data.items || [];
   buildGradeOptions();

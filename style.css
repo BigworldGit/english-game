@@ -631,7 +631,7 @@ html, body {
     border: 4px solid var(--secondary);
     border-radius: 4px;
     box-shadow: none;
-    background: #87CEEB;
+    background: transparent;
     image-rendering: pixelated;
     width: min(100%, 680px, 52vh);
     height: min(100%, 680px, 52vh);
