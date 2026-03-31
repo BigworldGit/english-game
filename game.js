@@ -55,6 +55,7 @@ const EXCLUDED_IMAGE_WORDS = new Set([
     'thank you',
     "what's your name",
     'nice to meet you',
+    'your',
     'name',
     'draw',
     'learn'
