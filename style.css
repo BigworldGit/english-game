@@ -3,6 +3,12 @@
    设计方向：现代 Minecraft 乐享版
    ============================================ */
 
+@font-face {
+    font-family: 'Zpix';
+    src: url('assets/fonts/zpix.ttf') format('truetype');
+    font-display: swap;
+}
+
 /* CSS Variables - 优化配色 */
 :root {
     /* 主色调 - 更活泼的绿色 */
@@ -82,7 +88,7 @@
 html, body {
     height: 100%;
     overflow: hidden;
-    font-family: 'ZCOOL QingKe HuangYou', 'VT323', monospace;
+    font-family: 'Zpix', monospace;
     font-size: 16px;
     background: linear-gradient(180deg, var(--bg-sky-top) 0%, var(--bg-sky-bottom) 100%);
 }
@@ -278,7 +284,7 @@ html, body {
 }
 
 .title {
-    font-family: 'VT323', monospace;
+    font-family: 'Zpix', monospace;
     font-size: 52px;
     color: #1f2f1d;
     line-height: 1.05;
@@ -319,7 +325,7 @@ html, body {
     outline: none;
     transition: var(--transition-normal);
     text-align: center;
-    font-family: 'ZCOOL QingKe HuangYou', 'VT323', monospace;
+    font-family: 'Zpix', monospace;
     background:
         linear-gradient(180deg, #fffdfa 0%, #f4ecd7 100%);
     box-shadow: inset 0 4px 0 rgba(255,255,255,0.8);
@@ -369,7 +375,7 @@ html, body {
     box-shadow: 0 0 0 3px rgba(98, 78, 44, 0.2), 0 6px 0 #a68f66;
     position: relative;
     overflow: hidden;
-    font-family: 'VT323', monospace;
+    font-family: 'Zpix', monospace;
 }
 
 .grade-btn::before {
@@ -412,7 +418,7 @@ html, body {
     cursor: pointer;
     transition: var(--transition-normal);
     box-shadow: 0 8px 0 rgba(52, 109, 35, 0.28);
-    font-family: 'VT323', monospace;
+    font-family: 'Zpix', monospace;
     letter-spacing: 1px;
     position: relative;
     overflow: hidden;
@@ -464,7 +470,7 @@ html, body {
     font-weight: 700;
     color: #284027;
     margin-bottom: 10px;
-    font-family: 'VT323', monospace;
+    font-family: 'Zpix', monospace;
     letter-spacing: 1px;
 }
 
@@ -486,7 +492,7 @@ html, body {
     cursor: pointer;
     margin-top: 12px;
     transition: var(--transition);
-    font-family: 'VT323', monospace;
+    font-family: 'Zpix', monospace;
     letter-spacing: 1px;
     box-shadow: 0 7px 0 rgba(117, 92, 51, 0.22);
 }
@@ -585,7 +591,7 @@ html, body {
     border-radius: 10px;
     font-weight: 500;
     font-size: 18px;
-    font-family: 'ZCOOL QingKe HuangYou', 'VT323', monospace;
+    font-family: 'Zpix', monospace;
     letter-spacing: 1px;
     text-align: center;
 }
@@ -657,7 +663,7 @@ html, body {
     cursor: pointer;
     transition: var(--transition-normal);
     box-shadow: 0 0 0 2px rgba(128, 128, 128, 0.16), 0 6px 0 #c7c7c7;
-    font-family: 'ZCOOL QingKe HuangYou', 'VT323', monospace;
+    font-family: 'Zpix', monospace;
     letter-spacing: 0.4px;
     line-height: 1.1;
     word-break: break-word;
@@ -816,7 +822,7 @@ html, body {
 .question-mode {
     min-height: 46px;
     border-radius: 10px;
-    font-family: 'VT323', monospace;
+    font-family: 'Zpix', monospace;
     letter-spacing: 1px;
     font-size: 24px;
 }
@@ -864,7 +870,7 @@ html, body {
 }
 
 .status-title {
-    font-family: 'ZCOOL QingKe HuangYou', 'VT323', monospace;
+    font-family: 'Zpix', monospace;
     font-size: 28px;
     color: var(--text-primary);
     letter-spacing: 1px;
@@ -894,7 +900,7 @@ html, body {
 }
 
 .status-value {
-    font-family: 'ZCOOL QingKe HuangYou', 'VT323', monospace;
+    font-family: 'Zpix', monospace;
     font-size: 34px;
     color: var(--text-primary);
     line-height: 1;
@@ -1043,7 +1049,7 @@ html, body {
 }
 
 .result-title {
-    font-family: 'ZCOOL QingKe HuangYou', 'VT323', monospace;
+    font-family: 'Zpix', monospace;
     font-size: 38px;
     color: #284027;
     margin-bottom: 18px;
@@ -1077,7 +1083,7 @@ html, body {
     font-size: 34px;
     font-weight: 700;
     color: #284027;
-    font-family: 'ZCOOL QingKe HuangYou', 'VT323', monospace;
+    font-family: 'Zpix', monospace;
 }
 
 .stat-label {
@@ -1118,7 +1124,7 @@ html, body {
     font-size: 30px;
     font-weight: 700;
     color: #284027;
-    font-family: 'ZCOOL QingKe HuangYou', 'VT323', monospace;
+    font-family: 'Zpix', monospace;
 }
 
 .accuracy-label {
@@ -1132,7 +1138,7 @@ html, body {
     color: #355235;
     margin-bottom: 18px;
     min-height: 22px;
-    font-family: 'ZCOOL QingKe HuangYou', 'VT323', monospace;
+    font-family: 'Zpix', monospace;
     letter-spacing: 1px;
     line-height: 1.3;
 }
@@ -1152,7 +1158,7 @@ html, body {
     border-radius: 4px;
     cursor: pointer;
     transition: var(--transition);
-    font-family: 'ZCOOL QingKe HuangYou', 'VT323', monospace;
+    font-family: 'Zpix', monospace;
     letter-spacing: 1px;
 }
 
