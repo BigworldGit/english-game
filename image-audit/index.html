@@ -143,6 +143,14 @@ let items = [];
 let statusMap = {};
 let currentItem = null;
 
+function resolveImagePath(imagePath) {
+  if (!imagePath) return '';
+  if (window.location.protocol === 'file:' && imagePath.startsWith('/images/')) {
+    return '..' + imagePath;
+  }
+  return imagePath;
+}
+
 function loadStatus() {
   try {
     statusMap = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
@@ -219,7 +227,7 @@ function buildGradeOptions() {
 
 function openLightbox(item) {
   currentItem = item;
-  document.getElementById('previewImage').src = item.image;
+  document.getElementById('previewImage').src = resolveImagePath(item.image);
   document.getElementById('previewWord').textContent = item.word;
   document.getElementById('previewGrade').textContent = item.grade;
   document.getElementById('previewImageName').textContent = item.expected_image;
@@ -266,7 +274,7 @@ function render() {
     for (const item of gradeItems) {
       const status = getStatus(item);
       html += '<article class="card ' + status + '">';
-      html += '<div class="thumb" data-word="' + escapeAttr(item.word) + '" data-fallback="' + escapeAttr(item.expected_image) + '"><img src="' + item.image + '" alt="' + escapeAttr(item.word) + '"></div>';
+      html += '<div class="thumb" data-word="' + escapeAttr(item.word) + '" data-fallback="' + escapeAttr(item.expected_image) + '"><img src="' + resolveImagePath(item.image) + '" alt="' + escapeAttr(item.word) + '"></div>';
       html += '<div class="word">' + escapeHtml(item.word) + '</div>';
       html += '<div class="info"><span>' + item.grade + '</span><span>' + escapeHtml(item.expected_image) + '</span></div>';
       html += '<div class="btns">';

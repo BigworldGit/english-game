@@ -46,6 +46,7 @@ const QUESTIONS_PER_LEVEL = 10;
 // 2. 现有图片资源表达错误、表达过弱，或容易和其他词混淆
 const EXCLUDED_IMAGE_WORDS = new Set([
     "I'm",
+    'am',
     'good morning',
     'good afternoon',
     'good evening',

@@ -1,17 +1,11 @@
 {
-  "generatedAt": "2026-03-31T15:30:26.494Z",
+  "generatedAt": "2026-03-31T15:37:37.194Z",
   "items": [
     {
       "grade": "1-1",
       "word": "afternoon",
       "expected_image": "afternoon.png",
       "image": "/images/grade1/afternoon.png"
-    },
-    {
-      "grade": "1-1",
-      "word": "am",
-      "expected_image": "am.png",
-      "image": "/images/grade1/am.png"
     },
     {
       "grade": "1-1",
