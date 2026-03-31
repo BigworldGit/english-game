@@ -87,12 +87,6 @@
     },
     {
       "grade": "1-1",
-      "word": "day",
-      "expected_image": "day.png",
-      "image": "/images/grade3/day.png"
-    },
-    {
-      "grade": "1-1",
       "word": "duck",
       "expected_image": "duck.png",
       "image": "/images/grade1/duck.png"
@@ -210,12 +204,6 @@
       "word": "how",
       "expected_image": "how.png",
       "image": "/images/grade1/how.png"
-    },
-    {
-      "grade": "1-1",
-      "word": "I",
-      "expected_image": "I.png",
-      "image": "/images/grade1/I.png"
     },
     {
       "grade": "1-1",
@@ -390,12 +378,6 @@
       "word": "stick",
       "expected_image": "stick.png",
       "image": "/images/grade3/stick.png"
-    },
-    {
-      "grade": "1-1",
-      "word": "Sunday",
-      "expected_image": "Sunday.png",
-      "image": "/images/grade2/Sunday.png"
     },
     {
       "grade": "1-1",
@@ -933,12 +915,6 @@
     },
     {
       "grade": "1-2",
-      "word": "teatime",
-      "expected_image": "teatime.png",
-      "image": "/images/grade3/teatime.png"
-    },
-    {
-      "grade": "1-2",
       "word": "tell",
       "expected_image": "tell.png",
       "image": "/images/grade1/tell.png"
@@ -1056,12 +1032,6 @@
       "word": "box",
       "expected_image": "box.png",
       "image": "/images/grade3/box.png"
-    },
-    {
-      "grade": "2-1",
-      "word": "bright",
-      "expected_image": "bright.png",
-      "image": "/images/grade3/bright.png"
     },
     {
       "grade": "2-1",
@@ -1275,12 +1245,6 @@
     },
     {
       "grade": "2-1",
-      "word": "now",
-      "expected_image": "now.png",
-      "image": "/images/grade3/now.png"
-    },
-    {
-      "grade": "2-1",
       "word": "old",
       "expected_image": "old.png",
       "image": "/images/grade1/old.png"
@@ -1461,12 +1425,6 @@
     },
     {
       "grade": "2-1",
-      "word": "yak",
-      "expected_image": "yak.png",
-      "image": "/images/grade3/yak.png"
-    },
-    {
-      "grade": "2-1",
       "word": "young",
       "expected_image": "young.png",
       "image": "/images/grade1/young.png"
@@ -1563,12 +1521,6 @@
     },
     {
       "grade": "2-2",
-      "word": "feel",
-      "expected_image": "feel.png",
-      "image": "/images/grade3/feel.png"
-    },
-    {
-      "grade": "2-2",
       "word": "fish",
       "expected_image": "fish.png",
       "image": "/images/grade1/fish.png"
@@ -1641,12 +1593,6 @@
     },
     {
       "grade": "2-2",
-      "word": "rule",
-      "expected_image": "rule.png",
-      "image": "/images/grade3/rule.png"
-    },
-    {
-      "grade": "2-2",
       "word": "salad",
       "expected_image": "salad.png",
       "image": "/images/grade3/salad.png"
@@ -1698,12 +1644,6 @@
       "word": "Teachers' Day",
       "expected_image": "teachers_day.png",
       "image": "/images/grade3/teachers_day.png"
-    },
-    {
-      "grade": "2-2",
-      "word": "thing",
-      "expected_image": "thing.png",
-      "image": "/images/grade3/thing.png"
     },
     {
       "grade": "2-2",
@@ -1794,12 +1734,6 @@
       "word": "door",
       "expected_image": "door.png",
       "image": "/images/grade1/door.png"
-    },
-    {
-      "grade": "3-1",
-      "word": "here",
-      "expected_image": "here.png",
-      "image": "/images/grade3/here.png"
     },
     {
       "grade": "3-1",
@@ -1980,12 +1914,6 @@
       "word": "tea",
       "expected_image": "tea.png",
       "image": "/images/grade3/tea.png"
-    },
-    {
-      "grade": "3-2",
-      "word": "there",
-      "expected_image": "there.png",
-      "image": "/images/grade3/there.png"
     },
     {
       "grade": "3-2",
@@ -2707,5 +2635,110 @@
       "expected_image": "wish.png",
       "image": "/images/grade1/wish.png"
     }
+  ],
+  "excludedByRepoAudit": [
+    "a",
+    "afraid of",
+    "an",
+    "and",
+    "at",
+    "at home",
+    "beside",
+    "bright",
+    "can",
+    "can't",
+    "come in",
+    "cry",
+    "day",
+    "dear",
+    "do",
+    "doing",
+    "don't",
+    "feel",
+    "fine",
+    "fly a kite",
+    "fly around",
+    "flying",
+    "for",
+    "fun",
+    "great",
+    "has",
+    "he",
+    "here",
+    "hopping",
+    "how many",
+    "how much",
+    "how old",
+    "i",
+    "is",
+    "it",
+    "it's",
+    "late",
+    "let's",
+    "lie",
+    "little",
+    "look at",
+    "lovely",
+    "may",
+    "me",
+    "moo",
+    "mr",
+    "mrs",
+    "need",
+    "no",
+    "not",
+    "now",
+    "oink",
+    "our",
+    "paint",
+    "peep",
+    "play cards",
+    "play football",
+    "play yo-yo",
+    "please",
+    "quack",
+    "ready",
+    "ride a bicycle",
+    "riding",
+    "rule",
+    "run around",
+    "run away",
+    "running",
+    "she",
+    "skating",
+    "skipping",
+    "sleeping",
+    "so",
+    "some",
+    "sour",
+    "stand up",
+    "stop",
+    "sunday",
+    "super",
+    "sure",
+    "sweet",
+    "swimming",
+    "teachers day",
+    "teatime",
+    "that",
+    "the",
+    "there",
+    "these",
+    "they",
+    "thing",
+    "this",
+    "throw",
+    "together",
+    "too",
+    "very",
+    "very much",
+    "very well",
+    "want to",
+    "we",
+    "woof",
+    "would like",
+    "wow",
+    "yak",
+    "yes"
   ]
 }
