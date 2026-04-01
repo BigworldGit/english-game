@@ -7,6 +7,61 @@
       "expected_image": "day.png"
     },
     {
+      "grade": "1-1",
+      "word": "give",
+      "expected_image": "give.png"
+    },
+    {
+      "grade": "1-1",
+      "word": "go",
+      "expected_image": "go.png"
+    },
+    {
+      "grade": "1-1",
+      "word": "have",
+      "expected_image": "have.png"
+    },
+    {
+      "grade": "1-1",
+      "word": "how",
+      "expected_image": "how.png"
+    },
+    {
+      "grade": "1-1",
+      "word": "I",
+      "expected_image": "I.png"
+    },
+    {
+      "grade": "1-1",
+      "word": "my",
+      "expected_image": "my.png"
+    },
+    {
+      "grade": "1-1",
+      "word": "on",
+      "expected_image": "on.png"
+    },
+    {
+      "grade": "1-1",
+      "word": "who",
+      "expected_image": "who.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "come",
+      "expected_image": "come.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "help",
+      "expected_image": "help.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "like",
+      "expected_image": "like.png"
+    },
+    {
       "grade": "1-2",
       "word": "teatime",
       "expected_image": "teatime.png"
@@ -59,6 +114,17 @@
   ],
   "words": [
     "day",
+    "give",
+    "go",
+    "have",
+    "how",
+    "I",
+    "my",
+    "on",
+    "who",
+    "come",
+    "help",
+    "like",
     "teatime",
     "bright",
     "now",

@@ -59,6 +59,9 @@ input{min-width:220px}
 .panel-main{display:grid;grid-template-columns:minmax(320px,1fr) 320px}
 .preview{padding:20px;background:#eff6ff;display:flex;align-items:center;justify-content:center;min-height:560px}
 .preview img{max-width:100%;max-height:78vh;object-fit:contain}
+.report-panel{width:min(900px,100%);background:#fff;border-radius:22px;overflow:hidden;box-shadow:0 25px 80px rgba(15,23,42,.35)}
+.report-body{padding:22px;display:grid;gap:16px}
+.report-actions{display:flex;gap:10px;justify-content:flex-end}
 .side{padding:22px;display:flex;flex-direction:column;gap:16px}
 .side h3{font-size:28px;line-height:1.2}
 .side .meta{display:grid;gap:8px;font-size:14px;color:#475569}
@@ -139,6 +142,19 @@ pre{white-space:pre-wrap;word-break:break-word;background:#0f172a;color:#e2e8f0;
   </div>
 </div>
 
+<div class="lb" id="reportLightbox">
+  <div class="close" id="closeReportLightbox">×</div>
+  <div class="report-panel">
+    <div class="report-body">
+      <h3>审核报告</h3>
+      <pre id="reportContent"></pre>
+      <div class="report-actions">
+        <button class="btn secondary" id="copyReportFromModal" type="button">复制审核结果</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 const STORAGE_KEY = 'image_audit_playable_words_status';
 const IMAGE_RETRY_LIMIT = 1;
@@ -165,7 +181,6 @@ function loadStatus() {
 
 function saveStatus() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(statusMap));
-  render();
 }
 
 function getStatus(item) {
@@ -173,11 +188,28 @@ function getStatus(item) {
 }
 
 function setStatus(item, status) {
-  statusMap[item.word] = status;
+  const currentStatus = getStatus(item);
+  if (currentStatus === status) {
+    delete statusMap[item.word];
+  } else {
+    statusMap[item.word] = status;
+  }
   saveStatus();
+  if (document.getElementById('statusFilter').value !== 'all') {
+    render();
+    if (currentItem && currentItem.word === item.word) {
+      updateLightboxStatus();
+    }
+    refreshReportIfOpen();
+    return;
+  }
+  updateItemUI(item.word);
+  updateToolbarCounts();
+  updateGradeMeta(item.grade);
   if (currentItem && currentItem.word === item.word) {
     updateLightboxStatus();
   }
+  refreshReportIfOpen();
 }
 
 function clearCurrentViewStatuses() {
@@ -185,6 +217,7 @@ function clearCurrentViewStatuses() {
     delete statusMap[item.word];
   });
   saveStatus();
+  render();
 }
 
 function updateToolbarCounts() {
@@ -273,13 +306,13 @@ function render() {
   let html = '';
   for (const [grade, gradeItems] of grouped.entries()) {
     const done = gradeItems.filter(item => getStatus(item) !== 'pending').length;
-    html += '<section class="grade">';
-    html += '<div class="grade-head"><h2>' + grade + '</h2><div class="meta">已标记 ' + done + ' / ' + gradeItems.length + '</div></div>';
+    html += '<section class="grade" data-grade-section="' + escapeAttr(grade) + '">';
+    html += '<div class="grade-head"><h2>' + grade + '</h2><div class="meta" data-grade-meta="' + escapeAttr(grade) + '">已标记 ' + done + ' / ' + gradeItems.length + '</div></div>';
     html += '<div class="grid">';
     for (const item of gradeItems) {
       const status = getStatus(item);
       const thumbPath = resolveImagePath(item.thumbnail || item.image);
-      html += '<article class="card ' + status + '">';
+      html += '<article class="card ' + status + '" data-card-word="' + escapeAttr(item.word) + '">';
       html += '<div class="thumb loading" data-word="' + escapeAttr(item.word) + '" data-fallback="' + escapeAttr(item.expected_image) + '" data-image="' + escapeAttr(resolveImagePath(item.image)) + '"><img data-src="' + escapeAttr(thumbPath) + '" alt="' + escapeAttr(item.word) + '" loading="lazy" decoding="async"></div>';
       html += '<div class="word">' + escapeHtml(item.word) + '</div>';
       html += '<div class="info"><span>' + item.grade + '</span><span>' + escapeHtml(item.expected_image) + '</span></div>';
@@ -374,6 +407,27 @@ function buttonHtml(word, status, label, currentStatus) {
   return '<button type="button" class="' + status + (currentStatus === status ? ' on' : '') + '" data-word="' + escapeAttr(word) + '" data-set-status="' + status + '">' + label + '</button>';
 }
 
+function updateItemUI(word) {
+  const item = items.find(entry => entry.word === word);
+  if (!item) return;
+  const currentStatus = getStatus(item);
+  document.querySelectorAll('[data-card-word="' + CSS.escape(word) + '"]').forEach(card => {
+    card.classList.remove('pending', 'keep', 'redo', 'exclude');
+    card.classList.add(currentStatus);
+  });
+  document.querySelectorAll('[data-word="' + CSS.escape(word) + '"][data-set-status]').forEach(button => {
+    button.classList.toggle('on', button.dataset.setStatus === currentStatus);
+  });
+}
+
+function updateGradeMeta(grade) {
+  const gradeItems = getFilteredItems().filter(item => item.grade === grade);
+  const meta = document.querySelector('[data-grade-meta="' + CSS.escape(grade) + '"]');
+  if (!meta) return;
+  const done = gradeItems.filter(item => getStatus(item) !== 'pending').length;
+  meta.textContent = '已标记 ' + done + ' / ' + gradeItems.length;
+}
+
 function escapeHtml(value) {
   return value
     .replace(/&/g, '&amp;')
@@ -393,35 +447,49 @@ function buildReport() {
   const exclude = [];
   for (const item of items) {
     const status = getStatus(item);
-    const row = item.grade + '\\t' + item.word + '\\t' + item.expected_image;
+    const row = item.grade + '\t' + item.word + '\t' + item.expected_image;
     if (status === 'keep') keep.push(row);
     else if (status === 'redo') redo.push(row);
     else if (status === 'exclude') exclude.push(row);
   }
   return [
     '保留',
-    keep.length ? keep.join('\\n') : '无',
+    keep.length ? keep.join('\n') : '无',
     '',
     '重做',
-    redo.length ? redo.join('\\n') : '无',
+    redo.length ? redo.join('\n') : '无',
     '',
     '剔除',
-    exclude.length ? exclude.join('\\n') : '无'
-  ].join('\\n');
+    exclude.length ? exclude.join('\n') : '无'
+  ].join('\n');
 }
 
 async function copyReport() {
   const report = buildReport();
   try {
     await navigator.clipboard.writeText(report);
-    alert('审核结果已复制到剪贴板。');
+    const reportContent = document.getElementById('reportContent');
+    if (document.getElementById('reportLightbox').classList.contains('on')) {
+      reportContent.textContent = report + '\n\n已复制到剪贴板。';
+    }
   } catch (error) {
-    alert(report);
+    showReport();
   }
 }
 
 function showReport() {
-  alert(buildReport());
+  document.getElementById('reportContent').textContent = buildReport();
+  document.getElementById('reportLightbox').classList.add('on');
+}
+
+function closeReport() {
+  document.getElementById('reportLightbox').classList.remove('on');
+}
+
+function refreshReportIfOpen() {
+  if (document.getElementById('reportLightbox').classList.contains('on')) {
+    document.getElementById('reportContent').textContent = buildReport();
+  }
 }
 
 async function init() {
@@ -445,8 +513,13 @@ document.getElementById('clearBtn').addEventListener('click', clearCurrentViewSt
 document.getElementById('copyBtn').addEventListener('click', copyReport);
 document.getElementById('reportBtn').addEventListener('click', showReport);
 document.getElementById('closeLightbox').addEventListener('click', closeLightbox);
+document.getElementById('closeReportLightbox').addEventListener('click', closeReport);
+document.getElementById('copyReportFromModal').addEventListener('click', copyReport);
 document.getElementById('lightbox').addEventListener('click', event => {
   if (event.target.id === 'lightbox') closeLightbox();
+});
+document.getElementById('reportLightbox').addEventListener('click', event => {
+  if (event.target.id === 'reportLightbox') closeReport();
 });
 document.querySelectorAll('.acts button').forEach(button => {
   button.addEventListener('click', () => {
