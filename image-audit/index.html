@@ -370,9 +370,14 @@ function showReport() {
 
 async function init() {
   loadStatus();
-  const response = await fetch('./current-playable-words.json');
-  const data = await response.json();
-  items = data.items || [];
+  const [itemsResponse, excludedResponse] = await Promise.all([
+    fetch('./current-playable-words.json'),
+    fetch('../docs/image-audit-excluded.json')
+  ]);
+  const data = await itemsResponse.json();
+  const excludedData = await excludedResponse.json();
+  const excludedWords = new Set((excludedData.words || []).map(word => String(word).toLowerCase()));
+  items = (data.items || []).filter(item => !excludedWords.has(String(item.word).toLowerCase()));
   buildGradeOptions();
   render();
 }

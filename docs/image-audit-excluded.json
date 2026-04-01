@@ -1,0 +1,73 @@
+{
+  "generatedAt": "2026-04-01",
+  "items": [
+    {
+      "grade": "1-1",
+      "word": "day",
+      "expected_image": "day.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "teatime",
+      "expected_image": "teatime.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "bright",
+      "expected_image": "bright.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "now",
+      "expected_image": "now.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "yak",
+      "expected_image": "yak.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "feel",
+      "expected_image": "feel.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "rule",
+      "expected_image": "rule.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "teachers day",
+      "expected_image": "teachers_day.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "thing",
+      "expected_image": "thing.png"
+    },
+    {
+      "grade": "3-1",
+      "word": "here",
+      "expected_image": "here.png"
+    },
+    {
+      "grade": "3-2",
+      "word": "there",
+      "expected_image": "there.png"
+    }
+  ],
+  "words": [
+    "day",
+    "teatime",
+    "bright",
+    "now",
+    "yak",
+    "feel",
+    "rule",
+    "teachers day",
+    "thing",
+    "here",
+    "there"
+  ]
+}

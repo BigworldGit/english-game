@@ -35,6 +35,8 @@ let currentMusicIndex = 0;
 // 预定义的候选词表
 let candidateWords = {};
 let candidateWordsLoaded = false;
+let auditExcludedWords = new Set();
+let auditExcludedLoaded = false;
 const API_BASE = window.location.origin;
 let activeImageRenderToken = 0;
 
@@ -244,6 +246,7 @@ function initGame() {
 
     // 加载预定义的候选词表
     loadCandidateWords();
+    loadAuditExcludedWords();
     updateStartButton();
     updateContinueButton();
 
@@ -268,6 +271,25 @@ function loadCandidateWords() {
             console.error('加载候选词表失败:', error);
             candidateWords = {};
             candidateWordsLoaded = true;
+            updateStartButton();
+            updateContinueButton();
+        });
+}
+
+function loadAuditExcludedWords() {
+    fetch('docs/image-audit-excluded.json')
+        .then(response => response.json())
+        .then(data => {
+            const words = Array.isArray(data.words) ? data.words : [];
+            auditExcludedWords = new Set(words.map(normalizeWord));
+            auditExcludedLoaded = true;
+            updateStartButton();
+            updateContinueButton();
+        })
+        .catch(error => {
+            console.error('加载审计剔除词失败:', error);
+            auditExcludedWords = new Set();
+            auditExcludedLoaded = true;
             updateStartButton();
             updateContinueButton();
         });
@@ -323,18 +345,18 @@ function setupEventListeners() {
 // ============================================
 function updateStartButton() {
     const username = elements.username.value.trim();
-    elements.startBtn.disabled = !(username.length >= 2 && selectedGrade && candidateWordsLoaded);
+    elements.startBtn.disabled = !(username.length >= 2 && selectedGrade && candidateWordsLoaded && auditExcludedLoaded);
 }
 
 function updateContinueButton() {
     if (elements.continueBtn) {
-        elements.continueBtn.disabled = !candidateWordsLoaded;
+        elements.continueBtn.disabled = !(candidateWordsLoaded && auditExcludedLoaded);
     }
 }
 
 function startGame() {
-    if (!candidateWordsLoaded) {
-        alert('候选词仍在加载中，请稍等片刻');
+    if (!candidateWordsLoaded || !auditExcludedLoaded) {
+        alert('题库资源仍在加载中，请稍等片刻');
         return;
     }
 
@@ -397,8 +419,8 @@ function showUserInfo() {
 }
 
 function continueGame() {
-    if (!candidateWordsLoaded) {
-        alert('候选词仍在加载中，请稍等片刻');
+    if (!candidateWordsLoaded || !auditExcludedLoaded) {
+        alert('题库资源仍在加载中，请稍等片刻');
         return;
     }
 
@@ -425,6 +447,10 @@ function generateUserId() {
 
 function normalizeWord(word) {
     return String(word).trim().toLowerCase();
+}
+
+function isImageWordExcluded(word) {
+    return EXCLUDED_IMAGE_WORDS.has(word) || auditExcludedWords.has(normalizeWord(word));
 }
 
 function getConflictGroup(word) {
@@ -536,7 +562,7 @@ function goToNextQuestion() {
 // ============================================
 function prepareWords() {
     const filteredWords = getWordsUpToGrade(currentGrade).filter(wordData =>
-        !EXCLUDED_IMAGE_WORDS.has(wordData.word) &&
+        !isImageWordExcluded(wordData.word) &&
         hasPlayableImageAsset(wordData.word)
     );
     const lookup = new Map(filteredWords.map(wordData => [wordData.word, wordData]));
