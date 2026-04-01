@@ -3,11 +3,6 @@
   "items": [
     {
       "grade": "1-1",
-      "word": "day",
-      "expected_image": "day.png"
-    },
-    {
-      "grade": "1-1",
       "word": "give",
       "expected_image": "give.png"
     },
@@ -63,57 +58,176 @@
     },
     {
       "grade": "1-2",
-      "word": "teatime",
-      "expected_image": "teatime.png"
+      "word": "see",
+      "expected_image": "see.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "tell",
+      "expected_image": "tell.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "to",
+      "expected_image": "to.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "where",
+      "expected_image": "where.png"
     },
     {
       "grade": "2-1",
-      "word": "bright",
-      "expected_image": "bright.png"
-    },
-    {
-      "grade": "2-1",
-      "word": "now",
-      "expected_image": "now.png"
-    },
-    {
-      "grade": "2-1",
-      "word": "yak",
-      "expected_image": "yak.png"
+      "word": "in",
+      "expected_image": "in.png"
     },
     {
       "grade": "2-2",
-      "word": "feel",
-      "expected_image": "feel.png"
+      "word": "are",
+      "expected_image": "are.png"
     },
     {
-      "grade": "2-2",
-      "word": "rule",
-      "expected_image": "rule.png"
+      "grade": "4-1",
+      "word": "behind",
+      "expected_image": "behind.png"
     },
     {
-      "grade": "2-2",
-      "word": "teachers day",
-      "expected_image": "teachers_day.png"
+      "grade": "4-1",
+      "word": "but",
+      "expected_image": "but.png"
     },
     {
-      "grade": "2-2",
-      "word": "thing",
-      "expected_image": "thing.png"
+      "grade": "4-1",
+      "word": "near",
+      "expected_image": "near.png"
     },
     {
-      "grade": "3-1",
-      "word": "here",
-      "expected_image": "here.png"
+      "grade": "4-1",
+      "word": "under",
+      "expected_image": "under.png"
     },
     {
-      "grade": "3-2",
-      "word": "there",
-      "expected_image": "there.png"
+      "grade": "4-2",
+      "word": "whose",
+      "expected_image": "whose.png"
+    },
+    {
+      "grade": "5-1",
+      "word": "always",
+      "expected_image": "always.png"
+    },
+    {
+      "grade": "5-1",
+      "word": "answer",
+      "expected_image": "answer.png"
+    },
+    {
+      "grade": "5-1",
+      "word": "become",
+      "expected_image": "become.png"
+    },
+    {
+      "grade": "5-1",
+      "word": "bring",
+      "expected_image": "bring.png"
+    },
+    {
+      "grade": "5-1",
+      "word": "careful",
+      "expected_image": "careful.png"
+    },
+    {
+      "grade": "5-1",
+      "word": "easy",
+      "expected_image": "easy.png"
+    },
+    {
+      "grade": "5-1",
+      "word": "never",
+      "expected_image": "never.png"
+    },
+    {
+      "grade": "5-1",
+      "word": "often",
+      "expected_image": "often.png"
+    },
+    {
+      "grade": "5-1",
+      "word": "say",
+      "expected_image": "say.png"
+    },
+    {
+      "grade": "5-1",
+      "word": "sometimes",
+      "expected_image": "sometimes.png"
+    },
+    {
+      "grade": "5-1",
+      "word": "take",
+      "expected_image": "take.png"
+    },
+    {
+      "grade": "5-1",
+      "word": "use",
+      "expected_image": "use.png"
+    },
+    {
+      "grade": "5-1",
+      "word": "usually",
+      "expected_image": "usually.png"
+    },
+    {
+      "grade": "5-1",
+      "word": "visit",
+      "expected_image": "visit.png"
+    },
+    {
+      "grade": "5-1",
+      "word": "when",
+      "expected_image": "when.png"
+    },
+    {
+      "grade": "5-2",
+      "word": "best",
+      "expected_image": "best.png"
+    },
+    {
+      "grade": "5-2",
+      "word": "change",
+      "expected_image": "change.png"
+    },
+    {
+      "grade": "5-2",
+      "word": "important",
+      "expected_image": "important.png"
+    },
+    {
+      "grade": "5-2",
+      "word": "kind",
+      "expected_image": "kind.png"
+    },
+    {
+      "grade": "5-2",
+      "word": "more",
+      "expected_image": "more.png"
+    },
+    {
+      "grade": "5-2",
+      "word": "why",
+      "expected_image": "why.png"
+    },
+    {
+      "grade": "6-1",
+      "word": "most",
+      "expected_image": "most.png"
+    },
+    {
+      "grade": "6-1",
+      "word": "send",
+      "expected_image": "send.png"
     }
   ],
   "words": [
-    "day",
     "give",
     "go",
     "have",
@@ -125,15 +239,39 @@
     "come",
     "help",
     "like",
-    "teatime",
-    "bright",
-    "now",
-    "yak",
-    "feel",
-    "rule",
-    "teachers day",
-    "thing",
-    "here",
-    "there"
+    "see",
+    "tell",
+    "to",
+    "where",
+    "in",
+    "are",
+    "behind",
+    "but",
+    "near",
+    "under",
+    "whose",
+    "always",
+    "answer",
+    "become",
+    "bring",
+    "careful",
+    "easy",
+    "never",
+    "often",
+    "say",
+    "sometimes",
+    "take",
+    "use",
+    "usually",
+    "visit",
+    "when",
+    "best",
+    "change",
+    "important",
+    "kind",
+    "more",
+    "why",
+    "most",
+    "send"
   ]
 }

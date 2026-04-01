@@ -1,4 +1,45 @@
-grade	word	expected_image
+保留
+1-2	make	make.png
+2-1	put	put.png
+
+重做
+1-1	supermarket	supermarket.png
+1-2	beach	beach.png
+1-2	doll	doll.png
+1-2	farmer	farmer.png
+1-2	fly	fly.png
+1-2	food	food.png
+1-2	gift	gift.png
+1-2	listen	listen.png
+1-2	sheep	sheep.png
+1-2	yummy	yummy.png
+2-1	insect	insect.png
+2-1	sister	sister.png
+2-1	work	work.png
+2-2	cool	cool.png
+2-2	hungry	hungry.png
+2-2	tired	tired.png
+4-1	cloud	cloud.png
+4-1	full	full.png
+4-1	sit	sit.png
+4-1	skirt	skirt.png
+4-2	grow	grow.png
+4-2	high	high.png
+5-1	clever	clever.png
+5-1	different	different.png
+5-1	heavy	heavy.png
+5-1	know	know.png
+5-1	think	think.png
+5-2	buy	buy.png
+5-2	film	film.png
+5-2	stand	stand.png
+5-2	study	study.png
+5-2	world	world.png
+6-1	boring	boring.png
+6-1	vegetable	vegetable.png
+6-2	wish	wish.png
+
+剔除
 1-1	give	give.png
 1-1	go	go.png
 1-1	have	have.png
