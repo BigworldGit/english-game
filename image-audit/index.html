@@ -278,8 +278,9 @@ function render() {
     html += '<div class="grid">';
     for (const item of gradeItems) {
       const status = getStatus(item);
+      const thumbPath = resolveImagePath(item.thumbnail || item.image);
       html += '<article class="card ' + status + '">';
-      html += '<div class="thumb loading" data-word="' + escapeAttr(item.word) + '" data-fallback="' + escapeAttr(item.expected_image) + '" data-image="' + escapeAttr(resolveImagePath(item.image)) + '"><img data-src="' + escapeAttr(resolveImagePath(item.image)) + '" alt="' + escapeAttr(item.word) + '" loading="lazy" decoding="async"></div>';
+      html += '<div class="thumb loading" data-word="' + escapeAttr(item.word) + '" data-fallback="' + escapeAttr(item.expected_image) + '" data-image="' + escapeAttr(resolveImagePath(item.image)) + '"><img data-src="' + escapeAttr(thumbPath) + '" alt="' + escapeAttr(item.word) + '" loading="lazy" decoding="async"></div>';
       html += '<div class="word">' + escapeHtml(item.word) + '</div>';
       html += '<div class="info"><span>' + item.grade + '</span><span>' + escapeHtml(item.expected_image) + '</span></div>';
       html += '<div class="btns">';
