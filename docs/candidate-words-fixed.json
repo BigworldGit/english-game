@@ -353,9 +353,9 @@
     "correct": "bike",
     "options": [
       "bike",
-      "mouth",
+      "book",
       "mum",
-      "nose"
+      "chair"
     ],
     "replaced": []
   },
@@ -365,7 +365,7 @@
       "bird",
       "dog",
       "name",
-      "eye"
+      "cat"
     ],
     "replaced": []
   },
@@ -785,7 +785,7 @@
       "dad",
       "name",
       "cat",
-      "leg"
+      "book"
     ],
     "replaced": []
   },
@@ -935,7 +935,7 @@
       "duck",
       "name",
       "fish",
-      "eye"
+      "bird"
     ],
     "replaced": []
   },
@@ -1043,9 +1043,9 @@
     "correct": "eye",
     "options": [
       "eye",
-      "foot",
-      "leg",
-      "head"
+      "book",
+      "cake",
+      "chair"
     ],
     "replaced": []
   },
@@ -1053,8 +1053,8 @@
     "correct": "face",
     "options": [
       "face",
-      "leg",
       "book",
+      "cake",
       "chair"
     ],
     "replaced": []
@@ -1183,9 +1183,9 @@
     "correct": "foot",
     "options": [
       "foot",
-      "mouth",
-      "face",
-      "eye"
+      "book",
+      "chair",
+      "cake"
     ],
     "replaced": []
   },
@@ -1373,7 +1373,7 @@
     "correct": "good_night",
     "options": [
       "good_night",
-      "head",
+      "book",
       "bird",
       "sleep"
     ],
@@ -1473,9 +1473,9 @@
     "correct": "hand",
     "options": [
       "hand",
-      "leg",
-      "mouth",
-      "face"
+      "book",
+      "cake",
+      "chair"
     ],
     "replaced": []
   },
@@ -1793,9 +1793,9 @@
     "correct": "leg",
     "options": [
       "leg",
-      "hand",
-      "nose",
-      "mouth"
+      "book",
+      "cake",
+      "chair"
     ],
     "replaced": []
   },
@@ -2033,9 +2033,9 @@
     "correct": "mother",
     "options": [
       "mother",
-      "mouth",
-      "face",
-      "head"
+      "book",
+      "chair",
+      "cake"
     ],
     "replaced": []
   },
@@ -2043,9 +2043,9 @@
     "correct": "mouth",
     "options": [
       "mouth",
-      "hand",
-      "leg",
-      "eye"
+      "book",
+      "cake",
+      "chair"
     ],
     "replaced": []
   },
@@ -2183,9 +2183,9 @@
     "correct": "nose",
     "options": [
       "nose",
-      "head",
-      "mouth",
-      "leg"
+      "book",
+      "cake",
+      "chair"
     ],
     "replaced": []
   },
@@ -2329,7 +2329,7 @@
     "correct": "pink",
     "options": [
       "pink",
-      "leg",
+      "book",
       "name",
       "cat"
     ],
@@ -2589,9 +2589,9 @@
     "correct": "see",
     "options": [
       "see",
-      "mouth",
-      "nose",
-      "face"
+      "book",
+      "cake",
+      "chair"
     ],
     "replaced": []
   },
@@ -2849,8 +2849,8 @@
     "correct": "special",
     "options": [
       "special",
-      "leg",
-      "foot",
+      "book",
+      "cake",
       "mother"
     ],
     "replaced": []
@@ -3001,7 +3001,7 @@
       "sunny",
       "juice",
       "cat",
-      "leg"
+      "book"
     ],
     "replaced": []
   },
@@ -3471,9 +3471,9 @@
     "correct": "week",
     "options": [
       "week",
-      "eye",
-      "nose",
-      "mouth"
+      "book",
+      "cake",
+      "chair"
     ],
     "replaced": []
   },
@@ -3541,7 +3541,7 @@
     "correct": "whose",
     "options": [
       "whose",
-      "nose",
+      "book",
       "name",
       "park"
     ],
@@ -3773,7 +3773,7 @@
       "星期日",
       "six",
       "my",
-      "hand"
+      "book"
     ],
     "replaced": []
   }
