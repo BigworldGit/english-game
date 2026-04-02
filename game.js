@@ -16,6 +16,7 @@ let questionCache = {};
 let currentOptions = [];
 let answers = [];
 let reviewWords = [];
+let learningProfile = null;
 let selectedGrade = null;
 let audioContext = null;
 let isPlaying = false;
@@ -233,6 +234,9 @@ const elements = {
     reviewWordCount: document.getElementById('reviewWordCount'),
     masteredWordsList: document.getElementById('masteredWordsList'),
     reviewWordsList: document.getElementById('reviewWordsList'),
+    overallMasteredCount: document.getElementById('overallMasteredCount'),
+    gradeCoverageText: document.getElementById('gradeCoverageText'),
+    fixedWrongCount: document.getElementById('fixedWrongCount'),
     reviewWrongBtn: document.getElementById('reviewWrongBtn'),
     retryLevelBtn: document.getElementById('retryLevelBtn'),
     nextLevelBtn: document.getElementById('nextLevelBtn'),
@@ -405,6 +409,7 @@ function startGame() {
     questionCache = {};
     reviewWords = [];
     isReviewMode = false;
+    loadLearningProfile();
 
     // 保存用户信息
     localStorage.setItem('minecraft_english_user', JSON.stringify(currentUser));
@@ -422,6 +427,7 @@ function showUserInfo() {
     elements.userInfo.style.display = 'block';
     elements.userNameDisplay.textContent = currentUser.name;
     elements.currentGrade.textContent = currentUser.grade;
+    loadLearningProfile();
 
     // 加载保存的进度
     const savedProgress = localStorage.getItem('minecraft_english_progress');
@@ -468,6 +474,142 @@ function resetGame() {
 
 function generateUserId() {
     return 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+}
+
+function getLearningProfileKey() {
+    if (!currentUser?.id) return null;
+    return `minecraft_english_learning_profile_${currentUser.id}`;
+}
+
+function createEmptyLearningProfile() {
+    return {
+        userId: currentUser?.id || null,
+        wordStats: {},
+        totalMasteredWords: 0,
+        fixedWrongWords: 0,
+        lastProcessedRoundSignature: null,
+        updatedAt: null
+    };
+}
+
+function loadLearningProfile() {
+    const key = getLearningProfileKey();
+    if (!key) {
+        learningProfile = createEmptyLearningProfile();
+        return;
+    }
+
+    try {
+        const saved = localStorage.getItem(key);
+        if (saved) {
+            learningProfile = { ...createEmptyLearningProfile(), ...JSON.parse(saved) };
+            learningProfile.wordStats = learningProfile.wordStats || {};
+            return;
+        }
+    } catch (error) {
+        console.error('加载学习档案失败:', error);
+    }
+
+    learningProfile = createEmptyLearningProfile();
+}
+
+function saveLearningProfile() {
+    const key = getLearningProfileKey();
+    if (!key || !learningProfile) return;
+    learningProfile.updatedAt = new Date().toISOString();
+    localStorage.setItem(key, JSON.stringify(learningProfile));
+}
+
+function getWordLearningStat(word) {
+    if (!learningProfile) {
+        learningProfile = createEmptyLearningProfile();
+    }
+    const key = normalizeWord(word);
+    if (!learningProfile.wordStats[key]) {
+        learningProfile.wordStats[key] = {
+            word,
+            correctCount: 0,
+            wrongCount: 0,
+            consecutiveCorrect: 0,
+            needsReview: false,
+            mastered: false,
+            lastResult: null
+        };
+    }
+    return learningProfile.wordStats[key];
+}
+
+function isWordMasteredStat(stat) {
+    return stat.consecutiveCorrect >= 2 || (stat.correctCount >= 3 && stat.correctCount > stat.wrongCount);
+}
+
+function updateLearningProfileFromAnswers(answerList = answers) {
+    if (!currentUser) return;
+    if (!learningProfile) {
+        loadLearningProfile();
+    }
+
+    const roundSignature = JSON.stringify({
+        grade: currentGrade,
+        level: currentLevel,
+        reviewMode: isReviewMode,
+        answers: answerList.filter(Boolean).map(answer => ({
+            q: answer.question,
+            w: answer.word,
+            s: answer.selected,
+            c: answer.correct
+        }))
+    });
+
+    if (learningProfile.lastProcessedRoundSignature === roundSignature) {
+        return;
+    }
+
+    const fixedWords = new Set();
+    answerList.filter(Boolean).forEach(answer => {
+        const stat = getWordLearningStat(answer.word);
+        const wasNeedsReview = stat.needsReview;
+
+        if (answer.correct) {
+            stat.correctCount += 1;
+            stat.consecutiveCorrect += 1;
+            stat.lastResult = 'correct';
+            if (wasNeedsReview && stat.consecutiveCorrect >= 1) {
+                stat.needsReview = false;
+                fixedWords.add(normalizeWord(answer.word));
+            }
+        } else {
+            stat.wrongCount += 1;
+            stat.consecutiveCorrect = 0;
+            stat.needsReview = true;
+            stat.lastResult = 'wrong';
+        }
+
+        stat.mastered = isWordMasteredStat(stat);
+    });
+
+    learningProfile.fixedWrongWords += fixedWords.size;
+    learningProfile.totalMasteredWords = Object.values(learningProfile.wordStats).filter(stat => stat.mastered).length;
+    learningProfile.lastProcessedRoundSignature = roundSignature;
+    saveLearningProfile();
+}
+
+function getCurrentGradeCoverage() {
+    const gradeWords = getWordsUpToGrade(currentGrade).filter(wordData =>
+        !isImageWordExcluded(wordData.word) &&
+        hasPlayableImageAsset(wordData.word)
+    );
+    const uniqueWords = [...new Set(gradeWords.map(wordData => normalizeWord(wordData.word)))];
+    if (!uniqueWords.length || !learningProfile) {
+        return { mastered: 0, total: uniqueWords.length, percent: 0 };
+    }
+
+    const mastered = uniqueWords.filter(word => learningProfile.wordStats[word]?.mastered).length;
+    return {
+        mastered,
+        total: uniqueWords.length,
+        percent: Math.round((mastered / uniqueWords.length) * 100)
+    };
 }
 
 function normalizeWord(word) {
@@ -3040,8 +3182,10 @@ function drawStar(ctx, cx, cy, spikes, outerRadius, innerRadius) {
 // 结果页面
 // ============================================
 function showResult() {
+    updateLearningProfileFromAnswers();
     const summary = getRoundSummary();
     const { correct, wrong, accuracy, masteredWords, reviewWords: roundReviewWords, bestStreak } = summary;
+    const coverage = getCurrentGradeCoverage();
 
     // 更新界面
     elements.correctCount.textContent = correct;
@@ -3102,6 +3246,15 @@ function showResult() {
     }
     if (elements.reviewWordsList) {
         elements.reviewWordsList.textContent = roundReviewWords.length ? roundReviewWords.join(' / ') : '本关没有待复习词。';
+    }
+    if (elements.overallMasteredCount) {
+        elements.overallMasteredCount.textContent = learningProfile?.totalMasteredWords || 0;
+    }
+    if (elements.gradeCoverageText) {
+        elements.gradeCoverageText.textContent = coverage.total ? `${coverage.mastered}/${coverage.total} (${coverage.percent}%)` : '0%';
+    }
+    if (elements.fixedWrongCount) {
+        elements.fixedWrongCount.textContent = learningProfile?.fixedWrongWords || 0;
     }
     if (elements.reviewWrongBtn) {
         elements.reviewWrongBtn.style.display = !isReviewMode && roundReviewWords.length > 0 ? 'block' : 'none';

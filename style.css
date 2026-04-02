@@ -1272,6 +1272,34 @@ html, body {
     word-break: break-word;
 }
 
+.result-overall-progress {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.progress-stat-card {
+    padding: 14px 12px;
+    border-radius: 12px;
+    border: 2px solid rgba(117, 92, 51, 0.12);
+    background: rgba(255,255,255,0.38);
+    box-shadow: 0 6px 0 rgba(126, 94, 53, 0.07);
+}
+
+.progress-stat-label {
+    font-size: 14px;
+    color: #607059;
+    margin-bottom: 8px;
+}
+
+.progress-stat-value {
+    font-size: 24px;
+    color: #284027;
+    line-height: 1.25;
+    word-break: break-word;
+}
+
 .result-buttons {
     display: flex;
     flex-direction: column;
@@ -1697,7 +1725,8 @@ html, body {
     }
 
     .feedback-detail-grid,
-    .result-learning-summary {
+    .result-learning-summary,
+    .result-overall-progress {
         grid-template-columns: 1fr;
     }
 
