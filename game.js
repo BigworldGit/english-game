@@ -836,6 +836,9 @@ function updateQuestionFeedback(answerRecord = null) {
     }
 
     if (!answerRecord) {
+        if (elements.questionFeedbackBar) {
+            elements.questionFeedbackBar.classList.add('is-pending');
+        }
         elements.answerResultBadge.textContent = '待作答';
         elements.answerResultBadge.className = 'feedback-result-badge pending';
         elements.reviewStateText.textContent = '本题还没加入复习列表';
@@ -845,6 +848,9 @@ function updateQuestionFeedback(answerRecord = null) {
         return;
     }
 
+    if (elements.questionFeedbackBar) {
+        elements.questionFeedbackBar.classList.remove('is-pending');
+    }
     elements.answerResultBadge.textContent = answerRecord.correct ? '答对了' : '待复习';
     elements.answerResultBadge.className = `feedback-result-badge ${answerRecord.correct ? 'correct' : 'wrong'}`;
     elements.reviewStateText.textContent = answerRecord.correct ? '这题暂时记为已掌握' : '这题已加入待复习列表';

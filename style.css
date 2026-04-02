@@ -627,6 +627,7 @@ html, body {
     padding: 0;
     overflow: visible;
     min-width: 0;
+    min-height: 0;
 }
 
 .play-area {
@@ -642,6 +643,9 @@ html, body {
     border-radius: 14px;
     box-shadow: 0 8px 16px rgba(21, 31, 18, 0.1);
     backdrop-filter: blur(10px);
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #wordCanvas {
@@ -650,8 +654,8 @@ html, body {
     box-shadow: none;
     background: transparent;
     image-rendering: pixelated;
-    width: min(100%, 680px, 52vh);
-    height: min(100%, 680px, 52vh);
+    width: min(100%, 600px, 42vh);
+    height: min(100%, 600px, 42vh);
     aspect-ratio: 1 / 1;
     flex: 0 0 auto;
     margin-bottom: 6px;
@@ -661,12 +665,24 @@ html, body {
     width: 100%;
     max-width: 760px;
     display: grid;
-    gap: 12px;
-    padding: 16px 18px;
+    gap: 10px;
+    padding: 14px 16px;
     background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(240,246,233,0.3) 100%);
     border: 2px solid rgba(117, 92, 51, 0.16);
     border-radius: 12px;
     box-shadow: 0 4px 0 rgba(117, 92, 51, 0.08);
+}
+
+.question-feedback-bar.is-pending {
+    gap: 8px;
+}
+
+.question-feedback-bar.is-pending .feedback-detail-grid {
+    display: none;
+}
+
+.question-feedback-bar.is-pending .feedback-hint-text {
+    font-size: 13px;
 }
 
 .feedback-summary-line {
@@ -749,14 +765,14 @@ html, body {
 .options-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    gap: 14px;
     width: 100%;
     max-width: 760px;
 }
 
 .option-btn {
-    padding: 24px 18px;
-    font-size: 32px;
+    padding: 18px 16px;
+    font-size: 28px;
     font-weight: 700;
     color: var(--text-primary);
     background: linear-gradient(135deg, rgba(255,255,255,0.66) 0%, rgba(248,249,250,0.46) 100%);
@@ -771,6 +787,7 @@ html, body {
     word-break: break-word;
     position: relative;
     overflow: hidden;
+    min-height: 92px;
 }
 
 .option-btn::before {
