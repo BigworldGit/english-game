@@ -640,6 +640,91 @@ html, body {
     margin-bottom: 6px;
 }
 
+.question-feedback-bar {
+    width: 100%;
+    max-width: 760px;
+    display: grid;
+    gap: 12px;
+    padding: 16px 18px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(240,246,233,0.3) 100%);
+    border: 2px solid rgba(117, 92, 51, 0.16);
+    border-radius: 12px;
+    box-shadow: 0 4px 0 rgba(117, 92, 51, 0.08);
+}
+
+.feedback-summary-line {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+}
+
+.feedback-result-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 15px;
+    border: 2px solid rgba(82, 98, 72, 0.18);
+    background: rgba(255,255,255,0.65);
+}
+
+.feedback-result-badge.correct {
+    background: rgba(75, 181, 67, 0.2);
+    color: #1f5f18;
+}
+
+.feedback-result-badge.wrong {
+    background: rgba(215, 79, 71, 0.18);
+    color: #8f2921;
+}
+
+.feedback-result-badge.pending {
+    color: #5a684f;
+}
+
+.feedback-review-state {
+    font-size: 14px;
+    color: #4e5e48;
+    text-align: right;
+}
+
+.feedback-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.feedback-detail-item {
+    display: grid;
+    gap: 6px;
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.48);
+    border-radius: 10px;
+    border: 1px solid rgba(117, 92, 51, 0.12);
+    text-align: left;
+}
+
+.feedback-detail-label {
+    font-size: 13px;
+    color: #65735a;
+}
+
+.feedback-detail-value {
+    font-size: 18px;
+    color: #2d4526;
+    word-break: break-word;
+}
+
+.feedback-hint-text {
+    font-size: 14px;
+    line-height: 1.45;
+    color: #43543c;
+    text-align: left;
+}
+
 .word-hint {
     display: none;
 }
@@ -1143,6 +1228,50 @@ html, body {
     line-height: 1.3;
 }
 
+.result-learning-summary {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 18px;
+    text-align: left;
+}
+
+.summary-card {
+    padding: 16px;
+    border-radius: 12px;
+    border: 2px solid rgba(117, 92, 51, 0.14);
+    box-shadow: 0 6px 0 rgba(126, 94, 53, 0.08);
+    background: rgba(255,255,255,0.42);
+}
+
+.mastery-card {
+    background: linear-gradient(180deg, rgba(120, 207, 107, 0.16) 0%, rgba(255,255,255,0.4) 100%);
+}
+
+.review-card {
+    background: linear-gradient(180deg, rgba(233, 180, 85, 0.16) 0%, rgba(255,255,255,0.4) 100%);
+}
+
+.summary-card-title {
+    font-size: 18px;
+    color: #324f2d;
+    margin-bottom: 8px;
+}
+
+.summary-card-count {
+    font-size: 28px;
+    color: #284027;
+    margin-bottom: 10px;
+}
+
+.summary-word-list {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #44543e;
+    min-height: 42px;
+    word-break: break-word;
+}
+
 .result-buttons {
     display: flex;
     flex-direction: column;
@@ -1172,6 +1301,20 @@ html, body {
 .continue-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 0 rgba(52, 109, 35, 0.18), 0 0 20px rgba(109, 204, 78, 0.18);
+}
+
+.review-btn {
+    background: linear-gradient(180deg, #f0c65e 0%, #d39a26 100%);
+    color: #5d3e09;
+    box-shadow: 0 8px 0 rgba(152, 108, 22, 0.16);
+    border: 3px solid rgba(124, 82, 17, 0.22);
+}
+
+.retry-btn {
+    background: linear-gradient(180deg, #9ec7ff 0%, #5d91dd 100%);
+    color: #103c78;
+    box-shadow: 0 8px 0 rgba(49, 84, 136, 0.16);
+    border: 3px solid rgba(33, 68, 120, 0.22);
 }
 
 .home-btn {
@@ -1540,4 +1683,39 @@ html, body {
 @keyframes wind {
     0%, 100% { transform: translateX(0); }
     50% { transform: translateX(10px); }
+}
+
+@media (max-width: 960px) {
+    .feedback-summary-line {
+        display: grid;
+        gap: 8px;
+        justify-content: stretch;
+    }
+
+    .feedback-review-state {
+        text-align: left;
+    }
+
+    .feedback-detail-grid,
+    .result-learning-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .result-stats {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 640px) {
+    .question-feedback-bar {
+        padding: 14px;
+    }
+
+    .feedback-detail-value {
+        font-size: 16px;
+    }
+
+    .summary-card-count {
+        font-size: 24px;
+    }
 }

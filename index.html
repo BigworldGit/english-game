@@ -73,7 +73,7 @@
                 </div>
                 <div class="level-info">
                     <span class="level-badge">第 <span id="levelNum">1</span> 关</span>
-                    <span class="question-badge">第 <span id="questionNum">1</span>/10 题</span>
+                    <span class="question-badge">第 <span id="questionNum">1/10</span> 题</span>
                 </div>
             </div>
 
@@ -81,6 +81,24 @@
                 <div class="play-area">
                     <!-- 单词图片区域 -->
                     <canvas id="wordCanvas" width="240" height="240"></canvas>
+
+                    <div class="question-feedback-bar" id="questionFeedbackBar">
+                        <div class="feedback-summary-line">
+                            <span class="feedback-result-badge pending" id="answerResultBadge">待作答</span>
+                            <span class="feedback-review-state" id="reviewStateText">本题还没加入复习列表</span>
+                        </div>
+                        <div class="feedback-detail-grid">
+                            <div class="feedback-detail-item">
+                                <span class="feedback-detail-label">正确答案</span>
+                                <span class="feedback-detail-value" id="correctAnswerText">-</span>
+                            </div>
+                            <div class="feedback-detail-item">
+                                <span class="feedback-detail-label">你的选择</span>
+                                <span class="feedback-detail-value" id="selectedAnswerText">-</span>
+                            </div>
+                        </div>
+                        <div class="feedback-hint-text" id="feedbackHintText">先观察图片里最明显的主体，再从选项里选最合适的单词。</div>
+                    </div>
 
                     <!-- 选项区域 -->
                     <div class="options-container" id="optionsContainer">
@@ -131,7 +149,7 @@
         <!-- 关卡结束页面 -->
         <div class="page page-result" id="resultPage">
             <div class="result-content">
-                <div class="result-title">关卡完成！</div>
+                <div class="result-title" id="resultTitle">关卡完成！</div>
 
                 <div class="result-stats">
                     <div class="stat-item">
@@ -144,6 +162,11 @@
                         <div class="stat-value" id="wrongCount">0</div>
                         <div class="stat-label">错误</div>
                     </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">🔥</div>
+                        <div class="stat-value" id="bestStreakCount">0</div>
+                        <div class="stat-label">连对峰值</div>
+                    </div>
                 </div>
 
                 <div class="accuracy-display">
@@ -155,7 +178,22 @@
 
                 <div class="result-message" id="resultMessage"></div>
 
+                <div class="result-learning-summary">
+                    <div class="summary-card mastery-card">
+                        <div class="summary-card-title">本关已掌握</div>
+                        <div class="summary-card-count" id="masteredWordCount">0</div>
+                        <div class="summary-word-list" id="masteredWordsList">本关还没有形成稳定掌握词。</div>
+                    </div>
+                    <div class="summary-card review-card">
+                        <div class="summary-card-title">待复习词</div>
+                        <div class="summary-card-count" id="reviewWordCount">0</div>
+                        <div class="summary-word-list" id="reviewWordsList">本关没有待复习词。</div>
+                    </div>
+                </div>
+
                 <div class="result-buttons">
+                    <button class="result-btn review-btn" id="reviewWrongBtn">复习错题</button>
+                    <button class="result-btn retry-btn" id="retryLevelBtn">再练一次</button>
                     <button class="result-btn continue-btn" id="nextLevelBtn">下一关</button>
                     <button class="result-btn home-btn" id="homeBtn">返回主页</button>
                 </div>

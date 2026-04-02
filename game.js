@@ -15,10 +15,12 @@ let questionSequence = [];
 let questionCache = {};
 let currentOptions = [];
 let answers = [];
+let reviewWords = [];
 let selectedGrade = null;
 let audioContext = null;
 let isPlaying = false;
 let bgMusic = null;
+let isReviewMode = false;
 let bgMusicFiles = [
     'audio/colors-and-cheers.mp3',
     'audio/pixelated-fury.mp3',
@@ -215,11 +217,24 @@ const elements = {
     liveAccuracyRate: document.getElementById('liveAccuracyRate'),
     progressBar: document.getElementById('progressBar'),
     feedback: document.getElementById('feedback'),
+    answerResultBadge: document.getElementById('answerResultBadge'),
+    reviewStateText: document.getElementById('reviewStateText'),
+    correctAnswerText: document.getElementById('correctAnswerText'),
+    selectedAnswerText: document.getElementById('selectedAnswerText'),
+    feedbackHintText: document.getElementById('feedbackHintText'),
+    resultTitle: document.getElementById('resultTitle'),
     correctCount: document.getElementById('correctCount'),
     wrongCount: document.getElementById('wrongCount'),
+    bestStreakCount: document.getElementById('bestStreakCount'),
     accuracyValue: document.getElementById('accuracyValue'),
     accuracyCircle: document.getElementById('accuracyCircle'),
     resultMessage: document.getElementById('resultMessage'),
+    masteredWordCount: document.getElementById('masteredWordCount'),
+    reviewWordCount: document.getElementById('reviewWordCount'),
+    masteredWordsList: document.getElementById('masteredWordsList'),
+    reviewWordsList: document.getElementById('reviewWordsList'),
+    reviewWrongBtn: document.getElementById('reviewWrongBtn'),
+    retryLevelBtn: document.getElementById('retryLevelBtn'),
     nextLevelBtn: document.getElementById('nextLevelBtn'),
     homeBtn: document.getElementById('homeBtn'),
     musicControl: document.getElementById('musicControl'),
@@ -319,6 +334,12 @@ function setupEventListeners() {
 
     // 下一关
     elements.nextLevelBtn.addEventListener('click', nextLevel);
+    if (elements.reviewWrongBtn) {
+        elements.reviewWrongBtn.addEventListener('click', startReviewRound);
+    }
+    if (elements.retryLevelBtn) {
+        elements.retryLevelBtn.addEventListener('click', replayCurrentRound);
+    }
 
     if (elements.prevQuestionBtn) {
         elements.prevQuestionBtn.addEventListener('click', goToPreviousQuestion);
@@ -382,6 +403,8 @@ function startGame() {
     currentQuestion = 1;
     answers = [];
     questionCache = {};
+    reviewWords = [];
+    isReviewMode = false;
 
     // 保存用户信息
     localStorage.setItem('minecraft_english_user', JSON.stringify(currentUser));
@@ -410,6 +433,8 @@ function showUserInfo() {
             currentQuestion = progress.question;
             answers = progress.answers || [];
             questionSequence = progress.questionSequence || [];
+            reviewWords = progress.reviewWords || [];
+            isReviewMode = Boolean(progress.isReviewMode);
             elements.currentLevel.textContent = currentLevel;
             elements.currentQuestion.textContent = currentQuestion;
         }
@@ -476,7 +501,98 @@ function getAnswerRecord(questionNumber) {
 }
 
 function getReviewedQuestionLimit() {
-    return Math.min(answers.length + 1, QUESTIONS_PER_LEVEL);
+    return Math.min(answers.length + 1, getCurrentRoundQuestionCount());
+}
+
+function getCurrentRoundQuestionCount() {
+    return isReviewMode ? Math.max(reviewWords.length, 0) : QUESTIONS_PER_LEVEL;
+}
+
+function getCurrentRoundWordData(questionNumber) {
+    if (isReviewMode) {
+        const reviewWord = reviewWords[questionNumber - 1];
+        return reviewWord ? getWordMeta(reviewWord) || { word: reviewWord, category: 'unknown' } : null;
+    }
+
+    const wordIndex = (currentLevel - 1) * QUESTIONS_PER_LEVEL + (questionNumber - 1);
+    if (wordIndex >= allWords.length) {
+        prepareWords();
+    }
+    return allWords[wordIndex % allWords.length] || null;
+}
+
+function getRoundSummary(answerList = answers) {
+    const validAnswers = answerList.filter(Boolean);
+    const correctAnswers = validAnswers.filter(answer => answer.correct);
+    const wrongAnswers = validAnswers.filter(answer => !answer.correct);
+    const masteredWords = [...new Set(correctAnswers.map(answer => answer.word).filter(word =>
+        !wrongAnswers.some(wrong => wrong.word === word)
+    ))];
+    const reviewList = [...new Set(wrongAnswers.map(answer => answer.word))];
+
+    let streak = 0;
+    let bestStreak = 0;
+    validAnswers.forEach(answer => {
+        if (answer.correct) {
+            streak += 1;
+            bestStreak = Math.max(bestStreak, streak);
+        } else {
+            streak = 0;
+        }
+    });
+
+    return {
+        total: validAnswers.length,
+        correct: correctAnswers.length,
+        wrong: wrongAnswers.length,
+        accuracy: validAnswers.length ? Math.round((correctAnswers.length / validAnswers.length) * 100) : 0,
+        masteredWords,
+        reviewWords: reviewList,
+        bestStreak
+    };
+}
+
+function generateLearningHint(word, selected, isCorrect) {
+    const meta = getWordMeta(word);
+    const category = meta?.category || 'unknown';
+
+    if (isCorrect) {
+        if (['color', 'animal', 'food', 'place', 'body', 'clothes'].includes(category)) {
+            return `你已经抓住这题的主要识别点，${word} 这类词可以继续保持。`;
+        }
+        return `这题已经掌握，继续保持对 ${word} 这类词的辨认速度。`;
+    }
+
+    if (category === 'color') {
+        return '这类题先看画面里最突出的颜色，再排除物体名称。';
+    }
+    if (['animal', 'food', 'body', 'clothes', 'place'].includes(category)) {
+        return '这类题先看图片里的主体物体，再判断动作、颜色或场景。';
+    }
+    return `这题先记入待复习，下一轮优先复习 ${word}。`;
+}
+
+function updateQuestionFeedback(answerRecord = null) {
+    if (!elements.answerResultBadge || !elements.reviewStateText || !elements.correctAnswerText || !elements.selectedAnswerText || !elements.feedbackHintText) {
+        return;
+    }
+
+    if (!answerRecord) {
+        elements.answerResultBadge.textContent = '待作答';
+        elements.answerResultBadge.className = 'feedback-result-badge pending';
+        elements.reviewStateText.textContent = '本题还没加入复习列表';
+        elements.correctAnswerText.textContent = '-';
+        elements.selectedAnswerText.textContent = '-';
+        elements.feedbackHintText.textContent = '先观察图片里最明显的主体，再从选项里选最合适的单词。';
+        return;
+    }
+
+    elements.answerResultBadge.textContent = answerRecord.correct ? '答对了' : '待复习';
+    elements.answerResultBadge.className = `feedback-result-badge ${answerRecord.correct ? 'correct' : 'wrong'}`;
+    elements.reviewStateText.textContent = answerRecord.correct ? '这题暂时记为已掌握' : '这题已加入待复习列表';
+    elements.correctAnswerText.textContent = answerRecord.word;
+    elements.selectedAnswerText.textContent = answerRecord.selected;
+    elements.feedbackHintText.textContent = answerRecord.learningHint || generateLearningHint(answerRecord.word, answerRecord.selected, answerRecord.correct);
 }
 
 function isAnsweredQuestion(questionNumber) {
@@ -502,6 +618,7 @@ function setQuestionMode(answerRecord) {
         if (elements.answerStatusText) {
             elements.answerStatusText.textContent = '本题还没作答，选一个最合适的答案吧。';
         }
+        updateQuestionFeedback(null);
         return;
     }
 
@@ -511,6 +628,7 @@ function setQuestionMode(answerRecord) {
             ? `这题答对了，正确答案是 ${answerRecord.word}。`
             : `这题答错了，你选的是 ${answerRecord.selected}，正确答案是 ${answerRecord.word}。`;
     }
+    updateQuestionFeedback(answerRecord);
 }
 
 function updateAnswerStatusPanel(answerRecord) {
@@ -538,7 +656,7 @@ function updateAnswerStatusPanel(answerRecord) {
         return;
     }
 
-    elements.answerStatusText.textContent = `目前已完成 ${answeredList.length} / ${QUESTIONS_PER_LEVEL} 题。`;
+    elements.answerStatusText.textContent = `目前已完成 ${answeredList.length} / ${getCurrentRoundQuestionCount()} 题。`;
 }
 
 function goToPreviousQuestion() {
@@ -595,7 +713,7 @@ function initGameRound() {
 
 function loadQuestion() {
     // 检查是否需要进入下一关
-    if (currentQuestion > QUESTIONS_PER_LEVEL) {
+    if (currentQuestion > getCurrentRoundQuestionCount()) {
         showResult();
         return;
     }
@@ -613,12 +731,11 @@ function loadQuestion() {
         currentWord = cachedState.wordData;
         currentOptions = [...cachedState.options];
     } else {
-        const wordIndex = (currentLevel - 1) * QUESTIONS_PER_LEVEL + (currentQuestion - 1);
-        if (wordIndex >= allWords.length) {
-            prepareWords();
+        currentWord = getCurrentRoundWordData(currentQuestion);
+        if (!currentWord) {
+            showResult();
+            return;
         }
-
-        currentWord = allWords[wordIndex % allWords.length];
         currentOptions = generateOptions();
         questionCache[currentQuestion] = {
             wordData: currentWord,
@@ -965,7 +1082,9 @@ function handleAnswer(selected, btn) {
         word: currentWord.word,
         options: [...currentOptions],
         selected: selected,
-        correct: isCorrect
+        correct: isCorrect,
+        reviewNeeded: !isCorrect,
+        learningHint: generateLearningHint(currentWord.word, selected, isCorrect)
     };
 
     // 上传答题数据到后端服务器
@@ -1002,13 +1121,17 @@ function handleAnswer(selected, btn) {
         playSound('wrong');
     }
 
+    setQuestionMode(answers[currentQuestion - 1]);
+    updateAnswerStatusPanel(answers[currentQuestion - 1]);
+    updateProgressBar();
+
     // 保存进度
     saveProgress();
 
     // 1.5秒后进入下一题
     setTimeout(() => {
         hideFeedback();
-        currentQuestion = Math.min(answers.length + 1, QUESTIONS_PER_LEVEL + 1);
+        currentQuestion = Math.min(answers.length + 1, getCurrentRoundQuestionCount() + 1);
         loadQuestion();
     }, 1500);
 }
@@ -1024,7 +1147,8 @@ function hideFeedback() {
 
 function updateProgressBar() {
     let progressHTML = '';
-    for (let i = 0; i < QUESTIONS_PER_LEVEL; i++) {
+    const roundCount = getCurrentRoundQuestionCount();
+    for (let i = 0; i < roundCount; i++) {
         const answer = answers[i];
         if (answer && answer.correct) {
             progressHTML += '<span class="progress-chip progress-correct" aria-label="答对"></span>';
@@ -1037,8 +1161,8 @@ function updateProgressBar() {
         }
     }
     
-    if (answers.length === QUESTIONS_PER_LEVEL && answers.every(answer => answer && answer.correct)) {
-        progressHTML = new Array(QUESTIONS_PER_LEVEL)
+    if (answers.length === roundCount && roundCount > 0 && answers.every(answer => answer && answer.correct)) {
+        progressHTML = new Array(roundCount)
             .fill('<span class="progress-chip progress-perfect" aria-label="全对"></span>')
             .join('');
     }
@@ -1048,7 +1172,7 @@ function updateProgressBar() {
 
 function updateProgressUI() {
     elements.levelNum.textContent = currentLevel;
-    elements.questionNum.textContent = currentQuestion;
+    elements.questionNum.textContent = `${Math.min(currentQuestion, Math.max(getCurrentRoundQuestionCount(), 1))}/${Math.max(getCurrentRoundQuestionCount(), 1)}`;
 }
 
 // ============================================
@@ -2916,13 +3040,15 @@ function drawStar(ctx, cx, cy, spikes, outerRadius, innerRadius) {
 // 结果页面
 // ============================================
 function showResult() {
-    const correct = answers.filter(a => a.correct).length;
-    const wrong = answers.length - correct;
-    const accuracy = Math.round((correct / answers.length) * 100);
+    const summary = getRoundSummary();
+    const { correct, wrong, accuracy, masteredWords, reviewWords: roundReviewWords, bestStreak } = summary;
 
     // 更新界面
     elements.correctCount.textContent = correct;
     elements.wrongCount.textContent = wrong;
+    if (elements.bestStreakCount) {
+        elements.bestStreakCount.textContent = bestStreak;
+    }
     elements.accuracyValue.textContent = accuracy + '%';
 
     // 更新正确率圆环
@@ -2931,18 +3057,61 @@ function showResult() {
 
     // 显示消息
     let message = '';
-    if (accuracy >= 90) {
-        message = '太棒了！你是英语小高手！🎉';
-        playSound('success'); // 播放胜利音效
+    if (isReviewMode) {
+        if (elements.resultTitle) {
+            elements.resultTitle.textContent = '错题复习完成';
+        }
+        if (accuracy >= 90) {
+            message = '这轮错题已经复习得比较稳，可以继续前进。';
+        } else if (accuracy >= 60) {
+            message = '这轮错题有进步，建议再复习一遍不稳的词。';
+        } else {
+            message = '这组错题还不稳，建议再看一遍图片和正确答案。';
+        }
+    } else if (accuracy >= 90) {
+        if (elements.resultTitle) {
+            elements.resultTitle.textContent = '关卡完成！';
+        }
+        message = '这关掌握得很稳，可以进入下一关。';
     } else if (accuracy >= 70) {
-        message = '做得不错！继续加油！💪';
-        playSound('success'); // 播放胜利音效
+        if (elements.resultTitle) {
+            elements.resultTitle.textContent = '关卡完成！';
+        }
+        message = '大部分词已经掌握，建议先复习错题。';
     } else if (accuracy >= 50) {
-        message = '还不错哦！多练习会更棒！🌟';
+        if (elements.resultTitle) {
+            elements.resultTitle.textContent = '关卡完成！';
+        }
+        message = '有一些词容易混淆，先再练一次更合适。';
     } else {
-        message = '别灰心！再试一次一定更好！💖';
+        if (elements.resultTitle) {
+            elements.resultTitle.textContent = '关卡完成！';
+        }
+        message = '这关还不稳，先把待复习词看一遍。';
     }
     elements.resultMessage.textContent = message;
+
+    if (elements.masteredWordCount) {
+        elements.masteredWordCount.textContent = masteredWords.length;
+    }
+    if (elements.reviewWordCount) {
+        elements.reviewWordCount.textContent = roundReviewWords.length;
+    }
+    if (elements.masteredWordsList) {
+        elements.masteredWordsList.textContent = masteredWords.length ? masteredWords.join(' / ') : '本关还没有形成稳定掌握词。';
+    }
+    if (elements.reviewWordsList) {
+        elements.reviewWordsList.textContent = roundReviewWords.length ? roundReviewWords.join(' / ') : '本关没有待复习词。';
+    }
+    if (elements.reviewWrongBtn) {
+        elements.reviewWrongBtn.style.display = !isReviewMode && roundReviewWords.length > 0 ? 'block' : 'none';
+    }
+    if (elements.retryLevelBtn) {
+        elements.retryLevelBtn.textContent = isReviewMode ? '再练错题' : '再练一次';
+    }
+    if (elements.nextLevelBtn) {
+        elements.nextLevelBtn.textContent = '下一关';
+    }
 
     // 播放结果音效
     playSound(accuracy >= 70 ? 'success' : 'encourage');
@@ -2952,7 +3121,37 @@ function showResult() {
 }
 
 function nextLevel() {
+    isReviewMode = false;
+    reviewWords = [];
     currentLevel++;
+    currentQuestion = 1;
+    answers = [];
+    questionCache = {};
+    saveProgress();
+    showPage('game');
+    initGameRound();
+}
+
+function replayCurrentRound() {
+    currentQuestion = 1;
+    answers = [];
+    questionCache = {};
+    if (!isReviewMode) {
+        prepareWords();
+    }
+    saveProgress();
+    showPage('game');
+    initGameRound();
+}
+
+function startReviewRound() {
+    const summary = getRoundSummary();
+    if (!summary.reviewWords.length) {
+        return;
+    }
+
+    isReviewMode = true;
+    reviewWords = [...summary.reviewWords];
     currentQuestion = 1;
     answers = [];
     questionCache = {};
@@ -3004,7 +3203,9 @@ function saveProgress() {
         level: currentLevel,
         question: currentQuestion,
         answers: answers,
-        questionSequence: questionSequence
+        questionSequence: questionSequence,
+        reviewWords: reviewWords,
+        isReviewMode: isReviewMode
     };
 
     localStorage.setItem('minecraft_english_progress', JSON.stringify(progress));
@@ -3381,23 +3582,20 @@ function clearWordAnimation() {
 function preloadNextQuestionImages() {
     // 预加载后续题目的图片
     const startIndex = currentQuestion;
-    const endIndex = Math.min(currentQuestion + PRELOAD_BATCH_SIZE, QUESTIONS_PER_LEVEL);
+    const endIndex = Math.min(currentQuestion + PRELOAD_BATCH_SIZE, getCurrentRoundQuestionCount());
     
     for (let i = startIndex; i < endIndex; i++) {
-        const nextWordIndex = (currentLevel - 1) * QUESTIONS_PER_LEVEL + i;
-        if (nextWordIndex < allWords.length) {
-            const nextWord = allWords[nextWordIndex % allWords.length];
+        const nextWord = getCurrentRoundWordData(i + 1);
+        if (nextWord?.word) {
             preloadImage(nextWord.word);
         }
     }
 }
 
 function preloadCurrentRoundImages() {
-    const startIndex = (currentLevel - 1) * QUESTIONS_PER_LEVEL;
-    const endIndex = Math.min(startIndex + QUESTIONS_PER_LEVEL, allWords.length);
-
-    for (let i = startIndex; i < endIndex; i++) {
-        const wordData = allWords[i];
+    const roundCount = getCurrentRoundQuestionCount();
+    for (let i = 1; i <= roundCount; i++) {
+        const wordData = getCurrentRoundWordData(i);
         if (wordData?.word) {
             preloadImage(wordData.word);
         }
