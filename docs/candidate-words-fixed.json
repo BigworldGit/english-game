@@ -1054,8 +1054,8 @@
     "options": [
       "face",
       "leg",
-      "name",
-      "head"
+      "book",
+      "chair"
     ],
     "replaced": []
   },
@@ -1513,9 +1513,9 @@
     "correct": "head",
     "options": [
       "head",
-      "nose",
-      "eye",
-      "hand"
+      "book",
+      "cake",
+      "chair"
     ],
     "replaced": []
   },

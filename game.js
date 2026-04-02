@@ -180,6 +180,7 @@ const CONFLICT_GROUPS = {
     nationality: ['american', 'australian', 'british', 'canadian', 'chinese', 'america', 'australia', 'britain', 'canada', 'china'],
     subjects: ['chinese', 'english', 'math', 'music', 'art', 'pe', 'science'],
     frequency: ['always', 'usually', 'often', 'sometimes', 'never'],
+    body: ['face', 'head', 'eye', 'ear', 'nose', 'mouth', 'hair', 'arm', 'hand', 'leg', 'foot', 'body'],
     pronouns: ['i', 'you', 'he', 'she', 'it', 'we', 'they', 'me', 'him', 'her', 'us', 'them', 'my', 'your', 'his', 'our', 'their'],
     be: ['am', 'is', 'are', 'was', 'were', 'be'],
     numbers: ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
@@ -808,6 +809,16 @@ function getRoundSummary(answerList = answers) {
         reviewWords: reviewList,
         bestStreak
     };
+}
+
+function renderWordChipList(words, variant, emptyText) {
+    if (!Array.isArray(words) || words.length === 0) {
+        return `<span class="summary-placeholder">${emptyText}</span>`;
+    }
+
+    return words
+        .map(word => `<span class="word-pill ${variant}">${word}</span>`)
+        .join('');
 }
 
 function generateLearningHint(word, selected, isCorrect) {
@@ -3365,10 +3376,10 @@ function showResult() {
         elements.reviewWordCount.textContent = roundReviewWords.length;
     }
     if (elements.masteredWordsList) {
-        elements.masteredWordsList.textContent = masteredWords.length ? masteredWords.join(' / ') : '本关还没有形成稳定掌握词。';
+        elements.masteredWordsList.innerHTML = renderWordChipList(masteredWords, 'mastery', '本关还没有形成稳定掌握词。');
     }
     if (elements.reviewWordsList) {
-        elements.reviewWordsList.textContent = roundReviewWords.length ? roundReviewWords.join(' / ') : '本关没有待复习词。';
+        elements.reviewWordsList.innerHTML = renderWordChipList(roundReviewWords, 'review', '本关没有待复习词。');
     }
     if (elements.overallMasteredCount) {
         elements.overallMasteredCount.textContent = learningProfile?.totalMasteredWords || 0;

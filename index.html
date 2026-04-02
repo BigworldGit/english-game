@@ -6,9 +6,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Minecraft英语单词小助手</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&family=ZCOOL+QingKe+HuangYou&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -150,33 +147,36 @@
         <div class="page page-result" id="resultPage">
             <div class="result-content">
                 <div class="result-title" id="resultTitle">关卡完成！</div>
+                <div class="result-hero-grid">
+                    <div class="result-stats">
+                        <div class="stat-item">
+                            <div class="stat-icon">✅</div>
+                            <div class="stat-value" id="correctCount">0</div>
+                            <div class="stat-label">正确</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">❌</div>
+                            <div class="stat-value" id="wrongCount">0</div>
+                            <div class="stat-label">错误</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">🔥</div>
+                            <div class="stat-value" id="bestStreakCount">0</div>
+                            <div class="stat-label">连对峰值</div>
+                        </div>
+                    </div>
 
-                <div class="result-stats">
-                    <div class="stat-item">
-                        <div class="stat-icon">✅</div>
-                        <div class="stat-value" id="correctCount">0</div>
-                        <div class="stat-label">正确</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-icon">❌</div>
-                        <div class="stat-value" id="wrongCount">0</div>
-                        <div class="stat-label">错误</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-icon">🔥</div>
-                        <div class="stat-value" id="bestStreakCount">0</div>
-                        <div class="stat-label">连对峰值</div>
+                    <div class="result-focus-panel">
+                        <div class="accuracy-display">
+                            <div class="accuracy-circle" id="accuracyCircle">
+                                <span class="accuracy-value" id="accuracyValue">0%</span>
+                            </div>
+                            <div class="accuracy-label">正确率</div>
+                        </div>
+
+                        <div class="result-message" id="resultMessage"></div>
                     </div>
                 </div>
-
-                <div class="accuracy-display">
-                    <div class="accuracy-circle" id="accuracyCircle">
-                        <span class="accuracy-value" id="accuracyValue">0%</span>
-                    </div>
-                    <div class="accuracy-label">正确率</div>
-                </div>
-
-                <div class="result-message" id="resultMessage"></div>
 
                 <div class="result-learning-summary">
                     <div class="summary-card mastery-card">
