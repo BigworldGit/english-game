@@ -22,6 +22,13 @@ let audioContext = null;
 let isPlaying = false;
 let bgMusic = null;
 let isReviewMode = false;
+const SOUND_EFFECT_FILES = {
+    correct: 'audio/feedback/sfx-answer-correct.mp3',
+    wrong: 'audio/feedback/sfx-answer-wrong.mp3',
+    success: 'audio/feedback/sfx-level-complete.mp3',
+    achievement: 'audio/feedback/sfx-achievement-unlock.mp3'
+};
+const soundEffectPool = {};
 let bgMusicFiles = [
     'audio/colors-and-cheers.mp3',
     'audio/pixelated-fury.mp3',
@@ -269,6 +276,7 @@ function initGame() {
     // 加载预定义的候选词表
     loadCandidateWords();
     loadAuditExcludedWords();
+    preloadSoundEffects();
     updateStartButton();
     updateContinueButton();
 
@@ -493,6 +501,7 @@ function createEmptyLearningProfile() {
         completedRounds: 0,
         perfectRounds: 0,
         bestRoundStreak: 0,
+        unlockedAchievements: [],
         lastProcessedRoundSignature: null,
         updatedAt: null
     };
@@ -526,6 +535,14 @@ function saveLearningProfile() {
     localStorage.setItem(key, JSON.stringify(learningProfile));
 }
 
+function preloadSoundEffects() {
+    Object.entries(SOUND_EFFECT_FILES).forEach(([type, src]) => {
+        const audio = new Audio(src);
+        audio.preload = 'auto';
+        soundEffectPool[type] = audio;
+    });
+}
+
 function getWordLearningStat(word) {
     if (!learningProfile) {
         learningProfile = createEmptyLearningProfile();
@@ -547,6 +564,54 @@ function getWordLearningStat(word) {
 
 function isWordMasteredStat(stat) {
     return stat.consecutiveCorrect >= 2 || (stat.correctCount >= 3 && stat.correctCount > stat.wrongCount);
+}
+
+function getAchievementRules(summary, profile = learningProfile || createEmptyLearningProfile()) {
+    const bestStreak = Math.max(profile.bestRoundStreak || 0, summary.bestStreak || 0);
+    return [
+        {
+            id: 'first_clear',
+            theme: 'daily',
+            label: '完成首关',
+            unlocked: profile.completedRounds >= 1,
+            progressText: `已完成 ${profile.completedRounds}/1 关`
+        },
+        {
+            id: 'perfect_round',
+            theme: 'streak',
+            label: '满分通关',
+            unlocked: profile.perfectRounds >= 1 || summary.accuracy === 100,
+            progressText: `已达成 ${Math.max(profile.perfectRounds, summary.accuracy === 100 ? 1 : 0)}/1 次`
+        },
+        {
+            id: 'streak_5',
+            theme: 'streak',
+            label: '连对 5 题',
+            unlocked: bestStreak >= 5,
+            progressText: `当前峰值 ${bestStreak}/5`
+        },
+        {
+            id: 'mastered_20',
+            theme: 'mastery',
+            label: '掌握 20 词',
+            unlocked: (profile.totalMasteredWords || 0) >= 20,
+            progressText: `当前 ${profile.totalMasteredWords || 0}/20`
+        },
+        {
+            id: 'mastered_50',
+            theme: 'mastery',
+            label: '掌握 50 词',
+            unlocked: (profile.totalMasteredWords || 0) >= 50,
+            progressText: `当前 ${profile.totalMasteredWords || 0}/50`
+        },
+        {
+            id: 'fixed_10',
+            theme: 'review',
+            label: '修复 10 个错词',
+            unlocked: (profile.fixedWrongWords || 0) >= 10,
+            progressText: `当前 ${profile.fixedWrongWords || 0}/10`
+        }
+    ];
 }
 
 function updateLearningProfileFromAnswers(answerList = answers) {
@@ -595,6 +660,8 @@ function updateLearningProfileFromAnswers(answerList = answers) {
         stat.mastered = isWordMasteredStat(stat);
     });
 
+    const previouslyUnlocked = new Set(learningProfile.unlockedAchievements || []);
+
     if (!isReviewMode && roundSummary.total > 0) {
         learningProfile.completedRounds += 1;
         if (roundSummary.wrong === 0) {
@@ -605,8 +672,14 @@ function updateLearningProfileFromAnswers(answerList = answers) {
 
     learningProfile.fixedWrongWords += fixedWords.size;
     learningProfile.totalMasteredWords = Object.values(learningProfile.wordStats).filter(stat => stat.mastered).length;
+    const unlockedIds = getAchievementRules(roundSummary, learningProfile)
+        .filter(rule => rule.unlocked)
+        .map(rule => rule.id);
+    const newlyUnlocked = unlockedIds.filter(id => !previouslyUnlocked.has(id));
+    learningProfile.unlockedAchievements = unlockedIds;
     learningProfile.lastProcessedRoundSignature = roundSignature;
     saveLearningProfile();
+    return newlyUnlocked;
 }
 
 function getPlayableWordsForCoverage(sourceWords) {
@@ -642,39 +715,7 @@ function getCoverageStats() {
 
 function getAchievementState(summary) {
     const profile = learningProfile || createEmptyLearningProfile();
-    const bestStreak = Math.max(profile.bestRoundStreak || 0, summary.bestStreak || 0);
-    const rules = [
-        {
-            label: '完成首关',
-            unlocked: profile.completedRounds >= 1,
-            progressText: `已完成 ${profile.completedRounds}/1 关`
-        },
-        {
-            label: '满分通关',
-            unlocked: profile.perfectRounds >= 1 || summary.accuracy === 100,
-            progressText: `已达成 ${Math.max(profile.perfectRounds, summary.accuracy === 100 ? 1 : 0)}/1 次`
-        },
-        {
-            label: '连对 5 题',
-            unlocked: bestStreak >= 5,
-            progressText: `当前峰值 ${bestStreak}/5`
-        },
-        {
-            label: '掌握 20 词',
-            unlocked: (profile.totalMasteredWords || 0) >= 20,
-            progressText: `当前 ${profile.totalMasteredWords || 0}/20`
-        },
-        {
-            label: '掌握 50 词',
-            unlocked: (profile.totalMasteredWords || 0) >= 50,
-            progressText: `当前 ${profile.totalMasteredWords || 0}/50`
-        },
-        {
-            label: '修复 10 个错词',
-            unlocked: (profile.fixedWrongWords || 0) >= 10,
-            progressText: `当前 ${profile.fixedWrongWords || 0}/10`
-        }
-    ];
+    const rules = getAchievementRules(summary, profile);
 
     const nextLocked = rules.find(rule => !rule.unlocked);
 
@@ -3256,7 +3297,7 @@ function drawStar(ctx, cx, cy, spikes, outerRadius, innerRadius) {
 // 结果页面
 // ============================================
 function showResult() {
-    updateLearningProfileFromAnswers();
+    const newlyUnlocked = updateLearningProfileFromAnswers() || [];
     const summary = getRoundSummary();
     const { correct, wrong, accuracy, masteredWords, reviewWords: roundReviewWords, bestStreak } = summary;
     const coverage = getCoverageStats();
@@ -3337,7 +3378,7 @@ function showResult() {
     if (elements.achievementBadgeList) {
         const unlocked = achievementState.unlocked;
         elements.achievementBadgeList.innerHTML = unlocked.length
-            ? unlocked.map(item => `<span class="achievement-badge">${item.label}</span>`).join('')
+            ? unlocked.map(item => `<span class="achievement-badge achievement-${item.theme}">${item.label}</span>`).join('')
             : '<span class="achievement-badge locked">本轮还没有新成就，继续练习会逐步解锁。</span>';
     }
     if (elements.nextGoalText) {
@@ -3351,6 +3392,19 @@ function showResult() {
     }
     if (elements.nextLevelBtn) {
         elements.nextLevelBtn.textContent = '下一关';
+    }
+
+    if (elements.resultTitle) {
+        elements.resultTitle.className = 'result-title';
+        if (!isReviewMode && accuracy === 100) {
+            elements.resultTitle.classList.add('banner-perfect');
+        } else {
+            elements.resultTitle.classList.add('banner-complete');
+        }
+    }
+
+    if (newlyUnlocked.length > 0) {
+        playSound('achievement');
     }
 
     // 播放结果音效
@@ -3483,8 +3537,26 @@ function initAudio() {
     return audioContext;
 }
 
+function playAudioAsset(type) {
+    const baseAudio = soundEffectPool[type];
+    if (!baseAudio) return false;
+
+    try {
+        const instance = new Audio(baseAudio.src);
+        instance.preload = 'auto';
+        instance.volume = type === 'success' ? 0.72 : 0.68;
+        instance.play().catch(() => {});
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+
 function playSound(type) {
     try {
+        if (playAudioAsset(type)) {
+            return;
+        }
         const ctx = initAudio();
         
         switch(type) {

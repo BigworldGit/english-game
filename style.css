@@ -71,6 +71,23 @@
 
     /* UI Assets */
     --asset-bg-day: url('assets/ui/bg-minecraft-day.png');
+    --asset-feedback-correct-burst: url('assets/ui/feedback/feedback-correct-burst.png');
+    --asset-feedback-wrong-burst: url('assets/ui/feedback/feedback-wrong-burst.png');
+    --asset-feedback-star-green: url('assets/ui/feedback/feedback-star-green.png');
+    --asset-feedback-star-yellow: url('assets/ui/feedback/feedback-star-yellow.png');
+    --asset-chip-correct: url('assets/ui/feedback/chip-correct.png');
+    --asset-chip-wrong: url('assets/ui/feedback/chip-wrong.png');
+    --asset-chip-current: url('assets/ui/feedback/chip-current.png');
+    --asset-chip-review: url('assets/ui/feedback/chip-review.png');
+    --asset-banner-complete: url('assets/ui/feedback/result-banner-complete.png');
+    --asset-banner-perfect: url('assets/ui/feedback/result-banner-perfect.png');
+    --asset-panel-mastery: url('assets/ui/feedback/panel-mastery-list.png');
+    --asset-panel-review: url('assets/ui/feedback/panel-review-list.png');
+    --asset-badge-mastery: url('assets/ui/feedback/badge-mastery-basic.png');
+    --asset-badge-streak: url('assets/ui/feedback/badge-streak.png');
+    --asset-badge-review: url('assets/ui/feedback/badge-review-fix.png');
+    --asset-badge-daily: url('assets/ui/feedback/badge-daily-study.png');
+    --asset-achievement-ring: url('assets/ui/feedback/achievement-glow-ring.png');
     --panel-border: rgba(95, 69, 34, 0.56);
     --panel-shadow: 0 14px 28px rgba(21, 31, 18, 0.16), 0 8px 0 rgba(95, 69, 34, 0.18);
     --panel-surface: linear-gradient(180deg, rgba(255, 250, 238, 0.24) 0%, rgba(240, 228, 196, 0.14) 100%);
@@ -872,20 +889,22 @@ html, body {
 }
 
 .progress-chip {
-    width: 18px;
-    height: 18px;
-    border-radius: 4px;
+    width: 28px;
+    height: 28px;
     display: inline-block;
-    border: 2px solid rgba(70, 56, 35, 0.2);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
+    border: 0;
+    box-shadow: none;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .progress-correct {
-    background: linear-gradient(180deg, #73e2a7 0%, #2ecc71 100%);
+    background-image: var(--asset-chip-correct);
 }
 
 .progress-wrong {
-    background: linear-gradient(180deg, #ff9389 0%, #e74c3c 100%);
+    background-image: var(--asset-chip-wrong);
 }
 
 .progress-empty {
@@ -1059,12 +1078,12 @@ html, body {
 
 /* Minecraft 风格进度显示 */
 .progress-current {
-    background: linear-gradient(180deg, #ffe07a 0%, #f1c40f 100%);
+    background-image: var(--asset-chip-current);
     animation: currentBlink 0.9s steps(2, end) infinite;
 }
 
 .progress-perfect {
-    background: linear-gradient(180deg, #6bdcff 0%, #1abcfe 100%);
+    background-image: var(--asset-chip-correct);
     animation: diamondGlow 0.8s ease-in-out infinite;
 }
 
@@ -1090,11 +1109,17 @@ html, body {
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
     z-index: 100;
+    min-width: 260px;
+    min-height: 220px;
     padding: 36px 52px;
     border-radius: 24px;
     opacity: 0;
     transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    box-shadow: var(--shadow-lg);
+    box-shadow: none;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .feedback.show {
@@ -1102,22 +1127,55 @@ html, body {
     opacity: 1;
 }
 
+.feedback::before,
+.feedback::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
 .feedback.correct {
-    background: linear-gradient(135deg, var(--success-light) 0%, var(--success) 100%);
     color: white;
-    box-shadow: var(--shadow-lg), 0 0 50px var(--success);
 }
 
 .feedback.wrong {
-    background: linear-gradient(135deg, var(--error-light) 0%, var(--error) 100%);
     color: white;
-    box-shadow: var(--shadow-lg), 0 0 50px var(--error);
+}
+
+.feedback.correct::before {
+    background-image: var(--asset-feedback-correct-burst);
+}
+
+.feedback.correct::after {
+    background-image: var(--asset-feedback-star-green);
+    background-size: 88px 88px;
+    transform: translateY(-54px);
+}
+
+.feedback.wrong::before {
+    background-image: var(--asset-feedback-wrong-burst);
+}
+
+.feedback.wrong::after {
+    background-image: var(--asset-feedback-star-yellow);
+    background-size: 78px 78px;
+    transform: translateY(-48px);
 }
 
 .feedback-text {
+    position: relative;
     font-size: 32px;
     font-weight: 700;
     text-align: center;
+    color: #fffdf3;
+    background: rgba(42, 56, 32, 0.74);
+    border: 3px solid rgba(255,255,255,0.26);
+    border-radius: 16px;
+    padding: 14px 20px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.22);
 }
 
 /* Result Page */
@@ -1140,6 +1198,22 @@ html, body {
     margin-bottom: 18px;
     text-shadow: 3px 3px 0 rgba(231, 248, 224, 0.8);
     line-height: 1.05;
+    padding: 34px 24px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    min-height: 128px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.result-title.banner-complete {
+    background-image: var(--asset-banner-complete);
+}
+
+.result-title.banner-perfect {
+    background-image: var(--asset-banner-perfect);
 }
 
 .result-stats {
@@ -1242,14 +1316,21 @@ html, body {
     border: 2px solid rgba(117, 92, 51, 0.14);
     box-shadow: 0 6px 0 rgba(126, 94, 53, 0.08);
     background: rgba(255,255,255,0.42);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .mastery-card {
-    background: linear-gradient(180deg, rgba(120, 207, 107, 0.16) 0%, rgba(255,255,255,0.4) 100%);
+    background-image:
+        linear-gradient(180deg, rgba(120, 207, 107, 0.24) 0%, rgba(255,255,255,0.62) 100%),
+        var(--asset-panel-mastery);
 }
 
 .review-card {
-    background: linear-gradient(180deg, rgba(233, 180, 85, 0.16) 0%, rgba(255,255,255,0.4) 100%);
+    background-image:
+        linear-gradient(180deg, rgba(233, 180, 85, 0.24) 0%, rgba(255,255,255,0.62) 100%),
+        var(--asset-panel-review);
 }
 
 .summary-card-title {
@@ -1324,12 +1405,49 @@ html, body {
 
 .achievement-badge {
     padding: 8px 12px;
-    border-radius: 999px;
+    min-height: 60px;
+    border-radius: 12px;
     border: 2px solid rgba(102, 146, 67, 0.16);
-    background: rgba(143, 208, 101, 0.22);
+    background-color: rgba(143, 208, 101, 0.22);
+    background-position: left 10px center, center;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 42px 42px, contain;
+    padding-left: 58px;
     color: #254123;
     font-size: 14px;
     line-height: 1.3;
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.achievement-badge::after {
+    content: '';
+    position: absolute;
+    inset: -10px;
+    background-image: var(--asset-achievement-ring);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.22;
+    pointer-events: none;
+}
+
+.achievement-badge.achievement-mastery {
+    background-image: var(--asset-badge-mastery);
+}
+
+.achievement-badge.achievement-streak {
+    background-image: var(--asset-badge-streak);
+}
+
+.achievement-badge.achievement-review {
+    background-image: var(--asset-badge-review);
+}
+
+.achievement-badge.achievement-daily {
+    background-image: var(--asset-badge-daily);
 }
 
 .achievement-badge.locked {
