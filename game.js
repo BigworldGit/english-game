@@ -236,7 +236,10 @@ const elements = {
     reviewWordsList: document.getElementById('reviewWordsList'),
     overallMasteredCount: document.getElementById('overallMasteredCount'),
     gradeCoverageText: document.getElementById('gradeCoverageText'),
+    overallCoverageText: document.getElementById('overallCoverageText'),
     fixedWrongCount: document.getElementById('fixedWrongCount'),
+    achievementBadgeList: document.getElementById('achievementBadgeList'),
+    nextGoalText: document.getElementById('nextGoalText'),
     reviewWrongBtn: document.getElementById('reviewWrongBtn'),
     retryLevelBtn: document.getElementById('retryLevelBtn'),
     nextLevelBtn: document.getElementById('nextLevelBtn'),
@@ -487,6 +490,9 @@ function createEmptyLearningProfile() {
         wordStats: {},
         totalMasteredWords: 0,
         fixedWrongWords: 0,
+        completedRounds: 0,
+        perfectRounds: 0,
+        bestRoundStreak: 0,
         lastProcessedRoundSignature: null,
         updatedAt: null
     };
@@ -565,6 +571,7 @@ function updateLearningProfileFromAnswers(answerList = answers) {
         return;
     }
 
+    const roundSummary = getRoundSummary(answerList);
     const fixedWords = new Set();
     answerList.filter(Boolean).forEach(answer => {
         const stat = getWordLearningStat(answer.word);
@@ -588,18 +595,29 @@ function updateLearningProfileFromAnswers(answerList = answers) {
         stat.mastered = isWordMasteredStat(stat);
     });
 
+    if (!isReviewMode && roundSummary.total > 0) {
+        learningProfile.completedRounds += 1;
+        if (roundSummary.wrong === 0) {
+            learningProfile.perfectRounds += 1;
+        }
+        learningProfile.bestRoundStreak = Math.max(learningProfile.bestRoundStreak, roundSummary.bestStreak);
+    }
+
     learningProfile.fixedWrongWords += fixedWords.size;
     learningProfile.totalMasteredWords = Object.values(learningProfile.wordStats).filter(stat => stat.mastered).length;
     learningProfile.lastProcessedRoundSignature = roundSignature;
     saveLearningProfile();
 }
 
-function getCurrentGradeCoverage() {
-    const gradeWords = getWordsUpToGrade(currentGrade).filter(wordData =>
+function getPlayableWordsForCoverage(sourceWords) {
+    return sourceWords.filter(wordData =>
         !isImageWordExcluded(wordData.word) &&
         hasPlayableImageAsset(wordData.word)
     );
-    const uniqueWords = [...new Set(gradeWords.map(wordData => normalizeWord(wordData.word)))];
+}
+
+function buildCoverageStat(sourceWords) {
+    const uniqueWords = [...new Set(getPlayableWordsForCoverage(sourceWords).map(wordData => normalizeWord(wordData.word)))];
     if (!uniqueWords.length || !learningProfile) {
         return { mastered: 0, total: uniqueWords.length, percent: 0 };
     }
@@ -609,6 +627,62 @@ function getCurrentGradeCoverage() {
         mastered,
         total: uniqueWords.length,
         percent: Math.round((mastered / uniqueWords.length) * 100)
+    };
+}
+
+function getCoverageStats() {
+    const currentGradeWords = getWordsByGrade(currentGrade) || [];
+    const cumulativeWords = getWordsUpToGrade(currentGrade) || [];
+
+    return {
+        current: buildCoverageStat(currentGradeWords),
+        cumulative: buildCoverageStat(cumulativeWords)
+    };
+}
+
+function getAchievementState(summary) {
+    const profile = learningProfile || createEmptyLearningProfile();
+    const bestStreak = Math.max(profile.bestRoundStreak || 0, summary.bestStreak || 0);
+    const rules = [
+        {
+            label: '完成首关',
+            unlocked: profile.completedRounds >= 1,
+            progressText: `已完成 ${profile.completedRounds}/1 关`
+        },
+        {
+            label: '满分通关',
+            unlocked: profile.perfectRounds >= 1 || summary.accuracy === 100,
+            progressText: `已达成 ${Math.max(profile.perfectRounds, summary.accuracy === 100 ? 1 : 0)}/1 次`
+        },
+        {
+            label: '连对 5 题',
+            unlocked: bestStreak >= 5,
+            progressText: `当前峰值 ${bestStreak}/5`
+        },
+        {
+            label: '掌握 20 词',
+            unlocked: (profile.totalMasteredWords || 0) >= 20,
+            progressText: `当前 ${profile.totalMasteredWords || 0}/20`
+        },
+        {
+            label: '掌握 50 词',
+            unlocked: (profile.totalMasteredWords || 0) >= 50,
+            progressText: `当前 ${profile.totalMasteredWords || 0}/50`
+        },
+        {
+            label: '修复 10 个错词',
+            unlocked: (profile.fixedWrongWords || 0) >= 10,
+            progressText: `当前 ${profile.fixedWrongWords || 0}/10`
+        }
+    ];
+
+    const nextLocked = rules.find(rule => !rule.unlocked);
+
+    return {
+        unlocked: rules.filter(rule => rule.unlocked).slice(-4),
+        nextGoal: nextLocked
+            ? `下一目标：${nextLocked.label}，${nextLocked.progressText}`
+            : '当前这批核心成就已全部解锁，继续练习会稳定巩固掌握状态。'
     };
 }
 
@@ -3185,7 +3259,8 @@ function showResult() {
     updateLearningProfileFromAnswers();
     const summary = getRoundSummary();
     const { correct, wrong, accuracy, masteredWords, reviewWords: roundReviewWords, bestStreak } = summary;
-    const coverage = getCurrentGradeCoverage();
+    const coverage = getCoverageStats();
+    const achievementState = getAchievementState(summary);
 
     // 更新界面
     elements.correctCount.textContent = correct;
@@ -3251,10 +3326,22 @@ function showResult() {
         elements.overallMasteredCount.textContent = learningProfile?.totalMasteredWords || 0;
     }
     if (elements.gradeCoverageText) {
-        elements.gradeCoverageText.textContent = coverage.total ? `${coverage.mastered}/${coverage.total} (${coverage.percent}%)` : '0%';
+        elements.gradeCoverageText.textContent = coverage.current.total ? `${coverage.current.mastered}/${coverage.current.total} (${coverage.current.percent}%)` : '0/0 (0%)';
+    }
+    if (elements.overallCoverageText) {
+        elements.overallCoverageText.textContent = coverage.cumulative.total ? `${coverage.cumulative.mastered}/${coverage.cumulative.total} (${coverage.cumulative.percent}%)` : '0/0 (0%)';
     }
     if (elements.fixedWrongCount) {
         elements.fixedWrongCount.textContent = learningProfile?.fixedWrongWords || 0;
+    }
+    if (elements.achievementBadgeList) {
+        const unlocked = achievementState.unlocked;
+        elements.achievementBadgeList.innerHTML = unlocked.length
+            ? unlocked.map(item => `<span class="achievement-badge">${item.label}</span>`).join('')
+            : '<span class="achievement-badge locked">本轮还没有新成就，继续练习会逐步解锁。</span>';
+    }
+    if (elements.nextGoalText) {
+        elements.nextGoalText.textContent = achievementState.nextGoal;
     }
     if (elements.reviewWrongBtn) {
         elements.reviewWrongBtn.style.display = !isReviewMode && roundReviewWords.length > 0 ? 'block' : 'none';
