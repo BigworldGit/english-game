@@ -975,8 +975,17 @@ function prepareWords() {
     questionSequence = allWords.map(wordData => wordData.word);
 }
 
-function initGameRound() {
+async function initGameRound() {
     preloadCurrentRoundImages();
+
+    const firstWord = getCurrentRoundWordData(currentQuestion);
+    if (firstWord?.word) {
+        try {
+            await preloadImage(firstWord.word);
+        } catch (error) {
+            console.warn('首题图片预热失败:', error);
+        }
+    }
 
     // 更新界面
     elements.gameUserName.textContent = currentUser.name;
@@ -3969,7 +3978,15 @@ function loadImageByPaths(paths, index = 0) {
 
     return new Promise(resolve => {
         const img = new Image();
-        img.onload = () => resolve(img);
+        img.onload = async () => {
+            try {
+                if (typeof img.decode === 'function') {
+                    await img.decode();
+                }
+            } catch (error) {
+            }
+            resolve(img);
+        };
         img.onerror = () => {
             loadImageByPaths(paths, index + 1).then(resolve);
         };
