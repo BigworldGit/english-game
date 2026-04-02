@@ -92,6 +92,12 @@ pre{white-space:pre-wrap;word-break:break-word;background:#0f172a;color:#e2e8f0;
       <div class="stat exclude"><b id="excludeCount">0</b>剔除</div>
     </div>
     <div class="filters">
+      <label>数据集
+        <select id="datasetFilter">
+          <option value="current">当前可出题词</option>
+          <option value="mc-640">mc-640 批次</option>
+        </select>
+      </label>
       <label>学期
         <select id="gradeFilter">
           <option value="all">全部</option>
@@ -162,6 +168,22 @@ let items = [];
 let statusMap = {};
 let currentItem = null;
 let imageObserver = null;
+let currentDataset = 'current';
+
+function getDatasetFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('dataset') || 'current';
+}
+
+function syncDatasetUrl(dataset) {
+  const url = new URL(window.location.href);
+  if (dataset === 'current') {
+    url.searchParams.delete('dataset');
+  } else {
+    url.searchParams.set('dataset', dataset);
+  }
+  window.history.replaceState({}, '', url);
+}
 
 function resolveImagePath(imagePath) {
   if (!imagePath) return '';
@@ -173,14 +195,14 @@ function resolveImagePath(imagePath) {
 
 function loadStatus() {
   try {
-    statusMap = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    statusMap = JSON.parse(localStorage.getItem(STORAGE_KEY + '_' + currentDataset) || '{}');
   } catch (error) {
     statusMap = {};
   }
 }
 
 function saveStatus() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(statusMap));
+  localStorage.setItem(STORAGE_KEY + '_' + currentDataset, JSON.stringify(statusMap));
 }
 
 function getStatus(item) {
@@ -253,6 +275,7 @@ function getFilteredItems() {
 
 function buildGradeOptions() {
   const select = document.getElementById('gradeFilter');
+  select.innerHTML = '<option value="all">全部</option>';
   const grades = [...new Set(items.map(item => item.grade))];
   for (const grade of grades) {
     const option = document.createElement('option');
@@ -493,19 +516,32 @@ function refreshReportIfOpen() {
 }
 
 async function init() {
+  currentDataset = document.getElementById('datasetFilter').value;
+  syncDatasetUrl(currentDataset);
   loadStatus();
-  const [itemsResponse, excludedResponse] = await Promise.all([
-    fetch('./current-playable-words.json'),
-    fetch('../docs/image-audit-excluded.json')
-  ]);
+  const datasetPath = currentDataset === 'mc-640'
+    ? './mc-640-batch.json'
+    : './current-playable-words.json';
+  const itemsResponse = await fetch(datasetPath);
   const data = await itemsResponse.json();
-  const excludedData = await excludedResponse.json();
-  const excludedWords = new Set((excludedData.words || []).map(word => String(word).toLowerCase()));
-  items = (data.items || []).filter(item => !excludedWords.has(String(item.word).toLowerCase()));
+  if (currentDataset === 'current') {
+    const excludedResponse = await fetch('../docs/image-audit-excluded.json');
+    const excludedData = await excludedResponse.json();
+    const excludedWords = new Set((excludedData.words || []).map(word => String(word).toLowerCase()));
+    items = (data.items || []).filter(item => !excludedWords.has(String(item.word).toLowerCase()));
+  } else {
+    items = data.items || [];
+  }
   buildGradeOptions();
   render();
 }
 
+async function reloadDataset() {
+  await init();
+}
+
+document.getElementById('datasetFilter').value = getDatasetFromUrl();
+document.getElementById('datasetFilter').addEventListener('change', reloadDataset);
 document.getElementById('gradeFilter').addEventListener('change', render);
 document.getElementById('statusFilter').addEventListener('change', render);
 document.getElementById('searchInput').addEventListener('input', render);

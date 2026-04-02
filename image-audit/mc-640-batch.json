@@ -1,0 +1,251 @@
+{
+  "generatedAt": "2026-04-02",
+  "dataset": "mc-640",
+  "items": [
+    {
+      "grade": "1-2",
+      "word": "beach",
+      "expected_image": "beach.png",
+      "image": "/image-audit/batches/mc-640/beach.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/beach.png"
+    },
+    {
+      "grade": "6-1",
+      "word": "boring",
+      "expected_image": "boring.png",
+      "image": "/image-audit/batches/mc-640/boring.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/boring.png"
+    },
+    {
+      "grade": "5-2",
+      "word": "buy",
+      "expected_image": "buy.png",
+      "image": "/image-audit/batches/mc-640/buy.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/buy.png"
+    },
+    {
+      "grade": "5-1",
+      "word": "clever",
+      "expected_image": "clever.png",
+      "image": "/image-audit/batches/mc-640/clever.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/clever.png"
+    },
+    {
+      "grade": "4-1",
+      "word": "cloud",
+      "expected_image": "cloud.png",
+      "image": "/image-audit/batches/mc-640/cloud.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/cloud.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "cool",
+      "expected_image": "cool.png",
+      "image": "/image-audit/batches/mc-640/cool.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/cool.png"
+    },
+    {
+      "grade": "5-1",
+      "word": "different",
+      "expected_image": "different.png",
+      "image": "/image-audit/batches/mc-640/different.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/different.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "doll",
+      "expected_image": "doll.png",
+      "image": "/image-audit/batches/mc-640/doll.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/doll.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "farmer",
+      "expected_image": "farmer.png",
+      "image": "/image-audit/batches/mc-640/farmer.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/farmer.png"
+    },
+    {
+      "grade": "5-2",
+      "word": "film",
+      "expected_image": "film.png",
+      "image": "/image-audit/batches/mc-640/film.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/film.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "fly",
+      "expected_image": "fly.png",
+      "image": "/image-audit/batches/mc-640/fly.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/fly.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "food",
+      "expected_image": "food.png",
+      "image": "/image-audit/batches/mc-640/food.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/food.png"
+    },
+    {
+      "grade": "4-1",
+      "word": "full",
+      "expected_image": "full.png",
+      "image": "/image-audit/batches/mc-640/full.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/full.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "gift",
+      "expected_image": "gift.png",
+      "image": "/image-audit/batches/mc-640/gift.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/gift.png"
+    },
+    {
+      "grade": "4-2",
+      "word": "grow",
+      "expected_image": "grow.png",
+      "image": "/image-audit/batches/mc-640/grow.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/grow.png"
+    },
+    {
+      "grade": "5-1",
+      "word": "heavy",
+      "expected_image": "heavy.png",
+      "image": "/image-audit/batches/mc-640/heavy.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/heavy.png"
+    },
+    {
+      "grade": "4-2",
+      "word": "high",
+      "expected_image": "high.png",
+      "image": "/image-audit/batches/mc-640/high.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/high.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "hungry",
+      "expected_image": "hungry.png",
+      "image": "/image-audit/batches/mc-640/hungry.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/hungry.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "insect",
+      "expected_image": "insect.png",
+      "image": "/image-audit/batches/mc-640/insect.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/insect.png"
+    },
+    {
+      "grade": "5-1",
+      "word": "know",
+      "expected_image": "know.png",
+      "image": "/image-audit/batches/mc-640/know.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/know.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "listen",
+      "expected_image": "listen.png",
+      "image": "/image-audit/batches/mc-640/listen.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/listen.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "sheep",
+      "expected_image": "sheep.png",
+      "image": "/image-audit/batches/mc-640/sheep.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/sheep.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "sister",
+      "expected_image": "sister.png",
+      "image": "/image-audit/batches/mc-640/sister.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/sister.png"
+    },
+    {
+      "grade": "4-1",
+      "word": "sit",
+      "expected_image": "sit.png",
+      "image": "/image-audit/batches/mc-640/sit.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/sit.png"
+    },
+    {
+      "grade": "4-1",
+      "word": "skirt",
+      "expected_image": "skirt.png",
+      "image": "/image-audit/batches/mc-640/skirt.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/skirt.png"
+    },
+    {
+      "grade": "5-2",
+      "word": "stand",
+      "expected_image": "stand.png",
+      "image": "/image-audit/batches/mc-640/stand.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/stand.png"
+    },
+    {
+      "grade": "5-2",
+      "word": "study",
+      "expected_image": "study.png",
+      "image": "/image-audit/batches/mc-640/study.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/study.png"
+    },
+    {
+      "grade": "1-1",
+      "word": "supermarket",
+      "expected_image": "supermarket.png",
+      "image": "/image-audit/batches/mc-640/supermarket.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/supermarket.png"
+    },
+    {
+      "grade": "5-1",
+      "word": "think",
+      "expected_image": "think.png",
+      "image": "/image-audit/batches/mc-640/think.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/think.png"
+    },
+    {
+      "grade": "2-2",
+      "word": "tired",
+      "expected_image": "tired.png",
+      "image": "/image-audit/batches/mc-640/tired.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/tired.png"
+    },
+    {
+      "grade": "6-1",
+      "word": "vegetable",
+      "expected_image": "vegetable.png",
+      "image": "/image-audit/batches/mc-640/vegetable.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/vegetable.png"
+    },
+    {
+      "grade": "6-2",
+      "word": "wish",
+      "expected_image": "wish.png",
+      "image": "/image-audit/batches/mc-640/wish.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/wish.png"
+    },
+    {
+      "grade": "2-1",
+      "word": "work",
+      "expected_image": "work.png",
+      "image": "/image-audit/batches/mc-640/work.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/work.png"
+    },
+    {
+      "grade": "5-2",
+      "word": "world",
+      "expected_image": "world.png",
+      "image": "/image-audit/batches/mc-640/world.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/world.png"
+    },
+    {
+      "grade": "1-2",
+      "word": "yummy",
+      "expected_image": "yummy.png",
+      "image": "/image-audit/batches/mc-640/yummy.png",
+      "thumbnail": "/image-audit/thumbs-mc-640/yummy.png"
+    }
+  ]
+}
