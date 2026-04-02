@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-01",
+  "generatedAt": "2026-04-02",
   "items": [
     {
       "grade": "1-1",
@@ -143,6 +143,11 @@
     },
     {
       "grade": "5-1",
+      "word": "know",
+      "expected_image": "know.png"
+    },
+    {
+      "grade": "5-1",
       "word": "never",
       "expected_image": "never.png"
     },
@@ -225,6 +230,11 @@
       "grade": "6-1",
       "word": "send",
       "expected_image": "send.png"
+    },
+    {
+      "grade": "6-2",
+      "word": "wish",
+      "expected_image": "wish.png"
     }
   ],
   "words": [
@@ -256,6 +266,7 @@
     "bring",
     "careful",
     "easy",
+    "know",
     "never",
     "often",
     "say",
@@ -272,6 +283,7 @@
     "more",
     "why",
     "most",
-    "send"
+    "send",
+    "wish"
   ]
 }

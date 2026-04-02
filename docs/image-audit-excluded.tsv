@@ -27,6 +27,7 @@ grade	word	expected_image
 5-1	bring	bring.png
 5-1	careful	careful.png
 5-1	easy	easy.png
+5-1	know	know.png
 5-1	never	never.png
 5-1	often	often.png
 5-1	say	say.png
@@ -44,3 +45,4 @@ grade	word	expected_image
 5-2	why	why.png
 6-1	most	most.png
 6-1	send	send.png
+6-2	wish	wish.png
