@@ -38,7 +38,8 @@ let bgMusicFiles = [
     'audio/pixel-power-up.mp3',
     'audio/sunny-learning-fiesta.mp3',
     'audio/global-dream-team.mp3',
-    'audio/starlight-lullaby.mp3'
+    'audio/starlight-lullaby.mp3',
+    'audio/Give_Your_Brain_a_Little_Pat.mp3'
 ];
 let currentMusicIndex = 0;
 
