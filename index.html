@@ -75,30 +75,30 @@
                     <span class="level-badge">第 <span id="levelNum">1</span> 关</span>
                     <span class="question-badge">第 <span id="questionNum">1/10</span> 题</span>
                 </div>
+
+                <div class="question-feedback-bar" id="questionFeedbackBar">
+                    <div class="feedback-summary-line">
+                        <span class="feedback-result-badge pending" id="answerResultBadge">待作答</span>
+                        <span class="feedback-review-state" id="reviewStateText">本题还没加入复习列表</span>
+                    </div>
+                    <div class="feedback-detail-grid">
+                        <div class="feedback-detail-item">
+                            <span class="feedback-detail-label">正确答案</span>
+                            <span class="feedback-detail-value" id="correctAnswerText">-</span>
+                        </div>
+                        <div class="feedback-detail-item">
+                            <span class="feedback-detail-label">你的选择</span>
+                            <span class="feedback-detail-value" id="selectedAnswerText">-</span>
+                        </div>
+                    </div>
+                    <div class="feedback-hint-text" id="feedbackHintText">先观察图片里最明显的主体，再从选项里选最合适的单词。</div>
+                </div>
             </div>
 
             <div class="game-content">
                 <div class="play-area">
                     <!-- 单词图片区域 -->
                     <canvas id="wordCanvas" width="240" height="240"></canvas>
-
-                    <div class="question-feedback-bar" id="questionFeedbackBar">
-                        <div class="feedback-summary-line">
-                            <span class="feedback-result-badge pending" id="answerResultBadge">待作答</span>
-                            <span class="feedback-review-state" id="reviewStateText">本题还没加入复习列表</span>
-                        </div>
-                        <div class="feedback-detail-grid">
-                            <div class="feedback-detail-item">
-                                <span class="feedback-detail-label">正确答案</span>
-                                <span class="feedback-detail-value" id="correctAnswerText">-</span>
-                            </div>
-                            <div class="feedback-detail-item">
-                                <span class="feedback-detail-label">你的选择</span>
-                                <span class="feedback-detail-value" id="selectedAnswerText">-</span>
-                            </div>
-                        </div>
-                        <div class="feedback-hint-text" id="feedbackHintText">先观察图片里最明显的主体，再从选项里选最合适的单词。</div>
-                    </div>
 
                     <!-- 选项区域 -->
                     <div class="options-container" id="optionsContainer">

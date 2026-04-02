@@ -544,6 +544,8 @@ html, body {
     box-shadow: var(--panel-shadow);
     gap: 12px;
     backdrop-filter: blur(10px);
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
 }
 
 .user-badge {
@@ -671,6 +673,47 @@ html, body {
     border: 2px solid rgba(117, 92, 51, 0.16);
     border-radius: 12px;
     box-shadow: 0 4px 0 rgba(117, 92, 51, 0.08);
+}
+
+.game-header .question-feedback-bar {
+    max-width: 100%;
+    margin-top: 6px;
+    padding: 12px;
+    gap: 8px;
+}
+
+.game-header .feedback-summary-line {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.game-header .feedback-result-badge {
+    min-width: 0;
+    width: 100%;
+    font-size: 14px;
+    padding: 8px 10px;
+}
+
+.game-header .feedback-review-state {
+    text-align: left;
+    font-size: 12px;
+}
+
+.game-header .feedback-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+}
+
+.game-header .feedback-detail-item {
+    padding: 10px 12px;
+}
+
+.game-header .feedback-detail-value {
+    font-size: 15px;
+}
+
+.game-header .feedback-hint-text {
+    font-size: 12px;
 }
 
 .question-feedback-bar.is-pending {
