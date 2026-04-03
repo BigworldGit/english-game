@@ -454,10 +454,15 @@ function showUserInfo() {
             questionSequence = progress.questionSequence || [];
             reviewWords = progress.reviewWords || [];
             isReviewMode = Boolean(progress.isReviewMode);
-            elements.currentLevel.textContent = currentLevel;
-            elements.currentQuestion.textContent = currentQuestion;
         }
     }
+
+    if (advancePastCompletedProgress()) {
+        saveProgress();
+    }
+
+    elements.currentLevel.textContent = currentLevel;
+    elements.currentQuestion.textContent = currentQuestion;
 
     updateContinueButton();
 }
@@ -470,6 +475,9 @@ function continueGame() {
 
     try {
         currentGrade = currentUser.grade;
+        if (advancePastCompletedProgress()) {
+            saveProgress();
+        }
         prepareWords();
         showPage('game');
     } catch (e) {
@@ -765,6 +773,34 @@ function getReviewedQuestionLimit() {
 
 function getCurrentRoundQuestionCount() {
     return isReviewMode ? Math.max(reviewWords.length, 0) : QUESTIONS_PER_LEVEL;
+}
+
+function isRoundComplete() {
+    const roundCount = getCurrentRoundQuestionCount();
+    if (roundCount <= 0) {
+        return false;
+    }
+
+    const roundAnswers = answers.slice(0, roundCount);
+    return roundAnswers.length >= roundCount && roundAnswers.every(Boolean);
+}
+
+function advancePastCompletedProgress() {
+    if (!isRoundComplete()) {
+        return false;
+    }
+
+    if (isReviewMode) {
+        isReviewMode = false;
+        reviewWords = [];
+    }
+
+    currentLevel += 1;
+    currentQuestion = 1;
+    answers = [];
+    questionCache = {};
+    questionSequence = [];
+    return true;
 }
 
 function getCurrentRoundWordData(questionNumber) {
@@ -3324,6 +3360,7 @@ function drawStar(ctx, cx, cy, spikes, outerRadius, innerRadius) {
 // 结果页面
 // ============================================
 function showResult() {
+    saveProgress();
     const newlyUnlocked = updateLearningProfileFromAnswers() || [];
     const summary = getRoundSummary();
     const { correct, wrong, accuracy, masteredWords, reviewWords: roundReviewWords, bestStreak } = summary;
