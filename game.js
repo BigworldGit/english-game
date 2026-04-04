@@ -53,6 +53,8 @@ let activeImageRenderToken = 0;
 
 // 游戏配置
 const QUESTIONS_PER_LEVEL = 10;
+const REPEAT_WORD_WINDOW = 20;
+const MAX_REPEAT_PER_WINDOW = 2;
 // 已确认不适合继续作为“看图猜词”题目的词。
 // 原因包括：
 // 1. 词本身过于抽象或属于寒暄短语
@@ -989,6 +991,85 @@ function goToNextQuestion() {
 // ============================================
 // 游戏逻辑
 // ============================================
+function getWordRepeatCountInWindow(sequence, word, windowSize = REPEAT_WORD_WINDOW) {
+    const normalizedWord = normalizeWord(word);
+    const recentWindow = sequence.slice(-Math.max(0, windowSize - 1));
+    return recentWindow.reduce((count, item) => {
+        return count + (normalizeWord(item.word) === normalizedWord ? 1 : 0);
+    }, 0);
+}
+
+function canAppendWordWithinRepeatLimit(sequence, wordData, windowSize = REPEAT_WORD_WINDOW, maxRepeat = MAX_REPEAT_PER_WINDOW) {
+    return getWordRepeatCountInWindow(sequence, wordData.word, windowSize) < maxRepeat;
+}
+
+function buildConstrainedWordSequence(wordList) {
+    const source = shuffleArray([...wordList]);
+    const remaining = [...source];
+    const sequence = [];
+    let stalledPasses = 0;
+
+    while (remaining.length > 0) {
+        let placedInPass = false;
+
+        for (let i = 0; i < remaining.length; i++) {
+            const candidate = remaining[i];
+            if (!canAppendWordWithinRepeatLimit(sequence, candidate)) {
+                continue;
+            }
+
+            sequence.push(candidate);
+            remaining.splice(i, 1);
+            placedInPass = true;
+            stalledPasses = 0;
+            break;
+        }
+
+        if (placedInPass) {
+            continue;
+        }
+
+        stalledPasses += 1;
+
+        // 理论上当剩余候选都与最近窗口冲突时，向后寻找最少重复项兜底。
+        // 这种情况通常只会出现在词库本身重复度很高时。
+        const fallbackIndex = remaining.reduce((bestIndex, item, index, arr) => {
+            if (bestIndex === -1) {
+                return index;
+            }
+            const bestCount = getWordRepeatCountInWindow(sequence, arr[bestIndex].word);
+            const currentCount = getWordRepeatCountInWindow(sequence, item.word);
+            return currentCount < bestCount ? index : bestIndex;
+        }, -1);
+
+        if (fallbackIndex === -1) {
+            break;
+        }
+
+        if (stalledPasses > 1) {
+            sequence.push(remaining.splice(fallbackIndex, 1)[0]);
+            stalledPasses = 0;
+        }
+    }
+
+    return sequence;
+}
+
+function sequenceRespectsRepeatLimit(sequence, windowSize = REPEAT_WORD_WINDOW, maxRepeat = MAX_REPEAT_PER_WINDOW) {
+    const recent = [];
+    for (const item of sequence) {
+        const count = recent.reduce((total, recentItem) => total + (normalizeWord(recentItem.word) === normalizeWord(item.word) ? 1 : 0), 0);
+        if (count >= maxRepeat) {
+            return false;
+        }
+        recent.push(item);
+        if (recent.length >= windowSize) {
+            recent.shift();
+        }
+    }
+    return true;
+}
+
 function prepareWords() {
     const filteredWords = getWordsUpToGrade(currentGrade).filter(wordData =>
         !isImageWordExcluded(wordData.word) &&
@@ -1000,14 +1081,14 @@ function prepareWords() {
         const restored = questionSequence
             .map(word => lookup.get(word))
             .filter(Boolean);
-        if (restored.length >= QUESTIONS_PER_LEVEL) {
+        if (restored.length >= QUESTIONS_PER_LEVEL && sequenceRespectsRepeatLimit(restored)) {
             allWords = restored;
             questionSequence = restored.map(wordData => wordData.word);
             return;
         }
     }
 
-    allWords = shuffleArray([...filteredWords]);
+    allWords = buildConstrainedWordSequence(filteredWords);
     questionSequence = allWords.map(wordData => wordData.word);
 }
 
