@@ -88,6 +88,17 @@
     --asset-badge-review: url('assets/ui/feedback/badge-review-fix.png');
     --asset-badge-daily: url('assets/ui/feedback/badge-daily-study.png');
     --asset-achievement-ring: url('assets/ui/feedback/achievement-glow-ring.png');
+    --asset-avatar-cat: url('assets/ui/gamification/avatar-cat.png');
+    --asset-avatar-robot: url('assets/ui/gamification/avatar-robot.png');
+    --asset-avatar-dragon: url('assets/ui/gamification/avatar-dragon.png');
+    --asset-combo-3: url('assets/ui/gamification/combo-3.png');
+    --asset-combo-5: url('assets/ui/gamification/combo-5.png');
+    --asset-fever-mode: url('assets/ui/gamification/fever-mode.png');
+    --asset-growth-trunk: url('assets/ui/gamification/growth-tree-trunk.png');
+    --asset-growth-leaf: url('assets/ui/gamification/growth-tree-leaf.png');
+    --asset-growth-glow: url('assets/ui/gamification/growth-tree-glow.png');
+    --asset-fix-break-chain: url('assets/ui/gamification/fix-break-chain.png');
+    --asset-fix-gold-card: url('assets/ui/gamification/fix-gold-card.png');
     --panel-border: rgba(95, 69, 34, 0.56);
     --panel-shadow: 0 14px 28px rgba(21, 31, 18, 0.16), 0 8px 0 rgba(95, 69, 34, 0.18);
     --panel-surface: linear-gradient(180deg, rgba(255, 250, 238, 0.24) 0%, rgba(240, 228, 196, 0.14) 100%);
@@ -397,11 +408,30 @@ html, body {
 }
 
 .avatar-emoji {
-    font-size: 26px;
+    width: 56px;
+    height: 56px;
+    display: block;
+    font-size: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    filter: drop-shadow(0 6px 10px rgba(47, 70, 38, 0.14));
 }
 
 .avatar-label {
     font-size: 11px;
+}
+
+.avatar-btn[data-avatar="cat"] .avatar-emoji {
+    background-image: var(--asset-avatar-cat);
+}
+
+.avatar-btn[data-avatar="robot"] .avatar-emoji {
+    background-image: var(--asset-avatar-robot);
+}
+
+.avatar-btn[data-avatar="dragon"] .avatar-emoji {
+    background-image: var(--asset-avatar-dragon);
 }
 
 
@@ -604,6 +634,40 @@ html, body {
     background: rgba(255,255,255,0.24);
     opacity: 0.82;
     transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.combo-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0;
+    transition: opacity 180ms ease;
+    pointer-events: none;
+}
+
+.combo-banner[data-combo-tier="3"]::before {
+    background-image: var(--asset-combo-3);
+    opacity: 0.34;
+}
+
+.combo-banner[data-combo-tier="5"]::before {
+    background-image: var(--asset-combo-5);
+    opacity: 0.38;
+}
+
+.combo-banner[data-combo-tier="fever"]::before {
+    background-image: var(--asset-fever-mode);
+    opacity: 0.46;
+}
+
+.combo-banner > * {
+    position: relative;
+    z-index: 1;
 }
 
 .combo-banner.is-active {
@@ -819,7 +883,22 @@ html, body {
     border-radius: 14px;
     background: linear-gradient(180deg, rgba(255,255,255,0.82) 0%, rgba(222, 243, 193, 0.7) 100%);
     border: 2px solid rgba(117, 92, 51, 0.12);
-    font-size: 28px;
+    font-size: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.companion-avatar[data-avatar="cat"] {
+    background-image: var(--asset-avatar-cat);
+}
+
+.companion-avatar[data-avatar="robot"] {
+    background-image: var(--asset-avatar-robot);
+}
+
+.companion-avatar[data-avatar="dragon"] {
+    background-image: var(--asset-avatar-dragon);
 }
 
 .companion-copy {
@@ -1755,26 +1834,43 @@ html, body {
 
 .tree-leaf {
     position: absolute;
-    width: 26px;
-    height: 20px;
-    border-radius: 50% 50% 45% 45%;
-    background: rgba(185, 196, 179, 0.5);
-    border: 1px solid rgba(90, 110, 79, 0.16);
-    left: calc((var(--leaf-index) % 4) * 28px + 12px);
+    width: 34px;
+    height: 34px;
+    left: calc((var(--leaf-index) % 4) * 28px + 8px);
     top: calc((var(--leaf-index) / 4) * 22px);
+    background-image: var(--asset-growth-leaf);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.26;
+    filter: grayscale(1) saturate(0.7);
 }
 
 .tree-leaf.active {
-    background: linear-gradient(180deg, rgba(183, 238, 131, 0.96) 0%, rgba(103, 189, 71, 0.92) 100%);
-    box-shadow: 0 0 12px rgba(117, 209, 77, 0.16);
+    opacity: 1;
+    filter: none;
+}
+
+.tree-leaf.active::after {
+    content: '';
+    position: absolute;
+    inset: -12px;
+    background-image: var(--asset-growth-glow);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.34;
+    pointer-events: none;
 }
 
 .tree-trunk {
-    width: 22px;
-    height: 56px;
-    margin: -6px auto 0;
-    border-radius: 6px;
-    background: linear-gradient(180deg, #8a5b30 0%, #69401f 100%);
+    width: 120px;
+    height: 86px;
+    margin: -10px auto 0;
+    background-image: var(--asset-growth-trunk);
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .tree-ground {
@@ -1808,6 +1904,7 @@ html, body {
 
 .sticker-chip {
     box-shadow: 0 2px 0 rgba(90, 120, 73, 0.08);
+    min-height: 54px;
 }
 
 .fixed-word-chip {
@@ -1815,8 +1912,11 @@ html, body {
     box-shadow: 0 0 0 1px rgba(236, 183, 74, 0.18), 0 4px 10px rgba(232, 181, 70, 0.14);
 }
 
-.sticker-icon {
-    font-size: 15px;
+.sticker-art {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+    flex: 0 0 auto;
 }
 
 .reward-owned-text {
@@ -1827,6 +1927,13 @@ html, body {
 .result-reward-card.has-drop,
 .result-fix-card.has-fixes {
     box-shadow: 0 0 0 2px rgba(255, 194, 64, 0.12), 0 10px 20px rgba(255, 176, 58, 0.12);
+}
+
+.result-fix-card.has-fixes {
+    background-image: var(--asset-fix-break-chain), linear-gradient(180deg, rgba(255,255,255,0.34) 0%, rgba(255,255,255,0.34) 100%);
+    background-position: right 12px bottom 10px, center;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 110px auto, auto;
 }
 
 .result-achievement-panel {
@@ -1857,10 +1964,10 @@ html, body {
     border-radius: 12px;
     border: 2px solid rgba(102, 146, 67, 0.16);
     background-color: rgba(143, 208, 101, 0.22);
-    background-position: left 10px center, center;
+    background-position: left 8px center, center;
     background-repeat: no-repeat, no-repeat;
-    background-size: 30px 30px, contain;
-    padding-left: 42px;
+    background-size: 34px 34px, contain;
+    padding-left: 48px;
     color: #254123;
     font-size: 11px;
     line-height: 1.3;
@@ -1882,20 +1989,8 @@ html, body {
     pointer-events: none;
 }
 
-.achievement-badge.achievement-mastery {
-    background-image: var(--asset-badge-mastery);
-}
-
-.achievement-badge.achievement-streak {
-    background-image: var(--asset-badge-streak);
-}
-
-.achievement-badge.achievement-review {
-    background-image: var(--asset-badge-review);
-}
-
-.achievement-badge.achievement-daily {
-    background-image: var(--asset-badge-daily);
+.achievement-badge:not(.locked) {
+    background-image: var(--achievement-image);
 }
 
 .achievement-badge.locked {

@@ -64,6 +64,31 @@ const STICKER_POOL = [
     { id: 'gem_combo', icon: '💎', label: '连击宝石', theme: 'gem' },
     { id: 'rocket_clear', icon: '🚀', label: '满分火箭', theme: 'rocket' }
 ];
+const GAME_ASSETS = {
+    avatar: {
+        cat: 'assets/ui/gamification/avatar-cat.png',
+        robot: 'assets/ui/gamification/avatar-robot.png',
+        dragon: 'assets/ui/gamification/avatar-dragon.png'
+    },
+    sticker: {
+        apple_star: 'assets/ui/gamification/sticker-apple-star.png',
+        sun_blaze: 'assets/ui/gamification/sticker-sun-blaze.png',
+        book_boost: 'assets/ui/gamification/sticker-book-boost.png',
+        leaf_growth: 'assets/ui/gamification/sticker-leaf-growth.png',
+        gem_combo: 'assets/ui/gamification/sticker-gem-combo.png',
+        rocket_clear: 'assets/ui/gamification/sticker-rocket-clear.png'
+    },
+    achievement: {
+        first_clear: 'assets/ui/gamification/badge-first-clear.png',
+        perfect_clear: 'assets/ui/gamification/badge-perfect-clear.png',
+        combo_5: 'assets/ui/gamification/badge-combo-5.png',
+        fever_10: 'assets/ui/gamification/badge-fever-10.png',
+        mastered_20: 'assets/ui/gamification/badge-mastery-20.png',
+        mastered_50: 'assets/ui/gamification/badge-mastery-50.png',
+        fixed_10: 'assets/ui/gamification/badge-fixed-10.png',
+        study_streak_3: 'assets/ui/gamification/badge-streak-3.png'
+    }
+};
 let bgMusicFiles = [
     'audio/colors-and-cheers.mp3',
     'audio/pixelated-fury.mp3',
@@ -462,7 +487,12 @@ function getAvatarConfig() {
 
 function updateCompanionDisplay(moodKey = 'ready') {
     const avatar = getAvatarConfig();
-    if (elements.companionAvatar) elements.companionAvatar.textContent = avatar.emoji;
+    if (elements.companionAvatar) {
+        elements.companionAvatar.textContent = '';
+        elements.companionAvatar.dataset.avatar = selectedAvatar;
+        elements.companionAvatar.setAttribute('aria-label', avatar.label);
+        elements.companionAvatar.setAttribute('title', avatar.label);
+    }
     if (elements.companionName) elements.companionName.textContent = avatar.label;
     if (elements.companionMood) elements.companionMood.textContent = avatar[moodKey] || avatar.ready;
     if (elements.currentAvatarLabel) elements.currentAvatarLabel.textContent = avatar.label;
@@ -942,6 +972,7 @@ function updateComboUI(answerList = answers) {
                 : '连续答对 3 题开始发光，5 题进入狂热模式。';
     }
     if (elements.comboBanner) {
+        elements.comboBanner.dataset.comboTier = isFever ? 'fever' : combo >= 4 ? '5' : combo >= 3 ? '3' : '0';
         elements.comboBanner.classList.toggle('is-active', combo >= 3);
         elements.comboBanner.classList.toggle('is-fever', isFever);
     }
@@ -985,7 +1016,10 @@ function renderStickerDrops(stickerDrops = []) {
     elements.rewardCard.classList.add('has-drop');
     elements.rewardSummaryText.textContent = `本轮掉落 ${stickerDrops.length} 张贴纸，继续闯关还能补齐整套收藏。`;
     elements.stickerDropList.innerHTML = stickerDrops.map(sticker =>
-        `<span class="sticker-chip sticker-${sticker.theme}"><span class="sticker-icon">${sticker.icon}</span><span>${sticker.label}</span></span>`
+        `<span class="sticker-chip sticker-${sticker.theme}">
+            <img class="sticker-art" src="${GAME_ASSETS.sticker[sticker.id] || ''}" alt="${sticker.label}">
+            <span>${sticker.label}</span>
+        </span>`
     ).join('');
 }
 
@@ -3846,7 +3880,7 @@ function showResult() {
     if (elements.achievementBadgeList) {
         const unlocked = achievementState.unlocked;
         elements.achievementBadgeList.innerHTML = unlocked.length
-            ? unlocked.map(item => `<span class="achievement-badge achievement-${item.theme}">${item.label}</span>`).join('')
+            ? unlocked.map(item => `<span class="achievement-badge achievement-${item.theme}" style="--achievement-image:url('${GAME_ASSETS.achievement[item.id] || ''}')">${item.label}</span>`).join('')
             : '<span class="achievement-badge locked">本轮还没有新成就，继续练习会逐步解锁。</span>';
     }
     if (elements.nextGoalText) {
