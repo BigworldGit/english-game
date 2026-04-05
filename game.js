@@ -48,6 +48,7 @@ let candidateWords = {};
 let candidateWordsLoaded = false;
 let auditExcludedWords = new Set();
 let auditExcludedLoaded = false;
+let distractorUsageCounts = new Map();
 const API_BASE = window.location.origin;
 let activeImageRenderToken = 0;
 
@@ -1076,6 +1077,7 @@ function prepareWords() {
         hasPlayableImageAsset(wordData.word)
     );
     const lookup = new Map(filteredWords.map(wordData => [wordData.word, wordData]));
+    distractorUsageCounts = new Map();
 
     if (questionSequence.length > 0) {
         const restored = questionSequence
@@ -1319,6 +1321,41 @@ function isWeakDistractor(candidateWord) {
     return !meta || !CONCRETE_CATEGORIES.has(meta.category);
 }
 
+function getDistractorUsageCount(word) {
+    return distractorUsageCounts.get(normalizeWord(word)) || 0;
+}
+
+function sortCandidatesByUsage(candidates) {
+    return [...candidates].sort((a, b) => {
+        const usageDiff = getDistractorUsageCount(a.word) - getDistractorUsageCount(b.word);
+        if (usageDiff !== 0) {
+            return usageDiff;
+        }
+        return Math.random() - 0.5;
+    });
+}
+
+function pickBalancedCandidate(candidates) {
+    if (!Array.isArray(candidates) || candidates.length === 0) {
+        return null;
+    }
+
+    const sorted = sortCandidatesByUsage(candidates);
+    const lowestUsage = getDistractorUsageCount(sorted[0].word);
+    const shortlist = sorted.filter(item => getDistractorUsageCount(item.word) <= lowestUsage + 1).slice(0, 4);
+    return shortlist[Math.floor(Math.random() * shortlist.length)] || sorted[0];
+}
+
+function recordDistractorUsage(options, correctAnswer) {
+    for (const option of options) {
+        if (normalizeWord(option) === normalizeWord(correctAnswer)) {
+            continue;
+        }
+        const key = normalizeWord(option);
+        distractorUsageCounts.set(key, getDistractorUsageCount(key) + 1);
+    }
+}
+
 function chooseDistractor(correctAnswer, usedWords, preferredWords = []) {
     const correctMeta = getWordMeta(correctAnswer);
     const correctGroup = getConflictGroup(correctAnswer);
@@ -1332,10 +1369,9 @@ function chooseDistractor(correctAnswer, usedWords, preferredWords = []) {
         return !shouldAvoidCandidate(correctAnswer, wordData.word);
     };
 
-    for (const preferred of preferredWords) {
-        if (isValidCandidate(preferred)) {
-            return preferred.word;
-        }
+    const balancedPreferred = pickBalancedCandidate(preferredWords.filter(isValidCandidate));
+    if (balancedPreferred) {
+        return balancedPreferred.word;
     }
 
     const shuffledPool = shuffleArray([...allWords]);
@@ -1355,7 +1391,8 @@ function chooseDistractor(correctAnswer, usedWords, preferredWords = []) {
     ];
 
     for (const allow of passes) {
-        const found = shuffledPool.find(allow);
+        const pool = shuffledPool.filter(allow);
+        const found = pickBalancedCandidate(pool);
         if (found) {
             return found.word;
         }
@@ -1371,6 +1408,7 @@ function repairPredefinedOptions(correctAnswer, predefinedOptions) {
     const preferredPool = allWords.filter(wordData =>
         wordData.category !== currentWord.category && CONCRETE_CATEGORIES.has(wordData.category)
     );
+    const predefinedCandidates = [];
 
     for (const option of predefinedOptions) {
         if (normalizeWord(option) === normalizeWord(correctAnswer)) {
@@ -1383,26 +1421,20 @@ function repairPredefinedOptions(correctAnswer, predefinedOptions) {
             !isWeakDistractor(option);
 
         if (validOption) {
-            repaired.push(option);
-            usedWords.add(option);
+            const optionMeta = getWordMeta(option) || { word: option, category: 'unknown' };
+            predefinedCandidates.push(optionMeta);
+        }
+    }
+
+    for (const candidate of sortCandidatesByUsage(predefinedCandidates)) {
+        if (repaired.length >= 4) {
+            break;
+        }
+        if (usedWords.has(candidate.word)) {
             continue;
         }
-
-        const replacement = chooseDistractor(correctAnswer, usedWords, preferredPool);
-        if (replacement) {
-            repaired.push(replacement);
-            usedWords.add(replacement);
-            continue;
-        }
-
-        if (
-            isOptionAllowedForCurrentGrade(option, allowedWordSet) &&
-            !shouldAvoidCandidate(correctAnswer, option) &&
-            !usedWords.has(option)
-        ) {
-            repaired.push(option);
-            usedWords.add(option);
-        }
+        repaired.push(candidate.word);
+        usedWords.add(candidate.word);
     }
 
     while (repaired.length < 4) {
@@ -1420,23 +1452,25 @@ function repairPredefinedOptions(correctAnswer, predefinedOptions) {
 function generateOptions() {
     const correctAnswer = currentWord.word;
     const predefinedData = getCandidateEntry(correctAnswer);
+    let options = null;
 
     if (predefinedData) {
-        return shuffleArray(repairPredefinedOptions(correctAnswer, predefinedData.options));
-    }
+        options = shuffleArray(repairPredefinedOptions(correctAnswer, predefinedData.options));
+    } else {
+        console.warn('单词没有预定义候选词:', correctAnswer, '，将使用运行时安全逻辑');
 
-    console.warn('单词没有预定义候选词:', correctAnswer, '，将使用运行时安全逻辑');
-
-    const options = [correctAnswer];
-    while (options.length < 4) {
-        const replacement = chooseDistractor(correctAnswer, new Set(options));
-        if (!replacement) {
-            break;
+        options = [correctAnswer];
+        while (options.length < 4) {
+            const replacement = chooseDistractor(correctAnswer, new Set(options));
+            if (!replacement) {
+                break;
+            }
+            options.push(replacement);
         }
-        options.push(replacement);
     }
 
-    return shuffleArray(options);
+    recordDistractorUsage(options, correctAnswer);
+    return options;
 }
 
 function renderOptions(answerRecord = null) {
