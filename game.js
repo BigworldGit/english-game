@@ -22,6 +22,7 @@ let audioContext = null;
 let isPlaying = false;
 let bgMusic = null;
 let isReviewMode = false;
+let selectedAvatar = 'cat';
 const SOUND_EFFECT_FILES = {
     correct: 'audio/feedback/sfx-answer-correct.mp3',
     wrong: 'audio/feedback/sfx-answer-wrong.mp3',
@@ -29,6 +30,40 @@ const SOUND_EFFECT_FILES = {
     achievement: 'audio/feedback/sfx-achievement-unlock.mp3'
 };
 const soundEffectPool = {};
+const AVATAR_CONFIG = {
+    cat: {
+        emoji: '🐱',
+        label: '像素猫',
+        ready: '准备好啦，我们先连对 3 题试试。',
+        correct: '太好了，再连下去我就要开始发光了。',
+        wrong: '没关系，我们把这题记进复习列表就好。',
+        fever: '喵呜！已经进入狂热模式，继续冲！'
+    },
+    robot: {
+        emoji: '🤖',
+        label: '小机器人',
+        ready: '系统待命，建议先冲出一个 3 连击。',
+        correct: '数据漂亮，继续保持节奏。',
+        wrong: '错误已记录，下一轮我们修回来。',
+        fever: '能量过载中，狂热模式已启动。'
+    },
+    dragon: {
+        emoji: '🐲',
+        label: '方块龙',
+        ready: '呼，先热个身，连对几题就能喷火啦。',
+        correct: '漂亮，这一题已经点亮火花。',
+        wrong: '别怕，我们把这块石头搬开再继续。',
+        fever: '嗷呜！狂热模式开启，火力全开。'
+    }
+};
+const STICKER_POOL = [
+    { id: 'apple_star', icon: '🍎', label: '苹果贴纸', theme: 'fruit' },
+    { id: 'sun_blaze', icon: '☀️', label: '太阳贴纸', theme: 'sun' },
+    { id: 'book_boost', icon: '📘', label: '学习贴纸', theme: 'book' },
+    { id: 'leaf_growth', icon: '🍃', label: '成长叶片', theme: 'leaf' },
+    { id: 'gem_combo', icon: '💎', label: '连击宝石', theme: 'gem' },
+    { id: 'rocket_clear', icon: '🚀', label: '满分火箭', theme: 'rocket' }
+];
 let bgMusicFiles = [
     'audio/colors-and-cheers.mp3',
     'audio/pixelated-fury.mp3',
@@ -208,10 +243,12 @@ const elements = {
     loginForm: document.getElementById('loginForm'),
     userInfo: document.getElementById('userInfo'),
     username: document.getElementById('username'),
+    avatarOptions: document.getElementById('avatarOptions'),
     startBtn: document.getElementById('startBtn'),
     continueBtn: document.getElementById('continueBtn'),
     resetBtn: document.getElementById('resetBtn'),
     userNameDisplay: document.getElementById('userNameDisplay'),
+    currentAvatarLabel: document.getElementById('currentAvatarLabel'),
     currentGrade: document.getElementById('currentGrade'),
     currentLevel: document.getElementById('currentLevel'),
     currentQuestion: document.getElementById('currentQuestion'),
@@ -235,6 +272,15 @@ const elements = {
     correctAnswerText: document.getElementById('correctAnswerText'),
     selectedAnswerText: document.getElementById('selectedAnswerText'),
     feedbackHintText: document.getElementById('feedbackHintText'),
+    comboBanner: document.getElementById('comboBanner'),
+    comboTitle: document.getElementById('comboTitle'),
+    comboSubtitle: document.getElementById('comboSubtitle'),
+    companionCard: document.getElementById('companionCard'),
+    companionAvatar: document.getElementById('companionAvatar'),
+    companionName: document.getElementById('companionName'),
+    companionMood: document.getElementById('companionMood'),
+    comboTrackFill: document.getElementById('comboTrackFill'),
+    comboTrackLabel: document.getElementById('comboTrackLabel'),
     resultTitle: document.getElementById('resultTitle'),
     correctCount: document.getElementById('correctCount'),
     wrongCount: document.getElementById('wrongCount'),
@@ -250,6 +296,16 @@ const elements = {
     gradeCoverageText: document.getElementById('gradeCoverageText'),
     overallCoverageText: document.getElementById('overallCoverageText'),
     fixedWrongCount: document.getElementById('fixedWrongCount'),
+    studyStreakCount: document.getElementById('studyStreakCount'),
+    freezeCount: document.getElementById('freezeCount'),
+    growthTree: document.getElementById('growthTree'),
+    growthTreeText: document.getElementById('growthTreeText'),
+    rewardCard: document.getElementById('rewardCard'),
+    rewardSummaryText: document.getElementById('rewardSummaryText'),
+    stickerDropList: document.getElementById('stickerDropList'),
+    fixCelebrateCard: document.getElementById('fixCelebrateCard'),
+    fixCelebrateText: document.getElementById('fixCelebrateText'),
+    fixWordList: document.getElementById('fixWordList'),
     achievementBadgeList: document.getElementById('achievementBadgeList'),
     nextGoalText: document.getElementById('nextGoalText'),
     reviewWrongBtn: document.getElementById('reviewWrongBtn'),
@@ -271,6 +327,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initGame() {
+    renderAvatarSelection();
+    updateCompanionDisplay();
     // 检查用户登录状态
     const savedUser = localStorage.getItem('minecraft_english_user');
     if (savedUser) {
@@ -341,6 +399,16 @@ function setupEventListeners() {
         });
     });
 
+    if (elements.avatarOptions) {
+        elements.avatarOptions.querySelectorAll('.avatar-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                selectedAvatar = btn.dataset.avatar || 'cat';
+                renderAvatarSelection();
+                updateCompanionDisplay();
+            });
+        });
+    }
+
     // 开始按钮
     elements.startBtn.addEventListener('click', startGame);
 
@@ -381,6 +449,25 @@ function setupEventListeners() {
     document.addEventListener('keydown', handleKeyPress);
 }
 
+function renderAvatarSelection() {
+    if (!elements.avatarOptions) return;
+    elements.avatarOptions.querySelectorAll('.avatar-btn').forEach(btn => {
+        btn.classList.toggle('selected', btn.dataset.avatar === selectedAvatar);
+    });
+}
+
+function getAvatarConfig() {
+    return AVATAR_CONFIG[selectedAvatar] || AVATAR_CONFIG.cat;
+}
+
+function updateCompanionDisplay(moodKey = 'ready') {
+    const avatar = getAvatarConfig();
+    if (elements.companionAvatar) elements.companionAvatar.textContent = avatar.emoji;
+    if (elements.companionName) elements.companionName.textContent = avatar.label;
+    if (elements.companionMood) elements.companionMood.textContent = avatar[moodKey] || avatar.ready;
+    if (elements.currentAvatarLabel) elements.currentAvatarLabel.textContent = avatar.label;
+}
+
 // ============================================
 // 用户系统
 // ============================================
@@ -415,7 +502,8 @@ function startGame() {
     currentUser = {
         id: generateUserId(),
         name: username,
-        grade: selectedGrade
+        grade: selectedGrade,
+        avatar: selectedAvatar
     };
 
     currentGrade = selectedGrade;
@@ -442,6 +530,9 @@ function showUserInfo() {
     elements.loginForm.style.display = 'none';
     elements.userInfo.style.display = 'block';
     elements.userNameDisplay.textContent = currentUser.name;
+    selectedAvatar = currentUser.avatar || 'cat';
+    renderAvatarSelection();
+    updateCompanionDisplay();
     elements.currentGrade.textContent = currentUser.grade;
     loadLearningProfile();
 
@@ -514,6 +605,12 @@ function createEmptyLearningProfile() {
         completedRounds: 0,
         perfectRounds: 0,
         bestRoundStreak: 0,
+        bestCombo: 0,
+        stickerInventory: {},
+        lastStickerDrop: [],
+        currentStudyStreakDays: 0,
+        streakFreezes: 1,
+        lastStudyDate: null,
         unlockedAchievements: [],
         lastProcessedRoundSignature: null,
         updatedAt: null
@@ -604,6 +701,13 @@ function getAchievementRules(summary, profile = learningProfile || createEmptyLe
             progressText: `当前峰值 ${bestStreak}/5`
         },
         {
+            id: 'fever_10',
+            theme: 'streak',
+            label: '狂热 10 连击',
+            unlocked: bestStreak >= 10,
+            progressText: `当前峰值 ${bestStreak}/10`
+        },
+        {
             id: 'mastered_20',
             theme: 'mastery',
             label: '掌握 20 词',
@@ -623,8 +727,65 @@ function getAchievementRules(summary, profile = learningProfile || createEmptyLe
             label: '修复 10 个错词',
             unlocked: (profile.fixedWrongWords || 0) >= 10,
             progressText: `当前 ${profile.fixedWrongWords || 0}/10`
+        },
+        {
+            id: 'study_streak_3',
+            theme: 'daily',
+            label: '连续学习 3 天',
+            unlocked: (profile.currentStudyStreakDays || 0) >= 3,
+            progressText: `当前 ${profile.currentStudyStreakDays || 0}/3 天`
         }
     ];
+}
+
+function updateStudyStreak(profile = learningProfile) {
+    if (!profile) return;
+
+    const today = new Date().toISOString().slice(0, 10);
+    if (profile.lastStudyDate === today) {
+        return;
+    }
+
+    if (!profile.lastStudyDate) {
+        profile.currentStudyStreakDays = 1;
+    } else {
+        const diffDays = Math.round((new Date(today) - new Date(profile.lastStudyDate)) / 86400000);
+        if (diffDays === 1) {
+            profile.currentStudyStreakDays = (profile.currentStudyStreakDays || 0) + 1;
+        } else if (diffDays > 1 && (profile.streakFreezes || 0) > 0) {
+            profile.streakFreezes -= 1;
+        } else {
+            profile.currentStudyStreakDays = 1;
+        }
+    }
+
+    profile.lastStudyDate = today;
+}
+
+function maybeAwardSticker(roundSummary, profile = learningProfile) {
+    if (!profile) return [];
+
+    const rewardRolls = [];
+    if (roundSummary.accuracy === 100) {
+        rewardRolls.push('perfect');
+    } else if (roundSummary.bestStreak >= 5) {
+        rewardRolls.push('combo');
+    }
+
+    if (!rewardRolls.length) {
+        profile.lastStickerDrop = [];
+        return [];
+    }
+
+    const drops = [];
+    const dropCount = Math.min(2, rewardRolls.length);
+    for (let i = 0; i < dropCount; i++) {
+        const sticker = STICKER_POOL[Math.floor(Math.random() * STICKER_POOL.length)];
+        profile.stickerInventory[sticker.id] = (profile.stickerInventory[sticker.id] || 0) + 1;
+        drops.push(sticker);
+    }
+    profile.lastStickerDrop = drops;
+    return drops;
 }
 
 function updateLearningProfileFromAnswers(answerList = answers) {
@@ -681,10 +842,13 @@ function updateLearningProfileFromAnswers(answerList = answers) {
             learningProfile.perfectRounds += 1;
         }
         learningProfile.bestRoundStreak = Math.max(learningProfile.bestRoundStreak, roundSummary.bestStreak);
+        learningProfile.bestCombo = Math.max(learningProfile.bestCombo || 0, roundSummary.bestStreak);
     }
 
+    updateStudyStreak(learningProfile);
     learningProfile.fixedWrongWords += fixedWords.size;
     learningProfile.totalMasteredWords = Object.values(learningProfile.wordStats).filter(stat => stat.mastered).length;
+    const stickerDrops = maybeAwardSticker(roundSummary, learningProfile);
     const unlockedIds = getAchievementRules(roundSummary, learningProfile)
         .filter(rule => rule.unlocked)
         .map(rule => rule.id);
@@ -692,7 +856,11 @@ function updateLearningProfileFromAnswers(answerList = answers) {
     learningProfile.unlockedAchievements = unlockedIds;
     learningProfile.lastProcessedRoundSignature = roundSignature;
     saveLearningProfile();
-    return newlyUnlocked;
+    return {
+        newlyUnlocked,
+        fixedWords: [...fixedWords],
+        stickerDrops
+    };
 }
 
 function getPlayableWordsForCoverage(sourceWords) {
@@ -738,6 +906,102 @@ function getAchievementState(summary) {
             ? `下一目标：${nextLocked.label}，${nextLocked.progressText}`
             : '当前这批核心成就已全部解锁，继续练习会稳定巩固掌握状态。'
     };
+}
+
+function getCurrentComboStreak(answerList = answers) {
+    let streak = 0;
+    for (let i = answerList.length - 1; i >= 0; i--) {
+        const answer = answerList[i];
+        if (!answer || !answer.correct) {
+            break;
+        }
+        streak += 1;
+    }
+    return streak;
+}
+
+function updateComboUI(answerList = answers) {
+    const combo = getCurrentComboStreak(answerList);
+    const isFever = combo >= 5;
+    const trackPercent = Math.min(100, (combo / 5) * 100);
+
+    if (elements.comboTrackFill) {
+        elements.comboTrackFill.style.width = `${trackPercent}%`;
+    }
+    if (elements.comboTrackLabel) {
+        elements.comboTrackLabel.textContent = isFever ? `当前连击 ${combo} · 狂热模式中` : `当前连击 ${combo} / 5`;
+    }
+    if (elements.comboTitle) {
+        elements.comboTitle.textContent = isFever ? `Fever x${combo}` : combo >= 3 ? `Combo x${combo}` : '准备连击';
+    }
+    if (elements.comboSubtitle) {
+        elements.comboSubtitle.textContent = isFever
+            ? '题目框已经点亮，继续答对会让奖励更丰厚。'
+            : combo >= 3
+                ? '连击已经启动，再答对 2 题进入狂热模式。'
+                : '连续答对 3 题开始发光，5 题进入狂热模式。';
+    }
+    if (elements.comboBanner) {
+        elements.comboBanner.classList.toggle('is-active', combo >= 3);
+        elements.comboBanner.classList.toggle('is-fever', isFever);
+    }
+    if (elements.companionCard) {
+        elements.companionCard.classList.toggle('is-fever', isFever);
+    }
+    if (elements.wordCanvas) {
+        elements.wordCanvas.classList.toggle('is-fever', isFever);
+    }
+    updateCompanionDisplay(isFever ? 'fever' : combo > 0 ? 'correct' : 'ready');
+}
+
+function renderGrowthTree() {
+    if (!elements.growthTree || !elements.growthTreeText) return;
+
+    const totalMastered = learningProfile?.totalMasteredWords || 0;
+    const leafCount = Math.min(12, Math.floor(totalMastered / 5));
+    const leaves = new Array(12).fill('').map((_, index) =>
+        `<span class="tree-leaf ${index < leafCount ? 'active' : ''}" style="--leaf-index:${index};"></span>`
+    ).join('');
+
+    elements.growthTree.innerHTML = `<div class="tree-crown">${leaves}</div><div class="tree-trunk"></div><div class="tree-ground"></div>`;
+    elements.growthTreeText.textContent = totalMastered >= 5
+        ? `已经长出 ${leafCount} 片叶子，累计掌握 ${totalMastered} 个词。`
+        : `再掌握 ${5 - totalMastered} 个词，就能长出第一片叶子。`;
+}
+
+function renderStickerDrops(stickerDrops = []) {
+    if (!elements.rewardCard || !elements.rewardSummaryText || !elements.stickerDropList) return;
+
+    const allOwned = learningProfile?.stickerInventory || {};
+    if (!stickerDrops.length) {
+        elements.rewardCard.classList.remove('has-drop');
+        elements.rewardSummaryText.textContent = '这一关没有掉落贴纸，冲击满分或高连击会更容易掉落。';
+        elements.stickerDropList.innerHTML = Object.keys(allOwned).length
+            ? `<span class="reward-owned-text">已收集 ${Object.values(allOwned).reduce((sum, value) => sum + value, 0)} 张贴纸。</span>`
+            : '';
+        return;
+    }
+
+    elements.rewardCard.classList.add('has-drop');
+    elements.rewardSummaryText.textContent = `本轮掉落 ${stickerDrops.length} 张贴纸，继续闯关还能补齐整套收藏。`;
+    elements.stickerDropList.innerHTML = stickerDrops.map(sticker =>
+        `<span class="sticker-chip sticker-${sticker.theme}"><span class="sticker-icon">${sticker.icon}</span><span>${sticker.label}</span></span>`
+    ).join('');
+}
+
+function renderFixedWordsCelebration(fixedWords = []) {
+    if (!elements.fixCelebrateCard || !elements.fixCelebrateText || !elements.fixWordList) return;
+
+    if (!fixedWords.length) {
+        elements.fixCelebrateCard.classList.remove('has-fixes');
+        elements.fixCelebrateText.textContent = '这轮还没有把待复习词转正，继续加油。';
+        elements.fixWordList.innerHTML = '';
+        return;
+    }
+
+    elements.fixCelebrateCard.classList.add('has-fixes');
+    elements.fixCelebrateText.textContent = `这轮成功修复 ${fixedWords.length} 个旧错词，它们已经从灰卡变成金卡了。`;
+    elements.fixWordList.innerHTML = fixedWords.map(word => `<span class="fixed-word-chip">${word}</span>`).join('');
 }
 
 function normalizeWord(word) {
@@ -895,6 +1159,7 @@ function updateQuestionFeedback(answerRecord = null) {
         elements.correctAnswerText.textContent = '-';
         elements.selectedAnswerText.textContent = '-';
         elements.feedbackHintText.textContent = '先观察图片里最明显的主体，再从选项里选最合适的单词。';
+        updateComboUI([]);
         return;
     }
 
@@ -907,6 +1172,7 @@ function updateQuestionFeedback(answerRecord = null) {
     elements.correctAnswerText.textContent = answerRecord.word;
     elements.selectedAnswerText.textContent = answerRecord.selected;
     elements.feedbackHintText.textContent = answerRecord.learningHint || generateLearningHint(answerRecord.word, answerRecord.selected, answerRecord.correct);
+    updateComboUI(answers.filter(Boolean));
 }
 
 function isAnsweredQuestion(questionNumber) {
@@ -1540,8 +1806,9 @@ function handleAnswer(selected, btn) {
     if (isCorrect) {
         btn.classList.add('correct');
         btn.classList.add('correct-answer');
-        showFeedback('correct');
-        playSound('correct');
+        const combo = getCurrentComboStreak(answers.filter(Boolean));
+        showFeedback('correct', combo);
+        playSound('correct', combo);
     } else {
         btn.classList.add('wrong');
         btn.classList.add('wrong-answer');
@@ -1552,7 +1819,7 @@ function handleAnswer(selected, btn) {
                 b.classList.add('correct-answer');
             }
         });
-        showFeedback('wrong');
+        showFeedback('wrong', 0);
         playSound('wrong');
     }
 
@@ -1571,13 +1838,23 @@ function handleAnswer(selected, btn) {
     }, 1500);
 }
 
-function showFeedback(type) {
+function showFeedback(type, combo = 0) {
     elements.feedback.className = 'feedback show ' + type;
+    if (type === 'correct' && combo >= 5) {
+        elements.feedback.classList.add('fever');
+        elements.feedback.querySelector('.feedback-text').textContent = `狂热 ${combo} 连击！`;
+        return;
+    }
+    if (type === 'correct' && combo >= 3) {
+        elements.feedback.querySelector('.feedback-text').textContent = `连击 x${combo}！`;
+        return;
+    }
     elements.feedback.querySelector('.feedback-text').textContent = type === 'correct' ? '太棒了！' : '再想想！';
 }
 
 function hideFeedback() {
     elements.feedback.classList.remove('show');
+    elements.feedback.classList.remove('fever');
 }
 
 function updateProgressBar() {
@@ -3476,7 +3753,10 @@ function drawStar(ctx, cx, cy, spikes, outerRadius, innerRadius) {
 // ============================================
 function showResult() {
     saveProgress();
-    const newlyUnlocked = updateLearningProfileFromAnswers() || [];
+    const learningResult = updateLearningProfileFromAnswers() || {};
+    const newlyUnlocked = learningResult.newlyUnlocked || [];
+    const fixedWords = learningResult.fixedWords || [];
+    const stickerDrops = learningResult.stickerDrops || [];
     const summary = getRoundSummary();
     const { correct, wrong, accuracy, masteredWords, reviewWords: roundReviewWords, bestStreak } = summary;
     const coverage = getCoverageStats();
@@ -3516,12 +3796,12 @@ function showResult() {
         if (elements.resultTitle) {
             elements.resultTitle.textContent = '关卡完成！';
         }
-        message = '大部分词已经掌握，建议先复习错题。';
+        message = wrong === 1 ? '只差一点点就能接近满分，先把这一个错词修掉吧。' : '大部分词已经掌握，建议先复习错题。';
     } else if (accuracy >= 50) {
         if (elements.resultTitle) {
             elements.resultTitle.textContent = '关卡完成！';
         }
-        message = '有一些词容易混淆，先再练一次更合适。';
+        message = '有一些词容易混淆，但已经摸到门了，再练一次会明显更稳。';
     } else {
         if (elements.resultTitle) {
             elements.resultTitle.textContent = '关卡完成！';
@@ -3554,6 +3834,15 @@ function showResult() {
     if (elements.fixedWrongCount) {
         elements.fixedWrongCount.textContent = learningProfile?.fixedWrongWords || 0;
     }
+    if (elements.studyStreakCount) {
+        elements.studyStreakCount.textContent = `${learningProfile?.currentStudyStreakDays || 0} 天`;
+    }
+    if (elements.freezeCount) {
+        elements.freezeCount.textContent = `${learningProfile?.streakFreezes || 0} 张`;
+    }
+    renderGrowthTree();
+    renderStickerDrops(stickerDrops);
+    renderFixedWordsCelebration(fixedWords);
     if (elements.achievementBadgeList) {
         const unlocked = achievementState.unlocked;
         elements.achievementBadgeList.innerHTML = unlocked.length
@@ -3716,7 +4005,7 @@ function initAudio() {
     return audioContext;
 }
 
-function playAudioAsset(type) {
+function playAudioAsset(type, combo = 0) {
     const baseAudio = soundEffectPool[type];
     if (!baseAudio) return false;
 
@@ -3724,6 +4013,9 @@ function playAudioAsset(type) {
         const instance = new Audio(baseAudio.src);
         instance.preload = 'auto';
         instance.volume = type === 'success' ? 0.72 : 0.68;
+        if (type === 'correct' && combo >= 2) {
+            instance.playbackRate = Math.min(1.28, 1 + combo * 0.04);
+        }
         instance.play().catch(() => {});
         return true;
     } catch (error) {
@@ -3731,9 +4023,9 @@ function playAudioAsset(type) {
     }
 }
 
-function playSound(type) {
+function playSound(type, combo = 0) {
     try {
-        if (playAudioAsset(type)) {
+        if (playAudioAsset(type, combo)) {
             return;
         }
         const ctx = initAudio();
@@ -3741,9 +4033,12 @@ function playSound(type) {
         switch(type) {
             case 'correct':
                 // 上升音阶 (C5-E5-G5) - 正确答题
-                playNote(ctx, 523.25, 0, 0.1);    // C5
-                playNote(ctx, 659.25, 0.1, 0.1);  // E5
-                playNote(ctx, 783.99, 0.2, 0.15); // G5
+                {
+                    const boost = Math.min(combo, 6) * 18;
+                    playNote(ctx, 523.25 + boost, 0, 0.1);
+                    playNote(ctx, 659.25 + boost, 0.1, 0.1);
+                    playNote(ctx, 783.99 + boost, 0.2, 0.15);
+                }
                 break;
             case 'wrong':
                 // 下降音阶 (G4-E4-C4) - 错误答题

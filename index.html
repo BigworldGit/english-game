@@ -36,6 +36,23 @@
                     <div class="form-group">
                         <input type="text" id="username" placeholder="请输入你的名字" maxlength="10" autocomplete="off">
                     </div>
+                    <div class="avatar-select">
+                        <label>选择学习伙伴：</label>
+                        <div class="avatar-options" id="avatarOptions">
+                            <button class="avatar-btn selected" type="button" data-avatar="cat">
+                                <span class="avatar-emoji">🐱</span>
+                                <span class="avatar-label">像素猫</span>
+                            </button>
+                            <button class="avatar-btn" type="button" data-avatar="robot">
+                                <span class="avatar-emoji">🤖</span>
+                                <span class="avatar-label">小机器人</span>
+                            </button>
+                            <button class="avatar-btn" type="button" data-avatar="dragon">
+                                <span class="avatar-emoji">🐲</span>
+                                <span class="avatar-label">方块龙</span>
+                            </button>
+                        </div>
+                    </div>
                     <div class="grade-select">
                         <label>选择你的年级：</label>
                         <div class="grade-buttons">
@@ -53,6 +70,7 @@
                 <!-- 已登录用户显示 -->
                 <div class="user-info" id="userInfo" style="display: none;">
                     <p class="welcome-text">欢迎回来，<span id="userNameDisplay"></span>！</p>
+                    <p class="progress-text">学习伙伴：<span id="currentAvatarLabel">像素猫</span></p>
                     <p class="progress-text">你正在学习 <span id="currentGrade">1</span> 年级的单词</p>
                     <p class="progress-text">当前第 <span id="currentLevel">1</span> 关，第 <span id="currentQuestion">1</span> 题</p>
                     <button class="start-btn" id="continueBtn">继续学习</button>
@@ -90,6 +108,11 @@
                     </div>
                     <div class="feedback-hint-text" id="feedbackHintText">先观察图片里最明显的主体，再从选项里选最合适的单词。</div>
                 </div>
+
+                <div class="combo-banner" id="comboBanner">
+                    <div class="combo-title" id="comboTitle">准备连击</div>
+                    <div class="combo-subtitle" id="comboSubtitle">连续答对会点亮狂热模式。</div>
+                </div>
             </div>
 
             <div class="game-content">
@@ -123,6 +146,21 @@
                     </div>
                     <div class="question-mode" id="questionModeLabel">答题中</div>
                     <div class="status-note" id="answerStatusText">本题还没作答，选一个最合适的答案吧。</div>
+                </div>
+
+                <div class="status-card status-card-companion" id="companionCard">
+                    <div class="companion-head">
+                        <div class="companion-avatar" id="companionAvatar">🐱</div>
+                        <div class="companion-copy">
+                            <div class="status-title">学习伙伴</div>
+                            <div class="companion-name" id="companionName">像素猫</div>
+                        </div>
+                    </div>
+                    <div class="companion-mood" id="companionMood">准备好啦，我们先连对 3 题试试。</div>
+                    <div class="combo-track">
+                        <div class="combo-track-fill" id="comboTrackFill"></div>
+                    </div>
+                    <div class="combo-track-label" id="comboTrackLabel">当前连击 0 / 5</div>
                 </div>
 
                 <div class="status-card status-card-nav">
@@ -197,6 +235,26 @@
                     </div>
 
                     <div class="result-side-stack">
+                        <div class="result-growth-card">
+                            <div class="growth-card-head">
+                                <div class="growth-card-title">成长树</div>
+                                <div class="growth-card-copy" id="growthTreeText">每掌握 5 个词，就会长出一片新叶子。</div>
+                            </div>
+                            <div class="growth-tree" id="growthTree"></div>
+                        </div>
+
+                        <div class="result-reward-card" id="rewardCard">
+                            <div class="reward-card-title">惊喜掉落</div>
+                            <div class="reward-card-copy" id="rewardSummaryText">这一关没有掉落贴纸，继续冲击满分吧。</div>
+                            <div class="sticker-drop" id="stickerDropList"></div>
+                        </div>
+
+                        <div class="result-fix-card" id="fixCelebrateCard">
+                            <div class="fix-card-title">错题修复庆祝</div>
+                            <div class="fix-card-copy" id="fixCelebrateText">这轮还没有把待复习词转正，继续加油。</div>
+                            <div class="fix-word-list" id="fixWordList"></div>
+                        </div>
+
                         <div class="result-overall-progress">
                             <div class="progress-stat-card">
                                 <div class="progress-stat-label">累计掌握词数</div>
@@ -213,6 +271,14 @@
                             <div class="progress-stat-card">
                                 <div class="progress-stat-label">修复错题数</div>
                                 <div class="progress-stat-value" id="fixedWrongCount">0</div>
+                            </div>
+                            <div class="progress-stat-card">
+                                <div class="progress-stat-label">连续学习天数</div>
+                                <div class="progress-stat-value" id="studyStreakCount">0 天</div>
+                            </div>
+                            <div class="progress-stat-card">
+                                <div class="progress-stat-label">冻结卡</div>
+                                <div class="progress-stat-value" id="freezeCount">0 张</div>
                             </div>
                         </div>
 
