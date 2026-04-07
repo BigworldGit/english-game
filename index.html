@@ -64,6 +64,13 @@
                             <button class="grade-btn" data-grade="6">6</button>
                         </div>
                     </div>
+                    <div class="scope-select">
+                        <label>选择学习范围：</label>
+                        <div class="scope-buttons" id="scopeButtons">
+                            <button class="scope-btn selected" type="button" data-scope="single">只学本年级</button>
+                            <button class="scope-btn" type="button" data-scope="cumulative">从一年级学到此年级</button>
+                        </div>
+                    </div>
                     <button class="start-btn" id="startBtn">开始学习</button>
                 </div>
 
@@ -72,6 +79,7 @@
                     <p class="welcome-text">欢迎回来，<span id="userNameDisplay"></span>！</p>
                     <p class="progress-text">学习伙伴：<span id="currentAvatarLabel">像素猫</span></p>
                     <p class="progress-text">你正在学习 <span id="currentGrade">1</span> 年级的单词</p>
+                    <p class="progress-text">学习范围：<span id="currentScopeText">只学本年级</span></p>
                     <p class="progress-text">当前第 <span id="currentLevel">1</span> 关，第 <span id="currentQuestion">1</span> 题</p>
                     <button class="start-btn" id="continueBtn">继续学习</button>
                     <button class="reset-btn" id="resetBtn">重新开始</button>
@@ -113,6 +121,8 @@
                     <div class="combo-title" id="comboTitle">准备连击</div>
                     <div class="combo-subtitle" id="comboSubtitle">连续答对会点亮狂热模式。</div>
                 </div>
+
+                <button class="game-home-btn" id="gameHomeBtn" type="button">返回主页</button>
             </div>
 
             <div class="game-content">

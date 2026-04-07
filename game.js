@@ -18,6 +18,7 @@ let answers = [];
 let reviewWords = [];
 let learningProfile = null;
 let selectedGrade = null;
+let selectedScope = 'single';
 let audioContext = null;
 let isPlaying = false;
 let bgMusic = null;
@@ -269,12 +270,14 @@ const elements = {
     userInfo: document.getElementById('userInfo'),
     username: document.getElementById('username'),
     avatarOptions: document.getElementById('avatarOptions'),
+    scopeButtons: document.getElementById('scopeButtons'),
     startBtn: document.getElementById('startBtn'),
     continueBtn: document.getElementById('continueBtn'),
     resetBtn: document.getElementById('resetBtn'),
     userNameDisplay: document.getElementById('userNameDisplay'),
     currentAvatarLabel: document.getElementById('currentAvatarLabel'),
     currentGrade: document.getElementById('currentGrade'),
+    currentScopeText: document.getElementById('currentScopeText'),
     currentLevel: document.getElementById('currentLevel'),
     currentQuestion: document.getElementById('currentQuestion'),
     gameUserName: document.getElementById('gameUserName'),
@@ -300,6 +303,7 @@ const elements = {
     comboBanner: document.getElementById('comboBanner'),
     comboTitle: document.getElementById('comboTitle'),
     comboSubtitle: document.getElementById('comboSubtitle'),
+    gameHomeBtn: document.getElementById('gameHomeBtn'),
     companionCard: document.getElementById('companionCard'),
     companionAvatar: document.getElementById('companionAvatar'),
     companionName: document.getElementById('companionName'),
@@ -353,6 +357,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initGame() {
     renderAvatarSelection();
+    renderScopeSelection();
     updateCompanionDisplay();
     // 检查用户登录状态
     const savedUser = localStorage.getItem('minecraft_english_user');
@@ -434,6 +439,16 @@ function setupEventListeners() {
         });
     }
 
+    if (elements.scopeButtons) {
+        elements.scopeButtons.querySelectorAll('.scope-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                selectedScope = btn.dataset.scope || 'single';
+                renderScopeSelection();
+                updateCompanionDisplay();
+            });
+        });
+    }
+
     // 开始按钮
     elements.startBtn.addEventListener('click', startGame);
 
@@ -463,6 +478,9 @@ function setupEventListeners() {
 
     // 返回主页
     elements.homeBtn.addEventListener('click', goHome);
+    if (elements.gameHomeBtn) {
+        elements.gameHomeBtn.addEventListener('click', goHome);
+    }
 
     // 音乐控制
     elements.musicControl.addEventListener('click', toggleMusic);
@@ -481,8 +499,19 @@ function renderAvatarSelection() {
     });
 }
 
+function renderScopeSelection() {
+    if (!elements.scopeButtons) return;
+    elements.scopeButtons.querySelectorAll('.scope-btn').forEach(btn => {
+        btn.classList.toggle('selected', btn.dataset.scope === selectedScope);
+    });
+}
+
 function getAvatarConfig() {
     return AVATAR_CONFIG[selectedAvatar] || AVATAR_CONFIG.cat;
+}
+
+function getScopeLabel(scope = selectedScope) {
+    return scope === 'cumulative' ? '从一年级学到此年级' : '只学本年级';
 }
 
 function updateCompanionDisplay(moodKey = 'ready') {
@@ -496,6 +525,7 @@ function updateCompanionDisplay(moodKey = 'ready') {
     if (elements.companionName) elements.companionName.textContent = avatar.label;
     if (elements.companionMood) elements.companionMood.textContent = avatar[moodKey] || avatar.ready;
     if (elements.currentAvatarLabel) elements.currentAvatarLabel.textContent = avatar.label;
+    if (elements.currentScopeText) elements.currentScopeText.textContent = getScopeLabel(currentUser?.scope || selectedScope);
 }
 
 // ============================================
@@ -533,7 +563,8 @@ function startGame() {
         id: generateUserId(),
         name: username,
         grade: selectedGrade,
-        avatar: selectedAvatar
+        avatar: selectedAvatar,
+        scope: selectedScope
     };
 
     currentGrade = selectedGrade;
@@ -561,9 +592,12 @@ function showUserInfo() {
     elements.userInfo.style.display = 'block';
     elements.userNameDisplay.textContent = currentUser.name;
     selectedAvatar = currentUser.avatar || 'cat';
+    selectedScope = currentUser.scope || 'single';
     renderAvatarSelection();
+    renderScopeSelection();
     updateCompanionDisplay();
     elements.currentGrade.textContent = currentUser.grade;
+    if (elements.currentScopeText) elements.currentScopeText.textContent = getScopeLabel(selectedScope);
     loadLearningProfile();
 
     // 加载保存的进度
@@ -578,6 +612,7 @@ function showUserInfo() {
             questionSequence = progress.questionSequence || [];
             reviewWords = progress.reviewWords || [];
             isReviewMode = Boolean(progress.isReviewMode);
+            selectedScope = progress.scope || currentUser.scope || 'single';
         }
     }
 
@@ -599,6 +634,7 @@ function continueGame() {
 
     try {
         currentGrade = currentUser.grade;
+        selectedScope = currentUser.scope || selectedScope;
         if (advancePastCompletedProgress()) {
             saveProgress();
         }
@@ -914,8 +950,12 @@ function buildCoverageStat(sourceWords) {
     };
 }
 
+function getScopedWords(grade = currentGrade) {
+    return selectedScope === 'cumulative' ? (getWordsUpToGrade(grade) || []) : (getWordsByGrade(grade) || []);
+}
+
 function getCoverageStats() {
-    const currentGradeWords = getWordsByGrade(currentGrade) || [];
+    const currentGradeWords = getScopedWords(currentGrade) || [];
     const cumulativeWords = getWordsUpToGrade(currentGrade) || [];
 
     return {
@@ -1372,7 +1412,7 @@ function sequenceRespectsRepeatLimit(sequence, windowSize = REPEAT_WORD_WINDOW, 
 }
 
 function prepareWords() {
-    const filteredWords = getWordsUpToGrade(currentGrade).filter(wordData =>
+    const filteredWords = getScopedWords(currentGrade).filter(wordData =>
         !isImageWordExcluded(wordData.word) &&
         hasPlayableImageAsset(wordData.word)
     );
@@ -3996,6 +4036,7 @@ function saveProgress() {
     const progress = {
         userId: currentUser.id,
         grade: currentGrade,
+        scope: selectedScope,
         level: currentLevel,
         question: currentQuestion,
         answers: answers,

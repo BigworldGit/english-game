@@ -499,6 +499,46 @@ html, body {
     transform: translateY(-2px);
 }
 
+.scope-select {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.scope-select label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: #4b603f;
+    font-weight: 700;
+}
+
+.scope-buttons {
+    display: grid;
+    gap: 10px;
+}
+
+.scope-btn {
+    min-height: 48px;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(180deg, rgba(248, 241, 223, 0.98) 0%, rgba(224, 212, 178, 0.96) 100%);
+    color: #5a4623;
+    font-family: 'Zpix', monospace;
+    font-size: 12px;
+    text-align: left;
+    cursor: pointer;
+    transition: var(--transition-normal);
+    box-shadow: 0 0 0 2px rgba(98, 78, 44, 0.16), 0 5px 0 rgba(166, 143, 102, 0.9);
+}
+
+.scope-btn.selected {
+    background: linear-gradient(180deg, #9ee27e 0%, #67b34a 100%);
+    color: #17310f;
+    box-shadow: 0 0 0 2px rgba(62, 115, 42, 0.22), 0 5px 0 rgba(63, 119, 41, 0.96);
+    transform: translateY(-1px);
+}
+
 .start-btn {
     width: 100%;
     padding: 20px 32px;
@@ -634,6 +674,23 @@ html, body {
     background: rgba(255,255,255,0.24);
     opacity: 0.82;
     transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.game-home-btn {
+    min-height: 42px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(180deg, rgba(243, 222, 186, 0.98) 0%, rgba(202, 163, 106, 0.96) 100%);
+    color: #5e4725;
+    font-family: 'Zpix', monospace;
+    font-size: 12px;
+    cursor: pointer;
+    box-shadow: 0 5px 0 rgba(117, 92, 51, 0.24);
+    transition: var(--transition-normal);
+}
+
+.game-home-btn:hover {
+    transform: translateY(-2px);
 }
 
 .combo-banner.is-active {
