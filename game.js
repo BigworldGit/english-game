@@ -255,7 +255,9 @@ const audioPool = {
     current: null,
     next: null,
     fadeDuration: 2000, // 淡入淡出时间(ms)
-    isTransitioning: false
+    isTransitioning: false,
+    fadeInTimer: null,
+    fadeOutTimer: null
 };
 
 // ============================================
@@ -4206,6 +4208,7 @@ function toggleMusic() {
             bgMusic.pause();
             bgMusic = null;
         }
+        stopBackgroundMusicPlayback();
         if (audioPool.current) {
             audioPool.current.pause();
             audioPool.current = null;
@@ -4226,6 +4229,31 @@ function toggleMusic() {
             audioContext.resume();
         }
         playBackgroundMusic();
+    }
+}
+
+function clearMusicTimers() {
+    if (audioPool.fadeInTimer) {
+        clearInterval(audioPool.fadeInTimer);
+        audioPool.fadeInTimer = null;
+    }
+    if (audioPool.fadeOutTimer) {
+        clearInterval(audioPool.fadeOutTimer);
+        audioPool.fadeOutTimer = null;
+    }
+}
+
+function stopBackgroundMusicPlayback() {
+    clearMusicTimers();
+    if (audioPool.current) {
+        audioPool.current.onended = null;
+        audioPool.current.pause();
+        audioPool.current.currentTime = 0;
+    }
+    if (audioPool.next) {
+        audioPool.next.onended = null;
+        audioPool.next.pause();
+        audioPool.next.currentTime = 0;
     }
 }
 
@@ -4547,9 +4575,11 @@ function bindTrackEnded(audio) {
 
 function playBackgroundMusicWithFade() {
     if (!isPlaying) return;
+    clearMusicTimers();
 
     // 如果已有音乐在播放，先停止
     if (audioPool.current) {
+        audioPool.current.onended = null;
         audioPool.current.pause();
     }
 
@@ -4576,9 +4606,14 @@ function playBackgroundMusicWithFade() {
 function switchToNextTrack() {
     if (audioPool.isTransitioning) return;
     audioPool.isTransitioning = true;
+    clearMusicTimers();
 
     // 淡出当前音乐
     fadeOut(audioPool.current, () => {
+        if (!isPlaying) {
+            audioPool.isTransitioning = false;
+            return;
+        }
         // 切换到下一首
         audioPool.current = audioPool.next;
         audioPool.current.volume = 0;
@@ -4608,11 +4643,16 @@ function fadeIn(audio) {
     let currentStep = 0;
     const targetVolume = 0.5;
     
-    const fadeTimer = setInterval(() => {
+    audioPool.fadeInTimer = setInterval(() => {
+        if (!isPlaying || !audioPool.current || audio !== audioPool.current) {
+            clearMusicTimers();
+            return;
+        }
         currentStep++;
         audio.volume = Math.min((currentStep / steps) * targetVolume, targetVolume);
         if (currentStep >= steps) {
-            clearInterval(fadeTimer);
+            clearInterval(audioPool.fadeInTimer);
+            audioPool.fadeInTimer = null;
         }
     }, interval);
 }
@@ -4627,11 +4667,17 @@ function fadeOut(audio, callback) {
     let currentStep = 0;
     const startVolume = audio.volume;
     
-    const fadeTimer = setInterval(() => {
+    audioPool.fadeOutTimer = setInterval(() => {
+        if (!audio) {
+            clearMusicTimers();
+            if (callback) callback();
+            return;
+        }
         currentStep++;
         audio.volume = Math.max(startVolume * (1 - currentStep / steps), 0);
         if (currentStep >= steps) {
-            clearInterval(fadeTimer);
+            clearInterval(audioPool.fadeOutTimer);
+            audioPool.fadeOutTimer = null;
             audio.pause();
             if (callback) callback();
         }
