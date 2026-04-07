@@ -4206,6 +4206,15 @@ function toggleMusic() {
             bgMusic.pause();
             bgMusic = null;
         }
+        if (audioPool.current) {
+            audioPool.current.pause();
+            audioPool.current = null;
+        }
+        if (audioPool.next) {
+            audioPool.next.pause();
+            audioPool.next = null;
+        }
+        audioPool.isTransitioning = false;
         if (audioContext && audioContext.state === 'running') {
             audioContext.suspend();
         }
@@ -4527,6 +4536,15 @@ function initAudioPool() {
     audioPool.next.volume = 0;
 }
 
+function bindTrackEnded(audio) {
+    if (!audio) return;
+    audio.onended = () => {
+        if (isPlaying && !audioPool.isTransitioning) {
+            switchToNextTrack();
+        }
+    };
+}
+
 function playBackgroundMusicWithFade() {
     if (!isPlaying) return;
 
@@ -4541,23 +4559,18 @@ function playBackgroundMusicWithFade() {
     audioPool.current = new Audio(bgMusicFiles[currentMusicIndex]);
     audioPool.current.volume = 0;
     audioPool.current.loop = false;
+    bindTrackEnded(audioPool.current);
 
     // 预加载下一首
     const nextIndex = (currentMusicIndex + 1) % bgMusicFiles.length;
     audioPool.next = new Audio(bgMusicFiles[nextIndex]);
     audioPool.next.preload = 'auto';
+    audioPool.next.volume = 0;
 
     // 淡入效果
     audioPool.current.play().then(() => {
         fadeIn(audioPool.current);
     }).catch(e => console.log('播放背景音乐失败:', e));
-
-    // 监听播放结束
-    audioPool.current.addEventListener('ended', function() {
-        if (isPlaying && !audioPool.isTransitioning) {
-            switchToNextTrack();
-        }
-    });
 }
 
 function switchToNextTrack() {
@@ -4569,15 +4582,20 @@ function switchToNextTrack() {
         // 切换到下一首
         audioPool.current = audioPool.next;
         audioPool.current.volume = 0;
+        currentMusicIndex = (currentMusicIndex + 1) % bgMusicFiles.length;
+        bindTrackEnded(audioPool.current);
         
         // 预再加载下一首
         const nextIndex = (currentMusicIndex + 1) % bgMusicFiles.length;
         audioPool.next = new Audio(bgMusicFiles[nextIndex]);
         audioPool.next.preload = 'auto';
+        audioPool.next.volume = 0;
         
         // 播放并淡入
         audioPool.current.play().then(() => {
             fadeIn(audioPool.current);
+            audioPool.isTransitioning = false;
+        }).catch(() => {
             audioPool.isTransitioning = false;
         });
     });
